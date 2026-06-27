@@ -329,22 +329,24 @@ This template uses **`semantic-release`** with the _conventionalcommits_ preset 
 
 **The creation of tags and releases is handled _automatically_ by the pre-configured [_workflows_](./.github/workflows/).**
 
-_Default [`package.json`](https://github.com/stairwaytowonderland/node-semantic-release/blob/main/templates/package.json)
-and [`.releaserc`](https://github.com/stairwaytowonderland/node-semantic-release/blob/main/templates/releaserc.json)
-files_ will be used instead of being included in this template, however those files can be copied into this project for
-additional customizations, such as [including a `CHANGELOG`](#page_with_curl-including-a-changelog).
+### :page_with_curl: Disabling the `CHANGELOG`
 
-> [!TIP]
->
-> In most cases, only the `.releaserc` needs to by _copied/customized_.
+A generated `CHANGELOG` is automatically committed, however it can be disabled by doing the following:
 
-### :page_with_curl: Including a `CHANGELOG`
+1. The **_entire_** `@semantic-release/changelog` _plugin_ configuration
+_(**toward the beginning of the plugins section** in your [`.releaserc`](./.releaserc))_:
 
-To have the generated `CHANGELOG` automatically committed:
+    ```json
+    [
+        "@semantic-release/changelog",
+        {
+            "changelogFile": "CHANGELOG.md"
+        }
+    ]
+    ```
 
-1. Copy the _default [.releaserc](https://github.com/stairwaytowonderland/node-semantic-release/blob/main/templates/releaserc.json)_
-file into your project.
-2. Add the `@semantic-release/git` _plugin_ configuration **to the end of the _plugins_ section** in your [`.releaserc`](./.releaserc):
+1. From the `@semantic-release/git` plugin configuration _(**toward the end of the plugins section** in your
+[`.releaserc`](./.releaserc))_, remove **_just_** the `CHANGELOG.md` asset:
 
     ```json
     [
@@ -355,29 +357,6 @@ file into your project.
       }
     ]
     ```
-
-> [!NOTE]
->
-> If using an altered or different `.releaserc` file, you must also ensure the `@semantic-release/changelog` _plugin_ is
-> configured:
->
-> ```json
-> [
->   "@semantic-release/changelog",
->   {
->     "changelogFile": "CHANGELOG.md"
->   }
-> ]
-> ```
-
-### :electric_plug: _"RC"_ Plugin ordering
-
-> [!IMPORTANT]
->
-> :abcd: The **order of plugins DOES matter** in the _release configuration file (`.releaserc`)_!
->
-> :1234: The `@semantic-release/changelog` plugin is typically one of the first in the _`plugins` array_, **after** `semantic-release-export-data`
-> but **before** `@semantic-release/commit-analyzer`.
 
 ## :card_index: Dependency License Management
 
