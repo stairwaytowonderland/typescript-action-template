@@ -312,6 +312,8 @@ To check the status of cached licenses, run the following command:
 licensed status
 ```
 
+---
+
 ## :sparkles: Contributing
 
 ### :speech_balloon: Commit Message Guidelines
