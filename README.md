@@ -26,11 +26,9 @@ follow the below instructions:
 
 > [!IMPORTANT]
 >
-> :classical_building: Make sure to remove or update the [`CODEOWNERS`](./CODEOWNERS) file! For
+> Make sure to remove or update the [`CODEOWNERS`](./CODEOWNERS) file! For
 > details on how to use this file, see
 > [About code owners](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners).
->
-> :robot: Also make sure to update [`package.json`](./package.json) and run `npm install && npm run all`.
 
 ## :gear: Initial Setup
 
@@ -81,6 +79,10 @@ as input(s) and output(s). For details about this file, see
 
 When you copy this repository, update `action.yaml` with the name, description,
 inputs, and outputs for your action.
+
+> [!IMPORTANT]
+>
+> Also make sure to update [`package.json`](./package.json) and run `npm install && npm run all`.
 
 ## :computer: Update the Action Code
 
