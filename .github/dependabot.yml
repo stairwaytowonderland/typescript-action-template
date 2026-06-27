@@ -31,7 +31,7 @@ updates:
     commit-message:
       prefix: 'ci'
       include: 'scope' # Automatically appends "(deps)" -> ci(deps):
-    # labels: ['dependencies', 'deps:github-actions']
+    # labels: ['dependencies', 'github_actions']
     # groups:
     #   actions-minor:
     #     update-types:
@@ -49,7 +49,7 @@ updates:
     commit-message:
       prefix: 'chore'
       include: 'scope' # Automatically appends "(deps)" -> chore(deps):
-    # labels: ['dependencies', 'deps:javascript']
+    # labels: ['dependencies', 'javascript']
     # groups:
     #   npm-development:
     #     dependency-type: development
