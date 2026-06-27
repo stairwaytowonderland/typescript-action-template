@@ -196,7 +196,7 @@ There are a few things to keep in mind when writing your action code:
   For more information about the GitHub Actions toolkit, see the
   [documentation](https://github.com/actions/toolkit/blob/main/README.md).
 
-So, what are you waiting for? Go ahead and start customizing your action!
+:bus: So, what are you waiting for? Go ahead and start customizing your action!
 
 1. Create a new branch
 
