@@ -1,9 +1,8 @@
 # Create a GitHub Action Using TypeScript
 
-![Linter](https://github.com/actions/typescript-action/actions/workflows/linter.yml/badge.svg)
-![CI](https://github.com/actions/typescript-action/actions/workflows/ci.yml/badge.svg)
-![Check dist/](https://github.com/actions/typescript-action/actions/workflows/check-dist.yml/badge.svg)
-![CodeQL](https://github.com/actions/typescript-action/actions/workflows/codeql-analysis.yml/badge.svg)
+![Linter](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/linter.yaml/badge.svg)
+![CI](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/ci.yaml/badge.svg)
+![CodeQL](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/codeql-analysis.yaml/badge.svg)
 ![Coverage](./badges/coverage.svg)
 
 Use this template to bootstrap the creation of a TypeScript action. :rocket:
@@ -14,7 +13,7 @@ publishing, and versioning guidance.
 If you are new, there's also a simpler introduction in the
 [Hello world JavaScript action repository](https://github.com/actions/hello-world-javascript-action).
 
-## Create Your Own Action
+## :honeybee: Create Your Own Action
 
 To create your own action, you can use this repository as a template! Just
 follow the below instructions:
@@ -27,11 +26,13 @@ follow the below instructions:
 
 > [!IMPORTANT]
 >
-> Make sure to remove or update the [`CODEOWNERS`](./CODEOWNERS) file! For
+> :classical_building: Make sure to remove or update the [`CODEOWNERS`](./CODEOWNERS) file! For
 > details on how to use this file, see
 > [About code owners](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners).
+>
+> :robot: Also make sure to update [`package.json`](./package.json) and run `npm install && npm run all`.
 
-## Initial Setup
+## :gear: Initial Setup
 
 After you've cloned the repository to your local machine or codespace, you'll
 need to perform some initial setup steps before you can develop your action.
@@ -72,16 +73,16 @@ need to perform some initial setup steps before you can develop your action.
    ...
    ```
 
-## Update the Action Metadata
+## :keyboard: Update the Action Metadata
 
-The [`action.yml`](action.yml) file defines metadata about your action, such as
-input(s) and output(s). For details about this file, see
+The [`action.yaml`](action.yaml) file defines metadata about your action, such
+as input(s) and output(s). For details about this file, see
 [Metadata syntax for GitHub Actions](https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions).
 
-When you copy this repository, update `action.yml` with the name, description,
+When you copy this repository, update `action.yaml` with the name, description,
 inputs, and outputs for your action.
 
-## Update the Action Code
+## :computer: Update the Action Code
 
 The [`src/`](./src/) directory is the heart of your action! This contains the
 source code that will be run when your action is invoked. You can replace the
@@ -178,11 +179,11 @@ For information about versioning your action, see
 [Versioning](https://github.com/actions/toolkit/blob/main/docs/action-versioning.md)
 in the GitHub Actions toolkit.
 
-## Validate the Action
+## :bell: Validate the Action
 
 You can now validate the action by referencing it in a workflow file. For
-example, [`ci.yml`](./.github/workflows/ci.yml) demonstrates how to reference an
-action in the same repository.
+example, [`test.yaml`](./.github/workflows/test.yaml) demonstrates how to
+reference an action in the same repository.
 
 ```yaml
 steps:
@@ -202,9 +203,10 @@ steps:
 ```
 
 For example workflow runs, check out the
-[Actions tab](https://github.com/actions/typescript-action/actions)! :rocket:
+[Actions tab](https://github.com/stairwaytowonderland/typescript-action-template/actions)!
+:rocket:
 
-## Usage
+## :joystick: Usage
 
 After testing, you can create version tag(s) that developers can use to
 reference different stable versions of your action. For more information, see
@@ -223,7 +225,7 @@ steps:
 
   - name: Test Local Action
     id: test-action
-    uses: actions/typescript-action@v1 # Commit with the `v1` tag
+    uses: stairwaytowonderland/typescript-action-template@v1 # Commit with the `v1` tag
     with:
       milliseconds: 1000
 
@@ -232,42 +234,25 @@ steps:
     run: echo "${{ steps.test-action.outputs.time }}"
 ```
 
-## Publishing a New Release
+## :package: Publishing a New Release
 
-This project includes a helper script, [`script/release`](./script/release)
-designed to streamline the process of tagging and pushing new releases for
-GitHub Actions.
+This project uses **`semantic-release`** with the _conventionalcommits_ preset
+by default.
 
-GitHub Actions allows users to select a specific version of the action to use,
-based on release tags. This script simplifies this process by performing the
-following steps:
+### :label: Tags/Releases
 
-1. **Retrieving the latest release tag:** The script starts by fetching the most
-   recent SemVer release tag of the current branch, by looking at the local data
-   available in your repository.
-1. **Prompting for a new release tag:** The user is then prompted to enter a new
-   release tag. To assist with this, the script displays the tag retrieved in
-   the previous step, and validates the format of the inputted tag (vX.X.X). The
-   user is also reminded to update the version field in package.json.
-1. **Tagging the new release:** The script then tags a new release and syncs the
-   separate major tag (e.g. v1, v2) with the new release tag (e.g. v1.0.0,
-   v2.1.2). When the user is creating a new major release, the script
-   auto-detects this and creates a `releases/v#` branch for the previous major
-   version.
-1. **Pushing changes to remote:** Finally, the script pushes the necessary
-   commits, tags and branches to the remote repository. From here, you will need
-   to create a new release in GitHub so users can easily reference the new tags
-   in their workflows.
+**The creation of tags and releases is handled _automatically_ by the
+pre-configured [_workflows_](./.github/workflows/).**
 
-## Dependency License Management
+## :card_index: Dependency License Management
 
 This template includes a GitHub Actions workflow,
-[`licensed.yml`](./.github/workflows/licensed.yml), that uses
+[`licensed.yaml`](./.github/workflows/licensed.yaml), that uses
 [Licensed](https://github.com/licensee/licensed) to check for dependencies with
 missing or non-compliant licenses. This workflow is initially disabled. To
 enable the workflow, follow the below steps.
 
-1. Open [`licensed.yml`](./.github/workflows/licensed.yml)
+1. Open [`licensed.yaml`](./.github/workflows/licensed.yaml)
 1. Uncomment the following lines:
 
    ```yaml
@@ -286,7 +271,7 @@ changes pushed directly to `main`. If the workflow detects any dependencies with
 missing or non-compliant licenses, it will fail the workflow and provide details
 on the issue(s) found.
 
-### Updating Licenses
+### :unlock: Updating Licenses
 
 Whenever you install or update dependencies, you can use the Licensed CLI to
 update the licenses database. To install Licensed, see the project's
@@ -303,3 +288,33 @@ To check the status of cached licenses, run the following command:
 ```bash
 licensed status
 ```
+
+## :sparkles: Contributing
+
+### :speech_balloon: Commit Message Guidelines
+
+- Write clear, concise commit messages that follow the
+  [![conventional-commit](https://img.shields.io/badge/conventional--commit-FE5196?logo=conventionalcommits&logoColor=white)](https://www.conventionalcommits.org/)&nbsp;standard.
+- The allowed _prefixes_ for this project are the following:
+
+  ```json
+  [
+    "build",
+    "chore",
+    "ci",
+    "docs",
+    "feat",
+    "fix",
+    "perf",
+    "refactor",
+    "revert",
+    "style",
+    "test"
+  ]
+  ```
+
+> [!NOTE]
+>
+> See
+> [Contributing Guidelines](https://github.com/stairwaytowonderland/repository-template?tab=contributing-ov-file#contributing-guidelines)
+> for more information.

@@ -100,3 +100,15 @@ __tests__/runner/*
 # IDE files
 .idea
 *.code-workspace
+
+# Project-specific ignores
+*.bak
+*.old
+*.tmp
+*.private
+/.last
+/.command
+
+logs
+*.log
+out/

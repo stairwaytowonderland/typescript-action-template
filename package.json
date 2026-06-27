@@ -1,69 +1,81 @@
 {
-  "name": "typescript-action",
-  "description": "GitHub Actions TypeScript template",
-  "version": "0.0.0",
-  "author": "",
-  "type": "module",
-  "private": true,
-  "homepage": "https://github.com/actions/typescript-action",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/actions/typescript-action.git"
-  },
-  "bugs": {
-    "url": "https://github.com/actions/typescript-action/issues"
-  },
-  "keywords": [
-    "actions"
-  ],
-  "exports": {
-    ".": "./dist/index.js"
-  },
-  "engines": {
-    "node": ">=24.0.0"
-  },
-  "scripts": {
-    "bundle": "npm run format:write && npm run package",
-    "ci-test": "NODE_OPTIONS=--experimental-vm-modules NODE_NO_WARNINGS=1 npx jest",
-    "coverage": "npx make-coverage-badge --output-path ./badges/coverage.svg",
-    "format:write": "npx prettier --write .",
-    "format:check": "npx prettier --check .",
-    "lint": "npx eslint .",
-    "local-action": "npx @github/local-action . src/main.ts .env",
-    "package": "npx rimraf ./dist && npx rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript",
-    "package:watch": "npm run package -- --watch",
-    "test": "NODE_OPTIONS=--experimental-vm-modules NODE_NO_WARNINGS=1 npx jest",
-    "all": "npm run format:write && npm run lint && npm run test && npm run coverage && npm run package"
-  },
-  "license": "MIT",
-  "dependencies": {
-    "@actions/core": "^3.0.0"
-  },
-  "devDependencies": {
-    "@eslint/compat": "^2.0.2",
-    "@eslint/eslintrc": "^3.3.3",
-    "@eslint/js": "^10.0.1",
-    "@github/local-action": "^7.0.1",
-    "@jest/globals": "^30.2.0",
-    "@rollup/plugin-commonjs": "^29.0.0",
-    "@rollup/plugin-node-resolve": "^16.0.3",
-    "@rollup/plugin-typescript": "^12.3.0",
-    "@types/jest": "^30.0.0",
-    "@types/node": "^25.2.3",
-    "@typescript-eslint/eslint-plugin": "^8.56.0",
-    "eslint": "^10.0.0",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-jest": "^29.15.0",
-    "eslint-plugin-prettier": "^5.5.5",
-    "jest": "^30.2.0",
-    "make-coverage-badge": "^1.2.0",
-    "prettier": "^3.8.1",
-    "rollup": "^4.57.1",
-    "ts-jest": "^29.4.6",
-    "ts-jest-resolver": "^2.0.1",
-    "typescript": "^5.9.3"
-  },
-  "optionalDependencies": {
-    "@rollup/rollup-linux-x64-gnu": "*"
-  }
+	"name": "typescript-action",
+	"description": "GitHub Actions TypeScript template",
+	"version": "0.0.0",
+	"author": "",
+	"type": "module",
+	"private": true,
+	"homepage": "https://github.com/stairwaytowonderland/typescript-action-template",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/stairwaytowonderland/typescript-action-template.git"
+	},
+	"bugs": {
+		"url": "https://github.com/stairwaytowonderland/typescript-action-template/issues"
+	},
+	"keywords": [
+		"actions"
+	],
+	"exports": {
+		".": "./dist/index.js"
+	},
+	"engines": {
+		"node": ">=24.0.0"
+	},
+	"scripts": {
+		"build": "npm run bundle",
+		"bundle": "npm run format:write && npm run package",
+		"ci-test": "NODE_OPTIONS=--experimental-vm-modules NODE_NO_WARNINGS=1 npx jest",
+		"coverage": "npx make-coverage-badge --output-path ./badges/coverage.svg",
+		"format:write": "npx prettier --write .",
+		"format:check": "npx prettier --check .",
+		"lint": "npx eslint .",
+		"local-action": "npx @github/local-action . src/main.ts .env",
+		"package": "npx rimraf ./dist && npx rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript",
+		"package:watch": "npm run package -- --watch",
+		"test": "NODE_OPTIONS=--experimental-vm-modules NODE_NO_WARNINGS=1 npx jest",
+		"all": "npm run format:write && npm run lint && npm run test && npm run coverage && npm run package"
+	},
+	"license": "MIT",
+	"dependencies": {
+		"@actions/core": "^3.0.0"
+	},
+	"devDependencies": {
+		"@emnapi/wasi-threads": "^2.0.0",
+		"@emnapi/runtime": "^1.10.0",
+		"@eslint/compat": "^2.0.2",
+		"@eslint/eslintrc": "^3.3.3",
+		"@eslint/js": "^10.0.1",
+		"@github/local-action": "^7.0.1",
+		"@jest/globals": "^30.2.0",
+		"@rollup/plugin-commonjs": "^29.0.0",
+		"@rollup/plugin-node-resolve": "^16.0.3",
+		"@rollup/plugin-typescript": "^12.3.0",
+		"@semantic-release/changelog": "^6.0.3",
+		"@semantic-release/commit-analyzer": "^13.0.1",
+		"@semantic-release/git": "^10.0.1",
+		"@semantic-release/github": "^12.0.8",
+		"@semantic-release/npm": "^13.1.5",
+		"@semantic-release/release-notes-generator": "^14.1.0",
+		"@types/jest": "^30.0.0",
+		"@types/node": "^26.0.1",
+		"@typescript-eslint/eslint-plugin": "^8.56.0",
+		"conventional-changelog-conventionalcommits": "^10.0.0",
+		"eslint": "^10.0.0",
+		"eslint-config-prettier": "^10.1.8",
+		"eslint-plugin-jest": "^29.15.0",
+		"eslint-plugin-prettier": "^5.5.5",
+		"jest": "^30.2.0",
+		"make-coverage-badge": "^1.2.0",
+		"prettier": "^3.8.1",
+		"rollup": "^4.57.1",
+		"semantic-release": "^25.0.3",
+		"semantic-release-export-data": "^1.2.0",
+		"ts-jest": "^29.4.6",
+		"ts-jest-resolver": "^2.0.1",
+		"typescript": "^6.0.3"
+	},
+	"optionalDependencies": {
+		"@rollup/rollup-linux-x64-gnu": "*"
+	}
 }
