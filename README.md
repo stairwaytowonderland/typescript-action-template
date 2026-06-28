@@ -1,8 +1,8 @@
 # Create a GitHub Action Using TypeScript
 
-![CI](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/ci.yaml/badge.svg)
-![Linter](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/linter.yaml/badge.svg)
-![CodeQL](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/codeql-analysis.yaml/badge.svg)
+![CI](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/ci.yml/badge.svg)
+![Linter](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/linter.yml/badge.svg)
+![CodeQL](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/codeql-analysis.yml/badge.svg)
 ![Coverage](./badges/coverage.svg)
 
 [![GitHub latest release](https://img.shields.io/github/v/release/stairwaytowonderland/typescript-action-template?include_prereleases&logo=rocket)](https://github.com/stairwaytowonderland/typescript-action-template/releases)
@@ -75,9 +75,9 @@ If you are new, there's also a simpler introduction in the
 ### :white_check_mark: First tasks
 
 - [ ] **:one: :tada: Create your repo:** Use this template to [**create your own repo**](#honeybee-create-your-own-action)!
-- [ ] **:two: Create some labels:** Run the [Create Labels](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/create-labels.yaml)
+- [ ] **:two: Create some labels:** Run the [Create Labels](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/create-labels.yml)
 _workflow_ to create some additional useful labels.
-- [ ] **:three: Create some issues:** Run the [Import Issues from CSV](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/import-csv-issues.yaml)
+- [ ] **:three: Create some issues:** Run the [Import Issues from CSV](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/import-csv-issues.yml)
   _workflow_ to import first issues using the provided sample _TODO.csv_.
 - [ ] **:four: Customize your _action_:**
   Customize the `README.md`, `CODEOWNERS`, `LICENSE`, `package.json` _(and `package-lock.json`)_, and `action.yaml`
@@ -269,7 +269,7 @@ in the GitHub Actions toolkit.
 ## :bell: Validate the Action
 
 You can now validate the action by referencing it in a workflow file. For
-example, [`test.yaml`](./.github/workflows/test.yaml) demonstrates how to
+example, [`test.yml`](./.github/workflows/test.yml) demonstrates how to
 reference an action in the same repository.
 
 ```yaml
@@ -361,12 +361,12 @@ _(**toward the beginning of the plugins section** in your [`.releaserc`](./.rele
 ## :card_index: Dependency License Management
 
 This template includes a GitHub Actions workflow,
-[`licensed.yaml`](./.github/workflows/licensed.yaml), that uses
+[`licensed.yml`](./.github/workflows/licensed.yml), that uses
 [Licensed](https://github.com/licensee/licensed) to check for dependencies with
 missing or non-compliant licenses. This workflow is initially disabled. To
 enable the workflow, follow the below steps.
 
-1. Open [`licensed.yaml`](./.github/workflows/licensed.yaml)
+1. Open [`licensed.yml`](./.github/workflows/licensed.yml)
 1. Uncomment the following lines:
 
    ```yaml

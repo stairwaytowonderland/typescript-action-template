@@ -41,6 +41,9 @@ updates:
       github-actions:
         patterns:
           - '*'
+    ignore:
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major']
 
   - package-ecosystem: npm
     directory: /
@@ -65,5 +68,8 @@ updates:
         applies-to: version-updates
         patterns:
           - '*'
+    ignore:
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major']
     registries:
       - npm-public
