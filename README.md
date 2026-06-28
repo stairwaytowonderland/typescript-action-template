@@ -47,6 +47,7 @@ If you are new, there's also a simpler introduction in the
 ├── .licensed.yml
 ├── .markdownlint.json
 ├── .node-version
+├── .npmrc
 ├── .pre-commit-config.yaml
 ├── .prettierignore
 ├── .prettierrc
