@@ -382,7 +382,7 @@ This template uses **`semantic-release`** with the _conventionalcommits_ preset 
 
 ### :label: Creating Tags and Releases
 
-**The creation of tags and releases is handled _automatically_ by the pre-configured [_workflows_](./.github/workflows/).**
+The **creation of tags and releases is handled _automatically_** by the pre-configured [_workflows_](./.github/workflows/).
 
 ### :page_with_curl: Disabling the `CHANGELOG`
 
