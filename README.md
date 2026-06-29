@@ -114,6 +114,61 @@ follow the below instructions
 > [About code owners](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners).)_
 >
 > :books: Make sure to  update the [`README.md`](./README.md) and the [`LICENSE`](./LICENSE) files accordingly!
+
+#### :b: _Option "B"_
+
+<details>
+<summary><b>Manual Creation</b></summary>
+
+1. **Clone this repo:**
+
+    ```bash
+    git clone git@github.com:stairwaytowonderland/repository-template.git
+    ```
+
+1. **Create a new empty repo:**
+
+    Use the **_UI_** to [create a new repository](https://github.com/new).
+
+1. **Initialize from the command line:**
+
+    ```bash
+    # Change directory into the cloned template
+    cd /path/to/cloned/template
+
+    # Delete the .git folder from cloned template
+    rm -rf .git
+
+    # Optionally overwrite the README with your content
+    echo "# Repository Template" > README.md
+
+    # Initialize new git local repository
+    git init
+
+    # Set default branch
+    git branch -M main
+
+    # Make first commit empty to allow easier rebasing
+    git commit --no-verify --allow-empty -m "chore: initial empty commit"
+
+    # Install pre-commit hooks
+    # (make sure `pre-commit` is installed ... install it using `pip` or `brew`)
+    pre-commit install
+
+    # Add all files (make sure your .gitignore file is properly configured)
+    git add .
+
+    # Second commit
+    git commit -m "chore: adding initial files"
+
+    # Set the remote to the new repo you manually created (step 2) ...
+    # To update the url (instead of add), use `git remote set-url origin <GIT_URL>`
+    git remote add origin git@github.com:<user-or-org>/<new-empty-repo>.git
+
+    # Push to remote
+    git push -u origin main
+    ```
+
 </details>
 
 ## :gear: Initial Setup
