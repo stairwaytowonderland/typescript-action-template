@@ -61,7 +61,7 @@ jobs:
           VALIDATE_JSON: false
           VALIDATE_NATURAL_LANGUAGE: false
 
-      - name: Run Checkov independently
+      - name: Run Checkov
         uses: bridgecrewio/checkov-action@v12
         with:
           config_file: .checkov.yml

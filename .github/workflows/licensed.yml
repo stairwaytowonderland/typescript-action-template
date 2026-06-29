@@ -40,6 +40,8 @@ jobs:
         id: generate-token
         uses: actions/create-github-app-token@v3
         with:
+          # Use app-id to satisfy checkov (linter.yml)
+          app-id: ${{ vars.ORG_REPO_USER_APP_ID }}
           client-id: ${{ vars.ORG_REPO_USER_APP_ID }}
           private-key: ${{ secrets.ORG_REPO_USER_PRIVATE_KEY }}
 
