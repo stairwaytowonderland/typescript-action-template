@@ -1,5 +1,5 @@
 # This workflow uses the CodeQL Action to analyze code for security vulnerabilities and errors.
-# The file extenstion must be .yml for CodeQL to recognize it.
+# The file extension must be .yml for CodeQL to recognize it.
 name: Code Quality (CodeQL)
 
 on:
@@ -10,7 +10,9 @@ on:
     branches:
       - main
   schedule:
-    - cron: '31 7 * * 3'
+    # every Tuesday at 7:31 AM America/Chicago
+    - cron: '31 7 * * 2'
+      timezone: America/Chicago
 
 permissions:
   actions: read
