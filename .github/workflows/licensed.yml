@@ -18,6 +18,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   licensed:
@@ -25,9 +26,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Get auth token
+        id: auth-token
+        # uses: ./.actions/.github/actions/auth-token-action
+        uses: stairwaytowonderland/actions/.github/actions/auth-token-action@v1
+        with:
+          app-private-key: ${{ secrets.ORG_REPO_USER_PRIVATE_KEY }}
+          app-client-id: ${{ vars.ORG_REPO_USER_APP_ID }}
+
       - name: Checkout
         id: checkout
         uses: actions/checkout@v7
+        with:
+          token: ${{ steps.auth-token.outputs.token }}
 
       - name: Setup Node.js
         id: setup-node
@@ -65,7 +76,7 @@ jobs:
           git config --local user.email "licensed-ci@users.noreply.github.com"
           git config --local user.name "licensed-ci"
           git add .
-          git commit -m "Auto-update license files"
+          git commit -m "chore(licensed): Auto-update license files"
           git push
 
       # Last, check the status of the cached licenses.
