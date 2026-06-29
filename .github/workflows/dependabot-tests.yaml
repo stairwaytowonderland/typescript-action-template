@@ -5,6 +5,9 @@ on:
     workflows: ['_']
     types: [completed]
 
+permissions:
+  contents: read
+
 jobs:
   dependabot-pr-test:
     name: Dependabot PR Test
