@@ -1,6 +1,6 @@
 # This workflow uses the CodeQL Action to analyze code for security vulnerabilities and errors.
 # The file extenstion must be .yml for CodeQL to recognize it.
-name: Code Quality
+name: Code Quality (CodeQL)
 
 on:
   pull_request:
