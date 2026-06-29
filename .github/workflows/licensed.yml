@@ -5,8 +5,11 @@
 name: Licensed
 
 on:
-  repository_dispatch:
-    types: [repository-created]
+  # Uncomment the below lines to run this workflow on repository creation events.
+  # This is useful for checking licenses on new repositories before any code is added.
+  # Note: This may require the GitHub App first be added to the ruleset bypass list for the repository.
+  # repository_dispatch:
+  #   types: [repository-created]
 
   # Uncomment the below lines to run this workflow on pull requests and pushes
   # to the default branch. This is useful for checking licenses before merging
