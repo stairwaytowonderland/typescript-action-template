@@ -117,9 +117,6 @@ follow the below instructions
 
 #### :b: _Option "B"_
 
-<details>
-<summary><b>Manual Creation</b></summary>
-
 1. **Clone this repo:**
 
     ```bash
@@ -168,8 +165,6 @@ follow the below instructions
     # Push to remote
     git push -u origin main
     ```
-
-</details>
 
 ## :gear: Initial Setup
 
