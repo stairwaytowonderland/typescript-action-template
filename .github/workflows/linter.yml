@@ -41,11 +41,6 @@ jobs:
         id: install
         run: npm ci
 
-      - name: Run Checkov independently
-        uses: bridgecrewio/checkov-action@v12
-        with:
-          config_file: .checkov.yml
-
       - name: Lint Codebase
         id: super-linter
         uses: super-linter/super-linter/slim@v8
@@ -65,3 +60,8 @@ jobs:
           VALIDATE_TYPESCRIPT_ES: false
           VALIDATE_JSON: false
           VALIDATE_NATURAL_LANGUAGE: false
+
+      - name: Run Checkov independently
+        uses: bridgecrewio/checkov-action@v12
+        with:
+          config_file: .checkov.yml
