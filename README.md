@@ -22,7 +22,7 @@ If you are new, there's also a simpler introduction in the
 ## :cactus: Project structure
 
 > [!TIP]
-> See the [`.github` folder's _"Readme"_](./.github/index.md) _(`index.md`)_ for its file structure.
+> See the `.github` folder's _"Readme"_ ([`index.md`](./.github/index.md)) for its file structure.
 
 <details>
 <summary><b>Project file structure</b> <i>(click to expand) ...</i></summary><br>
