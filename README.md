@@ -413,6 +413,8 @@ _(**toward the beginning of the plugins section** in your [`.releaserc`](./.rele
     ]
     ```
 
+    > :memo: **Note:** if `CHANGELOG.md` is the only asset listed, remove the **_entire_** `@semantic-release/git` block.
+
 ## :card_index: Dependency License Management
 
 This template includes a GitHub Actions workflow,
