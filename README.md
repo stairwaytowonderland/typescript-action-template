@@ -346,8 +346,7 @@ steps:
 ```
 
 For example workflow runs, check out the
-[Actions tab](https://github.com/stairwaytowonderland/typescript-action-template/actions)!
-:rocket:
+[Actions tab](https://github.com/stairwaytowonderland/typescript-action-template/actions)! :rocket:
 
 ## :joystick: Usage
 
