@@ -75,7 +75,7 @@ If you are new, there's also a simpler introduction in the
 
 ### :white_check_mark: First tasks
 
-- [ ] **:one: :tada: Create your repo:** Use this template to [**create your own repo**](#honeybee-create-your-own-action)!
+- [ ] **:one: :tada: Create your repo:** Use this template to [**Create your own action**](#honeybee-create-your-own-action)!
 - [ ] **:two: Create some labels:** Run the [Create Labels](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/create-labels.yml)
 _workflow_ to create some additional useful labels.
 - [ ] **:three: Create some issues:** Run the [Import Issues from CSV](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/import-csv-issues.yml)
