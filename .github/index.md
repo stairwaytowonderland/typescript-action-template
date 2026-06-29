@@ -22,7 +22,8 @@
 │   ├── publish.yml
 │   ├── release.yml
 │   ├── repository-created.yml
-│   └── test.yml
+│   ├── test.yml
+│   └── watchers.yml
 ├── dependabot.yml
 └── README.md
 ```

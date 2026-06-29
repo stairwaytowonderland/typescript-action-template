@@ -1,0 +1,12 @@
+name: Watchers
+
+on:
+  watch:
+    types: [started]
+
+jobs:
+  on-watch:
+    name: Watching the watchers
+    # if: ${{ github.repository == format('{0}/repository-template', github.repository_owner) }}
+    uses: stairwaytowonderland/actions/.github/workflows/watchers.yaml@v1
+    secrets: inherit
