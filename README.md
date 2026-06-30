@@ -55,7 +55,6 @@ If you are new, there's also a simpler introduction in the
 ├── .yaml-lint.yml
 ├── action.yaml
 ├── actionlint.yml
-├── CODEOWNERS
 ├── eslint.config.mjs
 ├── jest.config.js
 ├── LICENSE

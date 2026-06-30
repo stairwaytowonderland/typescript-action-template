@@ -14,7 +14,7 @@
 │   ├── codeql-analysis.yml
 │   ├── conventional-commit.yml
 │   ├── create-labels.yml
-│   ├── dependabot-tests.yml
+│   ├── dependabot-tests.yaml
 │   ├── import-csv-issues.yml
 │   ├── licensed.yml
 │   ├── linter.yml
@@ -23,9 +23,10 @@
 │   ├── release.yml
 │   ├── repository-created.yml
 │   ├── test.yml
-│   └── watchers.yml
+│   └── watchers.yaml
+├── CODEOWNERS
 ├── dependabot.yml
-└── README.md
+└── index.md
 ```
 
 > [!TIP]
