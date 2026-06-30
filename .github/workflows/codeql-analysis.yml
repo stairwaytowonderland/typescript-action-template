@@ -17,7 +17,10 @@ on:
       timezone: America/Chicago
 
 permissions:
+  actions: read
+  # checks: write
   contents: read
+  security-events: write
 
 jobs:
   codeql-analysis:
