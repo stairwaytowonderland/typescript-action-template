@@ -94,7 +94,7 @@ _workflow_ to create some additional useful labels.
 ### :honeybee: Create Your Own Action
 
 To create your own action, you can use this repository as a template! Just
-follow the below instructions
+follow the below instructions:
 
 #### :a: _Option "A"_
 
