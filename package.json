@@ -32,6 +32,8 @@
 		"coverage": "npx make-coverage-badge --output-path ./badges/coverage.svg",
 		"format:write": "npx prettier --write .",
 		"format:check": "npx prettier --check .",
+		"format-write": "npm run format:write",
+		"format-check": "npm run format:check",
 		"lint": "npx eslint .",
 		"local-action": "npx @github/local-action . src/main.ts .env",
 		"package": "npx rimraf ./dist && npx rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript",
