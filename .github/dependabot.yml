@@ -43,7 +43,7 @@ updates:
         applies-to: version-updates
         patterns:
           - '*'
-    assignees: ['andrewhaller']
+    # assignees: ['andrewhaller']
 
   - package-ecosystem: 'github-actions'
     directories:
@@ -63,7 +63,7 @@ updates:
         applies-to: version-updates
         patterns:
           - '*'
-    assignees: ['andrewhaller']
+    # assignees: ['andrewhaller']
 
   - package-ecosystem: npm
     directory: /
@@ -93,3 +93,4 @@ updates:
         update-types: ['version-update:semver-major']
     registries:
       - npm-public
+    # assignees: ['andrewhaller']
