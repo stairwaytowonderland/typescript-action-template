@@ -46,8 +46,8 @@
 		"@actions/core": "^3.0.0"
 	},
 	"devDependencies": {
-		"@emnapi/wasi-threads": "^2.0.0",
 		"@emnapi/runtime": "^1.10.0",
+		"@emnapi/wasi-threads": "^2.0.0",
 		"@eslint/compat": "^2.0.2",
 		"@eslint/eslintrc": "^3.3.3",
 		"@eslint/js": "^10.0.1",
