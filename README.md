@@ -203,14 +203,123 @@ need to perform some initial setup steps before you can develop your action.
    ```bash
    $ npm test
 
-    PASS  __tests__/main.test.ts
-    Update Major Version
-        ✓ Create a new major tag (2 ms)
-        ✓ Update an existing major tag (1 ms)
-        ✓ Fails (11 ms)
-        ✓ Fails with not tag reference
-        ✓ Fails with not semantic versioning tag
+   PASS  ./index.test.js
+     ✓ throws invalid number (3ms)
+     ✓ wait 500 ms (504ms)
+     ✓ test runs (95ms)
+
+   ...
    ```
+
+## :keyboard: Update the Action Metadata
+
+The [`action.yaml`](action.yaml) file defines metadata about your action, such
+as input(s) and output(s). For details about this file, see
+[Metadata syntax for GitHub Actions](https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions).
+
+When you copy this repository, update `action.yaml` with the name, description,
+inputs, and outputs for your action.
+
+> [!IMPORTANT]
+>
+> :robot: Also make sure to update [`package.json`](./package.json) and run `npm install && npm run all`.
+
+## :computer: Update the Action Code
+
+The [`src/`](./src/) directory is the heart of your action! This contains the
+source code that will be run when your action is invoked. You can replace the
+contents of this directory with your own code.
+
+There are a few things to keep in mind when writing your action code:
+
+- Most GitHub Actions toolkit and CI/CD operations are processed asynchronously.
+  In `main.ts`, you will see that the action is run in an `async` function.
+
+  ```javascript
+  import * as core from '@actions/core'
+  //...
+
+  async function run() {
+    try {
+      //...
+    } catch (error) {
+      core.setFailed(error.message)
+    }
+  }
+  ```
+
+  For more information about the GitHub Actions toolkit, see the
+  [documentation](https://github.com/actions/toolkit/blob/main/README.md).
+
+:bus: So, what are you waiting for? Go ahead and start customizing your action!
+
+1. Create a new branch
+
+   ```bash
+   git checkout -b releases/v1
+   ```
+
+1. Replace the contents of `src/` with your action code
+1. Add tests to `__tests__/` for your source code
+1. Format, test, and build the action
+
+   ```bash
+   npm run all
+   ```
+
+   > This step is important! It will run [`rollup`](https://rollupjs.org/) to
+   > build the final JavaScript action code with all dependencies included. If
+   > you do not run this step, your action will not work correctly when it is
+   > used in a workflow.
+
+1. (Optional) Test your action locally
+
+   The [`@github/local-action`](https://github.com/github/local-action) utility
+   can be used to test your action locally. It is a simple command-line tool
+   that "stubs" (or simulates) the GitHub Actions Toolkit. This way, you can run
+   your TypeScript action locally without having to commit and push your changes
+   to a repository.
+
+   The `local-action` utility can be run in the following ways:
+   - Visual Studio Code Debugger
+
+     Make sure to review and, if needed, update
+     [`.vscode/launch.json`](./.vscode/launch.json)
+
+   - Terminal/Command Prompt
+
+     ```bash
+     # npx @github/local action <action-yaml-path> <entrypoint> <dotenv-file>
+     npx @github/local-action . src/main.ts .env
+     ```
+
+   You can provide a `.env` file to the `local-action` CLI to set environment
+   variables used by the GitHub Actions Toolkit. For example, setting inputs and
+   event payload data used by your action. For more information, see the example
+   file, [`.env.example`](./.env.example), and the
+   [GitHub Actions Documentation](https://docs.github.com/en/actions/learn-github-actions/variables#default-environment-variables).
+
+1. Commit your changes
+
+   ```bash
+   git add .
+   git commit -m "My first action is ready!"
+   ```
+
+1. Push them to your repository
+
+   ```bash
+   git push -u origin releases/v1
+   ```
+
+1. Create a pull request and get feedback on your action
+1. Merge the pull request into the `main` branch
+
+Your action is now published! :rocket:
+
+For information about versioning your action, see
+[Versioning](https://github.com/actions/toolkit/blob/main/docs/action-versioning.md)
+in the GitHub Actions toolkit.
 
 ## :bell: Validate the Action
 
