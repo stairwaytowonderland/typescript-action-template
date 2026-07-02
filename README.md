@@ -203,13 +203,34 @@ need to perform some initial setup steps before you can develop your action.
    ```bash
    $ npm test
 
-   PASS  ./index.test.js
-     ✓ throws invalid number (3ms)
-     ✓ wait 500 ms (504ms)
-     ✓ test runs (95ms)
+    PASS  __tests__/wait.test.ts
+    wait.ts
+     ✓ Throws an invalid number (3 ms)
+     ✓ Waits with a valid number (502 ms)
 
-   ...
+    PASS  __tests__/main.test.ts
+    main.ts
+     ✓ Sets the time output (1 ms)
+     ✓ Sets a failed status
    ```
+
+1. :art: Format with `prettier`
+
+    ```bash
+    # Use `npm run format:check` to check only
+    $ npm run format:write
+
+    > typescript-action@0.0.0 format:write
+    > npx prettier --write .
+    ...
+    ```
+
+1. :surfer: Run them all _(recommended)_
+
+    ```bash
+    $ npm run all
+    ...
+    ```
 
 ## :keyboard: Update the Action Metadata
 
