@@ -214,7 +214,7 @@ need to perform some initial setup steps before you can develop your action.
      ✓ Sets a failed status
    ```
 
-1. :art: Format with `prettier`
+1. :art: Format and lint
 
     ```bash
     # Use `npm run format:check` to check only
@@ -222,6 +222,11 @@ need to perform some initial setup steps before you can develop your action.
 
     > typescript-action@0.0.0 format:write
     > npx prettier --write .
+
+    $ npm run lint
+
+    > typescript-action@0.0.0 lint
+    > npx eslint .
     ...
     ```
 
