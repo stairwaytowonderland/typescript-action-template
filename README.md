@@ -182,6 +182,66 @@ follow the below instructions:
 
 </details>
 
+## :video_game: Usage
+
+After testing, you can create version tag(s) that developers can use to
+reference different stable versions of your action. For more information, see
+[Versioning](https://github.com/actions/toolkit/blob/main/docs/action-versioning.md)
+in the GitHub Actions toolkit.
+
+To include the action in a workflow in another repository, you can use the
+`uses` syntax with the `@` symbol to reference a specific branch, tag, or commit
+hash.
+
+```yaml
+- uses: stairwaytowonderland/typescript-action-template@v1
+  with:
+    # Your input description here.
+    # Default: 1000
+    milliseconds: 1000
+```
+
+> [!NOTE]
+>
+> As a best practice use `contents:read` permissions unless otherwise required:
+>
+> ```yaml
+> permissions:
+>   contents: read
+> ```
+
+### :computer: Example
+
+```yaml
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    name: Use My Custom Action
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v7
+
+      - name: My Custom Action
+        id: custom-action
+        uses: stairwaytowonderland/typescript-action-template@v1 # Commit with the `v1` tag
+        with:
+          milliseconds: 1000
+
+      - name: Print Output
+        id: output
+        run: echo "${{ steps.custom-action.outputs.time }}"
+```
+
 ## :gear: Initial Setup
 
 After you've cloned the repository to your local machine or codespace, you'll
@@ -414,58 +474,6 @@ steps:
 
 For example workflow runs, check out the
 [Actions tab](https://github.com/stairwaytowonderland/typescript-action-template/actions)! :rocket:
-
-## :video_game: Usage
-
-After testing, you can create version tag(s) that developers can use to
-reference different stable versions of your action. For more information, see
-[Versioning](https://github.com/actions/toolkit/blob/main/docs/action-versioning.md)
-in the GitHub Actions toolkit.
-
-To include the action in a workflow in another repository, you can use the
-`uses` syntax with the `@` symbol to reference a specific branch, tag, or commit
-hash.
-
-### :key: Permissions
-
-As a best practice use `contents:read` permissions unless otherwise required:
-
-```yaml
-permissions:
-  contents: read
-```
-
-### :computer: Example
-
-```yaml
-name: CI
-
-on:
-  push:
-  pull_request:
-
-permissions:
-  contents: read
-
-jobs:
-  ci:
-    name: Use My Custom Action
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        id: checkout
-        uses: actions/checkout@v7
-
-      - name: My Custom Action
-        id: custom-action
-        uses: stairwaytowonderland/typescript-action-template@v1 # Commit with the `v1` tag
-        with:
-          milliseconds: 1000
-
-      - name: Print Output
-        id: output
-        run: echo "${{ steps.custom-action.outputs.time }}"
-```
 
 ## :package: Publishing a New Release
 
