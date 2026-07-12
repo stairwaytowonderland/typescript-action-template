@@ -203,6 +203,8 @@ hash.
 
 > [!NOTE]
 >
+> :key: Permissions
+>
 > As a best practice use `contents:read` permissions unless otherwise required:
 >
 > ```yaml
