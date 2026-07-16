@@ -28,7 +28,7 @@ updates:
     directory: '/'
     exclude-paths:
       - '.github/workflows/*'
-      - '.github/actions/**'
+      # - '.github/actions/**'
     schedule:
       # interval: "monthly"
       # day: "friday"
