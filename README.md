@@ -95,8 +95,8 @@ If you are new, there's also a simpler introduction in the
 
 ### :white_check_mark: First tasks
 
-- [ ] **:one: :clipboard: Create your repo:** Use this template to [**Create your own action**](#clipboard-create-your-own-action)!
-:tada:
+- [ ] **:one: :clipboard: Create your repo:** Use this template to
+[**Create your own action**](#clipboard-create-your-own-action)! :tada:
 - [ ] **:two: :label: Create some labels:** Run the [Create Labels](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/create-labels.yaml)
 _workflow_ to create some additional useful labels.
 - [ ] **:three: :bookmark: Create some issues:** Run the [Import Issues from CSV](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/import-csv-issues.yaml)
