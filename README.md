@@ -690,7 +690,7 @@ files.
 
 > [!NOTE]
 >
-> If **_using this template in another org_, or to _add those files to your project for further customization_**, copy
+> **_If using this template in another org_, or to _add those files to your project for further customization_**, copy
 > them from this organization's [_special .github repo_](https://github.com/stairwaytowonderland/.github/tree/main/.github).
 
 ## :ocean: Essential tools
