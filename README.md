@@ -503,8 +503,10 @@ steps:
     run: echo "${{ steps.test-action.outputs.time }}"
 ```
 
-For example workflow runs, check out the
-[Actions tab](https://github.com/stairwaytowonderland/typescript-action-template/actions)! :rocket:
+> [!TIP]
+>
+> For example workflow runs, check out the
+> [Actions tab](https://github.com/stairwaytowonderland/typescript-action-template/actions)!
 
 ## :package: Publishing a New Release
 
@@ -694,19 +696,31 @@ files.
 > **_If using this template in another org_, or to _add those files to your project for further customization_**, copy
 > them from this organization's [_special .github repo_](https://github.com/stairwaytowonderland/.github/tree/main/.github).
 
+## :bulb: Tips
+
+:office: The [`stairwaytowonderland`](https://github.com/stairwaytowonderland) _GitHub Organization_ is
+host to several **monorepos** and **marketplace actions**:
+
+- :white_check_mark: See the [`actions`](https://github.com/stairwaytowonderland/actions) monorepo for a variety of
+useful **composite actions**.
+- :white_check_mark: See the [`.github`](https://github.com/stairwaytowonderland/.github/workflows) monorepo for
+common **reuseable workflows**.
+- :white_check_mark: See the
+[official marketplace](https://github.com/marketplace?type=actions&query=stairwaytowonderland) for the organization's
+**published marketplace actions**.
+
+---
+<!-- REMOVE ABOVE -->
+
 ## :ocean: Essential tools
 
 - :white_check_mark: [Visual Studio Code](https://code.visualstudio.com/) (a.k.a. _VS Code_)
 - :white_check_mark: [EditorConfig](https://editorconfig.org/)
 - :white_check_mark: [pre-commit](https://pre-commit.com/)
 - :white_check_mark: [Prettier](https://prettier.io/)
-
   > :memo: **Note:** For a more customized experience, some files might need to be excluded from _Prettier_.
   >
-  > See the [official docs](https://prettier.io/docs/ignore) for details on ignoring code.
-
----
-<!-- REMOVE ABOVE -->
+  > _(See the [official docs](https://prettier.io/docs/ignore) for details on ignoring code)_
 
 ## :sparkles: Contributing
 
