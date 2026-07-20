@@ -79,6 +79,7 @@ If you are new, there's also a simpler introduction in the
 ### :white_check_mark: First tasks
 
 - [ ] **:one: :clipboard: Create your repo:** Use this template to [**Create your own action**](#clipboard-create-your-own-action)!
+:tada:
 - [ ] **:two: :label: Create some labels:** Run the [Create Labels](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/create-labels.yaml)
 _workflow_ to create some additional useful labels.
 - [ ] **:three: :bookmark: Create some issues:** Run the [Import Issues from CSV](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/import-csv-issues.yaml)
@@ -124,7 +125,8 @@ follow the below instructions:
 >
 > :books: Make sure to  update the [`README.md`](./README.md) and the [`LICENSE`](./LICENSE) files accordingly!
 >
-> :wrench: Make sure to [Update the Action Metadata](#wrench-update-the-action-metadata)!
+> :wrench: Make sure to [**Update the Action Metadata**](#wrench-update-the-action-metadata)
+([`action.yaml`](#zap-actionyaml) and [`package.json`](#toolbox-packagejson))! :rotating_light:
 
 #### :b: _Option "B"_
 
@@ -272,7 +274,7 @@ need to perform some initial setup steps before you can develop your action.
    npm run bundle
    ```
 
-1. :microscope: Run the tests
+1. :test_tube: Run the tests
 
    ```bash
    $ npm test
@@ -313,6 +315,8 @@ need to perform some initial setup steps before you can develop your action.
 
 ## :wrench: Update the Action Metadata
 
+### :zap: `action.yaml`
+
 The [`action.yaml`](action.yaml) file defines metadata about your action, such
 as input(s) and output(s). For details about this file, see
 [Metadata syntax for GitHub Actions](https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions).
@@ -320,37 +324,44 @@ as input(s) and output(s). For details about this file, see
 When you copy this repository, update `action.yaml` with the name, description,
 inputs, and outputs for your action.
 
-> [!IMPORTANT]
->
-> Make sure to update [`package.json`](./package.json)!
->
-> :hammer: Run `npm run clean && npm install && npm run all` to build your action and prepare it for commit.
->
-> <details>
-> <summary><b>‼️ You <b>must</b> update <i>at least</i> the <code>homepage</code>, <code>repository</code>, and
-> <code>bugs</code> <i>urls</i> or your action won't publish</b> <i>(Expand for details) ...</i></summary><br>
->
-> Update the following fields and urls appropriately, to match your
-> own repository:
->
-> ```json
-> {
->     "name": "typescript-action",
->     "description": "GitHub Actions TypeScript template",
->     "author": "",
->     "homepage": "https://github.com/stairwaytowonderland/typescript-action-template",
->     "repository": {
->         "type": "git",
->         "url": "git+https://github.com/stairwaytowonderland/typescript-action-template.git"
->     },
->     "bugs": {
->         "url": "https://github.com/stairwaytowonderland/typescript-action-template/issues"
->     },
->     ...
-> }
-> ```
->
-> </details>
+### :toolbox: `package.json`
+
+**Make sure to update [`package.json`](./package.json)!** :rotating_light:
+
+The package.json file serves as the manifest and configuration hub for any Node.js project or npm package
+_(See the [**official docs**](https://docs.npmjs.com/cli/v7/configuring-npm/package-json) for more information)_:
+
+1. <details>
+    <summary><b>‼️ You <b>must</b> update <i>at least</i> the
+    <a href="https://docs.npmjs.com/cli/v7/configuring-npm/package-json#homepage"><code>homepage</code></a>,
+    <a href="https://docs.npmjs.com/cli/v7/configuring-npm/package-json#repository"><code>repository</code></a>, and
+    <a href="https://docs.npmjs.com/cli/v7/configuring-npm/package-json#bugs"><code>bugs</code></a> <i>urls</i> or your
+    action won't publish</b> <i>(Expand for details) ...</i></summary><br>
+
+    Update the following fields and urls appropriately, to match your
+own repository:
+
+    ```json
+    {
+        "name": "typescript-action-template",
+        "description": "GitHub Actions TypeScript template",
+        "author": "",
+        "homepage": "https://github.com/stairwaytowonderland/typescript-action-template",
+        "repository": {
+            "type": "git",
+            "url": "git+https://github.com/stairwaytowonderland/typescript-action-template.git"
+        },
+        "bugs": {
+            "url": "https://github.com/stairwaytowonderland/typescript-action-template/issues"
+        },
+        ...
+    }
+    ```
+
+    </details>
+
+1. :hammer: After updating, run `npm run clean && npm install && npm run all` to build your action and prepare it
+for commit.
 
 ## :keyboard: Update the Action Code
 
@@ -379,7 +390,7 @@ There are a few things to keep in mind when writing your action code:
   For more information about the GitHub Actions toolkit, see the
   [documentation](https://github.com/actions/toolkit/blob/main/README.md).
 
-:roller_coaster: So, what are you waiting for? Go ahead and start customizing your action!
+:rocket: So, what are you waiting for? Go ahead and start customizing your action!
 
 1. Create a new branch
 
@@ -400,7 +411,7 @@ There are a few things to keep in mind when writing your action code:
    > you do not run this step, your action will not work correctly when it is
    > used in a workflow.
 
-1. :ferris_wheel: (Optional) Test your action locally
+1. :microscope: (Optional) Test your action locally
 
    The [`@github/local-action`](https://github.com/github/local-action) utility
    can be used to test your action locally. It is a simple command-line tool
@@ -488,11 +499,10 @@ The **creation of tags and releases is handled _automatically_** by the pre-conf
 ### :page_with_curl: Disabling the `CHANGELOG`
 
 <details>
-<summary><b>A generated <code>CHANGELOG</code> is automatically committed, however it can be disabled</b>
+<summary><b>To prevent the automatically generated <code>CHANGELOG</code> from being committed</b>
 <i>(Expand for details) ...</i></summary>
 
-1. The **_entire_** `@semantic-release/changelog` _plugin_ configuration
-_(**toward the beginning of the plugins section** in your [`.releaserc`](./.releaserc))_:
+1. Remove the **_entire_** `@semantic-release/changelog` _plugin_ configuration in your [`.releaserc`](./.releaserc):
 
     ```json
     [
@@ -503,20 +513,86 @@ _(**toward the beginning of the plugins section** in your [`.releaserc`](./.rele
     ]
     ```
 
-1. From the `@semantic-release/git` plugin configuration _(**toward the end of the plugins section** in your
-[`.releaserc`](./.releaserc))_, remove **_just_** the `CHANGELOG.md` asset:
+1. From the `@semantic-release/git` _plugin_ configuration in your
+[`.releaserc`](./.releaserc), remove the `CHANGELOG.md` asset:
 
     ```json
     [
       "@semantic-release/git",
       {
-        "assets": ["CHANGELOG.md"],
+        "assets": ["package.json", "package-lock.json"],
         "message": "chore(release): ${nextRelease.version}\n\n${nextRelease.notes}"
       }
     ]
     ```
 
     > :memo: **Note:** if `CHANGELOG.md` is the only asset listed, remove the **_entire_** `@semantic-release/git` block.
+
+</details>
+
+### :electric_plug: _"RC"_ Plugin ordering
+
+<details>
+<summary><b>The order of <code>.releaserc</code> <i>plugins</i> DOES matter</b>
+<i>(Expand for details) ...</i></summary><br>
+
+The **order of _plugins_ DOES matter** in the _release configuration file (`.releaserc`)_!
+
+:1234: The recommended order for the _`plugins` array_ is:
+
+```json
+[
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    "@semantic-release/changelog",
+    "@semantic-release/npm",
+    "@semantic-release/git",
+    "@semantic-release/github",
+    "semantic-release-export-data"
+]
+```
+
+#### Why This Exact Order Matters
+
+- [@semantic-release/commit-analyzer](https://github.com/semantic-release/commit-analyzer): Must go first to scan your
+commits and determine the next semantic version bump
+(_major_, _minor_, or _patch_).
+- [@semantic-release/release-notes-generator](https://github.com/semantic-release/release-notes-generator): Compiles
+the release notes based on those commits.
+- [@semantic-release/changelog](https://github.com/semantic-release/changelog): Must be placed before the `git` and `npm`
+plugins. It creates or updates the physical `CHANGELOG.md` file so downstream plugins can package and commit it.
+- [@semantic-release/npm](https://github.com/semantic-release/npm): Must run before the Git plugin. It updates the
+version string in package.json. If placed after `git`, the version bump won't be committed to your repository.
+- [@semantic-release/git](https://github.com/semantic-release/git): Consolidates the modified CHANGELOG.md and
+package.json, then creates the release commit and pushes it back to your repository.
+- [@semantic-release/github](https://github.com/semantic-release/github)
+(or [`gitlab`](https://github.com/semantic-release/gitlab)): Placed last to finalize the process by publishing the
+GitHub Release, uploading build assets, and posting automated comments on resolved issues or PRs.
+- [semantic-release-export-data](https://github.com/felipecrs/semantic-release-export-data): Can be placed anywhere in
+your plugins array, but the most reliable approach is to add it at the very end of your plugin list.
+It does not modify code, commit files, or change your package repository. _It is a passive plugin designed solely to
+hook into the prepare, publish, and success [lifecycles](https://semantic-release.org/developer-guide/plugin/) to extract data generated by previous steps (like the version
+determined by the `commit-analyzer`) and write it out as environment/GitHub Actions variables._
+
+See the [**official docs**](https://semantic-release.org/developer-guide/plugin/) for more information.
+
+#### How the Steps Execute Internally
+
+```mermaid
+flowchart TD
+    A[verifyConditions] --> B[analyzeCommits]
+    B --> C[verifyRelease]
+    C --> D[generateNotes]
+    D --> E[prepare]
+    E --> F[publish]
+    F --> G[success / fail]
+
+    classDef default fill:#f9f9f9,stroke:#333,stroke-width:2px;
+    classDef successFill fill:#d4edda,stroke:#28a745,stroke-width:2px;
+    classDef failFill fill:#f8d7da,stroke:#dc3545,stroke-width:2px;
+
+    class G successFill;
+```
 
 </details>
 
@@ -554,10 +630,11 @@ on the issue(s) found.
 ### :lock_with_ink_pen: Updating Licenses
 
 <details>
-<summary><b>Whenever you install or update dependencies, you can use the Licensed CLI to
+<summary><b>Use the Licensed CLI to
 update the licenses database</b> <i>(Expand for details) ...</i></summary><br>
 
-To install Licensed, see the project's
+Whenever you install or update dependencies, you can use the Licensed CLI to
+update the licenses database. To install Licensed, see the project's
 [Readme](https://github.com/licensee/licensed?tab=readme-ov-file#installation).
 
 To update the cached licenses, run the following command:

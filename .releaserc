@@ -4,13 +4,6 @@
 	],
 	"tagFormat": "v${version}",
 	"plugins": [
-		"semantic-release-export-data",
-		[
-			"@semantic-release/changelog",
-			{
-				"changelogFile": "CHANGELOG.md"
-			}
-		],
 		[
 			"@semantic-release/commit-analyzer",
 			{
@@ -94,6 +87,12 @@
 			}
 		],
 		[
+			"@semantic-release/changelog",
+			{
+				"changelogFile": "CHANGELOG.md"
+			}
+		],
+		[
 			"@semantic-release/npm",
 			{
 				"npmPublish": false
@@ -109,6 +108,7 @@
 				],
 				"message": "chore(release): ${nextRelease.version}\n\n${nextRelease.notes}"
 			}
-		]
+		],
+		"semantic-release-export-data"
 	]
 }
