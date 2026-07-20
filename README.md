@@ -25,7 +25,7 @@ If you are new, there's also a simpler introduction in the
 
 > [!TIP]
 >
-> For the `.github` folder file structure, see its [`index.md`](./.github/index.md).
+> For the complete `.github` folder file structure, see its [`index.md`](./.github/index.md).
 
 <details>
 <summary><b>Project file structure</b> <i>(Click to expand) ...</i></summary><br>
