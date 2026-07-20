@@ -586,8 +586,9 @@ version string in package.json. If placed after `git`, the version bump won't be
 - [@semantic-release/git](https://github.com/semantic-release/git): Consolidates the modified CHANGELOG.md and
 package.json, then creates the release commit and pushes it back to your repository.
 - [@semantic-release/github](https://github.com/semantic-release/github)
-(or [`gitlab`](https://github.com/semantic-release/gitlab)): Placed last to finalize the process by publishing the
-GitHub Release, uploading build assets, and posting automated comments on resolved issues or PRs.
+(or [`gitlab`](https://github.com/semantic-release/gitlab)): **(Optional)** Placed last _(of the `@semantic-release/`
+plugins)_ to finalize the process by publishing the GitHub Release, uploading build assets, and posting automated
+comments on resolved issues or PRs.
 - [semantic-release-export-data](https://github.com/felipecrs/semantic-release-export-data): Can be placed anywhere in
 your plugins array, but the most reliable approach is to add it at the very end of your plugin list.
 It does not modify code, commit files, or change your package repository. _It is a passive plugin designed solely to
