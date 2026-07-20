@@ -29,18 +29,35 @@ If you are new, there's also a simpler introduction in the
 <details>
 <summary><b>Project file structure</b> <i>(Click to expand) ...</i></summary><br>
 
-> :seedling: `tree -a -F -L 1 -I '.git|.vscode' --gitignore --dirsfirst .`
+> :seedling: `tree -a -F -L 2 -I '.git|.vscode|.devcontainer' --gitignore --dirsfirst .`
 
 ```none
 ./
 ├── __fixtures__/
+│   ├── core.ts
+│   └── wait.ts
 ├── __tests__/
-├── .devcontainer/
+│   ├── main.test.ts
+│   └── wait.test.ts
 ├── .github/
+│   ├── codeql/
+│   ├── workflows/
+│   ├── CODEOWNERS
+│   ├── dependabot.yml
+│   └── index.md
 ├── .licenses/
+│   └── npm/
 ├── badges/
+│   └── coverage.svg
 ├── dist/
+│   ├── index.js
+│   └── index.js.map
+├── script/
+│   └── release*
 ├── src/
+│   ├── index.ts
+│   ├── main.ts
+│   └── wait.ts
 ├── .checkov.yml
 ├── .editorconfig
 ├── .env.example
