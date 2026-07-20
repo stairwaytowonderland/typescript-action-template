@@ -344,7 +344,7 @@ inputs, and outputs for your action.
 
 ### :toolbox: `package.json`
 
-**Make sure to update [`package.json`](./package.json)!** :rotating_light:
+:exclamation: **Make sure to update [`package.json`](./package.json)!** :rotating_light:
 
 The package.json file serves as the manifest and configuration hub for any Node.js project or npm package
 _(See the [**official docs**](https://docs.npmjs.com/cli/v7/configuring-npm/package-json) for more information)_:
