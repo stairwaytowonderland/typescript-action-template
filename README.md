@@ -713,7 +713,7 @@ host to several **monorepos** and **marketplace actions**:
 - :white_check_mark: See the [`actions`](https://github.com/stairwaytowonderland/actions) monorepo for a variety of
 useful **composite actions**.
 - :white_check_mark: See the [`.github`](https://github.com/stairwaytowonderland/.github/workflows) monorepo for
-common **reuseable workflows**.
+common **reusable workflows**.
 - :white_check_mark: See the
 [GitHub Marketplace](https://github.com/marketplace?type=actions&query=stairwaytowonderland) for this organization's
 **published marketplace actions**.

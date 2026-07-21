@@ -117,6 +117,14 @@
 	"shellcheck.customArgs": ["-x"],
 
 	/*
+		Shellscript settings
+	*/
+	// "[shellscript]": {
+	// 	"editor.defaultFormatter": "mkhl.shfmt",
+	// 	"editor.formatOnSave": true
+	// },
+
+	/*
 		Dockerfile settings
 	*/
 	// "[dockerfile]": {
