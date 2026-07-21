@@ -350,7 +350,7 @@ The package.json file serves as the manifest and configuration hub for any Node.
 _(See the [**official docs**](https://docs.npmjs.com/cli/v7/configuring-npm/package-json) for more information)_:
 
 1. <details>
-    <summary><b>‼️ You <b>must</b> update <i>at least</i> the
+    <summary><b>‼️ You <b>must</b> update <i>(or remove)</i> the
     <a href="https://docs.npmjs.com/cli/v7/configuring-npm/package-json#homepage"><code>homepage</code></a>,
     <a href="https://docs.npmjs.com/cli/v7/configuring-npm/package-json#repository"><code>repository</code></a>, and
     <a href="https://docs.npmjs.com/cli/v7/configuring-npm/package-json#bugs"><code>bugs</code></a> <i>urls</i> or your
