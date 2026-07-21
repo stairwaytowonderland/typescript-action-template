@@ -339,8 +339,16 @@ The [`action.yaml`](action.yaml) file defines metadata about your action, such
 as input(s) and output(s). For details about this file, see
 [Metadata syntax for GitHub Actions](https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions).
 
-When you copy this repository, update `action.yaml` with the name, description,
-inputs, and outputs for your action.
+When you copy this repository, update `action.yaml` with the _`name`_, _`description`_,
+_inputs_, and _outputs_ for your action.
+
+> [!TIP]
+>
+> If the action will be published to the [GitHub Marketplace](https://github.com/marketplace), the name will be derived
+> from the _`name`_ field in the `action.yaml`.
+>
+> See [Publishing actions in GitHub Marketplace](https://docs.github.com/en/actions/how-tos/create-and-publish-actions/publish-in-github-marketplace)
+> for more information.
 
 ### :toolbox: `package.json`
 
