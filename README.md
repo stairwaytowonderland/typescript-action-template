@@ -715,7 +715,7 @@ useful **composite actions**.
 - :white_check_mark: See the [`.github`](https://github.com/stairwaytowonderland/.github/workflows) monorepo for
 common **reuseable workflows**.
 - :white_check_mark: See the
-[official marketplace](https://github.com/marketplace?type=actions&query=stairwaytowonderland) for the organization's
+[GitHub Marketplace](https://github.com/marketplace?type=actions&query=stairwaytowonderland) for the organization's
 **published marketplace actions**.
 
 ---
