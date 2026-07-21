@@ -160,7 +160,7 @@
 				/*
 					Python settings
 					# If formatting isn't working after changing black-formatter.args ...
-					# In the Command Pallete search for 'Black Formatter: Restart Server'
+					# In the Command Palette search for 'Black Formatter: Restart Server'
 
 					# Sample pyproject.toml
 					[tool.black]
