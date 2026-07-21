@@ -7,7 +7,7 @@
 
 [![GitHub latest release](https://img.shields.io/github/v/release/stairwaytowonderland/typescript-action-template?include_prereleases&logo=rocket)](https://github.com/stairwaytowonderland/typescript-action-template/releases)
 [![GitHub last commit](https://img.shields.io/github/last-commit/stairwaytowonderland/typescript-action-template/main?logo=git)](https://github.com/stairwaytowonderland/typescript-action-template/commits/main)
-[![GitHub license](https://img.shields.io/github/license/stairwaytowonderland/typescript-action-template?logo=opensourceinitiative)](https://github.com/stairwaytowonderland/typescript-action-template/tree/main/LICENSE)
+[![GitHub license](https://img.shields.io/github/license/stairwaytowonderland/typescript-action-template?logo=opensourceinitiative&logoColor=white)](https://github.com/stairwaytowonderland/typescript-action-template/tree/main/LICENSE)
 [![semantic-release: conventionalcommits](https://img.shields.io/badge/semantic--release-cc-FE5196?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
 [![pre-commit](https://img.shields.io/badge/pre--commit-FAB040?logo=pre-commit&logoColor=black)](https://github.com/pre-commit/pre-commit)
 
