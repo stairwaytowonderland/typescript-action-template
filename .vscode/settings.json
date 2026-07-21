@@ -47,11 +47,13 @@
 		"*.lib": "shellscript",
 		"*yaml.tftpl": "jinja-yaml",
 		"*json.tftpl": "jinja-json",
-		"LICENSE": "plaintext"
+		"LICENSE": "plaintext",
+		"CODEOWNERS": "properties"
 	},
 	"files.exclude": {
 		"**/.git": true,
 		"**/.DS_Store": true,
+		"**/node_modules": true,
 		"**/dist": true,
 		"**/build": true,
 		"**/__pycache__": true,
@@ -110,6 +112,7 @@
 	// https://github.com/yzhang-gh/vscode-markdown?tab=readme-ov-file#supported-settings
 	"markdown.extension.orderedList.marker": "one",
 	"markdown.extension.toc.unorderedList.marker": "-",
+	"markdown.extension.list.indentationSize": "adaptive",
 
 	/*
 		Shellcheck settings
@@ -153,7 +156,7 @@
 	"[toml]": {
 		"editor.defaultFormatter": "tamasfe.even-better-toml",
 		"editor.formatOnSave": true
-	},
+	}
 
 	/*
 		Python settings
@@ -175,60 +178,4 @@
 	// 		"source.organizeImports": "explicit"
 	// 	}
 	// }
-
-	/*
-		Better Byte settings
-		https://marketplace.visualstudio.com/items?itemName=cloudbyte.better-byte
-	*/
-	"better-byte.multilineComments": true,
-	"better-byte.highlightPlainText": false,
-	"better-byte.tags": [
-		{
-			"tag": "!",
-			"color": "#FF2D00",
-			"strikethrough": false,
-			"underline": false,
-			"backgroundColor": "transparent",
-			"bold": false,
-			"italic": false
-		},
-		{
-			"tag": "?",
-			"color": "#3498DB"
-		},
-		{
-			"tag": "//",
-			"color": "#474747",
-			"strikethrough": true
-		},
-		{
-			"tag": "TODO",
-			"color": "#000000",
-			"backgroundColor": "#FF8C00"
-		},
-		{
-			"tag": "*",
-			"color": "#28FF00"
-		},
-		{
-			"tag": "FIXME",
-			"color": "#000000",
-			"backgroundColor": "#FFCC00"
-		},
-		{
-			"tag": "HACK",
-			"color": "#000000",
-			"backgroundColor": "#FF8C00"
-		},
-		{
-			"tag": "BUG",
-			"color": "#000000",
-			"backgroundColor": "#FF2D00"
-		},
-		{
-			"tag": "UNDO",
-			"color": "#000000",
-			"backgroundColor": "#3498DB"
-		}
-	]
 }

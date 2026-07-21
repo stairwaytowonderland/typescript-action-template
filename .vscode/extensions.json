@@ -15,7 +15,7 @@
 		"github.vscode-github-actions",
 		"github.vscode-pull-request-github",
 		// "mkhl.shfmt", // Requires shfmt installation
-		"redhat.vscode-yaml",
+		// "redhat.vscode-yaml",
 		"rvest.vs-code-prettier-eslint",
 		"streetsidesoftware.code-spell-checker",
 		"timonwong.shellcheck",
