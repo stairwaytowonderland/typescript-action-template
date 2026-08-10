@@ -15,7 +15,7 @@ insert_final_newline = false
 indent_style = space
 indent_size = 2
 
-[*.{md,txt}, CHANGELOG, CONTRIBUTING, LICENSE, README]
+[{*.md,*.txt,CHANGELOG,CONTRIBUTING,LICENSE,README}]
 trim_trailing_whitespace = false
 max_line_length = off
 indent_style = space
