@@ -30,7 +30,7 @@
 * update README [skip ci] ([dc25e93](https://github.com/stairwaytowonderland/typescript-action-template/commit/dc25e93a60f34e252a2eac722f54bde467627e0f))
 * update README [skip ci] ([444a9ab](https://github.com/stairwaytowonderland/typescript-action-template/commit/444a9ab16206beca7c673131030de83e5cd54123))
 * update README [skip ci] ([58a94f5](https://github.com/stairwaytowonderland/typescript-action-template/commit/58a94f563498bc5855f5d2cbb41d16f91c70d5ad))
-* update reuseable workflow references ([45493a7](https://github.com/stairwaytowonderland/typescript-action-template/commit/45493a7036e56f0045ad8b1e347c241bdbf8fbac))
+* update reusable workflow references ([45493a7](https://github.com/stairwaytowonderland/typescript-action-template/commit/45493a7036e56f0045ad8b1e347c241bdbf8fbac))
 * update template ([bf8622a](https://github.com/stairwaytowonderland/typescript-action-template/commit/bf8622a664e9a8c0f4c99b2efa9f29ee27e62123))
 * updates ([6a832c0](https://github.com/stairwaytowonderland/typescript-action-template/commit/6a832c06ab633465706f2ea3e862263f6479dbd3))
 * updates [skip ci] ([79bf677](https://github.com/stairwaytowonderland/typescript-action-template/commit/79bf6777379b2b93f6612b1ff6a645717539d401))

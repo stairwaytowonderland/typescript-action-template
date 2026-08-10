@@ -115,6 +115,9 @@ _workflow_ to create some additional useful labels.
   Customize the [`README.md`](./README.md), [`CODEOWNERS`](./.github/CODEOWNERS), [`LICENSE`](./LICENSE),
   [`action.yaml`](./action.yaml), and [`package.json`](./package.json)
   _(**+** [`package-lock.json`](./package-lock.json))_ files, to include project-specific information and instructions.
+
+  > :exclamation: Remember to remove the initial `CHANGELOG.md` if it exists in the template.
+
 - [ ] **:six: :trophy: _(BONUS)_ :art: Install `pre-commit`:** Install `pre-commit` locally
 and configure it (using [.pre-commit-config.yaml](./.pre-commit-config.yaml)) to ensure proper formatting, mitigating
 workflow failures.
@@ -137,11 +140,13 @@ follow the below instructions:
 
 > [!IMPORTANT]
 >
-> :classical_building: Make sure to remove or update the [`CODEOWNERS`](./.github/CODEOWNERS) file!<br>_(For
+> :classical_building: Make sure to **remove or update** the [`CODEOWNERS`](./.github/CODEOWNERS) file!<br>_(For
 > details on how to use this file, see
 > [About code owners](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners).)_
 >
-> :books: Make sure to  update the [`README.md`](./README.md) and the [`LICENSE`](./LICENSE) files accordingly!
+> :books: Make sure to  **update** the [`README.md`](./README.md) and the [`LICENSE`](./LICENSE) files accordingly!
+>
+> :scroll: Make sure to **remove** the initial `CHANGELOG.md` if one was created, for a clean start.
 >
 > :wrench: Make sure to [**Update the Action Metadata**](#wrench-update-the-action-metadata)
 ([`action.yaml`](#zap-actionyaml) and [`package.json`](#toolbox-packagejson))! :rotating_light:
