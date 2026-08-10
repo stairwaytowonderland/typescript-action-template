@@ -142,7 +142,7 @@
 				"[toml]": {
 					"editor.defaultFormatter": "tamasfe.even-better-toml",
 					"editor.formatOnSave": true
-				},
+				}
 				/*
 					Terraform settings
 				*/
@@ -178,110 +178,6 @@
 				// 	}
 				// },
 				// "ruff.nativeServer": "on",
-				/*
-					Better Byte settings
-					https://marketplace.visualstudio.com/items?itemName=cloudbyte.better-byte
-				*/
-				"better-byte.multilineComments": true,
-				"better-byte.highlightPlainText": false,
-				"better-byte.tags": [
-					{
-						"tag": "!",
-						"color": "#FF2D00",
-						"strikethrough": false,
-						"underline": false,
-						"backgroundColor": "transparent",
-						"bold": false,
-						"italic": false
-					},
-					{
-						"tag": "?",
-						"color": "#3498DB"
-					},
-					{
-						"tag": "//",
-						"color": "#474747",
-						"strikethrough": true
-					},
-					{
-						"tag": "TODO",
-						"color": "#000000",
-						"backgroundColor": "#FF8C00"
-					},
-					{
-						"tag": "*",
-						"color": "#28FF00"
-					},
-					{
-						"tag": "FIXME",
-						"color": "#000000",
-						"backgroundColor": "#FFCC00"
-					},
-					{
-						"tag": "HACK",
-						"color": "#000000",
-						"backgroundColor": "#FF8C00"
-					},
-					{
-						"tag": "BUG",
-						"color": "#000000",
-						"backgroundColor": "#FF2D00"
-					},
-					{
-						"tag": "UNDO",
-						"color": "#000000",
-						"backgroundColor": "#3498DB"
-					}
-				],
-				/*
-					Custom YAML tags
-				*/
-				"yaml.customTags": [
-					"!reference sequence",
-					// CloudFormation custom tags
-					// https://github.com/redhat-developer/vscode-yaml/issues/669
-					"!And sequence",
-					"!And",
-					"!Base64 scalar",
-					"!Base64",
-					"!Cidr sequence",
-					"!Cidr",
-					"!Condition",
-					"!Condition scalar",
-					"!Equals sequence",
-					"!Equals",
-					"!FindInMap sequence",
-					"!FindInMap",
-					"!GetAtt",
-					"!GetAtt scalar",
-					"!GetAZs",
-					"!GetAZs scalar",
-					"!If sequence",
-					"!If",
-					"!ImportValue",
-					"!ImportValue scalar",
-					"!Join sequence",
-					"!Join",
-					"!Not sequence",
-					"!Not",
-					"!Or sequence",
-					"!Or",
-					"!Ref",
-					"!Ref scalar",
-					"!Select sequence",
-					"!Select",
-					"!Split sequence",
-					"!Split",
-					"!Sub sequence",
-					"!Sub",
-					"!Transform sequence",
-					"!Transform",
-					"!ValueOf",
-					"!ValueOf scalar",
-					"!ImportNoChecks",
-					"!ImportNoChecks scalar"
-					// Add any other CloudFormation intrinsic functions you use
-				]
 			}
 		}
 	},
