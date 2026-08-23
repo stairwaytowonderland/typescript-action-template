@@ -20,26 +20,33 @@
 		".": "./dist/index.js"
 	},
 	"engines": {
-		"node": ">=24.0.0"
+		"node": ">=24.0.0",
+		"npm": ">= 8.0.0"
 	},
 	"scripts": {
 		"clean": "rm -rf node_modules package-lock.json && npm cache clean --force",
 		"install:safe": "npm install --legacy-peer-deps --node-gyp=./node_modules/.bin/node-gyp",
 		"clean-install:safe": "npm run clean && npm run install:safe",
-		"build": "npm run bundle",
-		"bundle": "npm run format:write && npm run package",
+		"build": "npm run fix:format && npm run bundle",
+		"bundle": "npm run check && npm run package",
 		"ci-test": "NODE_OPTIONS=--experimental-vm-modules NODE_NO_WARNINGS=1 npx jest",
 		"coverage": "npx make-coverage-badge --output-path ./badges/coverage.svg",
-		"format:write": "npx prettier --write .",
-		"format:check": "npx prettier --check .",
-		"format-write": "npm run format:write",
-		"format-check": "npm run format:check",
-		"lint": "npx eslint .",
+		"check": "npx concurrently -n check: -c blue,green,red -g npm:check:*",
+		"check:format": "npx prettier --check .",
+		"check:lint": "npx eslint .",
+		"fix": "npx concurrently -n fix: -c cyan,yellow,magenta -g npm:fix:*",
+		"fix:format": "npx prettier --write .",
+		"fix:lint": "npx eslint --fix .",
+		"format-write": "npm run fix:format",
+		"format-check": "npm run check:format",
+		"lint": "npm run check:lint",
 		"local-action": "npx @github/local-action . src/main.ts .env",
 		"package": "npx rimraf ./dist && npx rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript",
 		"package:watch": "npm run package -- --watch",
 		"test": "NODE_OPTIONS=--experimental-vm-modules NODE_NO_WARNINGS=1 npx jest --coverage",
-		"all": "npm run format:write && npm run lint && npm run test && npm run coverage && npm run package"
+		"preinstall": "npx npm-force-resolutions",
+		"postinstall": "printf '\\033[1;32m%s: %s\\033[0m\n' 'Installation complete' 'Run `npm run build` to build the project.'",
+		"all": "npm run fix && npm run build && npm test && npm run coverage"
 	},
 	"license": "MIT",
 	"dependencies": {
