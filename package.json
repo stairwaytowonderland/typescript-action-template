@@ -76,6 +76,9 @@
 		"ts-jest-resolver": "^2.0.1",
 		"typescript": "^6.0.3"
 	},
+	"resolutions": {
+		"ip-address": "10.31.0"
+	},
 	"overrides": {
 		"node-gyp": {
 			"undici": ">=6.28.0 <7.0.0"
