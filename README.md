@@ -765,3 +765,7 @@ common **reusable workflows**.
 > See
 > [Contributing Guidelines](https://github.com/stairwaytowonderland/typescript-action-template?tab=contributing-ov-file#contributing-guidelines)
 > for more information.
+
+## :credit_card: License
+
+The scripts and documentation in this project are released under the [MIT License](LICENSE)
