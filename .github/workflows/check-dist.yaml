@@ -24,3 +24,6 @@ jobs:
   check-dist:
     name: Check dist/
     uses: stairwaytowonderland/.github/.github/workflows/npm-check-dist.yaml@v1
+    with:
+      build-command: |
+        npm run bundle
