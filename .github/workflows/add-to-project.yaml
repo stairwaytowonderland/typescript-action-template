@@ -1,0 +1,44 @@
+name: 📌 Add dependency PRs to board
+
+permissions:
+  contents: read # access to read repository's content
+
+on:
+  schedule:
+    - cron: '30 5 * * *'
+  # Use pull_request_target to have access to a token with write permissions on the repository
+  # To use pull_request, set the secrets to the organization 'Dependabot secrets' settings.
+  pull_request_target:
+    types: [opened, reopened, synchronize]
+  workflow_dispatch:
+    inputs:
+      dry-run:
+        description: 'Dry run mode'
+        required: false
+        type: boolean
+        default: true
+
+concurrency:
+  group: add-to-project-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  add-to-project:
+    name: Add pull requests to project
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get auth token
+        id: auth-token
+        uses: stairwaytowonderland/actions/.github/actions/auth-token-action@v1
+        with:
+          # github-token: ${{ secrets.github-token }}
+          app-private-key: ${{ secrets.ORG_REPO_USER_PRIVATE_KEY }}
+          app-client-id: ${{ vars.ORG_REPO_USER_APP_ID }}
+
+      - uses: stairwaytowonderland/add-to-project@v1
+        with:
+          dry-run: ${{ (github.event_name == 'workflow_dispatch' || github.event_name == 'schedule') && github.event.inputs.dry-run || true }}
+          project-url: https://github.com/orgs/${{ github.repository_owner }}/projects/5
+          github-token: ${{ steps.auth-token.outputs.token }}
+          labeled: dependencies
+          repo: ${{ (github.event_name == 'workflow_dispatch' || github.event_name == 'schedule') && github.event.repository.name || '' }}
