@@ -2,7 +2,7 @@ name: 🎫 Dependabot Tests
 
 on:
   workflow_run:
-    workflows: ['_']
+    workflows: ['🚀 Repository Created']
     types: [completed]
 
 permissions:
