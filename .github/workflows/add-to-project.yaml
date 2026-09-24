@@ -1,4 +1,4 @@
-name: 🗂️ Add dependency PRs to board
+name: 🗂️ Add Dependency PRs to Board
 
 permissions:
   contents: read # access to read repository's content
@@ -24,7 +24,7 @@ concurrency:
 
 jobs:
   add-to-project:
-    name: Add pull requests to project
+    name: 📌 Add PRs to project
     runs-on: ubuntu-latest
     steps:
       - name: Get auth token
