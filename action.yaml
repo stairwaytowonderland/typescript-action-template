@@ -3,6 +3,7 @@ description: Provide a description here
 author: Your name or organization here
 
 # Add your action's branding here. This will appear on the GitHub Marketplace.
+# https://docs.github.com/en/actions/reference/workflows-and-actions/metadata-syntax
 branding:
   icon: heart
   color: red
