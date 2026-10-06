@@ -6,7 +6,7 @@
 
 import * as core from '@actions/core'
 import { RepoAction, GitHubContext, ActionInputs, SimpleRepository, ActionRepository } from './types.js'
-import { wait } from './action.js'
+import action from './action.js'
 
 /**
  * Represents a flat configuration for the GitHub Action.
@@ -75,7 +75,7 @@ export class Action implements RepoAction {
 		core.debug(`Action inputs: ${JSON.stringify(this.inputs)}`)
 
 		core.debug(new Date().toTimeString())
-		const result = await wait(this)
+		const result = action(this)
 		core.debug(`Result: ${result}`)
 		core.debug(new Date().toTimeString())
 		core.setOutput('time', new Date().toTimeString())

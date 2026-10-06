@@ -23,7 +23,7 @@ jest.unstable_mockModule('@actions/github', () => github)
 import { ActionInputs, GitHubContext } from '../src/types.js'
 
 // Import the mocked core module and wait function from fixtures
-import { wait, delay, millisecondsFromInput } from '../src/action.js'
+import wait, { delay, millisecondsFromInput } from '../src/action.js'
 import { Action } from '../src/config.js'
 
 describe('Action Logic', () => {

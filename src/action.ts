@@ -14,7 +14,7 @@ import type { ActionConfig } from './config.js'
  * @param action (RepoAction) The action object.
  * @returns Resolves when the example logic is complete.
  */
-export async function wait(action: RepoAction): Promise<string> {
+export default async (action: RepoAction): Promise<string> => {
 	// Octokit instance for GitHub API requests
 	// const ghToken = (action.inputs?.ghToken as string)?.trim()
 	// const octokit: OctokitClient = getOctokit(ghToken)

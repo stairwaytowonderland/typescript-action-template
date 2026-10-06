@@ -33735,7 +33735,7 @@ export async function searchIssuesAndPullRequests(query: string, octokit: Octoki
  * @param action (RepoAction) The action object.
  * @returns Resolves when the example logic is complete.
  */
-async function wait(action) {
+var action = async (action) => {
     // Octokit instance for GitHub API requests
     // const ghToken = (action.inputs?.ghToken as string)?.trim()
     // const octokit: OctokitClient = getOctokit(ghToken)
@@ -33752,7 +33752,7 @@ async function wait(action) {
     const result = await delay(actionConfig.milliseconds);
     debug(`Result after waiting: ${result}`);
     return result;
-}
+};
 /**
  * Waits for a number of milliseconds.
  *
@@ -33832,7 +33832,7 @@ class Action {
         debug(`Action dryRun: ${this.dryRun}`);
         debug(`Action inputs: ${JSON.stringify(this.inputs)}`);
         debug(new Date().toTimeString());
-        const result = await wait(this);
+        const result = action(this);
         debug(`Result: ${result}`);
         debug(new Date().toTimeString());
         setOutput('time', new Date().toTimeString());
