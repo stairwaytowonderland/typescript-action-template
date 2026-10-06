@@ -75,9 +75,12 @@ export class Action implements RepoAction {
 		core.debug(`Action inputs: ${JSON.stringify(this.inputs)}`)
 
 		core.debug(new Date().toTimeString())
-		const result = action(this)
+		const result = await action(this)
 		core.debug(`Result: ${result}`)
 		core.debug(new Date().toTimeString())
 		core.setOutput('time', new Date().toTimeString())
 	}
 }
+
+// Export the Action class as the default export for external usage
+export default Action

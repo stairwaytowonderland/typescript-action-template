@@ -2,5 +2,5 @@
  * Shared utility functions
  */
 
-// Re-export utility functions from the common module
+// Re-export utility functions
 export { normalizeOptional } from './_common.js'

@@ -33832,7 +33832,7 @@ class Action {
         debug(`Action dryRun: ${this.dryRun}`);
         debug(`Action inputs: ${JSON.stringify(this.inputs)}`);
         debug(new Date().toTimeString());
-        const result = action(this);
+        const result = await action(this);
         debug(`Result: ${result}`);
         debug(new Date().toTimeString());
         setOutput('time', new Date().toTimeString());

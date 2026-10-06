@@ -15,7 +15,7 @@ import * as github from '../__fixtures__/github.js'
 import { jest } from '@jest/globals'
 
 // Import the source to be tested
-import { Action } from '../src/config.js'
+import Action from '../src/config.js'
 import { ActionRepository, SimpleRepository, GitHubContext } from '../src/types.js'
 import { normalizeOptional } from '../src/utils.js'
 
