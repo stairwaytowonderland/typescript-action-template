@@ -19,8 +19,9 @@ import { jest } from '@jest/globals'
 jest.unstable_mockModule('@actions/core', () => core)
 jest.unstable_mockModule('@actions/github', () => github)
 
-// Import custom types from the project
-import { ActionInputs, GitHubContext } from '../src/types.js'
+// Import custom types and utilities from the project
+import type { ActionInputs, GitHubContext } from '../src/types.js'
+import { kebabToCamel, normalizeOptional } from '../src/utils.js'
 
 // Import the mocked core module and wait function from fixtures
 import wait, { delay, millisecondsFromInput } from '../src/action.js'
@@ -147,6 +148,26 @@ describe('Utilities', () => {
 			const input = undefined
 			const result = millisecondsFromInput(input)
 			expect(isNaN(result)).toBe(true)
+		})
+	})
+
+	describe('normalizeOptional', () => {
+		test('converts empty string to undefined', () => {
+			expect(normalizeOptional('')).toBeUndefined()
+			expect(normalizeOptional(undefined)).toBeUndefined()
+			expect(normalizeOptional('value')).toBe('value')
+		})
+
+		test('does not modify non-empty strings', () => {
+			expect(normalizeOptional('non-empty')).toBe('non-empty')
+		})
+	})
+
+	describe('kebabToCamel', () => {
+		test('converts kebab-case to camelCase', () => {
+			expect(kebabToCamel('kebab-case-string')).toBe('kebabCaseString')
+			expect(kebabToCamel('another-example')).toBe('anotherExample')
+			expect(kebabToCamel('no-change')).toBe('noChange')
 		})
 	})
 })

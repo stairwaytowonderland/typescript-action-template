@@ -33699,9 +33699,9 @@ class ActionRepository {
  * @param value The string value to normalize. If the value is an empty string or undefined, it will be converted to undefined.
  * @returns The normalized string value or undefined.
  */
-function normalizeOptional(value) {
+const normalizeOptional = (value) => {
     return value || undefined;
-}
+};
 /**
  * Searches for issues and pull requests based on the provided query using the GitHub REST API.
  * Returns a list of search result items matching the query.
@@ -33847,21 +33847,25 @@ class Action {
  *
  * @returns Resolves when the action is complete.
  */
-async function run() {
-    try {
-        console.debug('Starting your GitHub action...');
-        const action = new Action(githubExports.context);
-        await action.run();
-        console.debug('Your GitHub action completed successfully!');
-        process.exit(0);
+const run = () => Promise.resolve()
+    .then(() => {
+    console.debug('Starting your GitHub action...');
+    const action = new Action(githubExports.context);
+    return action.run();
+})
+    .then(() => {
+    console.debug('Your GitHub action completed successfully!');
+    process.exit(0);
+})
+    .catch((error) => {
+    if (error instanceof Error) {
+        setFailed(error.message);
     }
-    catch (error) {
-        // Fail the workflow run if an error occurs
-        if (error instanceof Error)
-            setFailed(error.message);
-        process.exit(1);
+    else {
+        setFailed(String(error));
     }
-}
+    process.exit(1);
+});
 
 /**
  * Barrel file for the GitHub Action.

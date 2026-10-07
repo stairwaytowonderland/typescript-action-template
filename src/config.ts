@@ -5,7 +5,8 @@
  */
 
 import * as core from '@actions/core'
-import { RepoAction, GitHubContext, ActionInputs, SimpleRepository, ActionRepository } from './types.js'
+import type { RepoAction, GitHubContext, ActionInputs, SimpleRepository } from './types.js'
+import { ActionRepository } from './types.js'
 import action from './action.js'
 
 /**

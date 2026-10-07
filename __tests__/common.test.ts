@@ -16,8 +16,8 @@ import { jest } from '@jest/globals'
 
 // Import the source to be tested
 import Action from '../src/config.js'
-import { ActionRepository, SimpleRepository, GitHubContext } from '../src/types.js'
-import { normalizeOptional } from '../src/utils.js'
+import type { SimpleRepository, GitHubContext } from '../src/types.js'
+import { ActionRepository } from '../src/types.js'
 
 jest.unstable_mockModule('@actions/github', () => github)
 
@@ -128,18 +128,6 @@ describe('Config', () => {
 })
 
 describe('Utilities', () => {
-	describe('normalizeOptional', () => {
-		test('converts empty string to undefined', () => {
-			expect(normalizeOptional('')).toBeUndefined()
-			expect(normalizeOptional(undefined)).toBeUndefined()
-			expect(normalizeOptional('value')).toBe('value')
-		})
-
-		test('does not modify non-empty strings', () => {
-			expect(normalizeOptional('non-empty')).toBe('non-empty')
-		})
-	})
-
 	/*
 	describe('searchIssuesAndPullRequests', () => {
 		test('should return search results for a given query', async () => {

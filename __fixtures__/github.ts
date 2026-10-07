@@ -1,4 +1,4 @@
-import { WebhookPayload } from '@actions/github/lib/interfaces.js'
+import type { WebhookPayload } from '@actions/github/lib/interfaces.js'
 import { createAsyncMock } from '../__utils__/mocks.js'
 
 /**

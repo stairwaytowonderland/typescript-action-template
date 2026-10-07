@@ -3,7 +3,7 @@
  */
 
 import { getOctokit } from '@actions/github'
-import { Context } from '@actions/github/lib/context.js'
+import type { Context } from '@actions/github/lib/context.js'
 
 /*
  * Octokit client
@@ -212,7 +212,7 @@ export class ActionRepository implements SimpleRepository {
  * @param value The string value to normalize. If the value is an empty string or undefined, it will be converted to undefined.
  * @returns The normalized string value or undefined.
  */
-export function normalizeOptional(value?: string): string | undefined {
+export const normalizeOptional = (value?: string): string | undefined => {
 	return value || undefined
 }
 

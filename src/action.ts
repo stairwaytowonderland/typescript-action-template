@@ -5,7 +5,7 @@
  */
 
 import * as core from '@actions/core'
-import { RepoAction } from './types.js'
+import type { RepoAction } from './types.js'
 import type { ActionConfig } from './config.js'
 
 /**

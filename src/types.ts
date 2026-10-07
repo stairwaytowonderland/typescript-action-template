@@ -10,15 +10,8 @@
  * Imports types and utilities from _common.js to maintain consistency across the project.
  */
 
-import {
-	RepoAction,
-	ActionRepository,
-	SimpleRepository,
-	GitHubContext,
-	OctokitClient,
-	SearchItem,
-	getOctokit,
-} from './_common.js'
+import type { RepoAction, SimpleRepository, GitHubContext, OctokitClient, SearchItem } from './_common.js'
+import { ActionRepository, getOctokit } from './_common.js'
 export type { RepoAction, SimpleRepository, GitHubContext, OctokitClient, SearchItem }
 export type ActionInputs = NonNullable<RepoAction['inputs']>
 export { ActionRepository, getOctokit }
