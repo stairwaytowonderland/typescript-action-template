@@ -3,19 +3,19 @@
  */
 
 // Re-export utility functions
-export { normalizeOptional } from './_common.js'
+export { normalizeOptional, kebabToCamel } from './_common.js'
+export { getInputs } from './config.js'
+
+/*
+ * Project-specific utility functions for general use.
+ */
 
 /**
- * Converts a kebab-case string to camelCase.
+ * Utility function to parse milliseconds from input, used to convert string inputs to numeric values.
  *
- * @example
- * ```ts
- * kebabToCamel('kebab-case-string') // 'kebabCaseString'
- * ```
- *
- * @param str The kebab-case string to be converted.
- * @returns The converted camelCase string.
+ * @param input - The input value to be parsed as milliseconds.
+ * @returns The parsed number of milliseconds.
  */
-export const kebabToCamel = (str: string): string => {
-	return str.replace(/-./g, (m) => m.toUpperCase()[1])
+export const millisecondsFromInput = (input: unknown): number => {
+	return parseInt(String(input ?? ''), 10)
 }

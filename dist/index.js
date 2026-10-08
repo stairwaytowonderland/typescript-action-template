@@ -28675,6 +28675,27 @@ function getInput(name, options) {
     return val.trim();
 }
 /**
+ * Gets the input value of the boolean type in the YAML 1.2 "core schema" specification.
+ * Support boolean input list: `true | True | TRUE | false | False | FALSE` .
+ * The return value is also in boolean type.
+ * ref: https://yaml.org/spec/1.2/spec.html#id2804923
+ *
+ * @param     name     name of the input to get
+ * @param     options  optional. See InputOptions.
+ * @returns   boolean
+ */
+function getBooleanInput(name, options) {
+    const trueValue = ['true', 'True', 'TRUE'];
+    const falseValue = ['false', 'False', 'FALSE'];
+    const val = getInput(name);
+    if (trueValue.includes(val))
+        return true;
+    if (falseValue.includes(val))
+        return false;
+    throw new TypeError(`Input does not meet YAML 1.2 "Core Schema" specification: ${name}\n` +
+        `Support boolean input list: \`true | True | TRUE | false | False | FALSE\``);
+}
+/**
  * Sets the value of an output.
  *
  * @param     name     name of the output to set
@@ -33690,6 +33711,9 @@ class ActionRepository {
         return this;
     }
 }
+/*
+ * Utility functions for string manipulation.
+ */
 /**
  * Normalizes an optional string value.
  *
@@ -33702,6 +33726,27 @@ class ActionRepository {
 const normalizeOptional = (value) => {
     return value || undefined;
 };
+/*
+ * GitHub context payload utility functions.
+ */
+// import * as github from '@actions/github'
+/**
+ * Get the issue object from the GitHub context payload.
+ *
+ * @param context The GitHub context object containing the payload for the current action.
+ * @returns The issue object from the GitHub context payload, or undefined if not present.
+ */
+// export const getIssueFromContext = (context: Context = github.context) => context.payload.issue
+/**
+ * Get the pull request object from the GitHub context payload.
+ *
+ * @param context The GitHub context object containing the payload for the current action.
+ * @returns The pull request object from the GitHub context payload, or undefined if not present.
+ */
+// export const getPrFromContext = (context: Context = github.context) => context.payload.pull_request
+/*
+ * Utility functions for GitHub API interactions.
+ */
 /**
  * Searches for issues and pull requests based on the provided query using the GitHub REST API.
  * Returns a list of search result items matching the query.
@@ -33713,8 +33758,7 @@ const normalizeOptional = (value) => {
  * @returns A promise that resolves to an array of search result items matching the query.
  */
 /*
-export async function searchIssuesAndPullRequests(query: string, octokit: OctokitClient): Promise<SearchItem[]> {
-    // console.debug(`searchIssuesAndPullRequests -- web url: https://github.com/issues/search?q=${encodeURIComponent(query)}`)
+export const searchIssuesAndPullRequests = async (query: string, octokit: OctokitClient): Promise<SearchItem[]> => {
     const items = (await octokit.paginate(octokit.rest.search.issuesAndPullRequests, {
         q: query,
         per_page: 100,
@@ -33723,6 +33767,23 @@ export async function searchIssuesAndPullRequests(query: string, octokit: Octoki
     return items
 }
 */
+
+/**
+ * Shared utility functions
+ */
+// Re-export utility functions
+/*
+ * Project-specific utility functions for general use.
+ */
+/**
+ * Utility function to parse milliseconds from input, used to convert string inputs to numeric values.
+ *
+ * @param input - The input value to be parsed as milliseconds.
+ * @returns The parsed number of milliseconds.
+ */
+const millisecondsFromInput = (input) => {
+    return parseInt(String(input ?? ''), 10);
+};
 
 /**
  * Action logic
@@ -33759,28 +33820,33 @@ var action = async (action) => {
  * @param milliseconds The number of milliseconds to wait.
  * @returns Resolves with 'done!' after the wait is over.
  */
-async function delay(milliseconds) {
+const delay = (milliseconds) => {
+    if (isNaN(milliseconds))
+        return Promise.reject(new Error('milliseconds is not a number'));
     return new Promise((resolve) => {
-        if (isNaN(milliseconds))
-            throw new Error('milliseconds is not a number');
         setTimeout(() => resolve('done!'), milliseconds);
     });
-}
-/**
- * Utility function to parse milliseconds from input, used to convert string inputs to numeric values.
- *
- * @param input - The input value to be parsed as milliseconds.
- * @returns The parsed number of milliseconds.
- */
-function millisecondsFromInput(input) {
-    return parseInt(String(input ?? ''), 10);
-}
+};
 
 /**
  * Configuration for the GitHub Action.
  *
  * Contains the configuration interface for the GitHub Action.
  */
+/**
+ * Retrieves and normalizes GitHub Action inputs based on the provided labels.
+ *
+ * Converts the input labels from kebab-case to camelCase and returns an object containing the corresponding input values.
+ *
+ * @returns An object containing the normalized action inputs keyed by camelCase names.
+ */
+const getInputs = () => {
+    const dryRunInput = getBooleanInput('dry-run');
+    return {
+        dryRun: dryRunInput,
+        milliseconds: (getInput('milliseconds') ?? '').trim(),
+    };
+};
 /**
  * Main action class for the GitHub Action.
  *
@@ -33814,13 +33880,10 @@ class Action {
      * @param dryRun Optional flag indicating if the action should run in dry-run mode.
      */
     constructor(context, inputs, dryRun) {
-        const dryRunInput = (getInput('dry-run') ?? '').trim();
-        this.dryRun = dryRun ?? dryRunInput === 'true';
         this.context = context;
-        this.inputs = inputs ?? {
-            dryRun: dryRunInput,
-            milliseconds: (getInput('milliseconds') ?? '').trim(),
-        };
+        this.inputs = inputs ?? getInputs();
+        debug(`Action inputs after initialization: ${JSON.stringify(this.inputs)}`);
+        this.dryRun = dryRun ?? this.inputs?.dryRun ?? false;
     }
     /**
      * Executes the main logic of the GitHub Action.

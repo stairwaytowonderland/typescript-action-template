@@ -19,11 +19,14 @@ export { ActionRepository, getOctokit }
 /*
  * Webhook payload related types
  */
+
 // import { WebhookPayload } from '@actions/github/lib/interfaces.js'
+
 // export type PayloadIssue = NonNullable<WebhookPayload['issue']>
 // export type PayloadPullRequest = NonNullable<WebhookPayload['pull_request']>
 
 /*
  * Additional custom types
  */
-// export type OwnerType = 'orgs' | 'users'
+
+// export type Choices = 'yes' | 'no' | 'maybe'

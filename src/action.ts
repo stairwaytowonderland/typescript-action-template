@@ -7,6 +7,7 @@
 import * as core from '@actions/core'
 import type { RepoAction } from './types.js'
 import type { ActionConfig } from './config.js'
+import { millisecondsFromInput } from './utils.js'
 
 /**
  * Waits for the specified number of milliseconds as defined in the action's inputs.
@@ -45,20 +46,10 @@ export default async (action: RepoAction): Promise<string> => {
  * @param milliseconds The number of milliseconds to wait.
  * @returns Resolves with 'done!' after the wait is over.
  */
-export async function delay(milliseconds: number): Promise<string> {
-	return new Promise((resolve) => {
-		if (isNaN(milliseconds)) throw new Error('milliseconds is not a number')
+export const delay = (milliseconds: number): Promise<string> => {
+	if (isNaN(milliseconds)) return Promise.reject(new Error('milliseconds is not a number'))
 
+	return new Promise((resolve) => {
 		setTimeout(() => resolve('done!'), milliseconds)
 	})
-}
-
-/**
- * Utility function to parse milliseconds from input, used to convert string inputs to numeric values.
- *
- * @param input - The input value to be parsed as milliseconds.
- * @returns The parsed number of milliseconds.
- */
-export function millisecondsFromInput(input: unknown): number {
-	return parseInt(String(input ?? ''), 10)
 }

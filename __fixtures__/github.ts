@@ -12,7 +12,15 @@ export const getOctokit = () => createAsyncMock()
  * This context object is mutable and can be modified in tests to simulate different GitHub events and payloads.
  */
 export const context = {
-	payload: {} as WebhookPayload,
+	payload: {
+		// issue: { number: 1, html_url: '', body: '' },
+		// pull_request: { number: 2, html_url: '', body: '' },
+		repository: {
+			full_name: '',
+			owner: { login: '' },
+			name: '',
+		},
+	} as WebhookPayload,
 	repo: { owner: '', repo: '' },
 	eventName: '',
 	sha: '',

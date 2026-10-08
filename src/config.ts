@@ -10,6 +10,21 @@ import { ActionRepository } from './types.js'
 import action from './action.js'
 
 /**
+ * Retrieves and normalizes GitHub Action inputs based on the provided labels.
+ *
+ * Converts the input labels from kebab-case to camelCase and returns an object containing the corresponding input values.
+ *
+ * @returns An object containing the normalized action inputs keyed by camelCase names.
+ */
+export const getInputs = (): ActionInputs => {
+	const dryRunInput = core.getBooleanInput('dry-run')
+	return {
+		dryRun: dryRunInput,
+		milliseconds: (core.getInput('milliseconds') ?? '').trim(),
+	}
+}
+
+/**
  * Represents a flat configuration for the GitHub Action.
  *
  * * Customize this interface to include any additional configuration options required for your action.
@@ -55,14 +70,10 @@ export class Action implements RepoAction {
 	 * @param dryRun Optional flag indicating if the action should run in dry-run mode.
 	 */
 	constructor(context: GitHubContext, inputs?: ActionInputs, dryRun?: boolean) {
-		const dryRunInput = (core.getInput('dry-run') ?? '').trim()
-		this.dryRun = dryRun ?? dryRunInput === 'true'
 		this.context = context
-
-		this.inputs = inputs ?? {
-			dryRun: dryRunInput,
-			milliseconds: (core.getInput('milliseconds') ?? '').trim(),
-		}
+		this.inputs = inputs ?? getInputs()
+		core.debug(`Action inputs after initialization: ${JSON.stringify(this.inputs)}`)
+		this.dryRun = dryRun ?? this.inputs?.dryRun ?? false
 	}
 
 	/**

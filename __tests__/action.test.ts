@@ -9,6 +9,9 @@
 import * as core from '../__fixtures__/core.js'
 import * as github from '../__fixtures__/github.js'
 
+// Import utility functions for mocking inputs and capturing outputs during tests
+import { mockGetInput, mockGetBooleanInput } from '../__utils__/mocks.js'
+
 // Import the wait mocks from fixtures.
 // import { wait } from '../__fixtures__/action.js'
 
@@ -21,10 +24,10 @@ jest.unstable_mockModule('@actions/github', () => github)
 
 // Import custom types and utilities from the project
 import type { ActionInputs, GitHubContext } from '../src/types.js'
-import { kebabToCamel, normalizeOptional } from '../src/utils.js'
+import { getInputs, millisecondsFromInput } from '../src/utils.js'
 
 // Import the mocked core module and wait function from fixtures
-import wait, { delay, millisecondsFromInput } from '../src/action.js'
+import wait, { delay } from '../src/action.js'
 import Action from '../src/config.js'
 
 describe('Action Logic', () => {
@@ -37,7 +40,7 @@ describe('Action Logic', () => {
 
 	beforeEach(() => {
 		inputs = {
-			dryRun: 'false',
+			dryRun: false,
 			milliseconds: '500',
 		} as ActionInputs
 	})
@@ -45,6 +48,26 @@ describe('Action Logic', () => {
 	afterEach(() => {
 		// Restore any mocks or spies that were set up during the tests
 		jest.restoreAllMocks()
+	})
+
+	describe('getInputs', () => {
+		beforeEach(() => {
+			mockGetInput({
+				milliseconds: '500',
+			})
+			mockGetBooleanInput({
+				'dry-run': true,
+			})
+		})
+
+		test('returns an object with the specified inputs', () => {
+			const inputs = getInputs()
+			expect(inputs).toHaveProperty('dryRun')
+			expect(typeof inputs.dryRun).toBe('boolean')
+			expect(inputs.dryRun).toBe(true)
+			expect(inputs).toHaveProperty('milliseconds')
+			expect(inputs.milliseconds).toBe('500')
+		})
 	})
 
 	describe('Action', () => {
@@ -148,26 +171,6 @@ describe('Utilities', () => {
 			const input = undefined
 			const result = millisecondsFromInput(input)
 			expect(isNaN(result)).toBe(true)
-		})
-	})
-
-	describe('normalizeOptional', () => {
-		test('converts empty string to undefined', () => {
-			expect(normalizeOptional('')).toBeUndefined()
-			expect(normalizeOptional(undefined)).toBeUndefined()
-			expect(normalizeOptional('value')).toBe('value')
-		})
-
-		test('does not modify non-empty strings', () => {
-			expect(normalizeOptional('non-empty')).toBe('non-empty')
-		})
-	})
-
-	describe('kebabToCamel', () => {
-		test('converts kebab-case to camelCase', () => {
-			expect(kebabToCamel('kebab-case-string')).toBe('kebabCaseString')
-			expect(kebabToCamel('another-example')).toBe('anotherExample')
-			expect(kebabToCamel('no-change')).toBe('noChange')
 		})
 	})
 })

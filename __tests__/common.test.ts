@@ -18,6 +18,7 @@ import { jest } from '@jest/globals'
 import Action from '../src/config.js'
 import type { SimpleRepository, GitHubContext } from '../src/types.js'
 import { ActionRepository } from '../src/types.js'
+import { normalizeOptional, kebabToCamel } from '../src/utils.js'
 
 jest.unstable_mockModule('@actions/github', () => github)
 
@@ -128,6 +129,52 @@ describe('Config', () => {
 })
 
 describe('Utilities', () => {
+	describe('normalizeOptional', () => {
+		test('converts empty string to undefined', () => {
+			expect(normalizeOptional('')).toBeUndefined()
+			expect(normalizeOptional(undefined)).toBeUndefined()
+			expect(normalizeOptional('value')).toBe('value')
+		})
+
+		test('does not modify non-empty strings', () => {
+			expect(normalizeOptional('non-empty')).toBe('non-empty')
+		})
+	})
+
+	describe('kebabToCamel', () => {
+		test('converts kebab-case to camelCase', () => {
+			expect(kebabToCamel('kebab-case-string')).toBe('kebabCaseString')
+			expect(kebabToCamel('another-example')).toBe('anotherExample')
+			expect(kebabToCamel('no-change')).toBe('noChange')
+		})
+	})
+
+	// describe('Context Payload', () => {
+	// 	test('getIssueFromContext returns the issue from the context payload', () => {
+	// 		github.context.payload.issue = { number: 1 }
+	// 		const issue = getIssueFromContext(github.context as GitHubContext)
+	// 		expect(issue).toEqual({ number: 1 })
+	// 	})
+
+	// 	test('getPrFromContext returns the pull request from the context payload', () => {
+	// 		github.context.payload.pull_request = { number: 2 }
+	// 		const pr = getPrFromContext(github.context as GitHubContext)
+	// 		expect(pr).toEqual({ number: 2 })
+	// 	})
+
+	// 	test('getIssueFromContext returns the issue using the default fallback context', () => {
+	// 		github.context.payload.issue = { number: 1 }
+	// 		const issue = getIssueFromContext()
+	// 		expect(issue).toEqual({ number: 1 })
+	// 	})
+
+	// 	test('getPrFromContext returns the pull request using the default fallback context', () => {
+	// 		github.context.payload.pull_request = { number: 2 }
+	// 		const pr = getPrFromContext()
+	// 		expect(pr).toEqual({ number: 2 })
+	// 	})
+	// })
+
 	/*
 	describe('searchIssuesAndPullRequests', () => {
 		test('should return search results for a given query', async () => {
