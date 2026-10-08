@@ -10,6 +10,10 @@ branding:
 
 # Define your inputs here.
 inputs:
+  dry-run:
+    description: Indicates if the action should run in dry-run mode.
+    required: true
+    default: 'false'
   milliseconds:
     description: Your input description here
     required: true
