@@ -3,7 +3,7 @@
  */
 
 // Re-export utility functions
-export { normalizeOptional, kebabToCamel } from './_common.js'
+export { normalizeOptional, kebabToCamel, getOctokit, getSafeInputs } from './_common.js'
 export { getInputs } from './config.js'
 
 /*

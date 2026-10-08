@@ -33712,6 +33712,32 @@ class ActionRepository {
     }
 }
 /*
+ * Utility functions for handling action inputs and sensitive information.
+ */
+/**
+ * Filters out specified keys from the action inputs object.
+ *
+ * This is useful for removing sensitive information such as tokens from the inputs before logging or further processing.
+ *
+ * @example
+ * const safeInputs = getSafeInputs(inputs, 'ghToken', 'anotherKeyToRemove')
+ *
+ * @param inputs The action inputs object to filter.
+ * @param keys The keys to remove from the inputs object.
+ * @returns A new object with the specified keys removed from the inputs.
+ */
+const getSafeInputs = (inputs, ...keys) => {
+    // Fallback to an empty object if inputs is undefined
+    const initialObj = inputs ?? {};
+    // Iteratively destructure each key out of the object
+    const cleanInputs = keys.reduce((acc, key) => {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const { [key]: _, ...remaining } = acc;
+        return remaining;
+    }, initialObj);
+    return cleanInputs;
+};
+/*
  * Utility functions for string manipulation.
  */
 /**
@@ -33806,6 +33832,7 @@ var action = async (action) => {
     // Consider gathering action information into a single object
     // for reporting purposes
     const actionConfig = {
+        // ghToken: ghToken,
         milliseconds: ms,
         ...action,
     };
@@ -33843,6 +33870,7 @@ const delay = (milliseconds) => {
 const getInputs = () => {
     const dryRunInput = getBooleanInput('dry-run');
     return {
+        // ghToken: (core.getInput('github-token') ?? '').trim(),
         dryRun: dryRunInput,
         milliseconds: (getInput('milliseconds') ?? '').trim(),
     };
@@ -33882,7 +33910,7 @@ class Action {
     constructor(context, inputs, dryRun) {
         this.context = context;
         this.inputs = inputs ?? getInputs();
-        debug(`Action inputs after initialization: ${JSON.stringify(this.inputs)}`);
+        debug(`Action inputs after initialization: ${JSON.stringify(getSafeInputs(this.inputs, 'ghToken'))}`);
         this.dryRun = dryRun ?? this.inputs?.dryRun ?? false;
     }
     /**
@@ -33893,7 +33921,6 @@ class Action {
     async run() {
         debug(`Action created with actor: ${this.actor} and repo: ${this.repo.fullName}`);
         debug(`Action dryRun: ${this.dryRun}`);
-        debug(`Action inputs: ${JSON.stringify(this.inputs)}`);
         debug(new Date().toTimeString());
         const result = await action(this);
         debug(`Result: ${result}`);

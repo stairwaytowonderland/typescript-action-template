@@ -7,6 +7,7 @@
 import * as core from '@actions/core'
 import type { RepoAction, GitHubContext, ActionInputs, SimpleRepository } from './types.js'
 import { ActionRepository } from './types.js'
+import { getSafeInputs } from './utils.js'
 import action from './action.js'
 
 /**
@@ -19,6 +20,7 @@ import action from './action.js'
 export const getInputs = (): ActionInputs => {
 	const dryRunInput = core.getBooleanInput('dry-run')
 	return {
+		// ghToken: (core.getInput('github-token') ?? '').trim(),
 		dryRun: dryRunInput,
 		milliseconds: (core.getInput('milliseconds') ?? '').trim(),
 	}
@@ -30,6 +32,8 @@ export const getInputs = (): ActionInputs => {
  * * Customize this interface to include any additional configuration options required for your action.
  */
 export interface ActionConfig extends RepoAction {
+	/** The GitHub token used for authentication with the GitHub API. */
+	// ghToken: string
 	/** The number of milliseconds to wait during the action execution. */
 	milliseconds: number
 }
@@ -72,7 +76,7 @@ export class Action implements RepoAction {
 	constructor(context: GitHubContext, inputs?: ActionInputs, dryRun?: boolean) {
 		this.context = context
 		this.inputs = inputs ?? getInputs()
-		core.debug(`Action inputs after initialization: ${JSON.stringify(this.inputs)}`)
+		core.debug(`Action inputs after initialization: ${JSON.stringify(getSafeInputs(this.inputs, 'ghToken'))}`)
 		this.dryRun = dryRun ?? this.inputs?.dryRun ?? false
 	}
 
@@ -84,7 +88,6 @@ export class Action implements RepoAction {
 	async run(): Promise<void> {
 		core.debug(`Action created with actor: ${this.actor} and repo: ${this.repo.fullName}`)
 		core.debug(`Action dryRun: ${this.dryRun}`)
-		core.debug(`Action inputs: ${JSON.stringify(this.inputs)}`)
 
 		core.debug(new Date().toTimeString())
 		const result = await action(this)

@@ -10,6 +10,10 @@ branding:
 
 # Define your inputs here.
 inputs:
+  # github-token:
+  #   description: Your GitHub token.
+  #   required: true
+  #   default: ''
   dry-run:
     description: Indicates if the action should run in dry-run mode.
     required: true

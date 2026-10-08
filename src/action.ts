@@ -27,6 +27,7 @@ export default async (action: RepoAction): Promise<string> => {
 	// Consider gathering action information into a single object
 	// for reporting purposes
 	const actionConfig: ActionConfig = {
+		// ghToken: ghToken,
 		milliseconds: ms,
 		...action,
 	}
