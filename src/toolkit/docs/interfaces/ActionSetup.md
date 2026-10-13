@@ -6,7 +6,7 @@
 
 # Interface: ActionSetup
 
-Defined in: [src/toolkit/action.ts:21](https://github.com/stairwaytowonderland/typescript-action-template/blob/1e6d883ed23c71e7fabe6e66c779477a478fcbbe/src/toolkit/action.ts#L21)
+Defined in: [src/toolkit/action.ts:21](https://github.com/stairwaytowonderland/typescript-action-template/blob/09e93f3a9974b161f6442038da449fba9cecf83f/src/toolkit/action.ts#L21)
 
 Represents the base configuration for a GitHub Actions run.
 
@@ -16,7 +16,7 @@ Represents the base configuration for a GitHub Actions run.
 
 > **context**: [`GitHubContext`](GitHubContext.md)
 
-Defined in: [src/toolkit/action.ts:26](https://github.com/stairwaytowonderland/typescript-action-template/blob/1e6d883ed23c71e7fabe6e66c779477a478fcbbe/src/toolkit/action.ts#L26)
+Defined in: [src/toolkit/action.ts:26](https://github.com/stairwaytowonderland/typescript-action-template/blob/09e93f3a9974b161f6442038da449fba9cecf83f/src/toolkit/action.ts#L26)
 
 The GitHub context object.
 
@@ -26,7 +26,7 @@ The GitHub context object.
 
 > **dryRun**: `boolean`
 
-Defined in: [src/toolkit/action.ts:23](https://github.com/stairwaytowonderland/typescript-action-template/blob/1e6d883ed23c71e7fabe6e66c779477a478fcbbe/src/toolkit/action.ts#L23)
+Defined in: [src/toolkit/action.ts:23](https://github.com/stairwaytowonderland/typescript-action-template/blob/09e93f3a9974b161f6442038da449fba9cecf83f/src/toolkit/action.ts#L23)
 
 Indicates if the action should run in dry-run mode.
 
@@ -36,7 +36,7 @@ Indicates if the action should run in dry-run mode.
 
 > `optional` **inputs?**: `object`
 
-Defined in: [src/toolkit/action.ts:32](https://github.com/stairwaytowonderland/typescript-action-template/blob/1e6d883ed23c71e7fabe6e66c779477a478fcbbe/src/toolkit/action.ts#L32)
+Defined in: [src/toolkit/action.ts:32](https://github.com/stairwaytowonderland/typescript-action-template/blob/09e93f3a9974b161f6442038da449fba9cecf83f/src/toolkit/action.ts#L32)
 
 The action inputs provided to the GitHub Action.
 
@@ -54,6 +54,6 @@ The action inputs provided to the GitHub Action.
 
 > **repo**: [`SimpleRepository`](SimpleRepository.md)
 
-Defined in: [src/toolkit/action.ts:29](https://github.com/stairwaytowonderland/typescript-action-template/blob/1e6d883ed23c71e7fabe6e66c779477a478fcbbe/src/toolkit/action.ts#L29)
+Defined in: [src/toolkit/action.ts:29](https://github.com/stairwaytowonderland/typescript-action-template/blob/09e93f3a9974b161f6442038da449fba9cecf83f/src/toolkit/action.ts#L29)
 
 The repository associated with the GitHub Action.

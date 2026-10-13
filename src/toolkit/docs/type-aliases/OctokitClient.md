@@ -8,4 +8,4 @@
 
 > **OctokitClient** = `ReturnType`\<*typeof* `getOctokit`\>
 
-Defined in: [src/toolkit/api.ts:11](https://github.com/stairwaytowonderland/typescript-action-template/blob/1e6d883ed23c71e7fabe6e66c779477a478fcbbe/src/toolkit/api.ts#L11)
+Defined in: [src/toolkit/api.ts:11](https://github.com/stairwaytowonderland/typescript-action-template/blob/09e93f3a9974b161f6442038da449fba9cecf83f/src/toolkit/api.ts#L11)

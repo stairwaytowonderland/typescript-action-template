@@ -6,7 +6,7 @@
 
 # Interface: SearchItem
 
-Defined in: [src/toolkit/api.ts:131](https://github.com/stairwaytowonderland/typescript-action-template/blob/1e6d883ed23c71e7fabe6e66c779477a478fcbbe/src/toolkit/api.ts#L131)
+Defined in: [src/toolkit/api.ts:131](https://github.com/stairwaytowonderland/typescript-action-template/blob/09e93f3a9974b161f6442038da449fba9cecf83f/src/toolkit/api.ts#L131)
 
 Represents a single search result item from the GitHub API.
 
@@ -16,7 +16,7 @@ Represents a single search result item from the GitHub API.
 
 > **created\_at**: `Date`
 
-Defined in: [src/toolkit/api.ts:138](https://github.com/stairwaytowonderland/typescript-action-template/blob/1e6d883ed23c71e7fabe6e66c779477a478fcbbe/src/toolkit/api.ts#L138)
+Defined in: [src/toolkit/api.ts:138](https://github.com/stairwaytowonderland/typescript-action-template/blob/09e93f3a9974b161f6442038da449fba9cecf83f/src/toolkit/api.ts#L138)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/toolkit/api.ts:138](https://github.com/stairwaytowonderland/typ
 
 > **html\_url**: `string`
 
-Defined in: [src/toolkit/api.ts:136](https://github.com/stairwaytowonderland/typescript-action-template/blob/1e6d883ed23c71e7fabe6e66c779477a478fcbbe/src/toolkit/api.ts#L136)
+Defined in: [src/toolkit/api.ts:136](https://github.com/stairwaytowonderland/typescript-action-template/blob/09e93f3a9974b161f6442038da449fba9cecf83f/src/toolkit/api.ts#L136)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/toolkit/api.ts:136](https://github.com/stairwaytowonderland/typ
 
 > **labels**: `object`[]
 
-Defined in: [src/toolkit/api.ts:134](https://github.com/stairwaytowonderland/typescript-action-template/blob/1e6d883ed23c71e7fabe6e66c779477a478fcbbe/src/toolkit/api.ts#L134)
+Defined in: [src/toolkit/api.ts:134](https://github.com/stairwaytowonderland/typescript-action-template/blob/09e93f3a9974b161f6442038da449fba9cecf83f/src/toolkit/api.ts#L134)
 
 #### name
 
@@ -44,7 +44,7 @@ Defined in: [src/toolkit/api.ts:134](https://github.com/stairwaytowonderland/typ
 
 > **node\_id**: `string`
 
-Defined in: [src/toolkit/api.ts:132](https://github.com/stairwaytowonderland/typescript-action-template/blob/1e6d883ed23c71e7fabe6e66c779477a478fcbbe/src/toolkit/api.ts#L132)
+Defined in: [src/toolkit/api.ts:132](https://github.com/stairwaytowonderland/typescript-action-template/blob/09e93f3a9974b161f6442038da449fba9cecf83f/src/toolkit/api.ts#L132)
 
 ***
 
@@ -52,7 +52,7 @@ Defined in: [src/toolkit/api.ts:132](https://github.com/stairwaytowonderland/typ
 
 > **number**: `number`
 
-Defined in: [src/toolkit/api.ts:133](https://github.com/stairwaytowonderland/typescript-action-template/blob/1e6d883ed23c71e7fabe6e66c779477a478fcbbe/src/toolkit/api.ts#L133)
+Defined in: [src/toolkit/api.ts:133](https://github.com/stairwaytowonderland/typescript-action-template/blob/09e93f3a9974b161f6442038da449fba9cecf83f/src/toolkit/api.ts#L133)
 
 ***
 
@@ -60,7 +60,7 @@ Defined in: [src/toolkit/api.ts:133](https://github.com/stairwaytowonderland/typ
 
 > **repository\_url**: `string`
 
-Defined in: [src/toolkit/api.ts:137](https://github.com/stairwaytowonderland/typescript-action-template/blob/1e6d883ed23c71e7fabe6e66c779477a478fcbbe/src/toolkit/api.ts#L137)
+Defined in: [src/toolkit/api.ts:137](https://github.com/stairwaytowonderland/typescript-action-template/blob/09e93f3a9974b161f6442038da449fba9cecf83f/src/toolkit/api.ts#L137)
 
 ***
 
@@ -68,4 +68,4 @@ Defined in: [src/toolkit/api.ts:137](https://github.com/stairwaytowonderland/typ
 
 > **title**: `string`
 
-Defined in: [src/toolkit/api.ts:135](https://github.com/stairwaytowonderland/typescript-action-template/blob/1e6d883ed23c71e7fabe6e66c779477a478fcbbe/src/toolkit/api.ts#L135)
+Defined in: [src/toolkit/api.ts:135](https://github.com/stairwaytowonderland/typescript-action-template/blob/09e93f3a9974b161f6442038da449fba9cecf83f/src/toolkit/api.ts#L135)
