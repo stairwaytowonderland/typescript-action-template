@@ -6,7 +6,7 @@
 
 # Interface: ActionSetup
 
-Defined in: [src/toolkit/action.ts:28](https://github.com/stairwaytowonderland/typescript-action-template/blob/92ac5e301492fbe5517e01833ed2482e81932584/src/toolkit/action.ts#L28)
+Defined in: [src/toolkit/action.ts:28](https://github.com/stairwaytowonderland/typescript-action-template/blob/b0312f8e102f6849fc0255e2172a66854b32b61d/src/toolkit/action.ts#L28)
 
 Represents the base configuration for a GitHub Actions run.
 
@@ -16,7 +16,7 @@ Represents the base configuration for a GitHub Actions run.
 
 > **context**: [`GitHubContext`](GitHubContext.md)
 
-Defined in: [src/toolkit/action.ts:33](https://github.com/stairwaytowonderland/typescript-action-template/blob/92ac5e301492fbe5517e01833ed2482e81932584/src/toolkit/action.ts#L33)
+Defined in: [src/toolkit/action.ts:33](https://github.com/stairwaytowonderland/typescript-action-template/blob/b0312f8e102f6849fc0255e2172a66854b32b61d/src/toolkit/action.ts#L33)
 
 The GitHub context object.
 
@@ -26,7 +26,7 @@ The GitHub context object.
 
 > **dryRun**: `boolean`
 
-Defined in: [src/toolkit/action.ts:30](https://github.com/stairwaytowonderland/typescript-action-template/blob/92ac5e301492fbe5517e01833ed2482e81932584/src/toolkit/action.ts#L30)
+Defined in: [src/toolkit/action.ts:30](https://github.com/stairwaytowonderland/typescript-action-template/blob/b0312f8e102f6849fc0255e2172a66854b32b61d/src/toolkit/action.ts#L30)
 
 Indicates if the action should run in dry-run mode.
 
@@ -36,7 +36,7 @@ Indicates if the action should run in dry-run mode.
 
 > `optional` **inputs?**: `object`
 
-Defined in: [src/toolkit/action.ts:39](https://github.com/stairwaytowonderland/typescript-action-template/blob/92ac5e301492fbe5517e01833ed2482e81932584/src/toolkit/action.ts#L39)
+Defined in: [src/toolkit/action.ts:39](https://github.com/stairwaytowonderland/typescript-action-template/blob/b0312f8e102f6849fc0255e2172a66854b32b61d/src/toolkit/action.ts#L39)
 
 The action inputs provided to the GitHub Action.
 
@@ -58,6 +58,6 @@ Indicates if the action should run in dry-run mode.
 
 > **repo**: [`SimpleRepository`](SimpleRepository.md)
 
-Defined in: [src/toolkit/action.ts:36](https://github.com/stairwaytowonderland/typescript-action-template/blob/92ac5e301492fbe5517e01833ed2482e81932584/src/toolkit/action.ts#L36)
+Defined in: [src/toolkit/action.ts:36](https://github.com/stairwaytowonderland/typescript-action-template/blob/b0312f8e102f6849fc0255e2172a66854b32b61d/src/toolkit/action.ts#L36)
 
 The repository associated with the GitHub Action.
