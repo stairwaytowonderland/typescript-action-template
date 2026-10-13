@@ -26,6 +26,19 @@
 		"tsBuildInfoFile": "./node_modules/.cache/tsconfig.tsbuildinfo",
 		"verbatimModuleSyntax": true
 	},
-	"exclude": ["__fixtures__", "__tests__", "__utils__", "coverage", "dist", "node_modules"],
+	"exclude": [
+		"coverage",
+		"dist",
+		"node_modules",
+		"docs",
+		"__fixtures__",
+		"__tests__",
+		"__utils__",
+		"src/toolkit/__fixtures__",
+		"src/toolkit/__tests__",
+		"src/toolkit/__utils__",
+		"src/toolkit/docs",
+		"src/toolkit/*.test.ts"
+	],
 	"include": ["src"]
 }

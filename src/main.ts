@@ -1,6 +1,6 @@
 import * as core from '@actions/core'
 import * as github from '@actions/github'
-import Action from './config.js'
+import { Action } from './action.js'
 
 /**
  * Main entry for the GitHub Action.

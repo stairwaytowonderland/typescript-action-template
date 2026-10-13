@@ -3,8 +3,7 @@
  */
 
 // Re-export utility functions
-export { normalizeOptional, kebabToCamel, getOctokit, getSafeInputs } from './_common.js'
-export { getInputs } from './config.js'
+// export { getInputs } from './config.js'
 
 /*
  * Project-specific utility functions for general use.

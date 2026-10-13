@@ -1,17 +1,5 @@
-/**
- * Common types and utilities for the GitHub Action.
- */
-
-import * as github from '@actions/github'
 import type { Context } from '@actions/github/lib/context.js'
-import type { ActionInputs } from './types.js'
-
-/*
- * Octokit client
- */
-
-export const getOctokit = github.getOctokit
-export type OctokitClient = ReturnType<typeof getOctokit>
+import { normalizeOptional } from './utils.js'
 
 /*
  * Action related
@@ -21,9 +9,16 @@ export type OctokitClient = ReturnType<typeof getOctokit>
 export type { Context as GitHubContext }
 
 /**
+ * Represents the configuration for a GitHub Action that includes a `run` method.
+ */
+export interface ActionConfig {
+	run: () => Promise<void>
+}
+
+/**
  * Represents the base configuration for a GitHub Actions run.
  */
-export interface RepoAction {
+export interface ActionSetup {
 	/** Indicates if the action should run in dry-run mode. */
 	dryRun: boolean
 
@@ -38,6 +33,47 @@ export interface RepoAction {
 		[key: string]: unknown
 		dryRun: boolean
 	}
+}
+
+/**
+ * Represents the non-nullable action inputs for the GitHub Action.
+ */
+export type ActionInputs = NonNullable<ActionSetup['inputs']>
+
+/*
+ * Utility functions for handling action inputs and sensitive information.
+ */
+
+/**
+ * Filters out specified keys from the action inputs object.
+ *
+ * This is useful for removing sensitive information such as tokens from the inputs before logging or further processing.
+ *
+ * @example
+ * const safeInputs = getSafeInputs(inputs, 'ghToken', 'anotherKeyToRemove')
+ *
+ * @param inputs The action inputs object to filter.
+ * @param keys The keys to remove from the inputs object.
+ * @returns A new object with the specified keys removed from the inputs.
+ */
+export const getSafeInputs = <K extends keyof ActionInputs>(
+	inputs?: ActionInputs,
+	...keys: K[]
+): Omit<ActionInputs, K> => {
+	// Fallback to an empty object if inputs is undefined
+	const initialObj = inputs ?? {}
+
+	// Iteratively destructure each key out of the object
+	const cleanInputs = keys.reduce(
+		(acc, key) => {
+			// eslint-disable-next-line @typescript-eslint/no-unused-vars
+			const { [key]: _, ...remaining } = acc
+			return remaining
+		},
+		initialObj as Record<string, unknown>
+	)
+
+	return cleanInputs as Omit<ActionInputs, K>
 }
 
 /*
@@ -83,8 +119,8 @@ export class ActionRepository implements SimpleRepository {
 	/**
 	 * Initializes an ActionRepository instance with the specified repository name and owner.
 	 *
-	 * @param repoOrName The repository name or a SimpleRepository object.
-	 * @param owner The repository owner (optional if repoOrName contains a slash).
+	 * @param name The repository name or a SimpleRepository object.
+	 * @param owner The repository owner (optional if name contains a slash).
 	 */
 	constructor(name?: string, owner?: string)
 
@@ -203,136 +239,3 @@ export class ActionRepository implements SimpleRepository {
 		return this
 	}
 }
-
-/*
- * REST API related types and functions
- * Provides types and functions for interacting with the GitHub REST API.
- */
-
-/**
- * Represents a single search result item from the GitHub API.
- */
-export interface SearchItem {
-	node_id: string
-	number: number
-	labels: { name: string }[]
-	title: string
-	html_url: string
-	repository_url: string
-	created_at: Date
-}
-
-/*
- * Utility functions for handling action inputs and sensitive information.
- */
-
-/**
- * Filters out specified keys from the action inputs object.
- *
- * This is useful for removing sensitive information such as tokens from the inputs before logging or further processing.
- *
- * @example
- * const safeInputs = getSafeInputs(inputs, 'ghToken', 'anotherKeyToRemove')
- *
- * @param inputs The action inputs object to filter.
- * @param keys The keys to remove from the inputs object.
- * @returns A new object with the specified keys removed from the inputs.
- */
-export const getSafeInputs = <K extends keyof ActionInputs>(
-	inputs?: ActionInputs,
-	...keys: K[]
-): Omit<ActionInputs, K> => {
-	// Fallback to an empty object if inputs is undefined
-	const initialObj = inputs ?? {}
-
-	// Iteratively destructure each key out of the object
-	const cleanInputs = keys.reduce(
-		(acc, key) => {
-			// eslint-disable-next-line @typescript-eslint/no-unused-vars
-			const { [key]: _, ...remaining } = acc
-			return remaining
-		},
-		initialObj as Record<string, unknown>
-	)
-
-	return cleanInputs as Omit<ActionInputs, K>
-}
-
-/*
- * Utility functions for string manipulation.
- */
-
-/**
- * Normalizes an optional string value.
- *
- * Converts empty strings or undefined values to undefined.
- * This is useful for handling optional string values where empty strings should be treated as undefined.
- *
- * @param value The string value to normalize. If the value is an empty string or undefined, it will be converted to undefined.
- * @returns The normalized string value or undefined.
- */
-export const normalizeOptional = (value?: string): string | undefined => {
-	return value || undefined
-}
-
-/**
- * Converts a kebab-case string to camelCase.
- *
- * @example
- * ```ts
- * kebabToCamel('kebab-case-string') // 'kebabCaseString'
- * ```
- *
- * @param str The kebab-case string to be converted.
- * @returns The converted camelCase string.
- */
-export const kebabToCamel = (str: string): string => {
-	return str.replace(/-./g, (m) => m.toUpperCase()[1])
-}
-
-/*
- * GitHub context payload utility functions.
- */
-
-// import * as github from '@actions/github'
-
-/**
- * Get the issue object from the GitHub context payload.
- *
- * @param context The GitHub context object containing the payload for the current action.
- * @returns The issue object from the GitHub context payload, or undefined if not present.
- */
-// export const getIssueFromContext = (context: Context = github.context) => context.payload.issue
-
-/**
- * Get the pull request object from the GitHub context payload.
- *
- * @param context The GitHub context object containing the payload for the current action.
- * @returns The pull request object from the GitHub context payload, or undefined if not present.
- */
-// export const getPrFromContext = (context: Context = github.context) => context.payload.pull_request
-
-/*
- * Utility functions for GitHub API interactions.
- */
-
-/**
- * Searches for issues and pull requests based on the provided query using the GitHub REST API.
- * Returns a list of search result items matching the query.
- *
- * @see https://docs.github.com/en/rest/search/search?apiVersion=2026-03-10#search-issues-and-pull-requests
- *
- * @param query The search query string used to find issues and pull requests.
- * @param octokit The Octokit client instance used to interact with the GitHub REST API.
- * @returns A promise that resolves to an array of search result items matching the query.
- */
-/*
-export const searchIssuesAndPullRequests = async (query: string, octokit: OctokitClient): Promise<SearchItem[]> => {
-	const items = (await octokit.paginate(octokit.rest.search.issuesAndPullRequests, {
-		q: query,
-		per_page: 100,
-	})) as unknown as SearchItem[]
-
-	return items
-}
-*/

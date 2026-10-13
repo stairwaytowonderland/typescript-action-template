@@ -37,6 +37,7 @@ jobs:
     uses: stairwaytowonderland/.github/.github/workflows/linter.yaml@v1
     with:
       superlinter-validate-editorconfig: false
-      # additional-vars: |
-      #   VALIDATE_TYPESCRIPT_PRETTIER=false
+      superlinter-filter-regex-exclude: '(docs/.*\..*$|dist/.*|.*\.csv$)'
+      additional-vars: |
+        VALIDATE_HTML=false
     secrets: inherit

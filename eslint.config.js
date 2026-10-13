@@ -16,7 +16,7 @@ export default [
 	// 1. Global Ignores
 	{
 		// '**/.rollup.cache/**',
-		ignores: ['coverage/**', 'dist/**', 'lib/**', 'node_modules/**'],
+		ignores: ['coverage/**', 'dist/**', 'lib/**', 'node_modules/**', 'docs/**', 'src/toolkit/docs/**'],
 	},
 
 	// 2. Base Presets (Native Flat Config definitions)
@@ -46,17 +46,6 @@ export default [
 			sourceType: 'module',
 
 			parserOptions: {
-				// projectService: {
-				// 	allowDefaultProject: [
-				// 		'__fixtures__/*.ts',
-				// 		'__tests__/*.ts',
-				// 		'eslint.config.mjs',
-				// 		'jest.config.js',
-				// 		'rollup.config.ts',
-				// 		'.prettierrc.mjs',
-				// 	],
-				// 	maximumDefaultProjectFileMatchCount_THIS_WILL_SLOW_DOWN_LINTING: 1000,
-				// },
 				project: ['./tsconfig.json', './tsconfig.test.json', './tsconfig.eslint.json'],
 				tsconfigRootDir: import.meta.dirname,
 			},

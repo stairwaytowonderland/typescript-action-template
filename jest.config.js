@@ -4,9 +4,14 @@
 export default {
 	clearMocks: true,
 	collectCoverage: true,
-	collectCoverageFrom: ['./src/**'],
+	collectCoverageFrom: [
+		'./src/**',
+		'!src/toolkit/__fixtures__/**/*',
+		'!src/toolkit/__tests__/**/*',
+		'!src/toolkit/__utils__/**/*',
+	],
 	coverageDirectory: './coverage',
-	coveragePathIgnorePatterns: ['/node_modules/', '/dist/'],
+	coveragePathIgnorePatterns: ['/docs/', '/src/toolkit/docs/'],
 	coverageReporters: ['json-summary', 'text', 'lcov'],
 	// Uncomment the below lines if you would like to enforce a coverage threshold
 	// for your action. This will fail the build if the coverage is below the
@@ -28,6 +33,10 @@ export default {
 		// ts-jest emits .js extensions for ESM; remap relative .js → extensionless so Jest finds the .ts file
 		'^(\\.{1,2}/.*)\\.js$': '$1',
 		'^(_common\\.ts)$': '$1',
+		// Maps the '#toolkit' identifier to the source files within the toolkit directory.
+		'^#toolkit/(.*)\\.js$': '<rootDir>/src/toolkit/$1',
+		// Maps the '#toolkit' identifier to the source entry point
+		'^#toolkit$': '<rootDir>/src/toolkit/index.ts',
 	},
 	testMatch: ['**/*.test.ts'],
 	testPathIgnorePatterns: ['/dist/', '/node_modules/'],

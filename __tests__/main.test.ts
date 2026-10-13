@@ -9,18 +9,19 @@
  * so that the actual '@actions/core' module is not imported.
  */
 
+// Import Jest testing utilities
+import { jest } from '@jest/globals'
+
 // Import mocked core and GitHub modules from fixtures
-import * as core from '../__fixtures__/core.js'
-import * as github from '../__fixtures__/github.js'
+import * as core from '#toolkit/__fixtures__/core.js'
+// import * as github from '#toolkit/__fixtures__/github.js'
 
 // Import the action mocks from fixtures
 import { actionMock, actionRunMock } from '../__fixtures__/action.js'
+// import main from '../__fixtures__/action.js'
 
 // Import utility functions for mocking inputs and capturing outputs during tests
-import { mockGetInput, mockGetBooleanInput, mockSetOutput } from '../__utils__/mocks.js'
-
-// Import Jest testing utilities
-import { jest } from '@jest/globals'
+import { mockGetInput, mockGetBooleanInput, mockSetOutput } from '#toolkit/__utils__/mocks.js'
 
 /*
  * Mocks should be declared before the module being tested is imported.
@@ -30,10 +31,11 @@ import { jest } from '@jest/globals'
 
 // Mock the core and GitHub modules before importing the main module.
 jest.unstable_mockModule('@actions/core', () => core)
-jest.unstable_mockModule('@actions/github', () => github)
+// jest.unstable_mockModule('@actions/github', () => github)
 
 // Mock the Action class from the action module to control its behavior during tests
-jest.unstable_mockModule('../src/config.js', actionRunMock)
+jest.unstable_mockModule('../src/action.js', actionRunMock)
+// jest.unstable_mockModule('../src/action.js', () => ({ default: main }))
 
 // The module being tested should be imported dynamically. This ensures that the
 // mocks are used in place of any actual dependencies.
@@ -45,8 +47,9 @@ describe('Main Entry', () => {
 	let inputs: Record<string, string>
 
 	beforeEach(() => {
-		// Clear any previous mocks to ensure a clean state for each test.
+		// Clear and reset any previous mocks to ensure a clean state for each test.
 		jest.clearAllMocks()
+		jest.resetAllMocks()
 
 		// Intercept process.exit so it doesn't physically crash the Jest runner
 		exitSpy = jest.spyOn(process, 'exit').mockImplementation(() => undefined as never)
@@ -85,7 +88,6 @@ describe('Main Entry', () => {
 	// Restore the process.exit mock after each test
 	afterEach(() => {
 		exitSpy.mockRestore()
-		jest.resetAllMocks()
 	})
 
 	test('Sets the time output', async () => {

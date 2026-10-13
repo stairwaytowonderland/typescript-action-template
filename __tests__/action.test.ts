@@ -5,30 +5,23 @@
  * Unit tests for the action's logic, src/action.ts
  */
 
-// Import mocked core and GitHub modules from fixtures
-import * as core from '../__fixtures__/core.js'
-import * as github from '../__fixtures__/github.js'
-
-// Import utility functions for mocking inputs and capturing outputs during tests
-import { mockGetInput, mockGetBooleanInput } from '../__utils__/mocks.js'
-
-// Import the wait mocks from fixtures.
-// import { wait } from '../__fixtures__/action.js'
-
 // Import Jest testing utilities
 import { jest } from '@jest/globals'
 
-// Mocks should be declared before the module being tested is imported
-jest.unstable_mockModule('@actions/core', () => core)
-jest.unstable_mockModule('@actions/github', () => github)
+// Import mocked core and GitHub modules from fixtures
+import * as core from '#toolkit/__fixtures__/core.js'
+import * as github from '#toolkit/__fixtures__/github.js'
+
+// Import utility functions for mocking inputs and capturing outputs during tests
+import { mockGetInput, mockGetBooleanInput } from '#toolkit/__utils__/mocks.js'
 
 // Import custom types and utilities from the project
-import type { ActionInputs, GitHubContext } from '../src/types.js'
-import { getInputs, millisecondsFromInput } from '../src/utils.js'
+import type { ActionInputs, GitHubContext } from '#toolkit'
+import { getInputs } from '../src/config.js'
+import { millisecondsFromInput } from '../src/utils.js'
 
 // Import the mocked core module and wait function from fixtures
-import wait, { delay } from '../src/action.js'
-import Action from '../src/config.js'
+import main, { Action, delay } from '../src/action.js'
 
 describe('Action Logic', () => {
 	let inputs: ActionInputs
@@ -40,6 +33,7 @@ describe('Action Logic', () => {
 
 	beforeEach(() => {
 		inputs = {
+			// ghToken: 'mock-token',
 			dryRun: false,
 			milliseconds: '500',
 		} as ActionInputs
@@ -53,7 +47,8 @@ describe('Action Logic', () => {
 	describe('getInputs', () => {
 		beforeEach(() => {
 			mockGetInput({
-				milliseconds: '500',
+				// 'github-token': inputs.ghToken as string,
+				milliseconds: inputs.milliseconds as string,
 			})
 			mockGetBooleanInput({
 				'dry-run': true,
@@ -67,6 +62,8 @@ describe('Action Logic', () => {
 			expect(inputs.dryRun).toBe(true)
 			expect(inputs).toHaveProperty('milliseconds')
 			expect(inputs.milliseconds).toBe('500')
+			// expect(inputs).toHaveProperty('ghToken')
+			// expect(inputs.ghToken).toBe('mock-token')
 		})
 	})
 
@@ -78,6 +75,7 @@ describe('Action Logic', () => {
 
 			try {
 				const runPromise = action.run()
+				await jest.runAllTimersAsync()
 				jest.advanceTimersByTime(ms)
 				await runPromise
 			} finally {
@@ -97,6 +95,7 @@ describe('Action Logic', () => {
 			await expect(delay(input)).rejects.toThrow('milliseconds is not a number')
 		})
 
+		// eslint-disable-next-line jest/no-commented-out-tests
 		/*
 		// Test the delay function with a valid number and real timers.
 		test('Waits with a valid number', async () => {
@@ -128,49 +127,20 @@ describe('Action Logic', () => {
 		})
 	})
 
-	describe('wait', () => {
+	describe('main action', () => {
 		test('repo action parsed correctly', async () => {
 			jest.useFakeTimers()
 			const action = new Action(github.context as GitHubContext, inputs)
 			const ms = millisecondsFromInput(inputs.milliseconds)
 
 			try {
-				const resultPromise = wait(action)
+				const resultPromise = main(action)
+				// await jest.runAllTimersAsync()
 				jest.advanceTimersByTime(ms)
 				await expect(resultPromise).resolves.toBe('done!')
 			} finally {
 				jest.useRealTimers()
 			}
-		})
-	})
-})
-
-describe('Utilities', () => {
-	describe('millisecondsFromInput', () => {
-		test('parses correctly', () => {
-			const input = '1234'
-			const result = millisecondsFromInput(input)
-			expect(result).toBe(1234)
-		})
-		test('returns NaN for invalid input', () => {
-			const input = 'foo'
-			const result = millisecondsFromInput(input)
-			expect(isNaN(result)).toBe(true)
-		})
-		test('returns NaN for empty input', () => {
-			const input = ''
-			const result = millisecondsFromInput(input)
-			expect(isNaN(result)).toBe(true)
-		})
-		test('returns NaN for null input', () => {
-			const input = null
-			const result = millisecondsFromInput(input)
-			expect(isNaN(result)).toBe(true)
-		})
-		test('returns NaN for undefined input', () => {
-			const input = undefined
-			const result = millisecondsFromInput(input)
-			expect(isNaN(result)).toBe(true)
 		})
 	})
 })

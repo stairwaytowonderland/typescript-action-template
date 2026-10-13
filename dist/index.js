@@ -33598,9 +33598,48 @@ function requireGithub () {
 
 var githubExports = requireGithub();
 
-/**
- * Common types and utilities for the GitHub Action.
+/*
+ * Utility functions for string manipulation.
  */
+/**
+ * Normalizes an optional string value.
+ *
+ * Converts empty strings or undefined values to undefined.
+ * This is useful for handling optional string values where empty strings should be treated as undefined.
+ *
+ * @param value The string value to normalize. If the value is an empty string or undefined, it will be converted to undefined.
+ * @returns The normalized string value or undefined.
+ */
+const normalizeOptional = (value) => {
+    return value || undefined;
+};
+
+/*
+ * Utility functions for handling action inputs and sensitive information.
+ */
+/**
+ * Filters out specified keys from the action inputs object.
+ *
+ * This is useful for removing sensitive information such as tokens from the inputs before logging or further processing.
+ *
+ * @example
+ * const safeInputs = getSafeInputs(inputs, 'ghToken', 'anotherKeyToRemove')
+ *
+ * @param inputs The action inputs object to filter.
+ * @param keys The keys to remove from the inputs object.
+ * @returns A new object with the specified keys removed from the inputs.
+ */
+const getSafeInputs = (inputs, ...keys) => {
+    // Fallback to an empty object if inputs is undefined
+    const initialObj = inputs ?? {};
+    // Iteratively destructure each key out of the object
+    const cleanInputs = keys.reduce((acc, key) => {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const { [key]: _, ...remaining } = acc;
+        return remaining;
+    }, initialObj);
+    return cleanInputs;
+};
 /**
  * Provides methods to parse and normalize repository information from various sources.
  */
@@ -33711,149 +33750,6 @@ class ActionRepository {
         return this;
     }
 }
-/*
- * Utility functions for handling action inputs and sensitive information.
- */
-/**
- * Filters out specified keys from the action inputs object.
- *
- * This is useful for removing sensitive information such as tokens from the inputs before logging or further processing.
- *
- * @example
- * const safeInputs = getSafeInputs(inputs, 'ghToken', 'anotherKeyToRemove')
- *
- * @param inputs The action inputs object to filter.
- * @param keys The keys to remove from the inputs object.
- * @returns A new object with the specified keys removed from the inputs.
- */
-const getSafeInputs = (inputs, ...keys) => {
-    // Fallback to an empty object if inputs is undefined
-    const initialObj = inputs ?? {};
-    // Iteratively destructure each key out of the object
-    const cleanInputs = keys.reduce((acc, key) => {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const { [key]: _, ...remaining } = acc;
-        return remaining;
-    }, initialObj);
-    return cleanInputs;
-};
-/*
- * Utility functions for string manipulation.
- */
-/**
- * Normalizes an optional string value.
- *
- * Converts empty strings or undefined values to undefined.
- * This is useful for handling optional string values where empty strings should be treated as undefined.
- *
- * @param value The string value to normalize. If the value is an empty string or undefined, it will be converted to undefined.
- * @returns The normalized string value or undefined.
- */
-const normalizeOptional = (value) => {
-    return value || undefined;
-};
-/*
- * GitHub context payload utility functions.
- */
-// import * as github from '@actions/github'
-/**
- * Get the issue object from the GitHub context payload.
- *
- * @param context The GitHub context object containing the payload for the current action.
- * @returns The issue object from the GitHub context payload, or undefined if not present.
- */
-// export const getIssueFromContext = (context: Context = github.context) => context.payload.issue
-/**
- * Get the pull request object from the GitHub context payload.
- *
- * @param context The GitHub context object containing the payload for the current action.
- * @returns The pull request object from the GitHub context payload, or undefined if not present.
- */
-// export const getPrFromContext = (context: Context = github.context) => context.payload.pull_request
-/*
- * Utility functions for GitHub API interactions.
- */
-/**
- * Searches for issues and pull requests based on the provided query using the GitHub REST API.
- * Returns a list of search result items matching the query.
- *
- * @see https://docs.github.com/en/rest/search/search?apiVersion=2026-03-10#search-issues-and-pull-requests
- *
- * @param query The search query string used to find issues and pull requests.
- * @param octokit The Octokit client instance used to interact with the GitHub REST API.
- * @returns A promise that resolves to an array of search result items matching the query.
- */
-/*
-export const searchIssuesAndPullRequests = async (query: string, octokit: OctokitClient): Promise<SearchItem[]> => {
-    const items = (await octokit.paginate(octokit.rest.search.issuesAndPullRequests, {
-        q: query,
-        per_page: 100,
-    })) as unknown as SearchItem[]
-
-    return items
-}
-*/
-
-/**
- * Shared utility functions
- */
-// Re-export utility functions
-/*
- * Project-specific utility functions for general use.
- */
-/**
- * Utility function to parse milliseconds from input, used to convert string inputs to numeric values.
- *
- * @param input - The input value to be parsed as milliseconds.
- * @returns The parsed number of milliseconds.
- */
-const millisecondsFromInput = (input) => {
-    return parseInt(String(input ?? ''), 10);
-};
-
-/**
- * Action logic
- *
- * Contains the main logic for the GitHub Action
- */
-/**
- * Waits for the specified number of milliseconds as defined in the action's inputs.
- *
- * @param action (RepoAction) The action object.
- * @returns Resolves when the example logic is complete.
- */
-var action = async (action) => {
-    // Octokit instance for GitHub API requests
-    // const ghToken = (action.inputs?.ghToken as string)?.trim()
-    // const octokit: OctokitClient = getOctokit(ghToken)
-    // Change RepoAction dynamic key from `unknown` -> `any`
-    // to not require casting for basic operations
-    const ms = millisecondsFromInput(action.inputs?.milliseconds);
-    // Consider gathering action information into a single object
-    // for reporting purposes
-    const actionConfig = {
-        // ghToken: ghToken,
-        milliseconds: ms,
-        ...action,
-    };
-    debug(`Waiting ${actionConfig.milliseconds} milliseconds ...`);
-    const result = await delay(actionConfig.milliseconds);
-    debug(`Result after waiting: ${result}`);
-    return result;
-};
-/**
- * Waits for a number of milliseconds.
- *
- * @param milliseconds The number of milliseconds to wait.
- * @returns Resolves with 'done!' after the wait is over.
- */
-const delay = (milliseconds) => {
-    if (isNaN(milliseconds))
-        return Promise.reject(new Error('milliseconds is not a number'));
-    return new Promise((resolve) => {
-        setTimeout(() => resolve('done!'), milliseconds);
-    });
-};
 
 /**
  * Configuration for the GitHub Action.
@@ -33868,10 +33764,9 @@ const delay = (milliseconds) => {
  * @returns An object containing the normalized action inputs keyed by camelCase names.
  */
 const getInputs = () => {
-    const dryRunInput = getBooleanInput('dry-run');
     return {
         // ghToken: (core.getInput('github-token') ?? '').trim(),
-        dryRun: dryRunInput,
+        dryRun: getBooleanInput('dry-run'),
         milliseconds: (getInput('milliseconds') ?? '').trim(),
     };
 };
@@ -33881,7 +33776,7 @@ const getInputs = () => {
  * * Implements the RepoAction interface and provides methods to run the action.
  * * Customize this class to include any additional inputs, methods, or properties required for your action.
  */
-class Action {
+class Config {
     /** Indicates if the action should run in dry-run mode. */
     dryRun;
     /** The GitHub context object. */
@@ -33913,6 +33808,83 @@ class Action {
         this.dryRun = dryRun ?? this.inputs?.dryRun ?? false;
         debug(`Initializing Action with dryRun: ${this.dryRun}`);
     }
+}
+
+/**
+ * Shared utility functions
+ */
+// Re-export utility functions
+// export { getInputs } from './config.js'
+/*
+ * Project-specific utility functions for general use.
+ */
+/**
+ * Utility function to parse milliseconds from input, used to convert string inputs to numeric values.
+ *
+ * @param input - The input value to be parsed as milliseconds.
+ * @returns The parsed number of milliseconds.
+ */
+const millisecondsFromInput = (input) => {
+    return parseInt(String(input ?? ''), 10);
+};
+
+/**
+ * Action logic
+ *
+ * Contains the main logic for the GitHub Action
+ */
+/**
+ * Waits for the specified number of milliseconds as defined in the action's inputs.
+ *
+ * @param action (RepoAction) The action object.
+ * @returns Resolves when the example logic is complete.
+ */
+const main = async (action) => {
+    /*
+    // Octokit instance for GitHub API requests
+    const octokit = await getAuth(action)
+
+    if (!octokit) {
+        const authFailedMsg = 'Failed to obtain an authenticated Octokit instance.'
+        core.setFailed(authFailedMsg)
+        return
+    }
+    */
+    // Change RepoAction dynamic key from `unknown` -> `any`
+    // to not require casting for basic operations
+    const ms = millisecondsFromInput(action.inputs?.milliseconds);
+    // Consider gathering action information into a single object
+    // for reporting purposes
+    const actionInfo = {
+        milliseconds: ms,
+        ...action,
+    };
+    debug(`Waiting ${actionInfo.milliseconds} milliseconds ...`);
+    const result = await delay(actionInfo.milliseconds);
+    debug(`Result after waiting: ${result}`);
+    setOutput('time', new Date().toTimeString());
+    return result;
+};
+/**
+ * Waits for a number of milliseconds.
+ *
+ * @param milliseconds The number of milliseconds to wait.
+ * @returns Resolves with 'done!' after the wait is over.
+ */
+const delay = (milliseconds) => {
+    if (isNaN(milliseconds))
+        return Promise.reject(new Error('milliseconds is not a number'));
+    return new Promise((resolve) => {
+        setTimeout(() => resolve('done!'), milliseconds);
+    });
+};
+/**
+ * Represents the main action class that extends the base configuration.
+ *
+ * Provides the `run` method to execute the action's logic.
+ * Extends the base configuration class to inherit common action properties and methods.
+ */
+class Action extends Config {
     /**
      * Executes the main logic of the GitHub Action.
      *
@@ -33921,10 +33893,10 @@ class Action {
     async run() {
         debug(`Action created with actor: ${this.actor}, repo: ${this.repo.fullName}, inputs (safe): ${JSON.stringify(getSafeInputs(this.inputs, 'ghToken'), null, 2)}`);
         debug(`Start time: ${new Date().toTimeString()}`);
-        const result = await action(this);
+        const result = await main(this);
         debug(`End time: ${new Date().toTimeString()}`);
-        debug(`Result: ${result}`);
-        setOutput('time', new Date().toTimeString());
+        if (result)
+            debug(`Result: ${result}`);
     }
 }
 

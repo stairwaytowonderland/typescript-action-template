@@ -1,0 +1,9 @@
+{
+	"extends": "./typedoc.json",
+	"plugin": ["typedoc-plugin-coverage", "typedoc-plugin-markdown"],
+	"coverageLabel": "Toolkit Documented",
+	"coverageColor": "#5330c8",
+	"coverageOutputPath": "./badges/toolkit-documentation.svg",
+	"coverageOutputType": "svg",
+	"coverageSvgWidth": 160
+}

@@ -1,0 +1,10 @@
+{
+	"extends": "./typedoc.json",
+	"readme": "none",
+	"plugin": ["typedoc-plugin-coverage"],
+	"coverageLabel": "Documented",
+	"coverageColor": "#5330c8",
+	"coverageOutputPath": "./badges/combined-documentation.svg",
+	"coverageOutputType": "svg",
+	"coverageSvgWidth": 120
+}

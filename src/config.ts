@@ -5,10 +5,8 @@
  */
 
 import * as core from '@actions/core'
-import type { RepoAction, GitHubContext, ActionInputs, SimpleRepository } from './types.js'
-import { ActionRepository } from './types.js'
-import { getSafeInputs } from './utils.js'
-import action from './action.js'
+import type { ActionSetup, GitHubContext, ActionInputs, SimpleRepository } from '#toolkit'
+import { ActionRepository } from '#toolkit'
 
 /**
  * Retrieves and normalizes GitHub Action inputs based on the provided labels.
@@ -18,10 +16,9 @@ import action from './action.js'
  * @returns An object containing the normalized action inputs keyed by camelCase names.
  */
 export const getInputs = (): ActionInputs => {
-	const dryRunInput = core.getBooleanInput('dry-run')
 	return {
 		// ghToken: (core.getInput('github-token') ?? '').trim(),
-		dryRun: dryRunInput,
+		dryRun: core.getBooleanInput('dry-run'),
 		milliseconds: (core.getInput('milliseconds') ?? '').trim(),
 	}
 }
@@ -31,9 +28,7 @@ export const getInputs = (): ActionInputs => {
  *
  * * Customize this interface to include any additional configuration options required for your action.
  */
-export interface ActionConfig extends RepoAction {
-	/** The GitHub token used for authentication with the GitHub API. */
-	// ghToken: string
+export interface ActionInfo extends ActionInputs {
 	/** The number of milliseconds to wait during the action execution. */
 	milliseconds: number
 }
@@ -44,7 +39,7 @@ export interface ActionConfig extends RepoAction {
  * * Implements the RepoAction interface and provides methods to run the action.
  * * Customize this class to include any additional inputs, methods, or properties required for your action.
  */
-export class Action implements RepoAction {
+export class Config implements ActionSetup {
 	/** Indicates if the action should run in dry-run mode. */
 	dryRun: boolean
 	/** The GitHub context object. */
@@ -79,24 +74,7 @@ export class Action implements RepoAction {
 		this.dryRun = dryRun ?? this.inputs?.dryRun ?? false
 		core.debug(`Initializing Action with dryRun: ${this.dryRun}`)
 	}
-
-	/**
-	 * Executes the main logic of the GitHub Action.
-	 *
-	 * @returns resolves when the action has completed execution.
-	 */
-	async run(): Promise<void> {
-		core.debug(
-			`Action created with actor: ${this.actor}, repo: ${this.repo.fullName}, inputs (safe): ${JSON.stringify(getSafeInputs(this.inputs, 'ghToken'), null, 2)}`
-		)
-
-		core.debug(`Start time: ${new Date().toTimeString()}`)
-		const result = await action(this)
-		core.debug(`End time: ${new Date().toTimeString()}`)
-		core.debug(`Result: ${result}`)
-		core.setOutput('time', new Date().toTimeString())
-	}
 }
 
 // Export the Action class as the default export for external usage
-export default Action
+export default Config

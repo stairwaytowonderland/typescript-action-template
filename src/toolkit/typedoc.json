@@ -1,0 +1,10 @@
+{
+	"$schema": "https://typedoc.org/schema.json",
+	"readme": "none",
+	"disableSources": false,
+	"plugin": ["typedoc-plugin-markdown"],
+	"entryPointStrategy": "resolve",
+	"entryPoints": ["."],
+	"out": "./docs",
+	"exclude": ["**/__tests__/**", "**/__fixtures__/**", "**/__utils__/**", "**/docs/**", "**/*.test.ts", "index.ts"]
+}

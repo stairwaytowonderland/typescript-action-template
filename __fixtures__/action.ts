@@ -1,4 +1,6 @@
-import { createAsyncMock } from '../__utils__/mocks.js'
+import { jest } from '@jest/globals'
+
+import { createAsyncMock } from '#toolkit/__utils__/mocks.js'
 
 /**
  * Mock for the asynchronous action function, used to simulate its behavior during tests.
@@ -40,11 +42,11 @@ export const actionRunMockNamed = () => ({
  *
  * Currently set to the default export version.
  */
-export const actionRunMock = actionRunMockDefault
+export const actionRunMock = actionRunMockNamed
 
 /**
  * Mock for the wait function, used to simulate delays during tests.
  *
  * Currently commented out, as the mocked implementation is not needed for the tests.
  */
-// export const wait = jest.fn<typeof import('../src/action.js').wait>()
+export const main = jest.fn<typeof import('../src/action.js').main>()

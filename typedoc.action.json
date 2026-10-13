@@ -1,0 +1,14 @@
+{
+	"extends": "./typedoc.json",
+	"entryPointStrategy": "expand",
+	"entryPoints": ["src"],
+	"exclude": ["./src/toolkit/**"],
+	"out": "./docs",
+	"readme": "none",
+	"plugin": ["typedoc-plugin-coverage"],
+	"coverageLabel": "Action Documented",
+	"coverageColor": "#5330c8",
+	"coverageOutputPath": "./badges/action-documentation.svg",
+	"coverageOutputType": "svg",
+	"coverageSvgWidth": 158
+}

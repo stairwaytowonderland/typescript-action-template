@@ -1,7 +1,8 @@
+import { jest } from '@jest/globals'
+
 import * as github from '../__fixtures__/github.js'
 import * as core from '../__fixtures__/core.js'
-import { jest } from '@jest/globals'
-import type { OctokitClient } from '../src/types.js'
+import type { OctokitClient } from '../api.js'
 
 /**
  * Jest mock function for testing purposes.
