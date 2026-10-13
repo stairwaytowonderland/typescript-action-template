@@ -14,11 +14,15 @@ Represents a single search result item from the GitHub API.
 
 > **created\_at**: `Date`
 
+The date and time when the issue or pull request was created.
+
 ***
 
 ### html\_url
 
 > **html\_url**: `string`
+
+The URL of the issue or pull request on GitHub.
 
 ***
 
@@ -26,9 +30,13 @@ Represents a single search result item from the GitHub API.
 
 > **labels**: `object`[]
 
+The labels associated with the issue or pull request.
+
 #### name
 
 > **name**: `string`
+
+The name of the label.
 
 ***
 
@@ -36,11 +44,15 @@ Represents a single search result item from the GitHub API.
 
 > **node\_id**: `string`
 
+The unique node ID of the search result item.
+
 ***
 
 ### number
 
 > **number**: `number`
+
+The issue or pull request number.
 
 ***
 
@@ -48,8 +60,12 @@ Represents a single search result item from the GitHub API.
 
 > **repository\_url**: `string`
 
+The URL of the repository containing the issue or pull request.
+
 ***
 
 ### title
 
 > **title**: `string`
+
+The title of the issue or pull request.

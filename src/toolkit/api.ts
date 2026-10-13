@@ -8,6 +8,9 @@ import type { ActionSetup, GitHubContext } from './action.js'
  * Octokit client
  */
 
+/**
+ * Represents the Octokit client returned by the `getOctokit` function from the `@actions/github` library.
+ */
 export type OctokitClient = ReturnType<typeof getOctokit>
 
 /*
@@ -129,12 +132,22 @@ export const getPrFromContext = (context: GitHubContext = github.context) => con
  * Represents a single search result item from the GitHub API.
  */
 export interface SearchItem {
+	/** The unique node ID of the search result item. */
 	node_id: string
+	/** The issue or pull request number. */
 	number: number
-	labels: { name: string }[]
+	/** The labels associated with the issue or pull request. */
+	labels: {
+		/** The name of the label. */
+		name: string
+	}[]
+	/** The title of the issue or pull request. */
 	title: string
+	/** The URL of the issue or pull request on GitHub. */
 	html_url: string
+	/** The URL of the repository containing the issue or pull request. */
 	repository_url: string
+	/** The date and time when the issue or pull request was created. */
 	created_at: Date
 }
 

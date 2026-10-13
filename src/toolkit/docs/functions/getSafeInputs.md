@@ -8,7 +8,7 @@
 
 > **getSafeInputs**\<`K`\>(`inputs?`, ...`keys`): `Omit`\<[`ActionInputs`](../type-aliases/ActionInputs.md), `K`\>
 
-Defined in: [src/toolkit/action.ts:59](https://github.com/stairwaytowonderland/typescript-action-template/blob/09e93f3a9974b161f6442038da449fba9cecf83f/src/toolkit/action.ts#L59)
+Defined in: [src/toolkit/action.ts:68](https://github.com/stairwaytowonderland/typescript-action-template/blob/92ac5e301492fbe5517e01833ed2482e81932584/src/toolkit/action.ts#L68)
 
 Filters out specified keys from the action inputs object.
 
@@ -29,6 +29,8 @@ The action inputs object to filter.
 #### dryRun
 
 `boolean`
+
+Indicates if the action should run in dry-run mode.
 
 ### keys
 

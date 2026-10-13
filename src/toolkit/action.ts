@@ -5,13 +5,20 @@ import { normalizeOptional } from './utils.js'
  * Action related
  */
 
-// GitHub context type alias for convenience.
+/**
+ * Represents the GitHub context object provided by the `@actions/github` library.
+ */
 export type { Context as GitHubContext }
 
 /**
  * Represents the configuration for a GitHub Action that includes a `run` method.
  */
 export interface ActionConfig {
+	/**
+	 * Executes the main logic of the GitHub Action.
+	 *
+	 * @returns A promise that resolves when the action has completed its run.
+	 */
 	run: () => Promise<void>
 }
 
@@ -30,7 +37,9 @@ export interface ActionSetup {
 
 	/** The action inputs provided to the GitHub Action. */
 	inputs?: {
+		/** The action input key-value pairs. */
 		[key: string]: unknown
+		/** Indicates if the action should run in dry-run mode. */
 		dryRun: boolean
 	}
 }

@@ -6,7 +6,7 @@
 
 # Class: ActionRepository
 
-Defined in: [src/toolkit/action.ts:99](https://github.com/stairwaytowonderland/typescript-action-template/blob/09e93f3a9974b161f6442038da449fba9cecf83f/src/toolkit/action.ts#L99)
+Defined in: [src/toolkit/action.ts:108](https://github.com/stairwaytowonderland/typescript-action-template/blob/92ac5e301492fbe5517e01833ed2482e81932584/src/toolkit/action.ts#L108)
 
 Provides methods to parse and normalize repository information from various sources.
 
@@ -20,7 +20,7 @@ Provides methods to parse and normalize repository information from various sour
 
 > **new ActionRepository**(): `ActionRepository`
 
-Defined in: [src/toolkit/action.ts:117](https://github.com/stairwaytowonderland/typescript-action-template/blob/09e93f3a9974b161f6442038da449fba9cecf83f/src/toolkit/action.ts#L117)
+Defined in: [src/toolkit/action.ts:126](https://github.com/stairwaytowonderland/typescript-action-template/blob/92ac5e301492fbe5517e01833ed2482e81932584/src/toolkit/action.ts#L126)
 
 Initializes an ActionRepository instance with default values.
 
@@ -32,7 +32,7 @@ Initializes an ActionRepository instance with default values.
 
 > **new ActionRepository**(`name?`, `owner?`): `ActionRepository`
 
-Defined in: [src/toolkit/action.ts:125](https://github.com/stairwaytowonderland/typescript-action-template/blob/09e93f3a9974b161f6442038da449fba9cecf83f/src/toolkit/action.ts#L125)
+Defined in: [src/toolkit/action.ts:134](https://github.com/stairwaytowonderland/typescript-action-template/blob/92ac5e301492fbe5517e01833ed2482e81932584/src/toolkit/action.ts#L134)
 
 Initializes an ActionRepository instance with the specified repository name and owner.
 
@@ -58,7 +58,7 @@ The repository owner (optional if name contains a slash).
 
 > **new ActionRepository**(`repo`): `ActionRepository`
 
-Defined in: [src/toolkit/action.ts:132](https://github.com/stairwaytowonderland/typescript-action-template/blob/09e93f3a9974b161f6442038da449fba9cecf83f/src/toolkit/action.ts#L132)
+Defined in: [src/toolkit/action.ts:141](https://github.com/stairwaytowonderland/typescript-action-template/blob/92ac5e301492fbe5517e01833ed2482e81932584/src/toolkit/action.ts#L141)
 
 Initializes an ActionRepository instance from an existing SimpleRepository object.
 
@@ -80,7 +80,7 @@ The SimpleRepository object containing repository information.
 
 > `optional` **owner?**: `string`
 
-Defined in: [src/toolkit/action.ts:104](https://github.com/stairwaytowonderland/typescript-action-template/blob/09e93f3a9974b161f6442038da449fba9cecf83f/src/toolkit/action.ts#L104)
+Defined in: [src/toolkit/action.ts:113](https://github.com/stairwaytowonderland/typescript-action-template/blob/92ac5e301492fbe5517e01833ed2482e81932584/src/toolkit/action.ts#L113)
 
 The repository owner.
 
@@ -94,7 +94,7 @@ The repository owner.
 
 > `optional` **repo?**: `string`
 
-Defined in: [src/toolkit/action.ts:101](https://github.com/stairwaytowonderland/typescript-action-template/blob/09e93f3a9974b161f6442038da449fba9cecf83f/src/toolkit/action.ts#L101)
+Defined in: [src/toolkit/action.ts:110](https://github.com/stairwaytowonderland/typescript-action-template/blob/92ac5e301492fbe5517e01833ed2482e81932584/src/toolkit/action.ts#L110)
 
 The repository name.
 
@@ -110,7 +110,7 @@ The repository name.
 
 > **get** **fullName**(): `string` \| `undefined`
 
-Defined in: [src/toolkit/action.ts:110](https://github.com/stairwaytowonderland/typescript-action-template/blob/09e93f3a9974b161f6442038da449fba9cecf83f/src/toolkit/action.ts#L110)
+Defined in: [src/toolkit/action.ts:119](https://github.com/stairwaytowonderland/typescript-action-template/blob/92ac5e301492fbe5517e01833ed2482e81932584/src/toolkit/action.ts#L119)
 
 The full repository name in the format "owner/repo".
 Dynamically updates if the name or owner changes.
@@ -131,7 +131,7 @@ The full repository name in the format "owner/repo".
 
 > **fromApiUrl**(`apiUrl`): `this`
 
-Defined in: [src/toolkit/action.ts:219](https://github.com/stairwaytowonderland/typescript-action-template/blob/09e93f3a9974b161f6442038da449fba9cecf83f/src/toolkit/action.ts#L219)
+Defined in: [src/toolkit/action.ts:228](https://github.com/stairwaytowonderland/typescript-action-template/blob/92ac5e301492fbe5517e01833ed2482e81932584/src/toolkit/action.ts#L228)
 
 Parses the repository owner and name from a GitHub API URL and updates the instance accordingly.
 
@@ -155,7 +155,7 @@ https://api.github.com/repos/owner/repo
 
 > **fromContextRepo**(`context`): `this`
 
-Defined in: [src/toolkit/action.ts:235](https://github.com/stairwaytowonderland/typescript-action-template/blob/09e93f3a9974b161f6442038da449fba9cecf83f/src/toolkit/action.ts#L235)
+Defined in: [src/toolkit/action.ts:244](https://github.com/stairwaytowonderland/typescript-action-template/blob/92ac5e301492fbe5517e01833ed2482e81932584/src/toolkit/action.ts#L244)
 
 Updates the repository owner and name based on the provided GitHub Actions context.
 

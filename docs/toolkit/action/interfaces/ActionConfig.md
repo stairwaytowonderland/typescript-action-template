@@ -14,6 +14,10 @@ Represents the configuration for a GitHub Action that includes a `run` method.
 
 > **run**: () => `Promise`\<`void`\>
 
+Executes the main logic of the GitHub Action.
+
 #### Returns
 
 `Promise`\<`void`\>
+
+A promise that resolves when the action has completed its run.

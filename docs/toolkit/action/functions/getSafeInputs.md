@@ -28,6 +28,8 @@ The action inputs object to filter.
 
 `boolean`
 
+Indicates if the action should run in dry-run mode.
+
 ### keys
 
 ...`K`[]

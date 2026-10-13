@@ -14,10 +14,10 @@ Converts the input labels from kebab-case to camelCase and returns an object con
 
 ## Returns
 
-`object`
-
 An object containing the normalized action inputs keyed by camelCase names.
 
 ### dryRun
 
 > **dryRun**: `boolean`
+
+Indicates if the action should run in dry-run mode.

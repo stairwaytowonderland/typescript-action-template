@@ -6,6 +6,8 @@
 
 # Interface: GitHubContext
 
+Represents the GitHub context object provided by the `@actions/github` library.
+
 ## Properties
 
 ### action

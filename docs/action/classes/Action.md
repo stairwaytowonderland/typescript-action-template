@@ -43,6 +43,8 @@ Optional action inputs.
 
 `boolean`
 
+Indicates if the action should run in dry-run mode.
+
 ##### dryRun?
 
 `boolean`
@@ -93,9 +95,13 @@ The action inputs provided to the GitHub Action.
 
 \[`key`: `string`\]: `unknown`
 
+The action input key-value pairs.
+
 #### dryRun
 
 > **dryRun**: `boolean`
+
+Indicates if the action should run in dry-run mode.
 
 #### Inherited from
 

@@ -18,11 +18,15 @@ Represents a flat configuration for the GitHub Action.
 
 > \[`key`: `string`\]: `unknown`
 
+The action input key-value pairs.
+
 ## Properties
 
 ### dryRun
 
 > **dryRun**: `boolean`
+
+Indicates if the action should run in dry-run mode.
 
 #### Inherited from
 

@@ -1,5 +1,5 @@
 /**
- * Common types and utilities for the GitHub Action.
+ * Exports all the modules from the toolkit.
  */
 
 export * from './action.js'

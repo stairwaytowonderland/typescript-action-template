@@ -8,6 +8,8 @@
 
 Defined in: node\_modules/@actions/github/lib/context.d.ts:2
 
+Represents the GitHub context object provided by the `@actions/github` library.
+
 ## Properties
 
 ### action

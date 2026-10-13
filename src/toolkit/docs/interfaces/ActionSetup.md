@@ -6,7 +6,7 @@
 
 # Interface: ActionSetup
 
-Defined in: [src/toolkit/action.ts:21](https://github.com/stairwaytowonderland/typescript-action-template/blob/09e93f3a9974b161f6442038da449fba9cecf83f/src/toolkit/action.ts#L21)
+Defined in: [src/toolkit/action.ts:28](https://github.com/stairwaytowonderland/typescript-action-template/blob/92ac5e301492fbe5517e01833ed2482e81932584/src/toolkit/action.ts#L28)
 
 Represents the base configuration for a GitHub Actions run.
 
@@ -16,7 +16,7 @@ Represents the base configuration for a GitHub Actions run.
 
 > **context**: [`GitHubContext`](GitHubContext.md)
 
-Defined in: [src/toolkit/action.ts:26](https://github.com/stairwaytowonderland/typescript-action-template/blob/09e93f3a9974b161f6442038da449fba9cecf83f/src/toolkit/action.ts#L26)
+Defined in: [src/toolkit/action.ts:33](https://github.com/stairwaytowonderland/typescript-action-template/blob/92ac5e301492fbe5517e01833ed2482e81932584/src/toolkit/action.ts#L33)
 
 The GitHub context object.
 
@@ -26,7 +26,7 @@ The GitHub context object.
 
 > **dryRun**: `boolean`
 
-Defined in: [src/toolkit/action.ts:23](https://github.com/stairwaytowonderland/typescript-action-template/blob/09e93f3a9974b161f6442038da449fba9cecf83f/src/toolkit/action.ts#L23)
+Defined in: [src/toolkit/action.ts:30](https://github.com/stairwaytowonderland/typescript-action-template/blob/92ac5e301492fbe5517e01833ed2482e81932584/src/toolkit/action.ts#L30)
 
 Indicates if the action should run in dry-run mode.
 
@@ -36,7 +36,7 @@ Indicates if the action should run in dry-run mode.
 
 > `optional` **inputs?**: `object`
 
-Defined in: [src/toolkit/action.ts:32](https://github.com/stairwaytowonderland/typescript-action-template/blob/09e93f3a9974b161f6442038da449fba9cecf83f/src/toolkit/action.ts#L32)
+Defined in: [src/toolkit/action.ts:39](https://github.com/stairwaytowonderland/typescript-action-template/blob/92ac5e301492fbe5517e01833ed2482e81932584/src/toolkit/action.ts#L39)
 
 The action inputs provided to the GitHub Action.
 
@@ -44,9 +44,13 @@ The action inputs provided to the GitHub Action.
 
 \[`key`: `string`\]: `unknown`
 
+The action input key-value pairs.
+
 #### dryRun
 
 > **dryRun**: `boolean`
+
+Indicates if the action should run in dry-run mode.
 
 ***
 
@@ -54,6 +58,6 @@ The action inputs provided to the GitHub Action.
 
 > **repo**: [`SimpleRepository`](SimpleRepository.md)
 
-Defined in: [src/toolkit/action.ts:29](https://github.com/stairwaytowonderland/typescript-action-template/blob/09e93f3a9974b161f6442038da449fba9cecf83f/src/toolkit/action.ts#L29)
+Defined in: [src/toolkit/action.ts:36](https://github.com/stairwaytowonderland/typescript-action-template/blob/92ac5e301492fbe5517e01833ed2482e81932584/src/toolkit/action.ts#L36)
 
 The repository associated with the GitHub Action.

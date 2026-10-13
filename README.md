@@ -4,6 +4,7 @@
 ![Linter](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/linter.yaml/badge.svg)
 ![CodeQL](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/codeql-analysis.yml/badge.svg)
 ![Coverage](./badges/coverage.svg)
+![Documented](./badges/combined-documentation.svg)
 
 [![GitHub latest release](https://img.shields.io/github/v/release/stairwaytowonderland/typescript-action-template?include_prereleases&logo=rocket)](https://github.com/stairwaytowonderland/typescript-action-template/releases)
 [![GitHub last commit](https://img.shields.io/github/last-commit/stairwaytowonderland/typescript-action-template/main?logo=git)](https://github.com/stairwaytowonderland/typescript-action-template/commits/main)

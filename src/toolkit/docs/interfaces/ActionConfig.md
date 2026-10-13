@@ -6,7 +6,7 @@
 
 # Interface: ActionConfig
 
-Defined in: [src/toolkit/action.ts:14](https://github.com/stairwaytowonderland/typescript-action-template/blob/09e93f3a9974b161f6442038da449fba9cecf83f/src/toolkit/action.ts#L14)
+Defined in: [src/toolkit/action.ts:16](https://github.com/stairwaytowonderland/typescript-action-template/blob/92ac5e301492fbe5517e01833ed2482e81932584/src/toolkit/action.ts#L16)
 
 Represents the configuration for a GitHub Action that includes a `run` method.
 
@@ -16,8 +16,12 @@ Represents the configuration for a GitHub Action that includes a `run` method.
 
 > **run**: () => `Promise`\<`void`\>
 
-Defined in: [src/toolkit/action.ts:15](https://github.com/stairwaytowonderland/typescript-action-template/blob/09e93f3a9974b161f6442038da449fba9cecf83f/src/toolkit/action.ts#L15)
+Defined in: [src/toolkit/action.ts:22](https://github.com/stairwaytowonderland/typescript-action-template/blob/92ac5e301492fbe5517e01833ed2482e81932584/src/toolkit/action.ts#L22)
+
+Executes the main logic of the GitHub Action.
 
 #### Returns
 
 `Promise`\<`void`\>
+
+A promise that resolves when the action has completed its run.
