@@ -38,7 +38,7 @@ permissions:
 
 jobs:
   package-update:
-    name: Update packages
+    name: 🔂 Update packages
     uses: stairwaytowonderland/.github/.github/workflows/ci-package-update.yaml@v1
     secrets: inherit
 
