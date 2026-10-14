@@ -6,8 +6,8 @@ on:
       - main
     paths-ignore:
       - 'CHANGELOG.md'
-      - 'package.json'
-      - 'package-lock.json'
+      # - 'package.json'
+      # - 'package-lock.json'
 
     tags:
       - 'v*'
@@ -95,6 +95,7 @@ jobs:
 
   package-update:
     name: Update packages
+    needs: [publish]
     if: always()
     uses: stairwaytowonderland/.github/.github/workflows/ci-package-update.yaml@v1
     secrets: inherit
