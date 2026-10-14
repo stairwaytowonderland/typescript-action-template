@@ -8,6 +8,7 @@ import * as core from '@actions/core'
 import type { ActionSetup, GitHubContext, ActionInputs, SimpleRepository } from '#toolkit'
 import { ActionRepository } from '#toolkit'
 
+// * Retrieve raw inputs from the GitHub Action
 /**
  * Retrieves and normalizes GitHub Action inputs based on the provided labels.
  *
@@ -23,21 +24,13 @@ export const getInputs = (): ActionInputs => {
 	}
 }
 
-/**
- * Represents a flat configuration for the GitHub Action.
- *
- * * Customize this interface to include any additional configuration options required for your action.
- */
-export interface ActionInfo extends ActionInputs {
-	/** The number of milliseconds to wait during the action execution. */
-	milliseconds: number
-}
-
+// * =======================================================
+// * The main action configuration class doesn't need to be modified,
+// * as it's the base configuration class for setting up the GitHub Action.
 /**
  * Main action class for the GitHub Action.
  *
- * * Implements the RepoAction interface and provides methods to run the action.
- * * Customize this class to include any additional inputs, methods, or properties required for your action.
+ * Implements the RepoAction interface and provides methods to run the action.
  */
 export class Config implements ActionSetup {
 	/** Indicates if the action should run in dry-run mode. */

@@ -10,10 +10,6 @@
 
 - [Config](classes/Config.md)
 
-## Interfaces
-
-- [ActionInfo](interfaces/ActionInfo.md)
-
 ## Functions
 
 - [getInputs](functions/getInputs.md)

@@ -5,12 +5,23 @@
  */
 
 import * as core from '@actions/core'
-import type { ActionConfig, ActionSetup } from '#toolkit'
+import type { ActionConfig, ActionSetup, ActionInputs } from '#toolkit'
 import { getSafeInputs } from '#toolkit'
-import type { ActionInfo } from './config.js'
 import { Config } from './config.js'
 import { millisecondsFromInput } from './utils.js'
 
+// * Define an optional flat configuration interface for persisting action information
+/**
+ * Represents a flat configuration for the GitHub Action.
+ *
+ * Customize this interface to include any additional configuration options required for your action.
+ */
+interface ActionInfo extends ActionInputs {
+	/** The number of milliseconds to wait during the action execution. */
+	milliseconds: number
+}
+
+// * Implement the main action logic using the defined configuration and inputs
 /**
  * Waits for the specified number of milliseconds as defined in the action's inputs.
  *
@@ -68,6 +79,10 @@ export const delay = (milliseconds: number): Promise<string> => {
 	})
 }
 
+// * =======================================================
+// * The main action class that extends the base configuration ...
+// * this class doesn't need to be modified, as it primarily serves
+// * as a container for the action setup and context information.
 /**
  * Represents the main action class that extends the base configuration.
  *

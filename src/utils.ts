@@ -1,12 +1,5 @@
 /**
- * Shared utility functions
- */
-
-// Re-export utility functions
-// export { getInputs } from './config.js'
-
-/*
- * Project-specific utility functions for general use.
+ * Utility functions for the GitHub Action.
  */
 
 /**

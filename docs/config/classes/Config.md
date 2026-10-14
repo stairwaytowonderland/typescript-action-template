@@ -8,8 +8,7 @@
 
 Main action class for the GitHub Action.
 
-* Implements the RepoAction interface and provides methods to run the action.
-* Customize this class to include any additional inputs, methods, or properties required for your action.
+Implements the RepoAction interface and provides methods to run the action.
 
 ## Extended by
 

@@ -33756,6 +33756,7 @@ class ActionRepository {
  *
  * Contains the configuration interface for the GitHub Action.
  */
+// * Retrieve raw inputs from the GitHub Action
 /**
  * Retrieves and normalizes GitHub Action inputs based on the provided labels.
  *
@@ -33770,11 +33771,13 @@ const getInputs = () => {
         milliseconds: (getInput('milliseconds') ?? '').trim(),
     };
 };
+// * =======================================================
+// * The main action configuration class doesn't need to be modified,
+// * as it's the base configuration class for setting up the GitHub Action.
 /**
  * Main action class for the GitHub Action.
  *
- * * Implements the RepoAction interface and provides methods to run the action.
- * * Customize this class to include any additional inputs, methods, or properties required for your action.
+ * Implements the RepoAction interface and provides methods to run the action.
  */
 class Config {
     /** Indicates if the action should run in dry-run mode. */
@@ -33811,12 +33814,7 @@ class Config {
 }
 
 /**
- * Shared utility functions
- */
-// Re-export utility functions
-// export { getInputs } from './config.js'
-/*
- * Project-specific utility functions for general use.
+ * Utility functions for the GitHub Action.
  */
 /**
  * Utility function to parse milliseconds from input, used to convert string inputs to numeric values.
@@ -33833,6 +33831,7 @@ const millisecondsFromInput = (input) => {
  *
  * Contains the main logic for the GitHub Action
  */
+// * Implement the main action logic using the defined configuration and inputs
 /**
  * Waits for the specified number of milliseconds as defined in the action's inputs.
  *
@@ -33878,6 +33877,10 @@ const delay = (milliseconds) => {
         setTimeout(() => resolve('done!'), milliseconds);
     });
 };
+// * =======================================================
+// * The main action class that extends the base configuration ...
+// * this class doesn't need to be modified, as it primarily serves
+// * as a container for the action setup and context information.
 /**
  * Represents the main action class that extends the base configuration.
  *
@@ -33908,25 +33911,24 @@ class Action extends Config {
  *
  * @returns Resolves when the action is complete.
  */
-const run = () => Promise.resolve()
-    .then(() => {
-    console.debug('Starting your GitHub action...');
-    const action = new Action(githubExports.context);
-    return action.run();
-})
-    .then(() => {
-    console.debug('Your GitHub action completed successfully!');
-    process.exit(0);
-})
-    .catch((error) => {
-    if (error instanceof Error) {
-        setFailed(error.message);
+const run = async () => {
+    try {
+        console.debug('Starting your GitHub action...');
+        const action = new Action(githubExports.context);
+        await action.run();
+        console.debug('Your GitHub action completed successfully!');
+        process.exit(0);
     }
-    else {
-        setFailed(String(error));
+    catch (error) {
+        if (error instanceof Error) {
+            setFailed(error.message);
+        }
+        else {
+            setFailed(String(error));
+        }
+        process.exit(1);
     }
-    process.exit(1);
-});
+};
 
 /**
  * Barrel file for the GitHub Action.

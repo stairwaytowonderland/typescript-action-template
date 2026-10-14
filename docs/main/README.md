@@ -6,12 +6,12 @@
 
 # main
 
-## Variables
+## Functions
 
-- [run](variables/run.md)
+- [run](functions/run.md)
 
 ## References
 
 ### default
 
-Renames and re-exports [run](variables/run.md)
+Renames and re-exports [run](functions/run.md)

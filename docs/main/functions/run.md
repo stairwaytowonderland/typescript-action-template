@@ -4,9 +4,9 @@
 
 [typescript-action-template](../../README.md) / [main](../README.md) / run
 
-# Variable: run
+# Function: run()
 
-> `const` **run**: () => `Promise`\<`void`\>
+> **run**(): `Promise`\<`void`\>
 
 Main entry for the GitHub Action.
 
