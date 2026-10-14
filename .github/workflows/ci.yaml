@@ -96,6 +96,6 @@ jobs:
   package-update:
     name: Update packages
     needs: [publish]
-    if: always()
+    # if: always()
     uses: stairwaytowonderland/.github/.github/workflows/ci-package-update.yaml@v1
     secrets: inherit

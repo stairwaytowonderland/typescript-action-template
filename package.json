@@ -2,7 +2,7 @@
 	"name": "typescript-action-template",
 	"description": "GitHub Actions TypeScript template",
 	"version": "0.0.0",
-	"author": "stairwaytowonderland",
+	"author": "",
 	"type": "module",
 	"private": true,
 	"homepage": "https://github.com/stairwaytowonderland/typescript-action-template",
