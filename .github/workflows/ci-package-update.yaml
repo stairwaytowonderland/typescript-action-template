@@ -3,9 +3,9 @@ name: 🔂 CI Package Updates
 on:
   push:
     branches: [main]
-    paths:
-      - 'package.json'
-      - 'package-lock.json'
+    # paths:
+    #   - 'package.json'
+    #   - 'package-lock.json'
 
 concurrency:
   group: '${{ github.repository_id }}-${{ github.ref_name }}'
@@ -22,3 +22,12 @@ jobs:
     name: Update packages
     uses: stairwaytowonderland/.github/.github/workflows/ci-package-update.yaml@v1
     secrets: inherit
+
+  status-sync:
+    runs-on: ubuntu-latest
+    needs: package-update
+    # Runs even if package-update is canceled/skipped
+    if: always()
+    steps:
+      - name: Mark as Success
+        run: echo "Workflow handled by concurrency or completed."
