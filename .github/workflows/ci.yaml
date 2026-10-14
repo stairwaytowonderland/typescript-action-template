@@ -92,3 +92,9 @@ jobs:
   #     # The following inputs are required in the workflow specified by first-release-dispatch-workflow (e.g. the ci.yaml in this case):
   #     tag: ${{ inputs.tag }}
   #     notes-b64: ${{ inputs.notes-b64 }}
+
+  package-update:
+    name: Update packages
+    if: always()
+    uses: stairwaytowonderland/.github/.github/workflows/ci-package-update.yaml@v1
+    secrets: inherit
