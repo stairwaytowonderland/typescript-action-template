@@ -11,7 +11,7 @@
 ## Interfaces
 
 - [ActionConfig](interfaces/ActionConfig.md)
-- [ActionSetup](interfaces/ActionSetup.md)
+- [ActionExec](interfaces/ActionExec.md)
 - [GitHubContext](interfaces/GitHubContext.md)
 - [SearchItem](interfaces/SearchItem.md)
 - [SimpleRepository](interfaces/SimpleRepository.md)

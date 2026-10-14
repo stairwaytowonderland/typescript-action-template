@@ -13,6 +13,7 @@
 ## Functions
 
 - [delay](functions/delay.md)
+- [getInputs](functions/getInputs.md)
 - [main](functions/main.md)
 
 ## References

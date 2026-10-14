@@ -14,12 +14,12 @@ Waits for the specified number of milliseconds as defined in the action's inputs
 
 ### action
 
-[`ActionSetup`](../../toolkit/action/interfaces/ActionSetup.md)
+[`Action`](../classes/Action.md)
 
-(RepoAction) The action object.
+The instance of the Action class containing the configuration and inputs.
 
 ## Returns
 
 `Promise`\<`string` \| `void`\>
 
-Resolves when the example logic is complete.
+Resolves with a string indicating the result of the action.

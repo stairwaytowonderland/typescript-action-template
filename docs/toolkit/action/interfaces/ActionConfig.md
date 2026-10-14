@@ -6,18 +6,48 @@
 
 # Interface: ActionConfig
 
-Represents the configuration for a GitHub Action that includes a `run` method.
+Represents the base configuration for a GitHub Actions run.
 
 ## Properties
 
-### run
+### context
 
-> **run**: () => `Promise`\<`void`\>
+> **context**: [`GitHubContext`](GitHubContext.md)
 
-Executes the main logic of the GitHub Action.
+The GitHub context object.
 
-#### Returns
+***
 
-`Promise`\<`void`\>
+### dryRun
 
-A promise that resolves when the action has completed its run.
+> **dryRun**: `boolean`
+
+Indicates if the action should run in dry-run mode.
+
+***
+
+### inputs?
+
+> `optional` **inputs?**: `object`
+
+The action inputs provided to the GitHub Action.
+
+#### Index Signature
+
+\[`key`: `string`\]: `unknown`
+
+The action input key-value pairs.
+
+#### dryRun
+
+> **dryRun**: `boolean`
+
+Indicates if the action should run in dry-run mode.
+
+***
+
+### repo
+
+> **repo**: [`SimpleRepository`](SimpleRepository.md)
+
+The repository associated with the GitHub Action.

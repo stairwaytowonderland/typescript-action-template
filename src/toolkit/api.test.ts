@@ -16,7 +16,7 @@ import { toOctokit } from './__utils__/mocks.js'
  */
 
 // Import types
-import type { ActionSetup, SimpleRepository, GitHubContext } from './action.js'
+import type { ActionConfig, SimpleRepository, GitHubContext } from './action.js'
 import type { OctokitClient } from './api.js'
 // Import functions and classes
 import {
@@ -28,7 +28,7 @@ import {
 } from './api.js'
 
 describe('Octokit/API', () => {
-	let action: ActionSetup
+	let action: ActionConfig
 
 	beforeEach(() => {
 		jest.clearAllMocks()
@@ -146,7 +146,7 @@ describe('Octokit/API', () => {
 				},
 			}
 
-			const brokenAction: ActionSetup = {
+			const brokenAction: ActionConfig = {
 				dryRun: false,
 				context: {} as unknown as GitHubContext, // Standard simple cast permitted for unrelated properties if needed, or map a valid empty context
 				repo: explodingRepo,

@@ -6,18 +6,14 @@
 
 # Class: Action
 
-Represents the main action class that extends the base configuration.
+Main action class for the GitHub Action.
 
-Provides the `run` method to execute the action's logic.
-Extends the base configuration class to inherit common action properties and methods.
-
-## Extends
-
-- [`Config`](../../config/classes/Config.md)
+Implements the RepoAction interface and provides methods to run the action.
 
 ## Implements
 
 - [`ActionConfig`](../../toolkit/action/interfaces/ActionConfig.md)
+- [`ActionExec`](../../toolkit/action/interfaces/ActionExec.md)
 
 ## Constructors
 
@@ -55,10 +51,6 @@ Optional flag indicating if the action should run in dry-run mode.
 
 `Action`
 
-#### Inherited from
-
-[`Config`](../../config/classes/Config.md).[`constructor`](../../config/classes/Config.md#constructor)
-
 ## Properties
 
 ### context
@@ -67,9 +59,9 @@ Optional flag indicating if the action should run in dry-run mode.
 
 The GitHub context object.
 
-#### Inherited from
+#### Implementation of
 
-[`Config`](../../config/classes/Config.md).[`context`](../../config/classes/Config.md#context)
+[`ActionConfig`](../../toolkit/action/interfaces/ActionConfig.md).[`context`](../../toolkit/action/interfaces/ActionConfig.md#context)
 
 ***
 
@@ -79,9 +71,9 @@ The GitHub context object.
 
 Indicates if the action should run in dry-run mode.
 
-#### Inherited from
+#### Implementation of
 
-[`Config`](../../config/classes/Config.md).[`dryRun`](../../config/classes/Config.md#dryrun)
+[`ActionConfig`](../../toolkit/action/interfaces/ActionConfig.md).[`dryRun`](../../toolkit/action/interfaces/ActionConfig.md#dryrun)
 
 ***
 
@@ -103,9 +95,27 @@ The action input key-value pairs.
 
 Indicates if the action should run in dry-run mode.
 
-#### Inherited from
+#### Implementation of
 
-[`Config`](../../config/classes/Config.md).[`inputs`](../../config/classes/Config.md#inputs)
+[`ActionConfig`](../../toolkit/action/interfaces/ActionConfig.md).[`inputs`](../../toolkit/action/interfaces/ActionConfig.md#inputs)
+
+***
+
+### run
+
+> **run**: () => `Promise`\<`unknown`\>
+
+Executes the main logic of the GitHub Action.
+
+#### Returns
+
+`Promise`\<`unknown`\>
+
+A promise that resolves when the action has completed its run.
+
+#### Implementation of
+
+[`ActionExec`](../../toolkit/action/interfaces/ActionExec.md).[`run`](../../toolkit/action/interfaces/ActionExec.md#run)
 
 ## Accessors
 
@@ -120,10 +130,6 @@ Returns the actor (user) who triggered the GitHub Action.
 ##### Returns
 
 `string`
-
-#### Inherited from
-
-[`Config`](../../config/classes/Config.md).[`actor`](../../config/classes/Config.md#actor)
 
 ***
 
@@ -141,24 +147,6 @@ Returns the repository associated with the GitHub Action.
 
 The repository associated with the GitHub Action.
 
-#### Inherited from
-
-[`Config`](../../config/classes/Config.md).[`repo`](../../config/classes/Config.md#repo)
-
-## Methods
-
-### run()
-
-> **run**(): `Promise`\<`void`\>
-
-Executes the main logic of the GitHub Action.
-
-#### Returns
-
-`Promise`\<`void`\>
-
-resolves when the action has completed execution.
-
 #### Implementation of
 
-[`ActionConfig`](../../toolkit/action/interfaces/ActionConfig.md).[`run`](../../toolkit/action/interfaces/ActionConfig.md#run)
+[`ActionConfig`](../../toolkit/action/interfaces/ActionConfig.md).[`repo`](../../toolkit/action/interfaces/ActionConfig.md#repo)

@@ -13,19 +13,19 @@ export type { Context as GitHubContext }
 /**
  * Represents the configuration for a GitHub Action that includes a `run` method.
  */
-export interface ActionConfig {
+export interface ActionExec {
 	/**
 	 * Executes the main logic of the GitHub Action.
 	 *
 	 * @returns A promise that resolves when the action has completed its run.
 	 */
-	run: () => Promise<void>
+	run: () => Promise<unknown>
 }
 
 /**
  * Represents the base configuration for a GitHub Actions run.
  */
-export interface ActionSetup {
+export interface ActionConfig {
 	/** Indicates if the action should run in dry-run mode. */
 	dryRun: boolean
 
@@ -47,7 +47,7 @@ export interface ActionSetup {
 /**
  * Represents the non-nullable action inputs for the GitHub Action.
  */
-export type ActionInputs = NonNullable<ActionSetup['inputs']>
+export type ActionInputs = NonNullable<ActionConfig['inputs']>
 
 /*
  * Utility functions for handling action inputs and sensitive information.

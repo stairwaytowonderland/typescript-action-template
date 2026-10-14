@@ -2,7 +2,7 @@ import * as github from '@actions/github'
 import * as core from '@actions/core'
 import { getOctokit } from '@actions/github'
 
-import type { ActionSetup, GitHubContext } from './action.js'
+import type { ActionConfig, GitHubContext } from './action.js'
 
 /*
  * Octokit client
@@ -27,7 +27,7 @@ export type OctokitClient = ReturnType<typeof getOctokit>
  */
 export const isOctokitAuthenticated = async (
 	octokit: OctokitClient,
-	action: ActionSetup,
+	action: ActionConfig,
 	failOnError = false
 ): Promise<boolean> => {
 	const owner = action.repo?.owner
@@ -75,7 +75,7 @@ export const isOctokitAuthenticated = async (
  * @returns A promise that resolves to an authenticated Octokit client instance, or undefined if authentication fails.
  */
 export const getAuth = async (
-	action: ActionSetup,
+	action: ActionConfig,
 	failOnError = false,
 	ghToken?: string
 ): Promise<OctokitClient | undefined> => {

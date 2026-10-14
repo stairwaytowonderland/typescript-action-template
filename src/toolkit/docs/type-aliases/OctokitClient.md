@@ -8,6 +8,6 @@
 
 > **OctokitClient** = `ReturnType`\<*typeof* `getOctokit`\>
 
-Defined in: [src/toolkit/api.ts:14](https://github.com/stairwaytowonderland/typescript-action-template/blob/dfe4700b4333676f5c451c1a501bb788791362f8/src/toolkit/api.ts#L14)
+Defined in: [src/toolkit/api.ts:14](https://github.com/stairwaytowonderland/typescript-action-template/blob/7be33a45f0ece47e1c1086b15ca1c33944f860c4/src/toolkit/api.ts#L14)
 
 Represents the Octokit client returned by the `getOctokit` function from the `@actions/github` library.

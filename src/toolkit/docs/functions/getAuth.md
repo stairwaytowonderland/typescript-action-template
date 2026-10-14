@@ -8,7 +8,7 @@
 
 > **getAuth**(`action`, `failOnError?`, `ghToken?`): `Promise`\<`Octokit` & `Api` & `object` \| `undefined`\>
 
-Defined in: [src/toolkit/api.ts:77](https://github.com/stairwaytowonderland/typescript-action-template/blob/dfe4700b4333676f5c451c1a501bb788791362f8/src/toolkit/api.ts#L77)
+Defined in: [src/toolkit/api.ts:77](https://github.com/stairwaytowonderland/typescript-action-template/blob/7be33a45f0ece47e1c1086b15ca1c33944f860c4/src/toolkit/api.ts#L77)
 
 Retrieves an authenticated Octokit client using the provided GitHub token or the token from the action inputs.
 
@@ -18,7 +18,7 @@ If the environment is set to 'test', the function will skip live GitHub API auth
 
 ### action
 
-[`ActionSetup`](../interfaces/ActionSetup.md)
+[`ActionConfig`](../interfaces/ActionConfig.md)
 
 The repository action containing repository and input details.
 

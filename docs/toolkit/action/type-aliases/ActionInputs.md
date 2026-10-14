@@ -6,6 +6,6 @@
 
 # Type Alias: ActionInputs
 
-> **ActionInputs** = `NonNullable`\<[`ActionSetup`](../interfaces/ActionSetup.md)\[`"inputs"`\]\>
+> **ActionInputs** = `NonNullable`\<[`ActionConfig`](../interfaces/ActionConfig.md)\[`"inputs"`\]\>
 
 Represents the non-nullable action inputs for the GitHub Action.

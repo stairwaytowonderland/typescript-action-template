@@ -16,7 +16,7 @@ If the environment is set to 'test', the function will skip live GitHub API auth
 
 ### action
 
-[`ActionSetup`](../../action/interfaces/ActionSetup.md)
+[`ActionConfig`](../../action/interfaces/ActionConfig.md)
 
 The repository action containing repository and input details.
 

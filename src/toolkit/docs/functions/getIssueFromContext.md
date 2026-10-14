@@ -8,7 +8,7 @@
 
 > **getIssueFromContext**(`context?`): \{\[`key`: `string`\]: `any`; `body?`: `string`; `html_url?`: `string`; `number`: `number`; \} \| `undefined`
 
-Defined in: [src/toolkit/api.ts:116](https://github.com/stairwaytowonderland/typescript-action-template/blob/dfe4700b4333676f5c451c1a501bb788791362f8/src/toolkit/api.ts#L116)
+Defined in: [src/toolkit/api.ts:116](https://github.com/stairwaytowonderland/typescript-action-template/blob/7be33a45f0ece47e1c1086b15ca1c33944f860c4/src/toolkit/api.ts#L116)
 
 Get the issue object from the GitHub context payload.
 

@@ -5,30 +5,34 @@
  */
 
 import * as core from '@actions/core'
-import type { ActionConfig, ActionSetup, ActionInputs } from '#toolkit'
-import { getSafeInputs } from '#toolkit'
-import { Config } from './config.js'
+import type { ActionExec, ActionConfig, ActionInputs, GitHubContext, SimpleRepository } from '#toolkit'
+import { ActionRepository } from '#toolkit'
 import { millisecondsFromInput } from './utils.js'
 
-// * Define an optional flat configuration interface for persisting action information
+// * STEP 1: Retrieve raw inputs from the GitHub Action
 /**
- * Represents a flat configuration for the GitHub Action.
+ * Retrieves and normalizes GitHub Action inputs based on the provided labels.
  *
- * Customize this interface to include any additional configuration options required for your action.
+ * Converts the input labels from kebab-case to camelCase and returns an object containing the corresponding input values.
+ *
+ * @returns An object containing the normalized action inputs keyed by camelCase names.
  */
-interface ActionInfo extends ActionInputs {
-	/** The number of milliseconds to wait during the action execution. */
-	milliseconds: number
+export const getInputs = (): ActionInputs => {
+	return {
+		// ghToken: (core.getInput('github-token') ?? '').trim(),
+		dryRun: core.getBooleanInput('dry-run'),
+		milliseconds: (core.getInput('milliseconds') ?? '').trim(),
+	}
 }
 
-// * Implement the main action logic using the defined configuration and inputs
+// * STEP 2: Implement the main action logic using the defined configuration and inputs
 /**
  * Waits for the specified number of milliseconds as defined in the action's inputs.
  *
- * @param action (RepoAction) The action object.
- * @returns Resolves when the example logic is complete.
+ * @param action The instance of the Action class containing the configuration and inputs.
+ * @returns Resolves with a string indicating the result of the action.
  */
-export const main = async (action: ActionSetup): Promise<string | void> => {
+export const main = async (action: Action): Promise<string | void> => {
 	/*
 	// Octokit instance for GitHub API requests
 	const octokit = await getAuth(action)
@@ -48,7 +52,7 @@ export const main = async (action: ActionSetup): Promise<string | void> => {
 	// for reporting purposes
 	const actionInfo: ActionInfo = {
 		milliseconds: ms,
-		...action,
+		...(action as ActionConfig),
 	}
 
 	core.debug(`Waiting ${actionInfo.milliseconds} milliseconds ...`)
@@ -65,6 +69,17 @@ export const main = async (action: ActionSetup): Promise<string | void> => {
 // Export the main action function as the default export.
 export default main
 
+// * STEP 3: Define an optional flat configuration interface for persisting action information
+/**
+ * Represents a flat configuration for the GitHub Action.
+ *
+ * Customize this interface to include any additional configuration options required for your action.
+ */
+interface ActionInfo extends ActionInputs {
+	/** The number of milliseconds to wait during the action execution. */
+	milliseconds: number
+}
+
 /**
  * Waits for a number of milliseconds.
  *
@@ -80,29 +95,50 @@ export const delay = (milliseconds: number): Promise<string> => {
 }
 
 // * =======================================================
-// * The main action class that extends the base configuration ...
-// * this class doesn't need to be modified, as it primarily serves
-// * as a container for the action setup and context information.
+// * The main action configuration class doesn't need to be modified,
+// * as it's the base configuration class for setting up the GitHub Action.
 /**
- * Represents the main action class that extends the base configuration.
+ * Main action class for the GitHub Action.
  *
- * Provides the `run` method to execute the action's logic.
- * Extends the base configuration class to inherit common action properties and methods.
+ * Implements the RepoAction interface and provides methods to run the action.
  */
-export class Action extends Config implements ActionConfig {
-	/**
-	 * Executes the main logic of the GitHub Action.
-	 *
-	 * @returns resolves when the action has completed execution.
-	 */
-	async run(): Promise<void> {
-		core.debug(
-			`Action created with actor: ${this.actor}, repo: ${this.repo.fullName}, inputs (safe): ${JSON.stringify(getSafeInputs(this.inputs, 'ghToken'), null, 2)}`
-		)
+export class Action implements ActionConfig, ActionExec {
+	/** Indicates if the action should run in dry-run mode. */
+	dryRun: boolean
+	/** The GitHub context object. */
+	context: GitHubContext
+	/** The action inputs provided to the GitHub Action. */
+	inputs?: ActionInputs
 
-		core.debug(`Start time: ${new Date().toTimeString()}`)
-		const result = await main(this)
-		core.debug(`End time: ${new Date().toTimeString()}`)
-		if (result) core.debug(`Result: ${result}`)
+	run: () => Promise<unknown>
+
+	/**
+	 * Returns the actor (user) who triggered the GitHub Action.
+	 */
+	get actor(): string {
+		return this.context.actor
+	}
+
+	/**
+	 * Returns the repository associated with the GitHub Action.
+	 */
+	get repo(): SimpleRepository {
+		return new ActionRepository(this.context.repo) as SimpleRepository
+	}
+
+	/**
+	 * Creates a new instance of the Action class.
+	 *
+	 * @param context The GitHub context object.
+	 * @param inputs Optional action inputs.
+	 * @param dryRun Optional flag indicating if the action should run in dry-run mode.
+	 */
+	constructor(context: GitHubContext, inputs?: ActionInputs, dryRun?: boolean) {
+		this.context = context
+		this.inputs = inputs ?? getInputs()
+		this.dryRun = dryRun ?? this.inputs?.dryRun ?? false
+		// this.run = main.bind(this)
+		this.run = () => main(this)
+		core.debug(`Initializing Action with dryRun: ${this.dryRun}`)
 	}
 }

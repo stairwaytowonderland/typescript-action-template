@@ -2,7 +2,7 @@
 
 ***
 
-[typescript-action-template](../../README.md) / [config](../README.md) / getInputs
+[typescript-action-template](../../README.md) / [action](../README.md) / getInputs
 
 # Function: getInputs()
 

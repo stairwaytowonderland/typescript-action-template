@@ -7,7 +7,6 @@
 ## Modules
 
 - [action](action/README.md)
-- [config](config/README.md)
 - [main](main/README.md)
 - [toolkit/action](toolkit/action/README.md)
 - [toolkit/api](toolkit/api/README.md)

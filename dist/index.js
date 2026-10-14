@@ -33614,32 +33614,6 @@ const normalizeOptional = (value) => {
     return value || undefined;
 };
 
-/*
- * Utility functions for handling action inputs and sensitive information.
- */
-/**
- * Filters out specified keys from the action inputs object.
- *
- * This is useful for removing sensitive information such as tokens from the inputs before logging or further processing.
- *
- * @example
- * const safeInputs = getSafeInputs(inputs, 'ghToken', 'anotherKeyToRemove')
- *
- * @param inputs The action inputs object to filter.
- * @param keys The keys to remove from the inputs object.
- * @returns A new object with the specified keys removed from the inputs.
- */
-const getSafeInputs = (inputs, ...keys) => {
-    // Fallback to an empty object if inputs is undefined
-    const initialObj = inputs ?? {};
-    // Iteratively destructure each key out of the object
-    const cleanInputs = keys.reduce((acc, key) => {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const { [key]: _, ...remaining } = acc;
-        return remaining;
-    }, initialObj);
-    return cleanInputs;
-};
 /**
  * Provides methods to parse and normalize repository information from various sources.
  */
@@ -33752,68 +33726,6 @@ class ActionRepository {
 }
 
 /**
- * Configuration for the GitHub Action.
- *
- * Contains the configuration interface for the GitHub Action.
- */
-// * Retrieve raw inputs from the GitHub Action
-/**
- * Retrieves and normalizes GitHub Action inputs based on the provided labels.
- *
- * Converts the input labels from kebab-case to camelCase and returns an object containing the corresponding input values.
- *
- * @returns An object containing the normalized action inputs keyed by camelCase names.
- */
-const getInputs = () => {
-    return {
-        // ghToken: (core.getInput('github-token') ?? '').trim(),
-        dryRun: getBooleanInput('dry-run'),
-        milliseconds: (getInput('milliseconds') ?? '').trim(),
-    };
-};
-// * =======================================================
-// * The main action configuration class doesn't need to be modified,
-// * as it's the base configuration class for setting up the GitHub Action.
-/**
- * Main action class for the GitHub Action.
- *
- * Implements the RepoAction interface and provides methods to run the action.
- */
-class Config {
-    /** Indicates if the action should run in dry-run mode. */
-    dryRun;
-    /** The GitHub context object. */
-    context;
-    /** The action inputs provided to the GitHub Action. */
-    inputs;
-    /**
-     * Returns the actor (user) who triggered the GitHub Action.
-     */
-    get actor() {
-        return this.context.actor;
-    }
-    /**
-     * Returns the repository associated with the GitHub Action.
-     */
-    get repo() {
-        return new ActionRepository(this.context.repo);
-    }
-    /**
-     * Creates a new instance of the Action class.
-     *
-     * @param context The GitHub context object.
-     * @param inputs Optional action inputs.
-     * @param dryRun Optional flag indicating if the action should run in dry-run mode.
-     */
-    constructor(context, inputs, dryRun) {
-        this.context = context;
-        this.inputs = inputs ?? getInputs();
-        this.dryRun = dryRun ?? this.inputs?.dryRun ?? false;
-        debug(`Initializing Action with dryRun: ${this.dryRun}`);
-    }
-}
-
-/**
  * Utility functions for the GitHub Action.
  */
 /**
@@ -33831,12 +33743,27 @@ const millisecondsFromInput = (input) => {
  *
  * Contains the main logic for the GitHub Action
  */
-// * Implement the main action logic using the defined configuration and inputs
+// * STEP 1: Retrieve raw inputs from the GitHub Action
+/**
+ * Retrieves and normalizes GitHub Action inputs based on the provided labels.
+ *
+ * Converts the input labels from kebab-case to camelCase and returns an object containing the corresponding input values.
+ *
+ * @returns An object containing the normalized action inputs keyed by camelCase names.
+ */
+const getInputs = () => {
+    return {
+        // ghToken: (core.getInput('github-token') ?? '').trim(),
+        dryRun: getBooleanInput('dry-run'),
+        milliseconds: (getInput('milliseconds') ?? '').trim(),
+    };
+};
+// * STEP 2: Implement the main action logic using the defined configuration and inputs
 /**
  * Waits for the specified number of milliseconds as defined in the action's inputs.
  *
- * @param action (RepoAction) The action object.
- * @returns Resolves when the example logic is complete.
+ * @param action The instance of the Action class containing the configuration and inputs.
+ * @returns Resolves with a string indicating the result of the action.
  */
 const main = async (action) => {
     /*
@@ -33878,28 +33805,47 @@ const delay = (milliseconds) => {
     });
 };
 // * =======================================================
-// * The main action class that extends the base configuration ...
-// * this class doesn't need to be modified, as it primarily serves
-// * as a container for the action setup and context information.
+// * The main action configuration class doesn't need to be modified,
+// * as it's the base configuration class for setting up the GitHub Action.
 /**
- * Represents the main action class that extends the base configuration.
+ * Main action class for the GitHub Action.
  *
- * Provides the `run` method to execute the action's logic.
- * Extends the base configuration class to inherit common action properties and methods.
+ * Implements the RepoAction interface and provides methods to run the action.
  */
-class Action extends Config {
+class Action {
+    /** Indicates if the action should run in dry-run mode. */
+    dryRun;
+    /** The GitHub context object. */
+    context;
+    /** The action inputs provided to the GitHub Action. */
+    inputs;
+    run;
     /**
-     * Executes the main logic of the GitHub Action.
-     *
-     * @returns resolves when the action has completed execution.
+     * Returns the actor (user) who triggered the GitHub Action.
      */
-    async run() {
-        debug(`Action created with actor: ${this.actor}, repo: ${this.repo.fullName}, inputs (safe): ${JSON.stringify(getSafeInputs(this.inputs, 'ghToken'), null, 2)}`);
-        debug(`Start time: ${new Date().toTimeString()}`);
-        const result = await main(this);
-        debug(`End time: ${new Date().toTimeString()}`);
-        if (result)
-            debug(`Result: ${result}`);
+    get actor() {
+        return this.context.actor;
+    }
+    /**
+     * Returns the repository associated with the GitHub Action.
+     */
+    get repo() {
+        return new ActionRepository(this.context.repo);
+    }
+    /**
+     * Creates a new instance of the Action class.
+     *
+     * @param context The GitHub context object.
+     * @param inputs Optional action inputs.
+     * @param dryRun Optional flag indicating if the action should run in dry-run mode.
+     */
+    constructor(context, inputs, dryRun) {
+        this.context = context;
+        this.inputs = inputs ?? getInputs();
+        this.dryRun = dryRun ?? this.inputs?.dryRun ?? false;
+        // this.run = main.bind(this)
+        this.run = () => main(this);
+        debug(`Initializing Action with dryRun: ${this.dryRun}`);
     }
 }
 

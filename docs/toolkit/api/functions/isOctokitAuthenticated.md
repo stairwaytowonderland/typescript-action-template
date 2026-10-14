@@ -20,7 +20,7 @@ The Octokit client to check authentication for.
 
 ### action
 
-[`ActionSetup`](../../action/interfaces/ActionSetup.md)
+[`ActionConfig`](../../action/interfaces/ActionConfig.md)
 
 The repository action containing repository and input details.
 
