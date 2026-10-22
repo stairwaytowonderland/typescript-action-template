@@ -4,7 +4,7 @@
 	"plugin": ["typedoc-plugin-coverage", "typedoc-plugin-markdown"],
 	"coverageLabel": "Documented",
 	"coverageColor": "#5330c8",
-	"coverageOutputPath": "./badges/combined-documentation.svg",
+	"coverageOutputPath": "./badges/documentation.svg",
 	"coverageOutputType": "svg",
-	"coverageSvgWidth": 120
+	"coverageSvgWidth": 60
 }

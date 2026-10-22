@@ -2,6 +2,24 @@ name: JavaScript CodeQL Configuration
 
 paths:
   - 'src'
+
 paths-ignore:
-  - node_modules
-  - dist
+  # Dependencies, build output, and local assets
+  - 'node_modules/**'
+  - 'dist/**'
+  - 'badges/**'
+
+  # Testing blocks
+  - '**/__tests__/**'
+  - '**/__fixtures__/**'
+  - '**/__mocks__/**'
+  - '**/__utils__/**'
+
+  # Documentation exclusions
+  - '**/docs/**'
+  - '**/*.md'
+  - '**/*.rst'
+
+  # CI/CD Workflow infrastructure
+  - '**/*.yml'
+  - '**/*.yaml'

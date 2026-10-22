@@ -6,8 +6,8 @@ on:
       - main
     paths-ignore:
       - 'CHANGELOG.md'
-      # - 'package.json'
-      # - 'package-lock.json'
+      - 'package.json'
+      - 'package-lock.json'
 
     tags:
       - 'v*'
@@ -37,16 +37,11 @@ permissions:
 # 'Fine-grained token' repo permissions: Contents
 
 jobs:
-  package-update:
-    name: 🔂 Update packages
-    uses: stairwaytowonderland/.github/.github/workflows/ci-package-update.yaml@v1
-    secrets: inherit
-
   info:
     name: 🪏 Gather Info
-    needs: [package-update]
-    if: needs.package-update.outputs.has-updated != 'true'
     uses: stairwaytowonderland/.github/.github/workflows/ci-meta.yaml@v1
+    permissions:
+      contents: read
     with:
       publish: ${{ (github.event_name == 'workflow_dispatch' && (inputs.tag != '' && inputs.notes-b64 != '')) || startsWith(github.ref, 'refs/tags/') }}
 

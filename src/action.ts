@@ -137,7 +137,6 @@ export class Action implements ActionConfig, ActionExec {
 		this.context = context
 		this.inputs = inputs ?? getInputs()
 		this.dryRun = dryRun ?? this.inputs?.dryRun ?? false
-		// this.run = main.bind(this)
 		this.run = () => main(this)
 		core.debug(`Initializing Action with dryRun: ${this.dryRun}`)
 	}

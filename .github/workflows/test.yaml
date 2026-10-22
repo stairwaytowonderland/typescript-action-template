@@ -35,6 +35,44 @@ permissions:
   actions: read # access to reading actions
 
 jobs:
+  setup:
+    name: 📂 Check Changed Files
+    if: github.event_name == 'push' && ! startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    outputs:
+      trigger-update: ${{ steps.has-paths.outputs.trigger-update }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+          # sparse-checkout: |
+          #   package.json
+          #   package-lock.json
+
+      - name: Check for changed files
+        id: has-paths
+        # uses: ./.actions/.github/actions/changed-files-action
+        uses: stairwaytowonderland/actions/.github/actions/changed-files-action@v1
+        with:
+          paths: |
+            '.github/**'
+            'src/**'
+            'package.json'
+            'package-lock.json'
+            'action.yaml'
+          # ignore-authors: |
+          #   github-actions[bot]
+          #   semantic-release-bot
+
+      - name: Show outputs
+        env:
+          OUTPUTS_JSON: ${{ toJson(steps.has-paths.outputs) }}
+        run: |
+          echo "Outputs JSON:"
+          echo "$OUTPUTS_JSON"
+
   basic-validation:
     name: Basic Validation
     uses: actions/reusable-workflows/.github/workflows/basic-validation.yml@main

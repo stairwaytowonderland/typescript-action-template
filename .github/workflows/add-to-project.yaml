@@ -9,7 +9,8 @@ on:
   # Use pull_request_target to have access to a token with write permissions on the repository
   # To use pull_request, set the secrets to the organization 'Dependabot secrets' settings.
   pull_request_target:
-    types: [opened, reopened, synchronize]
+    branches:
+      - main
   workflow_dispatch:
     inputs:
       dry-run:
