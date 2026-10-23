@@ -22,18 +22,19 @@ on:
   #     - 'package-lock.json'
   workflow_dispatch:
 
-concurrency:
-  group: '${{ github.ref_name }}-${{ github.workflow }}'
-  cancel-in-progress: ${{ github.event_name == 'push' }}
-
 permissions:
   contents: read
-  packages: read
-  statuses: write
 
 jobs:
   lint:
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
     name: Lint Codebase
+    permissions:
+      contents: read
+      packages: read
+      statuses: write
     uses: stairwaytowonderland/.github/.github/workflows/linter.yaml@v1
     with:
       superlinter-validate-editorconfig: false

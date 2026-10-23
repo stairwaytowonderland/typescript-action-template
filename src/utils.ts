@@ -8,6 +8,4 @@
  * @param input - The input value to be parsed as milliseconds.
  * @returns The parsed number of milliseconds.
  */
-export const millisecondsFromInput = (input: unknown): number => {
-	return parseInt(String(input ?? ''), 10)
-}
+export const millisecondsFromInput = (input: unknown): number => parseInt(String(input ?? ''), 10)

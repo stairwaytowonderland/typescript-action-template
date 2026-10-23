@@ -2,17 +2,17 @@
 
 ***
 
-[typescript-action-template](../../../README.md) / [toolkit/action](../README.md) / ActionExec
+[typescript-action-template](../../../README.md) / [toolkit/action](../README.md) / ActionRun
 
-# Interface: ActionExec
+# Interface: ActionRun
 
 Represents the configuration for a GitHub Action that includes a `run` method.
 
-## Properties
+## Methods
 
-### run
+### run()
 
-> **run**: () => `Promise`\<`unknown`\>
+> **run**(): `Promise`\<`unknown`\>
 
 Executes the main logic of the GitHub Action.
 

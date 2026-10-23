@@ -1,11 +1,11 @@
 name: 🌟 Stargazers
 
-permissions:
-  contents: read
-
 on:
   watch:
     types: [started]
+
+permissions:
+  contents: read
 
 jobs:
   stargazers:

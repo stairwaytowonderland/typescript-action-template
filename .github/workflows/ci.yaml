@@ -1,5 +1,11 @@
-name: 🔄 CI
+# Use PAT instead of GITHUB_TOKEN to cause semantic-release to trigger tag pipeline when tag is created.
+# 'Fine-grained token' repo permissions: Contents
 
+# * 1. Identity
+name: 🔄 CI
+run-name: CI on ${{ github.ref_name }} triggered by @${{ github.actor }}
+
+# * 2. Trigger Events
 on:
   push:
     branches:
@@ -23,22 +29,41 @@ on:
         type: string
         default: '' # checkov:skip=CKV_GHA_7: Release notes required for automated dispatch, which is used for the first tag/release
 
-concurrency:
-  group: '${{ github.repository_id }}-${{ github.ref_name }}'
-  cancel-in-progress: ${{ github.event_name == 'push' }}
-
+# * 3. Global Security & Concurrency
 permissions:
-  actions: write
-  contents: write
-  issues: write
-  pull-requests: write
+  contents: read
 
-# Use PAT instead of GITHUB_TOKEN to cause semantic-release to trigger tag pipeline when tag is created.
-# 'Fine-grained token' repo permissions: Contents
+# concurrency:
+#   group: ${{ github.run_id }}
+#   cancel-in-progress: false
 
+# * 4. Global Variables & Configuration
+# env:
+#   DRY_RUN: ${{ format('{0}', inputs.dry-run == 'true') }}
+
+defaults:
+  run:
+    shell: bash
+
+# * 5. Job Execution
 jobs:
+  check-changed:
+    name: 📁 Check Changed Files
+    uses: stairwaytowonderland/.github/.github/workflows/check-changed.yaml@v1
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: ${{ github.event_name == 'push' }}
+    permissions:
+      contents: read
+    with:
+      paths: |
+        **/src/**
+        action.y*ml
+
   info:
     name: 🪏 Gather Info
+    needs: [check-changed]
+    if: needs.check-changed.outputs.result == 'true'
     uses: stairwaytowonderland/.github/.github/workflows/ci-meta.yaml@v1
     permissions:
       contents: read
@@ -49,10 +74,10 @@ jobs:
     name: 🔔 Run Action Tests
     needs: [info]
     if: needs.info.outputs.is-release-workflow == 'true'
-    uses: ./.github/workflows/test.yaml
     permissions:
       contents: read
       actions: read
+    uses: ./.github/workflows/test.yaml
     secrets: inherit
 
   check-dist:
@@ -60,13 +85,16 @@ jobs:
     needs: [info]
     if: needs.info.outputs.is-release-workflow == 'true'
     uses: ./.github/workflows/check-dist.yaml
-    permissions:
-      contents: read
 
   release:
     name: 🚀 Release a New Version
     needs: [info, test, check-dist]
     uses: stairwaytowonderland/.github/.github/workflows/release.yaml@v1
+    permissions:
+      actions: write
+      contents: write
+      issues: write
+      pull-requests: write
     with:
       dispatch-workflow: ${{ needs.info.outputs.has-release-tags != 'true' && 'ci.yaml' || '' }}
     secrets: inherit
@@ -87,10 +115,10 @@ jobs:
   # release-and-publish:
   #   name: Release and Publish
   #   uses: stairwaytowonderland/.github/.github/workflows/ci.yaml@v1
-  #   secrets: inherit
   #   with:
   #     first-release-dispatch-workflow: ci.yaml
   #     normalize-majorver: true
   #     # The following inputs are required in the workflow specified by first-release-dispatch-workflow (e.g. the ci.yaml in this case):
   #     tag: ${{ inputs.tag }}
   #     notes-b64: ${{ inputs.notes-b64 }}
+  #   secrets: inherit

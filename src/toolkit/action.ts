@@ -13,13 +13,14 @@ export type { Context as GitHubContext }
 /**
  * Represents the configuration for a GitHub Action that includes a `run` method.
  */
-export interface ActionExec {
+export interface ActionRun {
 	/**
 	 * Executes the main logic of the GitHub Action.
 	 *
 	 * @returns A promise that resolves when the action has completed its run.
 	 */
-	run: () => Promise<unknown>
+	// run: () => Promise<unknown>
+	run(): Promise<unknown>
 }
 
 /**

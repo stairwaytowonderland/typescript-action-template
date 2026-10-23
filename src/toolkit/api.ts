@@ -25,11 +25,11 @@ export type OctokitClient = ReturnType<typeof getOctokit>
  * @param failOnError Whether to throw an error if authentication fails. Defaults to false.
  * @returns A promise that resolves to true if authenticated, false otherwise.
  */
-export const isOctokitAuthenticated = async (
+export async function isOctokitAuthenticated(
 	octokit: OctokitClient,
 	action: ActionConfig,
 	failOnError = false
-): Promise<boolean> => {
+): Promise<boolean> {
 	const owner = action.repo?.owner
 	const repo = action.repo?.repo
 
@@ -74,11 +74,11 @@ export const isOctokitAuthenticated = async (
  * @param ghToken Optional GitHub token to use for authentication. If not provided, it will be read from the action inputs.
  * @returns A promise that resolves to an authenticated Octokit client instance, or undefined if authentication fails.
  */
-export const getAuth = async (
+export async function getAuth(
 	action: ActionConfig,
 	failOnError = false,
 	ghToken?: string
-): Promise<OctokitClient | undefined> => {
+): Promise<OctokitClient | undefined> {
 	const token = ghToken?.trim() || (action.inputs?.ghToken as string)?.trim()
 
 	if (!token) {
@@ -161,11 +161,17 @@ export interface SearchItem {
  * @param octokit The Octokit client instance used to interact with the GitHub REST API.
  * @returns A promise that resolves to an array of search result items matching the query.
  */
-export const searchIssuesAndPullRequests = async (query: string, octokit: OctokitClient): Promise<SearchItem[]> => {
-	const items = (await octokit.paginate(octokit.rest.search.issuesAndPullRequests, {
+// export async function searchIssuesAndPullRequests(query: string, octokit: OctokitClient): Promise<SearchItem[]> {
+// 	const items = (await octokit.paginate(octokit.rest.search.issuesAndPullRequests, {
+// 		q: query,
+// 		per_page: 100,
+// 	})) as unknown as SearchItem[]
+
+// 	return items
+// }
+
+export const searchIssuesAndPullRequests = async (query: string, octokit: OctokitClient): Promise<SearchItem[]> =>
+	(await octokit.paginate(octokit.rest.search.issuesAndPullRequests, {
 		q: query,
 		per_page: 100,
 	})) as unknown as SearchItem[]
-
-	return items
-}

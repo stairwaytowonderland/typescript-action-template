@@ -13,7 +13,7 @@
 ## Interfaces
 
 - [ActionConfig](interfaces/ActionConfig.md)
-- [ActionExec](interfaces/ActionExec.md)
+- [ActionRun](interfaces/ActionRun.md)
 - [GitHubContext](interfaces/GitHubContext.md)
 - [SimpleRepository](interfaces/SimpleRepository.md)
 

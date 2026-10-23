@@ -5,7 +5,7 @@
  */
 
 import * as core from '@actions/core'
-import type { ActionExec, ActionConfig, ActionInputs, GitHubContext, SimpleRepository } from '#toolkit'
+import type { ActionRun, ActionConfig, ActionInputs, GitHubContext, SimpleRepository } from '#toolkit'
 import { ActionRepository } from '#toolkit'
 import { millisecondsFromInput } from './utils.js'
 
@@ -102,7 +102,7 @@ export const delay = (milliseconds: number): Promise<string> => {
  *
  * Implements the RepoAction interface and provides methods to run the action.
  */
-export class Action implements ActionConfig, ActionExec {
+export class Action implements ActionConfig, ActionRun {
 	/** Indicates if the action should run in dry-run mode. */
 	dryRun: boolean
 	/** The GitHub context object. */
@@ -110,7 +110,9 @@ export class Action implements ActionConfig, ActionExec {
 	/** The action inputs provided to the GitHub Action. */
 	inputs?: ActionInputs
 
-	run: () => Promise<unknown>
+	run(): Promise<unknown> {
+		return main(this)
+	}
 
 	/**
 	 * Returns the actor (user) who triggered the GitHub Action.
@@ -137,7 +139,6 @@ export class Action implements ActionConfig, ActionExec {
 		this.context = context
 		this.inputs = inputs ?? getInputs()
 		this.dryRun = dryRun ?? this.inputs?.dryRun ?? false
-		this.run = () => main(this)
 		core.debug(`Initializing Action with dryRun: ${this.dryRun}`)
 	}
 }

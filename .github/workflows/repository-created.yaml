@@ -9,8 +9,8 @@ permissions:
 
 jobs:
   on-create:
-    name: 🚀 On Create
     if: github.event_name == 'repository_dispatch'
+    name: 🚀 On Create
     uses: stairwaytowonderland/.github/.github/workflows/repository-created.yaml@v1
     with:
       repo: ${{ github.event.client_payload.repository.name }}

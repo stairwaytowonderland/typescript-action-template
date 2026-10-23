@@ -1,8 +1,5 @@
 name: 🗂️ Add Dependency PRs to Board
 
-permissions:
-  contents: read # access to read repository's content
-
 on:
   schedule:
     - cron: '30 5 * * *'
@@ -19,12 +16,14 @@ on:
         required: false
         default: true
 
-concurrency:
-  group: add-to-project-${{ github.event.pull_request.number }}
-  cancel-in-progress: true
+permissions:
+  contents: read
 
 jobs:
   add-to-project:
+    concurrency:
+      group: add-to-project-${{ github.event.pull_request.number }}
+      cancel-in-progress: true
     name: 📌 Add PRs to project
     runs-on: ubuntu-latest
     steps:

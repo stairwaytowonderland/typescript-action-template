@@ -6,29 +6,74 @@ name: 🚦 Code Quality (CodeQL)
 
 on:
   schedule:
-    # every Tuesday at 7:31 AM America/Chicago
     - cron: '31 7 * * 2'
       timezone: America/Chicago
   pull_request:
+    # The branches below must be a subset of the on.push branches
     branches:
       - main
-    paths:
-      - 'src/**'
+    paths-ignore:
+      # Exclude all root-level hidden directories and files (except .github)
+      - '.devcontainer/**'
+      - '.licenses/**'
+      - '.vscode/**'
+
+      # Other asset and documentation exclusions
+      - 'badges/**'
+      - '**/docs/**'
+      - '**/*.md'
+      - '**/*.rst'
+      - 'LICENSE'
   push:
     branches:
       - main
-    paths:
-      - 'src/**'
+    paths-ignore:
+      # Exclude all root-level hidden directories and files (except .github)
+      - '.devcontainer/**'
+      - '.licenses/**'
+      - '.vscode/**'
+
+      # Other asset and documentation exclusions
+      - 'badges/**'
+      - '**/docs/**'
+      - '**/*.md'
+      - '**/*.rst'
+      - 'LICENSE'
 
 permissions:
-  actions: read
-  # checks: write
   contents: read
-  security-events: write
 
 jobs:
+  check-changed:
+    name: Check Changed Files
+    uses: stairwaytowonderland/.github/.github/workflows/check-changed.yaml@v1
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
+    permissions:
+      contents: read
+    with:
+      paths: |
+        **/src/**
+        package*.json
+        action.y*ml
+
   codeql-analysis:
+    needs: [check-changed]
+    if: |
+      needs.check-changed.outputs.result == 'true' && (
+        github.event_name == 'pull_request' || (
+          github.event_name == 'push' &&
+          github.actor != 'github-actions[bot]' &&
+          github.actor != 'dependabot[bot]' &&
+          github.actor != 'renovate[bot]' &&
+          github.actor != 'semantic-release[bot]' &&
+          github.actor != 'semantic-release-bot'))
     uses: actions/reusable-workflows/.github/workflows/codeql-analysis.yml@main
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
     with:
       languages: '["typescript"]'
       codeql-cfg-path: '.github/codeql/codeql-config.yml'
