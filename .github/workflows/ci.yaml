@@ -86,6 +86,16 @@ jobs:
     if: needs.changed.outputs.result == 'true' && needs.info.outputs.is-release-workflow == 'true'
     uses: ./.github/workflows/check-dist.yaml
 
+  pre-commit:
+    name: 🎨 Run Pre-commit Hooks
+    needs: [info, changed]
+    if: ((needs.info.outputs.is-release-workflow == 'true' && needs.changed.outputs.result != 'true') && (!failure() && !cancelled()) || success())
+    permissions:
+      contents: read
+      pull-requests: read
+    uses: ./.github/workflows/pre-commit.yaml
+    secrets: inherit
+
   release:
     name: 🚀 Release a New Version
     needs: [info, changed, test, check-dist]
