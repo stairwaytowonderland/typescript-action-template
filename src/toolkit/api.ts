@@ -161,15 +161,6 @@ export interface SearchItem {
  * @param octokit The Octokit client instance used to interact with the GitHub REST API.
  * @returns A promise that resolves to an array of search result items matching the query.
  */
-// export async function searchIssuesAndPullRequests(query: string, octokit: OctokitClient): Promise<SearchItem[]> {
-// 	const items = (await octokit.paginate(octokit.rest.search.issuesAndPullRequests, {
-// 		q: query,
-// 		per_page: 100,
-// 	})) as unknown as SearchItem[]
-
-// 	return items
-// }
-
 export const searchIssuesAndPullRequests = async (query: string, octokit: OctokitClient): Promise<SearchItem[]> =>
 	(await octokit.paginate(octokit.rest.search.issuesAndPullRequests, {
 		q: query,

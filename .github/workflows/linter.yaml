@@ -27,10 +27,10 @@ permissions:
 
 jobs:
   lint:
+    name: Lint Codebase
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: true
-    name: Lint Codebase
     permissions:
       contents: read
       packages: read

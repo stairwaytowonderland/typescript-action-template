@@ -10,8 +10,8 @@ permissions:
 
 jobs:
   dependabot-pr-test:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     name: 🎫 Dependabot PR Test
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository

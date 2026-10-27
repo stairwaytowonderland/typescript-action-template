@@ -132,10 +132,9 @@ _workflow_ to create some additional useful labels.
   [`action.yaml`](./action.yaml), and [`package.json`](./package.json)
   _(**+** [`package-lock.json`](./package-lock.json))_ files, to include project-specific information and instructions.
 
-  > :exclamation: Remember to remove the initial `CHANGELOG.md` if it exists in the template.
+  > :bangbang: Remember to remove the initial `CHANGELOG.md` if it exists in the template.
 
-- [ ] **:six: :trophy: _(BONUS)_ :art: Install `pre-commit`:** Install `pre-commit` locally
-and configure it (using [.pre-commit-config.yaml](./.pre-commit-config.yaml)) to ensure proper formatting, mitigating
+- [ ] **:six: :trophy: _(BONUS)_ :art: Install `pre-commit`** locally to ensure proper formatting, mitigating
 workflow failures.
 _(See [Development Guidelines](https://github.com/stairwaytowonderland/repository-template?tab=contributing-ov-file#development-guidelines) for details)_
 
@@ -156,16 +155,16 @@ follow the below instructions:
 
 > [!IMPORTANT]
 >
-> :classical_building: Make sure to **remove or update** the [`CODEOWNERS`](./.github/CODEOWNERS) file!<br>_(For
+> - :classical_building: Make sure to **remove or update** the [`CODEOWNERS`](./.github/CODEOWNERS) file!<br>_(For
 > details on how to use this file, see
 > [About code owners](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners).)_
 >
-> :books: Make sure to  **update** the [`README.md`](./README.md) and the [`LICENSE`](./LICENSE) files accordingly!
+> - :page_facing_up: Make sure to  **update** the [`README.md`](./README.md) and the [`LICENSE`](./LICENSE) files accordingly!
 >
-> :scroll: Make sure to **remove** the initial `CHANGELOG.md` if one was created, for a clean start.
+> - :scroll: Make sure to **remove** the initial `CHANGELOG.md` if one was created, for a clean start.
 >
-> :wrench: Make sure to [**Update the Action Metadata**](#wrench-update-the-action-metadata)
-([`action.yaml`](#zap-actionyaml) and [`package.json`](#toolbox-packagejson))! :rotating_light:
+> - :wrench: Make sure to [**Update the Action Metadata**](#wrench-update-the-action-metadata)
+([`action.yaml`](#zap-actionyaml) and [`package.json`](#toolbox-packagejson))!
 
 #### :b: _Option "B"_
 
@@ -373,7 +372,7 @@ _inputs_, and _outputs_ for your action.
 
 ### :toolbox: `package.json`
 
-:exclamation: **Make sure to update [`package.json`](./package.json)!** :rotating_light:
+:rotating_light: **Make sure to update [`package.json`](./package.json)!**
 
 The package.json file serves as the manifest and configuration hub for any Node.js project or npm package
 _(See the [**official docs**](https://docs.npmjs.com/cli/v7/configuring-npm/package-json) for more information)_:

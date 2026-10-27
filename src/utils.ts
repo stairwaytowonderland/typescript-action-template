@@ -1,5 +1,7 @@
 /**
  * Utility functions for the GitHub Action.
+ *
+ * @packageDocumentation
  */
 
 /**

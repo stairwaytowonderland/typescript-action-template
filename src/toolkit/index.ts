@@ -1,5 +1,8 @@
 /**
  * Exports all the modules from the toolkit.
+ *
+ * @module #toolkit
+ * @packageDocumentation
  */
 
 export * from './action.js'

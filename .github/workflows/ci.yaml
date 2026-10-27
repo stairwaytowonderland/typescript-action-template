@@ -1,11 +1,11 @@
 # Use PAT instead of GITHUB_TOKEN to cause semantic-release to trigger tag pipeline when tag is created.
 # 'Fine-grained token' repo permissions: Contents
 
-# * 1. Identity
+# 1. Identity
 name: 🔄 CI
-run-name: CI on ${{ github.ref_name }} triggered by @${{ github.actor }}
+# run-name: CI on ${{ github.ref_name }} triggered by @${{ github.actor }}
 
-# * 2. Trigger Events
+# 2. Trigger Events
 on:
   push:
     branches:
@@ -29,15 +29,15 @@ on:
         type: string
         default: '' # checkov:skip=CKV_GHA_7: Release notes required for automated dispatch, which is used for the first tag/release
 
-# * 3. Global Security & Concurrency
+# 3. Global Security & Concurrency
 permissions:
   contents: read
 
-# concurrency:
-#   group: ${{ github.run_id }}
-#   cancel-in-progress: false
+concurrency:
+  group: ${{ github.repository_id }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'push' }}
 
-# * 4. Global Variables & Configuration
+# 4. Global Variables & Configuration
 # env:
 #   DRY_RUN: ${{ format('{0}', inputs.dry-run == 'true') }}
 
@@ -45,35 +45,35 @@ defaults:
   run:
     shell: bash
 
-# * 5. Job Execution
+# 5. Job Execution
 jobs:
-  check-changed:
-    name: 📁 Check Changed Files
-    uses: stairwaytowonderland/.github/.github/workflows/check-changed.yaml@v1
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}
-      cancel-in-progress: ${{ github.event_name == 'push' }}
-    permissions:
-      contents: read
-    with:
-      paths: |
-        **/src/**
-        action.y*ml
-
   info:
-    name: 🪏 Gather Info
-    needs: [check-changed]
-    if: needs.check-changed.outputs.result == 'true'
-    uses: stairwaytowonderland/.github/.github/workflows/ci-meta.yaml@v1
+    name: 🔎 Gather Info
     permissions:
       contents: read
+    uses: stairwaytowonderland/.github/.github/workflows/ci-meta.yaml@v1
     with:
       publish: ${{ (github.event_name == 'workflow_dispatch' && (inputs.tag != '' && inputs.notes-b64 != '')) || startsWith(github.ref, 'refs/tags/') }}
 
-  test:
-    name: 🔔 Run Action Tests
+  changed:
+    name: 📁 Check Changed Files
     needs: [info]
     if: needs.info.outputs.is-release-workflow == 'true'
+    permissions:
+      contents: read
+    uses: stairwaytowonderland/.github/.github/workflows/check-changed.yaml@v1
+    with:
+      paths: |
+        action.y*ml
+        **/src/**
+        !**/src/**/typedoc*.json
+        !**/src/**/badges/*
+        !**/src/**/docs/**/*
+
+  test:
+    name: 🔔 Run Action Tests
+    needs: [info, changed]
+    if: needs.changed.outputs.result == 'true' && needs.info.outputs.is-release-workflow == 'true'
     permissions:
       contents: read
       actions: read
@@ -82,33 +82,38 @@ jobs:
 
   check-dist:
     name: 🏗️ Check Transpiled JavaScript
-    needs: [info]
-    if: needs.info.outputs.is-release-workflow == 'true'
+    needs: [info, changed]
+    if: needs.changed.outputs.result == 'true' && needs.info.outputs.is-release-workflow == 'true'
     uses: ./.github/workflows/check-dist.yaml
 
   release:
     name: 🚀 Release a New Version
-    needs: [info, test, check-dist]
-    uses: stairwaytowonderland/.github/.github/workflows/release.yaml@v1
+    needs: [info, changed, test, check-dist]
+    if: ((needs.info.outputs.is-release-workflow == 'true' && needs.changed.outputs.result != 'true') && (!failure() && !cancelled()) || success()) && ! github.event.repository.is_template
+    # if: (needs.changed.outputs.result != 'true' && (!failure() && !cancelled()) || success()) && ! github.event.repository.is_template
     permissions:
       actions: write
       contents: write
       issues: write
       pull-requests: write
-    with:
-      dispatch-workflow: ${{ needs.info.outputs.has-release-tags != 'true' && 'ci.yaml' || '' }}
+    uses: stairwaytowonderland/.github/.github/workflows/release.yaml@v1
+    # with:
+    #   dispatch-workflow: ${{ needs.info.outputs.has-release-tags != 'true' && 'ci.yaml' || '' }}
     secrets: inherit
 
   publish:
     name: 📦 Publish Release
     needs: [info]
     if: needs.info.outputs.is-publish-workflow == 'true' && ! github.event.repository.is_template
-    uses: stairwaytowonderland/.github/.github/workflows/publish.yaml@v1
+    # if: (!failure() && !cancelled()) && (needs.release.outputs.new-release-published == 'true' && ! github.event.repository.is_template)
     permissions:
       contents: write
+    uses: stairwaytowonderland/.github/.github/workflows/publish.yaml@v1
     with:
       tag: ${{ inputs.tag }}
+      # tag: ${{ needs.release.outputs.new-release-git-tag }}
       notes-b64: ${{ inputs.notes-b64 }}
+      # notes-b64: ${{ needs.release.outputs.new-release-notes-base64 }}
       normalize-majorver: true
     secrets: inherit
 

@@ -22,10 +22,10 @@ permissions:
 
 jobs:
   import-issues:
+    name: Import Issues
     concurrency:
       group: ${{ github.repository_id }}-${{ github.ref }}
       cancel-in-progress: false
-    name: Import Issues
     permissions:
       contents: read
       issues: write

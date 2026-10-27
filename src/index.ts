@@ -2,6 +2,8 @@
  * Barrel file for the GitHub Action.
  *
  * This file simply imports and runs the main logic of the action.
+ *
+ * @packageDocumentation
  */
 
 import run from './main.js'

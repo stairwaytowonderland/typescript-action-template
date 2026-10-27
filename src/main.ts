@@ -1,12 +1,20 @@
-import * as core from '@actions/core'
-import * as github from '@actions/github'
-import { Action } from './action.js'
-
 /**
  * Main entry for the GitHub Action.
  *
  * This file contains the main entry for the GitHub Action,
  * which gathers inputs and invokes the run function.
+ *
+ * @packageDocumentation
+ */
+
+import * as core from '@actions/core'
+import * as github from '@actions/github'
+import { Action } from './action.js'
+
+/**
+ * Runs the main logic for the GitHub Action.
+ *
+ * Gathers inputs and invokes the run function.
  *
  * @returns Resolves when the action is complete.
  */

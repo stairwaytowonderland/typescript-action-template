@@ -24,8 +24,12 @@ on:
   #     - 'CHANGELOG.md'
   #     - 'package.json'
   #     - 'package-lock.json'
-  workflow_call:
   workflow_dispatch:
+  workflow_call:
+    outputs:
+      completed:
+        description: 'Indicates if the workflow completed'
+        value: true
 
 permissions:
   contents: read
@@ -33,10 +37,10 @@ permissions:
 jobs:
   check-dist:
     name: Check dist/
-    uses: stairwaytowonderland/.github/.github/workflows/npm-check-dist.yaml@v1
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: true
+    uses: stairwaytowonderland/.github/.github/workflows/npm-check-dist.yaml@v1
     with:
       build-command: |
         npm run bundle

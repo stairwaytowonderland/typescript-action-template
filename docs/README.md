@@ -6,9 +6,8 @@
 
 ## Modules
 
-- [action](action/README.md)
+- [index](index/README.md)
 - [main](main/README.md)
-- [toolkit/action](toolkit/action/README.md)
-- [toolkit/api](toolkit/api/README.md)
-- [toolkit/utils](toolkit/utils/README.md)
+- [action](action/README.md)
 - [utils](utils/README.md)
+- [#toolkit](toolkit/README.md)

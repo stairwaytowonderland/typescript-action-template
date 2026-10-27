@@ -6,15 +6,19 @@
 
 # action
 
+Action logic
+
+Contains the main logic for the GitHub Action
+
 ## Classes
 
 - [Action](classes/Action.md)
 
 ## Functions
 
-- [delay](functions/delay.md)
 - [getInputs](functions/getInputs.md)
 - [main](functions/main.md)
+- [delay](functions/delay.md)
 
 ## References
 

@@ -8,10 +8,9 @@
 
 > **run**(): `Promise`\<`void`\>
 
-Main entry for the GitHub Action.
+Runs the main logic for the GitHub Action.
 
-This file contains the main entry for the GitHub Action,
-which gathers inputs and invokes the run function.
+Gathers inputs and invokes the run function.
 
 ## Returns
 

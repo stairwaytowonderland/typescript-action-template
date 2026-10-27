@@ -2,9 +2,11 @@
 	"$schema": "https://typedoc.org/schema.json",
 	"logLevel": "Verbose",
 	"readme": "none",
+	"out": "./docs",
 	"disableSources": true,
 	"entryPointStrategy": "expand",
 	"entryPoints": ["src"],
-	"out": "./docs",
-	"exclude": ["**/__tests__/**", "**/__fixtures__/**", "**/__utils__/**", "**/docs/**", "**/*.test.ts", "**/index.ts"]
+	"sort": ["kind", "instance-first", "required-first", "external-last", "alphabetical"],
+	"sortEntryPoints": true,
+	"exclude": ["**/__tests__/**", "**/__fixtures__/**", "**/__utils__/**", "**/docs/**", "**/*.test.ts"]
 }

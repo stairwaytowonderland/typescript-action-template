@@ -9,8 +9,8 @@ permissions:
 
 jobs:
   on-create:
-    if: github.event_name == 'repository_dispatch'
     name: 🚀 On Create
+    if: github.event_name == 'repository_dispatch'
     uses: stairwaytowonderland/.github/.github/workflows/repository-created.yaml@v1
     with:
       repo: ${{ github.event.client_payload.repository.name }}
@@ -19,10 +19,10 @@ jobs:
       sender-id: ${{ github.event.client_payload.sender.id }}
 
   create-labels:
-    if: github.event_name == 'repository_dispatch' || github.event_name == 'workflow_dispatch'
     name: 🏷️ Create Labels
+    if: github.event_name == 'repository_dispatch' || github.event_name == 'workflow_dispatch'
     uses: stairwaytowonderland/label-management/.github/workflows/create-labels.yaml@v1
-    secrets: inherit
     # with:
     #   dry-run: ${{ inputs.dry-run == true }}
     #   update-existing: ${{ inputs.update-existing == true }}
+    secrets: inherit

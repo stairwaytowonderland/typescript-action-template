@@ -1,3 +1,5 @@
+// import { context as githubContext } from '@actions/github'
+// import type { Context } from '@actions/github/lib/context.js'
 import type { WebhookPayload } from '@actions/github/lib/interfaces.js'
 import { mockOctokitInstance } from '../__utils__/octokit.js'
 
@@ -11,7 +13,7 @@ export const getOctokit = () => mockOctokitInstance
  *
  * This context object is mutable and can be modified in tests to simulate different GitHub events and payloads.
  */
-export const context = {
+const mockedContext = {
 	payload: {
 		// issue: { number: 1, html_url: '', body: '' },
 		// pull_request: { number: 2, html_url: '', body: '' },
@@ -37,3 +39,5 @@ export const context = {
 	serverUrl: 'https://github.com',
 	graphqlUrl: 'https://api.github.com/graphql',
 }
+
+export const context = mockedContext

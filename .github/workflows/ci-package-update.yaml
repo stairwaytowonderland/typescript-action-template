@@ -13,23 +13,23 @@ permissions:
 
 jobs:
   package-update:
-    concurrency:
-      group: ${{ github.repository_id }}-${{ github.ref }}
-      cancel-in-progress: false
     name: Update packages
+    # concurrency:
+    #   group: ${{ github.repository_id }}-${{ github.ref }}
+    #   cancel-in-progress: false
     permissions:
       actions: write
       contents: write
       issues: write
       pull-requests: write
     uses: stairwaytowonderland/.github/.github/workflows/ci-package-update.yaml@v1
-    secrets: inherit
     with:
       ignore-events: ''
+    secrets: inherit
 
   # debug:
-  #   needs: [package-update]
   #   name: Debug
+  #   needs: [package-update]
   #   runs-on: ubuntu-latest
   #   steps:
   #     - name: Checkout repository

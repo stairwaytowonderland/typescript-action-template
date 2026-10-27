@@ -21,11 +21,11 @@ permissions:
 
 jobs:
   add-to-project:
+    name: 📌 Add PRs to project
+    runs-on: ubuntu-latest
     concurrency:
       group: add-to-project-${{ github.event.pull_request.number }}
       cancel-in-progress: true
-    name: 📌 Add PRs to project
-    runs-on: ubuntu-latest
     steps:
       - name: Get auth token
         id: auth-token

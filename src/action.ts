@@ -2,6 +2,8 @@
  * Action logic
  *
  * Contains the main logic for the GitHub Action
+ *
+ * @packageDocumentation
  */
 
 import * as core from '@actions/core'

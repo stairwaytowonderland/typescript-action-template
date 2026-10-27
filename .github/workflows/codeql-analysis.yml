@@ -46,12 +46,12 @@ permissions:
 jobs:
   check-changed:
     name: Check Changed Files
-    uses: stairwaytowonderland/.github/.github/workflows/check-changed.yaml@v1
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: true
     permissions:
       contents: read
+    uses: stairwaytowonderland/.github/.github/workflows/check-changed.yaml@v1
     with:
       paths: |
         **/src/**
