@@ -87,7 +87,7 @@ jobs:
     uses: ./.github/workflows/check-dist.yaml
 
   pre-commit:
-    name: 🎨 Run Pre-commit Hooks
+    name: 🎨 Pre-commit Check
     needs: [info, changed]
     if: ((needs.info.outputs.is-release-workflow == 'true' && needs.changed.outputs.result != 'true') && (!failure() && !cancelled()) || success())
     permissions:

@@ -9,6 +9,6 @@ permissions:
 
 jobs:
   stargazers:
-    name: 🌟 On Star
+    name: On Star
     uses: stairwaytowonderland/.github/.github/workflows/stargazers.yaml@v1
     secrets: inherit

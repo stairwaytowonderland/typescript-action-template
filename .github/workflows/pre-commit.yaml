@@ -17,7 +17,7 @@ permissions:
 
 jobs:
   pre-commit:
-    name: Run pre-commit
+    name: Run Pre-commit Hooks
     permissions:
       contents: read
       pull-requests: read

@@ -3,7 +3,7 @@
 	"folders": [
 		{
 			"name": "Root (/.)",
-			"path": "../../typescript-action-template",
+			"path": "../.",
 		},
 		{
 			"name": "Main (src)",
