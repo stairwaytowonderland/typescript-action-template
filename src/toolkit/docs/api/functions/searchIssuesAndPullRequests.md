@@ -8,7 +8,7 @@
 
 > **searchIssuesAndPullRequests**(`query`, `octokit`): `Promise`\<[`SearchItem`](../interfaces/SearchItem.md)[]\>
 
-Defined in: [src/toolkit/api.ts:164](https://github.com/stairwaytowonderland/typescript-action-template/blob/f45eeeb057a3c7ec60800606e54a4ee56aac184d/src/toolkit/api.ts#L164)
+Defined in: [src/toolkit/api.ts:164](https://github.com/stairwaytowonderland/typescript-action-template/blob/813389b017284245d8482ed278c9d4959e516a44/src/toolkit/api.ts#L164)
 
 Searches for issues and pull requests based on the provided query using the GitHub REST API.
 Returns a list of search result items matching the query.
