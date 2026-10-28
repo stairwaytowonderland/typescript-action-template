@@ -8,7 +8,7 @@
 
 > **kebabToCamel**(`str`): `string`
 
-Defined in: [src/toolkit/utils.ts:27](https://github.com/stairwaytowonderland/typescript-action-template/blob/46bb225f258293693f25e124862b1e5274fd8140/src/toolkit/utils.ts#L27)
+Defined in: [src/toolkit/utils.ts:27](https://github.com/stairwaytowonderland/typescript-action-template/blob/f45eeeb057a3c7ec60800606e54a4ee56aac184d/src/toolkit/utils.ts#L27)
 
 Converts a kebab-case string to camelCase.
 

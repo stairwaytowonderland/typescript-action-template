@@ -26,6 +26,14 @@ The GitHub context object.
 
 ***
 
+### actor
+
+> **actor**: `string`
+
+The actor (user) who triggered the GitHub Action.
+
+***
+
 ### repo
 
 > **repo**: [`SimpleRepository`](SimpleRepository.md)

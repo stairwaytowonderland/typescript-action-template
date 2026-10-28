@@ -1,5 +1,6 @@
 {
 	"$schema": "https://typedoc.org/schema.json",
+	"logLevel": "Info",
 	"name": "Toolkit",
 	"readme": "none",
 	"out": "./docs",

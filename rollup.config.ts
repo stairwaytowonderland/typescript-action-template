@@ -76,11 +76,11 @@ export default defineConfig({
 		// preserveModulesRoot: 'src',
 	},
 	// onwarn(warning, warn) {
-	// 	if (warning.code === 'CIRCULAR_DEPENDENCY' && warning.message?.includes(IGNORED_CIRCULAR_DEPENDENCY)) {
-	// 		return;
+	// 	if (warning.code === 'CIRCULAR_DEPENDENCY') {
+	// 		return
 	// 	}
 
-	// 	warn(warning);
+	// 	warn(warning)
 	// },
 	plugins: [
 		nodeResolve({ preferBuiltins: true }),
@@ -98,7 +98,7 @@ export default defineConfig({
 		commonjs(),
 		license({
 			banner: 'Copyright <%= moment().format("YYYY") %> <%= pkg.author %>',
-			thirdParty: { output: 'dist/licenses.txt' }, // codespell:ignore thirdparty
+			thirdParty: { output: 'dist/licenses.txt', allow: allowedSpdxString }, // codespell:ignore thirdparty
 		}),
 	],
 })

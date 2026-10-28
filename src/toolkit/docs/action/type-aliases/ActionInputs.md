@@ -8,6 +8,6 @@
 
 > **ActionInputs** = `NonNullable`\<[`ActionConfig`](../interfaces/ActionConfig.md)\[`"inputs"`\]\>
 
-Defined in: [src/toolkit/action.ts:51](https://github.com/stairwaytowonderland/typescript-action-template/blob/46bb225f258293693f25e124862b1e5274fd8140/src/toolkit/action.ts#L51)
+Defined in: [src/toolkit/action.ts:60](https://github.com/stairwaytowonderland/typescript-action-template/blob/f45eeeb057a3c7ec60800606e54a4ee56aac184d/src/toolkit/action.ts#L60)
 
 Represents the non-nullable action inputs for the GitHub Action.

@@ -35,6 +35,7 @@ describe('Octokit/API', () => {
 
 		action = {
 			dryRun: false,
+			actor: github.context.actor,
 			context: github.context as GitHubContext,
 			repo: github.context.repo as SimpleRepository,
 			inputs: {
@@ -148,6 +149,7 @@ describe('Octokit/API', () => {
 
 			const brokenAction: ActionConfig = {
 				dryRun: false,
+				actor: 'test-actor',
 				context: {} as unknown as GitHubContext, // Standard simple cast permitted for unrelated properties if needed, or map a valid empty context
 				repo: explodingRepo,
 				inputs: {

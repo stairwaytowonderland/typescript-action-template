@@ -39,7 +39,7 @@ jest.unstable_mockModule('../src/action.js', actionRunMock)
 
 // The module being tested should be imported dynamically. This ensures that the
 // mocks are used in place of any actual dependencies.
-const { default: run } = await import('../src/main.js')
+const { run } = await import('../src/main.js')
 
 describe('Main Entry', () => {
 	let exitSpy: jest.SpiedFunction<typeof process.exit>

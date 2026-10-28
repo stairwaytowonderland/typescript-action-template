@@ -21,7 +21,7 @@ import { getInputs } from '../src/action.js'
 import { millisecondsFromInput } from '../src/utils.js'
 
 // Import the mocked core module and wait function from fixtures
-import main, { Action, delay } from '../src/action.js'
+import { Action, delay, main } from '../src/action.js'
 
 describe('Action Logic', () => {
 	let inputs: ActionInputs
@@ -42,6 +42,11 @@ describe('Action Logic', () => {
 	})
 
 	describe('Action', () => {
+		test('initializes with no values', () => {
+			const action = new Action()
+			expect(action.context).toEqual({})
+		})
+
 		test('initializes with default values', () => {
 			const action = new Action(github.context as GitHubContext)
 			expect(action.dryRun).toBe(false)
@@ -75,6 +80,23 @@ describe('Action Logic', () => {
 			}
 
 			expect(core.setOutput).toHaveBeenCalledWith('time', expect.stringMatching(/^\d{2}:\d{2}:\d{2}/))
+		})
+
+		test('run method loads context', async () => {
+			jest.useFakeTimers()
+			const action = new Action(undefined as unknown as GitHubContext, inputs)
+			const ms = millisecondsFromInput(inputs.milliseconds)
+
+			try {
+				const runPromise = action.run()
+				await jest.runAllTimersAsync()
+				jest.advanceTimersByTime(ms)
+				await runPromise
+			} finally {
+				jest.useRealTimers()
+			}
+
+			expect(action.context).toEqual(github.context)
 		})
 	})
 

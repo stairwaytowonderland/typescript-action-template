@@ -68,10 +68,23 @@ export const main = async (action: Action): Promise<string | void> => {
 	return result
 }
 
-// Export the main action function as the default export.
-export default main
+// * STEP 3: Define additional helper functions for the action
 
-// * STEP 3: Define an optional flat configuration interface for persisting action information
+/**
+ * Waits for a number of milliseconds.
+ *
+ * @param milliseconds The number of milliseconds to wait.
+ * @returns Resolves with 'done!' after the wait is over.
+ */
+export function delay(milliseconds: number): Promise<string> {
+	if (isNaN(milliseconds)) return Promise.reject(new Error('milliseconds is not a number'))
+
+	return new Promise((resolve) => {
+		setTimeout(() => resolve('done!'), milliseconds)
+	})
+}
+
+// * STEP 4: Define an optional flat configuration interface for persisting action information
 /**
  * Represents a flat configuration for the GitHub Action.
  *
@@ -80,20 +93,6 @@ export default main
 interface ActionInfo extends ActionInputs {
 	/** The number of milliseconds to wait during the action execution. */
 	milliseconds: number
-}
-
-/**
- * Waits for a number of milliseconds.
- *
- * @param milliseconds The number of milliseconds to wait.
- * @returns Resolves with 'done!' after the wait is over.
- */
-export const delay = (milliseconds: number): Promise<string> => {
-	if (isNaN(milliseconds)) return Promise.reject(new Error('milliseconds is not a number'))
-
-	return new Promise((resolve) => {
-		setTimeout(() => resolve('done!'), milliseconds)
-	})
 }
 
 // * =======================================================
@@ -105,30 +104,36 @@ export const delay = (milliseconds: number): Promise<string> => {
  * Implements the RepoAction interface and provides methods to run the action.
  */
 export class Action implements ActionConfig, ActionRun {
+	/** The GitHub context object. */
+	private _context: GitHubContext
+
 	/** Indicates if the action should run in dry-run mode. */
 	dryRun: boolean
-	/** The GitHub context object. */
-	context: GitHubContext
 	/** The action inputs provided to the GitHub Action. */
 	inputs?: ActionInputs
 
-	run(): Promise<unknown> {
+	/**
+	 * Executes the main logic of the GitHub Action.
+	 *
+	 * Runs the main function of the action with the current configuration.
+	 *
+	 * If the context has not been loaded yet, it will be fetched here.
+	 *
+	 * *One caveat of relying on the run() method to load the context is that any code*
+	 * *executed before the context is loaded may not have access to the proper GitHub context.*
+	 * *In such cases, consider explicitly calling loadContext() with the refresh flag set to true.*
+	 *
+	 * @returns A promise that resolves when the action has completed its run.
+	 */
+	async run(): Promise<unknown> {
+		await this.loadContext()
 		return main(this)
 	}
 
 	/**
-	 * Returns the actor (user) who triggered the GitHub Action.
+	 * Default constructor for the Action class.
 	 */
-	get actor(): string {
-		return this.context.actor
-	}
-
-	/**
-	 * Returns the repository associated with the GitHub Action.
-	 */
-	get repo(): SimpleRepository {
-		return new ActionRepository(this.context.repo) as SimpleRepository
-	}
+	constructor()
 
 	/**
 	 * Creates a new instance of the Action class.
@@ -137,10 +142,51 @@ export class Action implements ActionConfig, ActionRun {
 	 * @param inputs Optional action inputs.
 	 * @param dryRun Optional flag indicating if the action should run in dry-run mode.
 	 */
-	constructor(context: GitHubContext, inputs?: ActionInputs, dryRun?: boolean) {
-		this.context = context
+	constructor(context: GitHubContext, inputs?: ActionInputs, dryRun?: boolean)
+
+	constructor(context?: GitHubContext, inputs?: ActionInputs, dryRun?: boolean) {
+		this._context = context || ({} as GitHubContext)
 		this.inputs = inputs ?? getInputs()
 		this.dryRun = dryRun ?? this.inputs?.dryRun ?? false
 		core.debug(`Initializing Action with dryRun: ${this.dryRun}`)
 	}
+
+	/**
+	 * Retrieves the GitHub context object for the action.
+	 */
+	get context(): GitHubContext {
+		return this._context
+	}
+
+	/**
+	 * Returns the actor (user) who triggered the GitHub Action.
+	 */
+	get actor(): string {
+		return this._context.actor
+	}
+
+	/**
+	 * Returns the repository associated with the GitHub Action.
+	 */
+	get repo(): SimpleRepository {
+		return new ActionRepository(this._context.repo) as SimpleRepository
+	}
+
+	/**
+	 * Loads the GitHub context if it hasn't been loaded yet or if a refresh is requested.
+	 *
+	 * @param refresh Optional flag indicating if the context should be refreshed.
+	 * @returns A promise that resolves with the GitHub context object.
+	 */
+	async loadContext(refresh?: boolean): Promise<GitHubContext> {
+		if (!this._context || Object.keys(this._context).length === 0 || refresh) {
+			console.debug('Fetching GitHub context...')
+			const github = await import('@actions/github')
+			this._context = github.context as GitHubContext
+		}
+		return this._context
+	}
 }
+
+// * Export the main action function as the default export.
+export default main

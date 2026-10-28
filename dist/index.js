@@ -37,6 +37,21 @@ import require$$5$3 from 'string_decoder';
 import 'child_process';
 import 'timers';
 
+function _mergeNamespaces(n, m) {
+    m.forEach(function (e) {
+        e && typeof e !== 'string' && !Array.isArray(e) && Object.keys(e).forEach(function (k) {
+            if (k !== 'default' && !(k in n)) {
+                var d = Object.getOwnPropertyDescriptor(e, k);
+                Object.defineProperty(n, k, d.get ? d : {
+                    enumerable: true,
+                    get: function () { return e[k]; }
+                });
+            }
+        });
+    });
+    return Object.freeze(n);
+}
+
 // We use any as a valid input type
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /**
@@ -28842,7 +28857,7 @@ function error(message, properties = {}) {
     issueCommand('error', toCommandProperties(properties), message instanceof Error ? message.toString() : message);
 }
 
-var github = {};
+var github$1 = {};
 
 var context = {};
 
@@ -33645,9 +33660,9 @@ function requireUtils () {
 var hasRequiredGithub;
 
 function requireGithub () {
-	if (hasRequiredGithub) return github;
+	if (hasRequiredGithub) return github$1;
 	hasRequiredGithub = 1;
-	var __createBinding = (github && github.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+	var __createBinding = (github$1 && github$1.__createBinding) || (Object.create ? (function(o, m, k, k2) {
 	    if (k2 === undefined) k2 = k;
 	    var desc = Object.getOwnPropertyDescriptor(m, k);
 	    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
@@ -33658,12 +33673,12 @@ function requireGithub () {
 	    if (k2 === undefined) k2 = k;
 	    o[k2] = m[k];
 	}));
-	var __setModuleDefault = (github && github.__setModuleDefault) || (Object.create ? (function(o, v) {
+	var __setModuleDefault = (github$1 && github$1.__setModuleDefault) || (Object.create ? (function(o, v) {
 	    Object.defineProperty(o, "default", { enumerable: true, value: v });
 	}) : function(o, v) {
 	    o["default"] = v;
 	});
-	var __importStar = (github && github.__importStar) || (function () {
+	var __importStar = (github$1 && github$1.__importStar) || (function () {
 	    var ownKeys = function(o) {
 	        ownKeys = Object.getOwnPropertyNames || function (o) {
 	            var ar = [];
@@ -33680,12 +33695,12 @@ function requireGithub () {
 	        return result;
 	    };
 	})();
-	Object.defineProperty(github, "__esModule", { value: true });
-	github.context = void 0;
-	github.getOctokit = getOctokit;
+	Object.defineProperty(github$1, "__esModule", { value: true });
+	github$1.context = void 0;
+	github$1.getOctokit = getOctokit;
 	const Context = __importStar(requireContext());
 	const utils_1 = requireUtils();
-	github.context = new Context.Context();
+	github$1.context = new Context.Context();
 	/**
 	 * Returns a hydrated octokit ready to use for GitHub Actions
 	 *
@@ -33697,10 +33712,14 @@ function requireGithub () {
 	    return new GitHubWithPlugins((0, utils_1.getOctokitOptions)(token, options));
 	}
 	
-	return github;
+	return github$1;
 }
 
 var githubExports = requireGithub();
+
+var github = /*#__PURE__*/_mergeNamespaces({
+    __proto__: null
+}, [githubExports]);
 
 /*
  * Utility functions for string manipulation.
@@ -33895,19 +33914,20 @@ const main = async (action) => {
     setOutput('time', new Date().toTimeString());
     return result;
 };
+// * STEP 3: Define additional helper functions for the action
 /**
  * Waits for a number of milliseconds.
  *
  * @param milliseconds The number of milliseconds to wait.
  * @returns Resolves with 'done!' after the wait is over.
  */
-const delay = (milliseconds) => {
+function delay(milliseconds) {
     if (isNaN(milliseconds))
         return Promise.reject(new Error('milliseconds is not a number'));
     return new Promise((resolve) => {
         setTimeout(() => resolve('done!'), milliseconds);
     });
-};
+}
 // * =======================================================
 // * The main action configuration class doesn't need to be modified,
 // * as it's the base configuration class for setting up the GitHub Action.
@@ -33917,39 +33937,66 @@ const delay = (milliseconds) => {
  * Implements the RepoAction interface and provides methods to run the action.
  */
 class Action {
+    /** The GitHub context object. */
+    _context;
     /** Indicates if the action should run in dry-run mode. */
     dryRun;
-    /** The GitHub context object. */
-    context;
     /** The action inputs provided to the GitHub Action. */
     inputs;
-    run() {
+    /**
+     * Executes the main logic of the GitHub Action.
+     *
+     * Runs the main function of the action with the current configuration.
+     *
+     * If the context has not been loaded yet, it will be fetched here.
+     *
+     * *One caveat of relying on the run() method to load the context is that any code*
+     * *executed before the context is loaded may not have access to the proper GitHub context.*
+     * *In such cases, consider explicitly calling loadContext() with the refresh flag set to true.*
+     *
+     * @returns A promise that resolves when the action has completed its run.
+     */
+    async run() {
+        await this.loadContext();
         return main(this);
+    }
+    constructor(context, inputs, dryRun) {
+        this._context = context || {};
+        this.inputs = inputs ?? getInputs();
+        this.dryRun = dryRun ?? this.inputs?.dryRun ?? false;
+        debug(`Initializing Action with dryRun: ${this.dryRun}`);
+    }
+    /**
+     * Retrieves the GitHub context object for the action.
+     */
+    get context() {
+        return this._context;
     }
     /**
      * Returns the actor (user) who triggered the GitHub Action.
      */
     get actor() {
-        return this.context.actor;
+        return this._context.actor;
     }
     /**
      * Returns the repository associated with the GitHub Action.
      */
     get repo() {
-        return new ActionRepository(this.context.repo);
+        return new ActionRepository(this._context.repo);
     }
     /**
-     * Creates a new instance of the Action class.
+     * Loads the GitHub context if it hasn't been loaded yet or if a refresh is requested.
      *
-     * @param context The GitHub context object.
-     * @param inputs Optional action inputs.
-     * @param dryRun Optional flag indicating if the action should run in dry-run mode.
+     * @param refresh Optional flag indicating if the context should be refreshed.
+     * @returns A promise that resolves with the GitHub context object.
      */
-    constructor(context, inputs, dryRun) {
-        this.context = context;
-        this.inputs = inputs ?? getInputs();
-        this.dryRun = dryRun ?? this.inputs?.dryRun ?? false;
-        debug(`Initializing Action with dryRun: ${this.dryRun}`);
+    async loadContext(refresh) {
+        if (!this._context || Object.keys(this._context).length === 0 || refresh) {
+            console.debug('Fetching GitHub context...');
+            const github$1 = await Promise.resolve().then(function () { return github; });
+            this._context = github$1.context;
+        }
+        return this._context;
     }
 }
 

@@ -19,8 +19,14 @@ export interface ActionRun {
 	 *
 	 * @returns A promise that resolves when the action has completed its run.
 	 */
-	// run: () => Promise<unknown>
 	run(): Promise<unknown>
+
+	/**
+	 * Retrieves the GitHub context object for the action.
+	 *
+	 * @returns A promise that resolves with the GitHub context object.
+	 */
+	loadContext(): Promise<Context>
 }
 
 /**
@@ -32,6 +38,9 @@ export interface ActionConfig {
 
 	/** The GitHub context object. */
 	context: Context
+
+	/** The actor (user) who triggered the GitHub Action. */
+	actor: string
 
 	/** The repository associated with the GitHub Action. */
 	repo: SimpleRepository
