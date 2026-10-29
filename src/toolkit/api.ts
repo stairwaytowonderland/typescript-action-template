@@ -6,9 +6,8 @@
  * @packageDocumentation
  */
 
-import * as github from '@actions/github'
 import * as core from '@actions/core'
-import { getOctokit } from '@actions/github'
+import * as github from '@actions/github'
 
 import type { ActionConfig, GitHubContext } from './action.js'
 
@@ -19,7 +18,7 @@ import type { ActionConfig, GitHubContext } from './action.js'
 /**
  * Represents the Octokit client returned by the `getOctokit` function from the `@actions/github` library.
  */
-export type OctokitClient = ReturnType<typeof getOctokit>
+export type OctokitClient = ReturnType<typeof github.getOctokit>
 
 /*
  * Utility functions for GitHub API interactions.
@@ -96,7 +95,7 @@ export async function getAuth(
 		return undefined
 	}
 
-	const octokit: OctokitClient = getOctokit(token)
+	const octokit: OctokitClient = github.getOctokit(token)
 
 	try {
 		const isAuthenticated = await isOctokitAuthenticated(octokit, action, failOnError)

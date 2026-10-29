@@ -28,13 +28,6 @@ export interface ActionRun {
 	 * @returns A promise that resolves when the action has completed its run.
 	 */
 	run(): Promise<unknown>
-
-	/**
-	 * Retrieves the GitHub context object for the action.
-	 *
-	 * @returns A promise that resolves with the GitHub context object.
-	 */
-	loadContext(): Promise<this>
 }
 
 /**

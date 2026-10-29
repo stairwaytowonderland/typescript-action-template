@@ -19,25 +19,15 @@ Implements the RepoAction interface and provides methods to run the action.
 
 ### Constructor
 
-> **new Action**(): `Action`
-
-Default constructor for the Action class.
-
-#### Returns
-
-`Action`
-
-### Constructor
-
-> **new Action**(`context`, `inputs?`, `dryRun?`): `Action`
+> **new Action**(`context?`, `inputs?`, `dryRun?`): `Action`
 
 Creates a new instance of the Action class.
 
 #### Parameters
 
-##### context
+##### context?
 
-`Context`
+`Context` = `githubContext`
 
 The GitHub context object.
 
@@ -73,30 +63,6 @@ Indicates if the action should run in dry-run mode.
 
 [`ActionConfig`](../../toolkit/interfaces/ActionConfig.md).[`dryRun`](../../toolkit/interfaces/ActionConfig.md#dryrun)
 
-***
-
-### inputs?
-
-> `optional` **inputs?**: `object`
-
-The action inputs provided to the GitHub Action.
-
-#### Index Signature
-
-\[`key`: `string`\]: `unknown`
-
-The action input key-value pairs.
-
-#### dryRun
-
-> **dryRun**: `boolean`
-
-Indicates if the action should run in dry-run mode.
-
-#### Implementation of
-
-[`ActionConfig`](../../toolkit/interfaces/ActionConfig.md).[`inputs`](../../toolkit/interfaces/ActionConfig.md#inputs)
-
 ## Accessors
 
 ### context
@@ -116,6 +82,44 @@ The GitHub context object.
 #### Implementation of
 
 [`ActionConfig`](../../toolkit/interfaces/ActionConfig.md).[`context`](../../toolkit/interfaces/ActionConfig.md#context)
+
+***
+
+### inputs
+
+#### Get Signature
+
+> **get** **inputs**(): \{\[`key`: `string`\]: `unknown`; `dryRun`: `boolean`; \} \| `undefined`
+
+Retrieves the action inputs for the GitHub Action.
+
+##### Returns
+
+###### Type Literal
+
+\{\[`key`: `string`\]: `unknown`; `dryRun`: `boolean`; \}
+
+###### Index Signature
+
+\[`key`: `string`\]: `unknown`
+
+The action input key-value pairs.
+
+###### dryRun
+
+> **dryRun**: `boolean`
+
+Indicates if the action should run in dry-run mode.
+
+***
+
+`undefined`
+
+The action inputs provided to the GitHub Action.
+
+#### Implementation of
+
+[`ActionConfig`](../../toolkit/interfaces/ActionConfig.md).[`inputs`](../../toolkit/interfaces/ActionConfig.md#inputs)
 
 ***
 
@@ -167,12 +171,6 @@ Executes the main logic of the GitHub Action.
 
 Runs the main function of the action with the current configuration.
 
-If the context has not been loaded yet, it will be fetched here.
-
-*One caveat of relying on the run() method to load the context is that any code*
-*executed before the context is loaded may not have access to the proper GitHub context.*
-*In such cases, consider explicitly calling loadContext() with the refresh flag set to true.*
-
 #### Returns
 
 `Promise`\<`unknown`\>
@@ -182,29 +180,3 @@ A promise that resolves when the action has completed its run.
 #### Implementation of
 
 [`ActionRun`](../../toolkit/interfaces/ActionRun.md).[`run`](../../toolkit/interfaces/ActionRun.md#run)
-
-***
-
-### loadContext()
-
-> **loadContext**(`refresh?`): `Promise`\<`Action`\>
-
-Loads the GitHub context if it hasn't been loaded yet or if a refresh is requested.
-
-#### Parameters
-
-##### refresh?
-
-`boolean`
-
-Optional flag indicating if the context should be refreshed.
-
-#### Returns
-
-`Promise`\<`Action`\>
-
-A promise that resolves with the GitHub context object.
-
-#### Implementation of
-
-[`ActionRun`](../../toolkit/interfaces/ActionRun.md).[`loadContext`](../../toolkit/interfaces/ActionRun.md#loadcontext)

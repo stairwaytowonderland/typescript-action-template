@@ -6,6 +6,6 @@
 
 # Type Alias: OctokitClient
 
-> **OctokitClient** = `ReturnType`\<*typeof* `getOctokit`\>
+> **OctokitClient** = `ReturnType`\<*typeof* `github.getOctokit`\>
 
 Represents the Octokit client returned by the `getOctokit` function from the `@actions/github` library.

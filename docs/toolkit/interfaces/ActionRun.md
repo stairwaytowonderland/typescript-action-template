@@ -21,17 +21,3 @@ Executes the main logic of the GitHub Action.
 `Promise`\<`unknown`\>
 
 A promise that resolves when the action has completed its run.
-
-***
-
-### loadContext()
-
-> **loadContext**(): `Promise`\<`ActionRun`\>
-
-Retrieves the GitHub context object for the action.
-
-#### Returns
-
-`Promise`\<`ActionRun`\>
-
-A promise that resolves with the GitHub context object.

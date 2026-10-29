@@ -34101,11 +34101,6 @@ Octokit.plugin(restEndpointMethods, paginateRest).defaults(defaults);
 
 const context = new Context();
 
-var github = /*#__PURE__*/Object.freeze({
-    __proto__: null,
-    context: context
-});
-
 /**
  * Utility functions for the toolkit
  *
@@ -34333,31 +34328,31 @@ function delay(milliseconds) {
 class Action {
     /** The GitHub context object. */
     _context;
+    /** The action inputs provided to the GitHub Action. */
+    _inputs;
     /** Indicates if the action should run in dry-run mode. */
     dryRun;
-    /** The action inputs provided to the GitHub Action. */
-    inputs;
     /**
      * Executes the main logic of the GitHub Action.
      *
      * Runs the main function of the action with the current configuration.
      *
-     * If the context has not been loaded yet, it will be fetched here.
-     *
-     * *One caveat of relying on the run() method to load the context is that any code*
-     * *executed before the context is loaded may not have access to the proper GitHub context.*
-     * *In such cases, consider explicitly calling loadContext() with the refresh flag set to true.*
-     *
      * @returns A promise that resolves when the action has completed its run.
      */
     async run() {
-        await this.loadContext();
         return main(this);
     }
-    constructor(context, inputs, dryRun) {
-        this._context = context || {};
-        this.inputs = inputs ?? getInputs();
-        this.dryRun = dryRun ?? this.inputs?.dryRun ?? false;
+    /**
+     * Creates a new instance of the Action class.
+     *
+     * @param context The GitHub context object.
+     * @param inputs Optional action inputs.
+     * @param dryRun Optional flag indicating if the action should run in dry-run mode.
+     */
+    constructor(context$1 = context, inputs, dryRun) {
+        this._context = context$1;
+        this._inputs = inputs ?? getInputs();
+        this.dryRun = dryRun ?? this._inputs?.dryRun ?? false;
         debug(`Initializing Action with dryRun: ${this.dryRun}`);
     }
     /**
@@ -34365,6 +34360,12 @@ class Action {
      */
     get context() {
         return this._context;
+    }
+    /**
+     * Retrieves the action inputs for the GitHub Action.
+     */
+    get inputs() {
+        return this._inputs;
     }
     /**
      * Returns the actor (user) who triggered the GitHub Action.
@@ -34377,20 +34378,6 @@ class Action {
      */
     get repo() {
         return new ActionRepository(this._context.repo);
-    }
-    /**
-     * Loads the GitHub context if it hasn't been loaded yet or if a refresh is requested.
-     *
-     * @param refresh Optional flag indicating if the context should be refreshed.
-     * @returns A promise that resolves with the GitHub context object.
-     */
-    async loadContext(refresh) {
-        if (!this._context || Object.keys(this._context).length === 0 || refresh) {
-            console.debug('Fetching GitHub context...');
-            const github$1 = await Promise.resolve().then(function () { return github; });
-            this._context = github$1.context;
-        }
-        return this;
     }
 }
 

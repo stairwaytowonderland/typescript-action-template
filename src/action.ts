@@ -7,6 +7,7 @@
  */
 
 import * as core from '@actions/core'
+import { context as githubContext } from '@actions/github'
 import type { ActionRun, ActionConfig, ActionInputs, GitHubContext, SimpleRepository } from '#toolkit'
 import { ActionRepository } from '#toolkit'
 import { millisecondsFromInput } from './utils.js'
@@ -106,34 +107,21 @@ interface ActionInfo extends ActionInputs {
 export class Action implements ActionConfig, ActionRun {
 	/** The GitHub context object. */
 	private _context: GitHubContext
-
+	/** The action inputs provided to the GitHub Action. */
+	private _inputs?: ActionInputs
 	/** Indicates if the action should run in dry-run mode. */
 	dryRun: boolean
-	/** The action inputs provided to the GitHub Action. */
-	inputs?: ActionInputs
 
 	/**
 	 * Executes the main logic of the GitHub Action.
 	 *
 	 * Runs the main function of the action with the current configuration.
 	 *
-	 * If the context has not been loaded yet, it will be fetched here.
-	 *
-	 * *One caveat of relying on the run() method to load the context is that any code*
-	 * *executed before the context is loaded may not have access to the proper GitHub context.*
-	 * *In such cases, consider explicitly calling loadContext() with the refresh flag set to true.*
-	 *
 	 * @returns A promise that resolves when the action has completed its run.
 	 */
 	async run(): Promise<unknown> {
-		await this.loadContext()
 		return main(this)
 	}
-
-	/**
-	 * Default constructor for the Action class.
-	 */
-	constructor()
 
 	/**
 	 * Creates a new instance of the Action class.
@@ -142,12 +130,10 @@ export class Action implements ActionConfig, ActionRun {
 	 * @param inputs Optional action inputs.
 	 * @param dryRun Optional flag indicating if the action should run in dry-run mode.
 	 */
-	constructor(context: GitHubContext, inputs?: ActionInputs, dryRun?: boolean)
-
-	constructor(context?: GitHubContext, inputs?: ActionInputs, dryRun?: boolean) {
-		this._context = context || ({} as GitHubContext)
-		this.inputs = inputs ?? getInputs()
-		this.dryRun = dryRun ?? this.inputs?.dryRun ?? false
+	constructor(context: GitHubContext = githubContext, inputs?: ActionInputs, dryRun?: boolean) {
+		this._context = context
+		this._inputs = inputs ?? getInputs()
+		this.dryRun = dryRun ?? this._inputs?.dryRun ?? false
 		core.debug(`Initializing Action with dryRun: ${this.dryRun}`)
 	}
 
@@ -156,6 +142,13 @@ export class Action implements ActionConfig, ActionRun {
 	 */
 	get context(): GitHubContext {
 		return this._context
+	}
+
+	/**
+	 * Retrieves the action inputs for the GitHub Action.
+	 */
+	get inputs(): ActionInputs | undefined {
+		return this._inputs
 	}
 
 	/**
@@ -170,21 +163,6 @@ export class Action implements ActionConfig, ActionRun {
 	 */
 	get repo(): SimpleRepository {
 		return new ActionRepository(this._context.repo) as SimpleRepository
-	}
-
-	/**
-	 * Loads the GitHub context if it hasn't been loaded yet or if a refresh is requested.
-	 *
-	 * @param refresh Optional flag indicating if the context should be refreshed.
-	 * @returns A promise that resolves with the GitHub context object.
-	 */
-	async loadContext(refresh?: boolean): Promise<this> {
-		if (!this._context || Object.keys(this._context).length === 0 || refresh) {
-			console.debug('Fetching GitHub context...')
-			const github = await import('@actions/github')
-			this._context = github.context as GitHubContext
-		}
-		return this
 	}
 }
 

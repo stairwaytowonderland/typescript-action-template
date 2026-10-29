@@ -44,7 +44,7 @@ describe('Action Logic', () => {
 	describe('Action', () => {
 		test('initializes with no values', () => {
 			const action = new Action()
-			expect(action.context).toEqual({})
+			expect(action.context).toEqual(github.context)
 		})
 
 		test('initializes with default values', () => {
@@ -80,23 +80,6 @@ describe('Action Logic', () => {
 			}
 
 			expect(core.setOutput).toHaveBeenCalledWith('time', expect.stringMatching(/^\d{2}:\d{2}:\d{2}/))
-		})
-
-		test('run method loads context', async () => {
-			jest.useFakeTimers()
-			const action = new Action(undefined as unknown as GitHubContext, inputs)
-			const ms = millisecondsFromInput(inputs.milliseconds)
-
-			try {
-				const runPromise = action.run()
-				await jest.runAllTimersAsync()
-				jest.advanceTimersByTime(ms)
-				await runPromise
-			} finally {
-				jest.useRealTimers()
-			}
-
-			expect(action.context).toEqual(github.context)
 		})
 	})
 
