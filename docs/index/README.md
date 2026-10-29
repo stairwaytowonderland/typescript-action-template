@@ -6,7 +6,7 @@
 
 # index
 
-Barrel file for the GitHub Action.
+Barrel file for the GitHub Action
 
 This file simply imports and runs the main logic of the action.
 

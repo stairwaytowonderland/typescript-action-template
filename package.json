@@ -89,7 +89,7 @@
 		"docs:generate:toolkit": "printf '\\033[1;32m%s\\033[0m\n' 'Generating toolkit docs...' && npx typedoc --options src/toolkit/typedoc.json",
 		"docs:clean:toolkit": "printf '\\033[1;32m%s\\033[0m\n' 'Cleaning toolkit docs directory...' && rm -rf src/toolkit/docs",
 		"prepackage": "printf '\\033[1;32m%s\\033[0m\n' 'Packaging project...'",
-		"postpackage": "node -e \"import('./rollup.config.ts').then(m => console.dir(m.default, { depth: null }))\" && npm run docs",
+		"postpackage": "node -e \"import('./rollup.config.ts').then(m => console.dir(m.default, { depth: null }))\"",
 		"pretest": "printf '\\033[1;32m%s\\033[0m\n' 'Running tests with coverage...'",
 		"posttest": "npm run coverage && npm run madge",
 		"preinstall": "npx npm-force-resolutions && printf '\\033[1;32m%s\\033[0m\n' 'Installing dependencies...'",
@@ -98,7 +98,7 @@
 		"setup": "npm install concurrently@$(node -pe \"require('./package.json').devDependencies['concurrently']\")",
 		"reset": "npm run setup && npm run clean && npm install",
 		"prep": "npm run fix && npm run build:compile && npm test && npm run build:package",
-		"all": "npm run reset && npm run fix && npm test && npm run bundle"
+		"all": "npm run reset && npm run fix && npm test && npm run bundle && npm run docs"
 	},
 	"license": "MIT",
 	"dependencies": {
