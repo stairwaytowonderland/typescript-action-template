@@ -6,7 +6,7 @@
 
 # Interface: ActionRun
 
-Defined in: [src/toolkit/action.ts:16](https://github.com/stairwaytowonderland/typescript-action-template/blob/72aaaea92614865dce70adcb2bec396df371203b/src/toolkit/action.ts#L16)
+Defined in: [src/toolkit/action.ts:16](https://github.com/stairwaytowonderland/typescript-action-template/blob/5ad77e18357cd03173c777c66ae4670accd8b6c3/src/toolkit/action.ts#L16)
 
 Represents the configuration for a GitHub Action that includes a `run` method.
 
@@ -16,7 +16,7 @@ Represents the configuration for a GitHub Action that includes a `run` method.
 
 > **loadContext**(): `Promise`\<`ActionRun`\>
 
-Defined in: [src/toolkit/action.ts:29](https://github.com/stairwaytowonderland/typescript-action-template/blob/72aaaea92614865dce70adcb2bec396df371203b/src/toolkit/action.ts#L29)
+Defined in: [src/toolkit/action.ts:29](https://github.com/stairwaytowonderland/typescript-action-template/blob/5ad77e18357cd03173c777c66ae4670accd8b6c3/src/toolkit/action.ts#L29)
 
 Retrieves the GitHub context object for the action.
 
@@ -32,7 +32,7 @@ A promise that resolves with the GitHub context object.
 
 > **run**(): `Promise`\<`unknown`\>
 
-Defined in: [src/toolkit/action.ts:22](https://github.com/stairwaytowonderland/typescript-action-template/blob/72aaaea92614865dce70adcb2bec396df371203b/src/toolkit/action.ts#L22)
+Defined in: [src/toolkit/action.ts:22](https://github.com/stairwaytowonderland/typescript-action-template/blob/5ad77e18357cd03173c777c66ae4670accd8b6c3/src/toolkit/action.ts#L22)
 
 Executes the main logic of the GitHub Action.
 
