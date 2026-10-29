@@ -1,5 +1,7 @@
-/*
- * Utility functions for string manipulation.
+/**
+ * Utility functions for the toolkit
+ *
+ * @packageDocumentation
  */
 
 /**

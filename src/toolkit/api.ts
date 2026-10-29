@@ -1,3 +1,11 @@
+/**
+ * GitHub API related helper functions and types for the toolkit.
+ *
+ * Provides helper functions and types to interact with the GitHub API.
+ *
+ * @packageDocumentation
+ */
+
 import * as github from '@actions/github'
 import * as core from '@actions/core'
 import { getOctokit } from '@actions/github'

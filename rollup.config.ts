@@ -75,13 +75,16 @@ export default defineConfig({
 		 */
 		// preserveModulesRoot: 'src',
 	},
-	// onwarn(warning, warn) {
-	// 	if (warning.code === 'CIRCULAR_DEPENDENCY') {
-	// 		return
-	// 	}
+	onwarn(warning, warn) {
+		switch (warning.code) {
+			case 'CIRCULAR_DEPENDENCY':
+				return
+			case 'THIS_IS_UNDEFINED':
+				return
+		}
 
-	// 	warn(warning)
-	// },
+		warn(warning)
+	},
 	plugins: [
 		nodeResolve({ preferBuiltins: true }),
 		typescript({

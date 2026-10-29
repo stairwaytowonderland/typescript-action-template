@@ -6,6 +6,8 @@
 
 # utils
 
+Utility functions for the toolkit
+
 ## Functions
 
 - [kebabToCamel](functions/kebabToCamel.md)

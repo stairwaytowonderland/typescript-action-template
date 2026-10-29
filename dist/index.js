@@ -34106,8 +34106,10 @@ var github = /*#__PURE__*/Object.freeze({
     context: context
 });
 
-/*
- * Utility functions for string manipulation.
+/**
+ * Utility functions for the toolkit
+ *
+ * @packageDocumentation
  */
 /**
  * Normalizes an optional string value.
@@ -34120,6 +34122,13 @@ var github = /*#__PURE__*/Object.freeze({
  */
 const normalizeOptional = (value) => value || undefined;
 
+/**
+ * GitHub Action related classes, helper functions and types for the toolkit.
+ *
+ * Provides types and classes to manage GitHub Action configuration and repository information.
+ *
+ * @packageDocumentation
+ */
 /**
  * Provides methods to parse and normalize repository information from various sources.
  */

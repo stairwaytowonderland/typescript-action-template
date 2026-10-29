@@ -1,3 +1,11 @@
+/**
+ * GitHub Action related classes, helper functions and types for the toolkit.
+ *
+ * Provides types and classes to manage GitHub Action configuration and repository information.
+ *
+ * @packageDocumentation
+ */
+
 import type { context as Context } from '@actions/github'
 import { normalizeOptional } from './utils.js'
 

@@ -8,7 +8,7 @@
 
 > **normalizeOptional**(`value?`): `string` \| `undefined`
 
-Defined in: [src/toolkit/utils.ts:14](https://github.com/stairwaytowonderland/typescript-action-template/blob/5ad77e18357cd03173c777c66ae4670accd8b6c3/src/toolkit/utils.ts#L14)
+Defined in: [src/toolkit/utils.ts:16](https://github.com/stairwaytowonderland/typescript-action-template/blob/5cff6cc247ebc89e56cfb10f2e7804443a7f0b63/src/toolkit/utils.ts#L16)
 
 Normalizes an optional string value.
 

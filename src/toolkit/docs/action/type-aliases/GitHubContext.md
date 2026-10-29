@@ -8,6 +8,6 @@
 
 > **GitHubContext** = *typeof* `Context`
 
-Defined in: [src/toolkit/action.ts:11](https://github.com/stairwaytowonderland/typescript-action-template/blob/5ad77e18357cd03173c777c66ae4670accd8b6c3/src/toolkit/action.ts#L11)
+Defined in: [src/toolkit/action.ts:19](https://github.com/stairwaytowonderland/typescript-action-template/blob/5cff6cc247ebc89e56cfb10f2e7804443a7f0b63/src/toolkit/action.ts#L19)
 
 Represents the GitHub context object provided by the `@actions/github` library.

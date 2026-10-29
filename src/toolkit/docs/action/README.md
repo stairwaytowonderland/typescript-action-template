@@ -6,6 +6,10 @@
 
 # action
 
+GitHub Action related classes, helper functions and types for the toolkit.
+
+Provides types and classes to manage GitHub Action configuration and repository information.
+
 ## Classes
 
 - [ActionRepository](classes/ActionRepository.md)

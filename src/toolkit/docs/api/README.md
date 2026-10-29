@@ -6,6 +6,10 @@
 
 # api
 
+GitHub API related helper functions and types for the toolkit.
+
+Provides helper functions and types to interact with the GitHub API.
+
 ## Interfaces
 
 - [SearchItem](interfaces/SearchItem.md)
