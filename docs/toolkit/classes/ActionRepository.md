@@ -145,7 +145,7 @@ Updates the repository owner and name based on the provided GitHub Actions conte
 
 ##### context
 
-[`GitHubContext`](../interfaces/GitHubContext.md)
+`Context`
 
 The GitHub Actions context containing repository information.
 

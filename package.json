@@ -105,6 +105,7 @@
 		"@actions/core": "^3.0.0"
 	},
 	"devDependencies": {
+		"@actions/github": "^9.0.0",
 		"@emnapi/runtime": "^1.11.3",
 		"@emnapi/wasi-threads": "^2.0.1",
 		"@eslint/compat": "^2.0.2",
@@ -113,6 +114,7 @@
 		"@github/local-action": "^7.0.1",
 		"@github/prettier-config": "^0.0.6",
 		"@jest/globals": "^30.2.0",
+		"@rollup/plugin-alias": "^6.0.1",
 		"@rollup/plugin-commonjs": "^29.0.0",
 		"@rollup/plugin-node-resolve": "^16.0.3",
 		"@rollup/plugin-typescript": "^12.3.0",
@@ -145,20 +147,6 @@
 	},
 	"resolutions": {
 		"ip-address": "10.31.0"
-	},
-	"overrides": {
-		"node-gyp": {
-			"undici": ">=6.29.1 <7.0.0"
-		},
-		"@actions/github": {
-			"undici": ">=6.29.1 <7.0.0"
-		},
-		"@actions/http-client": {
-			"undici": ">=6.29.1 <7.0.0"
-		},
-		"@semantic-release/github": {
-			"undici": ">=7.29.0 <8.0.0"
-		}
 	},
 	"optionalDependencies": {
 		"@rollup/rollup-linux-x64-gnu": "*"

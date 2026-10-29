@@ -1,4 +1,4 @@
-import type { Context } from '@actions/github/lib/context.js'
+import type { context as Context } from '@actions/github'
 import { normalizeOptional } from './utils.js'
 
 /*
@@ -8,7 +8,7 @@ import { normalizeOptional } from './utils.js'
 /**
  * Represents the GitHub context object provided by the `@actions/github` library.
  */
-export type { Context as GitHubContext }
+export type GitHubContext = typeof Context
 
 /**
  * Represents the configuration for a GitHub Action that includes a `run` method.
@@ -26,7 +26,7 @@ export interface ActionRun {
 	 *
 	 * @returns A promise that resolves with the GitHub context object.
 	 */
-	loadContext(): Promise<Context>
+	loadContext(): Promise<this>
 }
 
 /**
@@ -37,7 +37,7 @@ export interface ActionConfig {
 	dryRun: boolean
 
 	/** The GitHub context object. */
-	context: Context
+	context: GitHubContext
 
 	/** The actor (user) who triggered the GitHub Action. */
 	actor: string
@@ -107,7 +107,7 @@ export const getSafeInputs = <K extends keyof ActionInputs>(
  * @see https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype
  * @see https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-1.html#mapped-types
  */
-export interface SimpleRepository extends Partial<Context['repo']> {
+export interface SimpleRepository extends Partial<GitHubContext['repo']> {
 	/** The full repository name in the format "owner/repo". */
 	fullName?: string
 }
@@ -251,7 +251,7 @@ export class ActionRepository implements SimpleRepository {
 	 *
 	 * @param context The GitHub Actions context containing repository information.
 	 */
-	fromContextRepo(context: Context): this {
+	fromContextRepo(context: GitHubContext): this {
 		this.owner = context.repo.owner
 		this.repo = context.repo.repo
 

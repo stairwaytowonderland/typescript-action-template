@@ -37,7 +37,7 @@ Creates a new instance of the Action class.
 
 ##### context
 
-[`GitHubContext`](../../toolkit/interfaces/GitHubContext.md)
+`Context`
 
 The GitHub context object.
 
@@ -103,13 +103,13 @@ Indicates if the action should run in dry-run mode.
 
 #### Get Signature
 
-> **get** **context**(): [`GitHubContext`](../../toolkit/interfaces/GitHubContext.md)
+> **get** **context**(): `Context`
 
 Retrieves the GitHub context object for the action.
 
 ##### Returns
 
-[`GitHubContext`](../../toolkit/interfaces/GitHubContext.md)
+`Context`
 
 The GitHub context object.
 
@@ -187,7 +187,7 @@ A promise that resolves when the action has completed its run.
 
 ### loadContext()
 
-> **loadContext**(`refresh?`): `Promise`\<[`GitHubContext`](../../toolkit/interfaces/GitHubContext.md)\>
+> **loadContext**(`refresh?`): `Promise`\<`Action`\>
 
 Loads the GitHub context if it hasn't been loaded yet or if a refresh is requested.
 
@@ -201,7 +201,7 @@ Optional flag indicating if the context should be refreshed.
 
 #### Returns
 
-`Promise`\<[`GitHubContext`](../../toolkit/interfaces/GitHubContext.md)\>
+`Promise`\<`Action`\>
 
 A promise that resolves with the GitHub context object.
 

@@ -20,7 +20,7 @@ Indicates if the action should run in dry-run mode.
 
 ### context
 
-> **context**: [`GitHubContext`](GitHubContext.md)
+> **context**: `Context`
 
 The GitHub context object.
 

@@ -14,7 +14,6 @@ Exports all the modules from the toolkit.
 
 ## Interfaces
 
-- [GitHubContext](interfaces/GitHubContext.md)
 - [ActionRun](interfaces/ActionRun.md)
 - [ActionConfig](interfaces/ActionConfig.md)
 - [SimpleRepository](interfaces/SimpleRepository.md)
@@ -22,6 +21,7 @@ Exports all the modules from the toolkit.
 
 ## Type Aliases
 
+- [GitHubContext](type-aliases/GitHubContext.md)
 - [ActionInputs](type-aliases/ActionInputs.md)
 - [OctokitClient](type-aliases/OctokitClient.md)
 

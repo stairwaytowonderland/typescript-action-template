@@ -14,12 +14,12 @@
 
 - [ActionConfig](interfaces/ActionConfig.md)
 - [ActionRun](interfaces/ActionRun.md)
-- [GitHubContext](interfaces/GitHubContext.md)
 - [SimpleRepository](interfaces/SimpleRepository.md)
 
 ## Type Aliases
 
 - [ActionInputs](type-aliases/ActionInputs.md)
+- [GitHubContext](type-aliases/GitHubContext.md)
 
 ## Functions
 

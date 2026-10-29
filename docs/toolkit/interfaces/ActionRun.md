@@ -26,12 +26,12 @@ A promise that resolves when the action has completed its run.
 
 ### loadContext()
 
-> **loadContext**(): `Promise`\<[`GitHubContext`](GitHubContext.md)\>
+> **loadContext**(): `Promise`\<`ActionRun`\>
 
 Retrieves the GitHub context object for the action.
 
 #### Returns
 
-`Promise`\<[`GitHubContext`](GitHubContext.md)\>
+`Promise`\<`ActionRun`\>
 
 A promise that resolves with the GitHub context object.

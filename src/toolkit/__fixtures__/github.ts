@@ -1,12 +1,15 @@
-// import { context as githubContext } from '@actions/github'
-// import type { Context } from '@actions/github/lib/context.js'
-import type { WebhookPayload } from '@actions/github/lib/interfaces.js'
+import type { context as Context } from '@actions/github'
 import { mockOctokitInstance } from '../__utils__/octokit.js'
 
 /**
  * Mocked GitHub Octokit instance for testing purposes.
  */
 export const getOctokit = () => mockOctokitInstance
+
+/**
+ * Represents the payload of a GitHub webhook event.
+ */
+type WebhookPayload = (typeof Context)['payload']
 
 /**
  * Mocked GitHub context for testing purposes.

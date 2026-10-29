@@ -14,7 +14,7 @@ Get the pull request object from the GitHub context payload.
 
 ### context?
 
-[`GitHubContext`](../interfaces/GitHubContext.md) = `github.context`
+`Context` = `github.context`
 
 The GitHub context object containing the payload for the current action.
 

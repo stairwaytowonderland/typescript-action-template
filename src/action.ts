@@ -178,13 +178,13 @@ export class Action implements ActionConfig, ActionRun {
 	 * @param refresh Optional flag indicating if the context should be refreshed.
 	 * @returns A promise that resolves with the GitHub context object.
 	 */
-	async loadContext(refresh?: boolean): Promise<GitHubContext> {
+	async loadContext(refresh?: boolean): Promise<this> {
 		if (!this._context || Object.keys(this._context).length === 0 || refresh) {
 			console.debug('Fetching GitHub context...')
 			const github = await import('@actions/github')
 			this._context = github.context as GitHubContext
 		}
-		return this._context
+		return this
 	}
 }
 

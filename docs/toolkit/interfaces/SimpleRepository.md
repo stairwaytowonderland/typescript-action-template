@@ -17,7 +17,7 @@ Extends the Partial type to allow optional repository properties.
 
 ## Extends
 
-- `Partial`\<[`GitHubContext`](GitHubContext.md)\[`"repo"`\]\>
+- `Partial`\<[`GitHubContext`](../type-aliases/GitHubContext.md)\[`"repo"`\]\>
 
 ## Properties
 
