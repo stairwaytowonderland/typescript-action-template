@@ -31,12 +31,12 @@
 		"format-write": "npm run fix:format",
 		"format-check": "npm run check:format",
 		"install:safe": "npm install --legacy-peer-deps --node-gyp=./node_modules/.bin/node-gyp",
-		"prebuild": "npm run fix && echo && printf '\\033[1;32m%s\\033[0m\n' 'Building project...'",
+		"prebuild": "printf '\\033[1;32m%s\\033[0m\n' 'Building project...'",
 		"build": "npm run build:compile",
 		"build:compile": "npm run compile",
 		"build:package": "npm run package",
-		"bundle": "npm run build && npm run build:package",
-		"precompile": "npm run check && echo && printf '\\033[1;32m%s\\033[0m\n' 'Running TypeScript compilation...'",
+		"bundle": "npm run check && npm run build && npm run build:package",
+		"precompile": "printf '\\033[1;32m%s\\033[0m\n' 'Running TypeScript compilation...'",
 		"compile": "npm run command:jq:check && tsc --showConfig | jq -c '.' || tsc --showConfig",
 		"precheck": "printf '\\033[1;32m%s\\033[0m\n' 'Running checks...'",
 		"check": "concurrently -n check: -g npm:check:*",
@@ -54,7 +54,7 @@
 		"package": "npm run package:rollup",
 		"package:rollup": "rimraf ./dist && rollup --config rollup.config.ts --configPlugin typescript",
 		"package:watch": "printf '\\033[1;32m%s\\033[0m\n' 'Packaging project in watch mode...' && npm run package:rollup -- --watch",
-		"preclean": "printf '\\033[1;32m%s\\033[0m\n' 'Purging outputs...'",
+		"preclean": "printf '\\033[1;32m%s\\033[0m\n' 'Purging outputs and caches...'",
 		"clean": "concurrently -n clean: -g npm:clean:*",
 		"clean:modules": "printf '\\033[1;32m%s\\033[0m\n' 'Cleaning node_modules and package-lock.json...' && rm -rf node_modules package-lock.json",
 		"clean:cache": "printf '\\033[1;32m%s\\033[0m\n' 'Cleaning npm cache...' && npm cache clean --force",
@@ -98,7 +98,7 @@
 		"setup": "npm install concurrently@$(node -pe \"require('./package.json').devDependencies['concurrently']\")",
 		"reset": "npm run setup && npm run clean && npm install",
 		"prep": "npm run fix && npm run build:compile && npm test && npm run build:package",
-		"all": "npm run reset && npm test && npm run bundle"
+		"all": "npm run reset && npm run fix && npm test && npm run bundle"
 	},
 	"license": "MIT",
 	"dependencies": {
@@ -147,6 +147,20 @@
 	},
 	"resolutions": {
 		"ip-address": "10.31.0"
+	},
+	"overrides": {
+		"node-gyp": {
+			"undici": ">=6.29.1 <7.0.0"
+		},
+		"@actions/github": {
+			"undici": ">=6.29.1 <7.0.0"
+		},
+		"@actions/http-client": {
+			"undici": ">=6.29.1 <7.0.0"
+		},
+		"@semantic-release/github": {
+			"undici": ">=7.29.0 <8.0.0"
+		}
 	},
 	"optionalDependencies": {
 		"@rollup/rollup-linux-x64-gnu": "*"
