@@ -37,6 +37,7 @@ jobs:
       statuses: write
     uses: stairwaytowonderland/.github/.github/workflows/linter.yaml@v1
     with:
+      superlinter-version: 'v7.1.0'
       superlinter-validate-editorconfig: false
       superlinter-filter-regex-exclude: '(docs/.*\..*$|dist/.*|.*\.csv$)'
       additional-vars: |
