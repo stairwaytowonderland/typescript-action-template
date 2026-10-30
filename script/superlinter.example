@@ -58,9 +58,6 @@ export \
 # Uncomment the following line to disable TypeScript Prettier validation.
 # export VALIDATE_TYPESCRIPT_PRETTIER=false
 
-# Ignore the "workflow_ref" property not being defined in GitHub Actions (when running superlinter locally certain job payload don't exist).
-export GITHUB_ACTIONS_COMMAND_ARGS="-ignore 'property \"workflow_ref\" is not defined'"
-
 superlinter() {
 	set -x
 
@@ -97,7 +94,6 @@ superlinter() {
 		-e "LOG_LEVEL" \
 		-e "DEFAULT_WORKSPACE" \
 		-e RUN_LOCAL=true \
-		-e GITHUB_ACTIONS_COMMAND_ARGS \
 		-v "$project_dir":"${DEFAULT_WORKSPACE:-/tmp/lint}" \
 		"$SUPER_LINTER_IMAGE":"${SUPER_LINTER_VERSION:-latest}"
 }
