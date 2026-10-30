@@ -21,7 +21,13 @@ Implements the RepoAction interface and provides methods to run the action.
 
 ### Constructor
 
-> **new Action**(`context?`, `inputs?`, `dryRun?`): `Action`
+```ts
+new Action(
+   context?,
+   inputs?,
+   dryRun?
+): Action;
+```
 
 Defined in: [src/action.ts:156](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/action.ts#L156)
 
@@ -29,23 +35,11 @@ Creates a new instance of the Action class.
 
 #### Parameters
 
-##### context?
-
-`Context` = `githubContext`
-
-The GitHub context object.
-
-##### inputs?
-
-[`Inputs`](../type-aliases/Inputs.md)
-
-Optional action inputs.
-
-##### dryRun?
-
-`boolean`
-
-Optional flag indicating if the action should run in dry-run mode.
+| Parameter | Type | Default value | Description |
+| ------ | ------ | ------ | ------ |
+| `context?` | `Context` | `githubContext` | The GitHub context object. |
+| `inputs?` | [`Inputs`](../type-aliases/Inputs.md) | `undefined` | Optional action inputs. |
+| `dryRun?` | `boolean` | `undefined` | Optional flag indicating if the action should run in dry-run mode. |
 
 #### Returns
 
@@ -55,7 +49,9 @@ Optional flag indicating if the action should run in dry-run mode.
 
 ### context
 
-> **context**: `Context`
+```ts
+context: Context;
+```
 
 Defined in: [src/action.ts:132](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/action.ts#L132)
 
@@ -69,7 +65,9 @@ The GitHub context object.
 
 ### inputs?
 
-> `optional` **inputs?**: [`Inputs`](../type-aliases/Inputs.md)
+```ts
+inputs?: Inputs;
+```
 
 Defined in: [src/action.ts:134](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/action.ts#L134)
 
@@ -83,7 +81,9 @@ The action inputs provided to the GitHub Action.
 
 ### dryRun
 
-> **dryRun**: `boolean`
+```ts
+dryRun: boolean;
+```
 
 Defined in: [src/action.ts:136](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/action.ts#L136)
 
@@ -99,7 +99,9 @@ Indicates if the action should run in dry-run mode.
 
 #### Get Signature
 
-> **get** **safeInputs**(): `ReturnType`\<*typeof* [`getSafeInputs`](../../toolkit/functions/getSafeInputs.md)\>
+```ts
+get safeInputs(): ReturnType<typeof getSafeInputs>;
+```
 
 Defined in: [src/action.ts:168](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/action.ts#L168)
 
@@ -123,7 +125,9 @@ The action inputs with sensitive keys removed.
 
 #### Get Signature
 
-> **get** **actor**(): `string`
+```ts
+get actor(): string;
+```
 
 Defined in: [src/action.ts:175](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/action.ts#L175)
 
@@ -145,7 +149,9 @@ The actor (user) who triggered the GitHub Action.
 
 #### Get Signature
 
-> **get** **repo**(): [`SimpleRepository`](../../toolkit/interfaces/SimpleRepository.md)
+```ts
+get repo(): SimpleRepository;
+```
 
 Defined in: [src/action.ts:182](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/action.ts#L182)
 
@@ -165,7 +171,9 @@ The repository associated with the GitHub Action.
 
 ### run()
 
-> **run**(): `Promise`\<`unknown`\>
+```ts
+run(): Promise<unknown>;
+```
 
 Defined in: [src/action.ts:145](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/action.ts#L145)
 

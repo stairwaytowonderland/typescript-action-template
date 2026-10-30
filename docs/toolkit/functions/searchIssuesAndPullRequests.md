@@ -6,7 +6,9 @@
 
 # Function: searchIssuesAndPullRequests()
 
-> **searchIssuesAndPullRequests**(`query`, `octokit`): `Promise`\<[`SearchItem`](../interfaces/SearchItem.md)[]\>
+```ts
+function searchIssuesAndPullRequests(query, octokit): Promise<SearchItem[]>;
+```
 
 Defined in: [src/toolkit/api.ts:143](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/api.ts#L143)
 
@@ -15,17 +17,10 @@ Returns a list of search result items matching the query.
 
 ## Parameters
 
-### query
-
-`string`
-
-The search query string used to find issues and pull requests.
-
-### octokit
-
-`Octokit` & `Api` & `object`
-
-The Octokit client instance used to interact with the GitHub REST API.
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `query` | `string` | The search query string used to find issues and pull requests. |
+| `octokit` | `Octokit` & `Api` & \{ `paginate`: `PaginateInterface`; \} | The Octokit client instance used to interact with the GitHub REST API. |
 
 ## Returns
 

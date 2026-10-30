@@ -18,7 +18,9 @@ Provides methods to parse and normalize repository information from various sour
 
 ### Constructor
 
-> **new ActionRepository**(): `ActionRepository`
+```ts
+new ActionRepository(): ActionRepository;
+```
 
 Defined in: [src/toolkit/action.ts:169](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L169)
 
@@ -30,7 +32,9 @@ Initializes an ActionRepository instance with default values.
 
 ### Constructor
 
-> **new ActionRepository**(`name?`, `owner?`): `ActionRepository`
+```ts
+new ActionRepository(name?, owner?): ActionRepository;
+```
 
 Defined in: [src/toolkit/action.ts:177](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L177)
 
@@ -38,17 +42,10 @@ Initializes an ActionRepository instance with the specified repository name and 
 
 #### Parameters
 
-##### name?
-
-`string`
-
-The repository name or a SimpleRepository object.
-
-##### owner?
-
-`string`
-
-The repository owner (optional if name contains a slash).
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `name?` | `string` | The repository name or a SimpleRepository object. |
+| `owner?` | `string` | The repository owner (optional if name contains a slash). |
 
 #### Returns
 
@@ -56,7 +53,9 @@ The repository owner (optional if name contains a slash).
 
 ### Constructor
 
-> **new ActionRepository**(`repo`): `ActionRepository`
+```ts
+new ActionRepository(repo): ActionRepository;
+```
 
 Defined in: [src/toolkit/action.ts:184](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L184)
 
@@ -64,11 +63,9 @@ Initializes an ActionRepository instance from an existing SimpleRepository objec
 
 #### Parameters
 
-##### repo
-
-[`SimpleRepository`](../interfaces/SimpleRepository.md)
-
-The SimpleRepository object containing repository information.
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `repo` | [`SimpleRepository`](../interfaces/SimpleRepository.md) | The SimpleRepository object containing repository information. |
 
 #### Returns
 
@@ -78,7 +75,9 @@ The SimpleRepository object containing repository information.
 
 ### repo?
 
-> `optional` **repo?**: `string`
+```ts
+repo?: string;
+```
 
 Defined in: [src/toolkit/action.ts:153](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L153)
 
@@ -92,7 +91,9 @@ The repository name.
 
 ### owner?
 
-> `optional` **owner?**: `string`
+```ts
+owner?: string;
+```
 
 Defined in: [src/toolkit/action.ts:156](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L156)
 
@@ -108,7 +109,9 @@ The repository owner.
 
 #### Get Signature
 
-> **get** **fullName**(): `string` \| `undefined`
+```ts
+get fullName(): string | undefined;
+```
 
 Defined in: [src/toolkit/action.ts:162](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L162)
 
@@ -129,7 +132,9 @@ The full repository name in the format "owner/repo".
 
 ### fromApiUrl()
 
-> **fromApiUrl**(`apiUrl`): `this`
+```ts
+fromApiUrl(apiUrl): this;
+```
 
 Defined in: [src/toolkit/action.ts:271](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L271)
 
@@ -137,9 +142,9 @@ Parses the repository owner and name from a GitHub API URL and updates the insta
 
 #### Parameters
 
-##### apiUrl
-
-`string`
+| Parameter | Type |
+| ------ | ------ |
+| `apiUrl` | `string` |
 
 #### Returns
 
@@ -153,7 +158,9 @@ https://api.github.com/repos/owner/repo
 
 ### fromContextRepo()
 
-> **fromContextRepo**(`context`): `this`
+```ts
+fromContextRepo(context): this;
+```
 
 Defined in: [src/toolkit/action.ts:287](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L287)
 
@@ -161,11 +168,9 @@ Updates the repository owner and name based on the provided GitHub Actions conte
 
 #### Parameters
 
-##### context
-
-`Context`
-
-The GitHub Actions context containing repository information.
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `context` | `Context` | The GitHub Actions context containing repository information. |
 
 #### Returns
 

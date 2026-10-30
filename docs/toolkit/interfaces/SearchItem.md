@@ -14,7 +14,9 @@ Represents a single search result item from the GitHub API.
 
 ### node\_id
 
-> **node\_id**: `string`
+```ts
+node_id: string;
+```
 
 Defined in: [src/toolkit/api.ts:115](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/api.ts#L115)
 
@@ -24,7 +26,9 @@ The unique node ID of the search result item.
 
 ### number
 
-> **number**: `number`
+```ts
+number: number;
+```
 
 Defined in: [src/toolkit/api.ts:117](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/api.ts#L117)
 
@@ -34,7 +38,11 @@ The issue or pull request number.
 
 ### labels
 
-> **labels**: `object`[]
+```ts
+labels: {
+  name: string;
+}[];
+```
 
 Defined in: [src/toolkit/api.ts:119](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/api.ts#L119)
 
@@ -42,7 +50,9 @@ The labels associated with the issue or pull request.
 
 #### name
 
-> **name**: `string`
+```ts
+name: string;
+```
 
 The name of the label.
 
@@ -50,7 +60,9 @@ The name of the label.
 
 ### title
 
-> **title**: `string`
+```ts
+title: string;
+```
 
 Defined in: [src/toolkit/api.ts:124](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/api.ts#L124)
 
@@ -60,7 +72,9 @@ The title of the issue or pull request.
 
 ### html\_url
 
-> **html\_url**: `string`
+```ts
+html_url: string;
+```
 
 Defined in: [src/toolkit/api.ts:126](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/api.ts#L126)
 
@@ -70,7 +84,9 @@ The URL of the issue or pull request on GitHub.
 
 ### repository\_url
 
-> **repository\_url**: `string`
+```ts
+repository_url: string;
+```
 
 Defined in: [src/toolkit/api.ts:128](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/api.ts#L128)
 
@@ -80,7 +96,9 @@ The URL of the repository containing the issue or pull request.
 
 ### created\_at
 
-> **created\_at**: `Date`
+```ts
+created_at: Date;
+```
 
 Defined in: [src/toolkit/api.ts:130](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/api.ts#L130)
 

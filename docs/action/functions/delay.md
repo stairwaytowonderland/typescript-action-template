@@ -6,7 +6,9 @@
 
 # Function: delay()
 
-> **delay**(`milliseconds`): `Promise`\<`string`\>
+```ts
+function delay(milliseconds): Promise<string>;
+```
 
 Defined in: [src/action.ts:102](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/action.ts#L102)
 
@@ -14,11 +16,9 @@ Waits for a number of milliseconds.
 
 ## Parameters
 
-### milliseconds
-
-`number`
-
-The number of milliseconds to wait.
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `milliseconds` | `number` | The number of milliseconds to wait. |
 
 ## Returns
 

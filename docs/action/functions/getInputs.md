@@ -6,7 +6,9 @@
 
 # Function: getInputs()
 
-> **getInputs**(): [`Inputs`](../type-aliases/Inputs.md)
+```ts
+function getInputs(): Inputs;
+```
 
 Defined in: [src/action.ts:33](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/action.ts#L33)
 

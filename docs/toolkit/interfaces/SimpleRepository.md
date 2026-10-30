@@ -25,7 +25,9 @@ Extends the Partial type to allow optional repository properties.
 
 ### owner?
 
-> `optional` **owner?**: `string`
+```ts
+owner?: string;
+```
 
 Defined in: node\_modules/@actions/github/lib/context.d.ts:30
 
@@ -37,7 +39,9 @@ Defined in: node\_modules/@actions/github/lib/context.d.ts:30
 
 ### repo?
 
-> `optional` **repo?**: `string`
+```ts
+repo?: string;
+```
 
 Defined in: node\_modules/@actions/github/lib/context.d.ts:31
 
@@ -49,7 +53,9 @@ Defined in: node\_modules/@actions/github/lib/context.d.ts:31
 
 ### fullName?
 
-> `optional` **fullName?**: `string`
+```ts
+fullName?: string;
+```
 
 Defined in: [src/toolkit/action.ts:145](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L145)
 

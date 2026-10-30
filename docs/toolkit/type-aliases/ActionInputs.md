@@ -6,7 +6,9 @@
 
 # Type Alias: ActionInputs
 
-> **ActionInputs** = `NonNullable`\<[`ActionConfig`](../interfaces/ActionConfig.md)\[`"inputs"`\]\>
+```ts
+type ActionInputs = NonNullable<ActionConfig["inputs"]>;
+```
 
 Defined in: [src/toolkit/action.ts:66](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L66)
 

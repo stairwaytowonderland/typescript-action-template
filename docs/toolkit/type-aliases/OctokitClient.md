@@ -6,7 +6,9 @@
 
 # Type Alias: OctokitClient
 
-> **OctokitClient** = `ReturnType`\<*typeof* `github.getOctokit`\>
+```ts
+type OctokitClient = ReturnType<typeof github.getOctokit>;
+```
 
 Defined in: [src/toolkit/api.ts:21](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/api.ts#L21)
 

@@ -12,18 +12,24 @@ Contains the main logic for the GitHub Action
 
 ## Classes
 
-- [Action](classes/Action.md)
+| Class | Description |
+| ------ | ------ |
+| [Action](classes/Action.md) | Main action class for the GitHub Action. |
 
 ## Type Aliases
 
-- [Inputs](type-aliases/Inputs.md)
+| Type Alias | Description |
+| ------ | ------ |
+| [Inputs](type-aliases/Inputs.md) | - |
 
 ## Functions
 
-- [getInputs](functions/getInputs.md)
-- [safeInputs](functions/safeInputs.md)
-- [main](functions/main.md)
-- [delay](functions/delay.md)
+| Function | Description |
+| ------ | ------ |
+| [getInputs](functions/getInputs.md) | Retrieves and normalizes GitHub Action inputs based on the provided labels. |
+| [safeInputs](functions/safeInputs.md) | Takes the action inputs and returns a sanitized version with sensitive keys removed. |
+| [main](functions/main.md) | Waits for the specified number of milliseconds as defined in the action's inputs. |
+| [delay](functions/delay.md) | Waits for a number of milliseconds. |
 
 ## References
 

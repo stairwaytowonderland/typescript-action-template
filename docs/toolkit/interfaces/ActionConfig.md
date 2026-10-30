@@ -14,7 +14,9 @@ Represents the base configuration for a GitHub Actions run.
 
 ### dryRun
 
-> **dryRun**: `boolean`
+```ts
+dryRun: boolean;
+```
 
 Defined in: [src/toolkit/action.ts:43](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L43)
 
@@ -24,7 +26,9 @@ Indicates if the action should run in dry-run mode.
 
 ### context
 
-> **context**: `Context`
+```ts
+context: Context;
+```
 
 Defined in: [src/toolkit/action.ts:46](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L46)
 
@@ -34,7 +38,9 @@ The GitHub context object.
 
 ### actor
 
-> **actor**: `string`
+```ts
+actor: string;
+```
 
 Defined in: [src/toolkit/action.ts:49](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L49)
 
@@ -44,7 +50,9 @@ The actor (user) who triggered the GitHub Action.
 
 ### repo
 
-> **repo**: [`SimpleRepository`](SimpleRepository.md)
+```ts
+repo: SimpleRepository;
+```
 
 Defined in: [src/toolkit/action.ts:52](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L52)
 
@@ -54,7 +62,12 @@ The repository associated with the GitHub Action.
 
 ### inputs?
 
-> `optional` **inputs?**: `object`
+```ts
+inputs?: {
+[key: string]: unknown;
+  dryRun: boolean;
+};
+```
 
 Defined in: [src/toolkit/action.ts:55](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L55)
 
@@ -62,12 +75,16 @@ The action inputs provided to the GitHub Action.
 
 #### Index Signature
 
-\[`key`: `string`\]: `unknown`
+```ts
+[key: string]: unknown
+```
 
 The action input key-value pairs.
 
 #### dryRun
 
-> **dryRun**: `boolean`
+```ts
+dryRun: boolean;
+```
 
 Indicates if the action should run in dry-run mode.

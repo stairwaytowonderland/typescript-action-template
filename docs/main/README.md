@@ -13,7 +13,9 @@ which gathers inputs and invokes the run function.
 
 ## Functions
 
-- [run](functions/run.md)
+| Function | Description |
+| ------ | ------ |
+| [run](functions/run.md) | Runs the main logic for the GitHub Action. |
 
 ## References
 

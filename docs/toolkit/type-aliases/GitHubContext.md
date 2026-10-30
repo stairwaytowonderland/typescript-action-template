@@ -6,7 +6,9 @@
 
 # Type Alias: GitHubContext
 
-> **GitHubContext** = *typeof* `Context`
+```ts
+type GitHubContext = typeof Context;
+```
 
 Defined in: [src/toolkit/action.ts:19](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L19)
 

@@ -6,7 +6,12 @@
 
 # Function: safeInputs()
 
-> **safeInputs**(`inputs?`): `Omit`\<\{\[`key`: `string`\]: `unknown`; `dryRun`: `boolean`; \}, `"ghToken"`\>
+```ts
+function safeInputs(inputs?): Omit<{
+[key: string]: unknown;
+  dryRun: boolean;
+}, "ghToken">;
+```
 
 Defined in: [src/action.ts:51](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/action.ts#L51)
 
@@ -17,14 +22,15 @@ This helps prevent accidental exposure of sensitive information in logs or outpu
 
 ## Parameters
 
-### inputs?
-
-[`Inputs`](../type-aliases/Inputs.md)
-
-The action inputs to be sanitized.
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `inputs?` | [`Inputs`](../type-aliases/Inputs.md) | The action inputs to be sanitized. |
 
 ## Returns
 
-`Omit`\<\{\[`key`: `string`\]: `unknown`; `dryRun`: `boolean`; \}, `"ghToken"`\>
+`Omit`\<\{
+\[`key`: `string`\]: `unknown`;
+  `dryRun`: `boolean`;
+\}, `"ghToken"`\>
 
 The sanitized action inputs with sensitive keys removed.

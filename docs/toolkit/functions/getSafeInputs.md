@@ -6,7 +6,9 @@
 
 # Function: getSafeInputs()
 
-> **getSafeInputs**\<`K`\>(`inputs?`, ...`keys`): `Omit`\<[`ActionInputs`](../type-aliases/ActionInputs.md), `K`\>
+```ts
+function getSafeInputs<K>(inputs?, ...keys): Omit<ActionInputs, K>;
+```
 
 Defined in: [src/toolkit/action.ts:84](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L84)
 
@@ -16,27 +18,17 @@ This is useful for removing sensitive information such as tokens from the inputs
 
 ## Type Parameters
 
-### K
-
-`K` *extends* `string` \| `number`
+| Type Parameter |
+| ------ |
+| <a id="type-parameter-k"></a> `K` *extends* `string` \| `number` |
 
 ## Parameters
 
-### inputs?
-
-The action inputs object to filter.
-
-#### dryRun
-
-`boolean`
-
-Indicates if the action should run in dry-run mode.
-
-### keys
-
-...`K`[]
-
-The keys to remove from the inputs object.
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `inputs?` | \{ \[`key`: `string`\]: `unknown`; `dryRun`: `boolean`; \} | The action inputs object to filter. |
+| `inputs.dryRun` | `boolean` | Indicates if the action should run in dry-run mode. |
+| ...`keys?` | `K`[] | The keys to remove from the inputs object. |
 
 ## Returns
 

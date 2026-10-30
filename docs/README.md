@@ -6,8 +6,10 @@
 
 ## Modules
 
-- [index](index/README.md)
-- [main](main/README.md)
-- [action](action/README.md)
-- [utils](utils/README.md)
-- [#toolkit](toolkit/README.md)
+| Module | Description |
+| ------ | ------ |
+| [index](index/README.md) | Barrel file for the GitHub Action. |
+| [main](main/README.md) | Main entry for the GitHub Action. |
+| [action](action/README.md) | Action logic |
+| [utils](utils/README.md) | Utility functions for the GitHub Action. |
+| [#toolkit](toolkit/README.md) | Exports all the modules from the toolkit. |

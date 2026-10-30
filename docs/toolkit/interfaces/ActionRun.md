@@ -14,7 +14,9 @@ Represents the configuration for a GitHub Action that includes a `run` method.
 
 ### safeInputs
 
-> **safeInputs**: `ReturnType`\<*typeof* [`getSafeInputs`](../functions/getSafeInputs.md)\>
+```ts
+safeInputs: ReturnType<typeof getSafeInputs>;
+```
 
 Defined in: [src/toolkit/action.ts:28](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L28)
 
@@ -24,7 +26,9 @@ The action inputs with sensitive keys removed.
 
 ### run()
 
-> **run**(): `Promise`\<`unknown`\>
+```ts
+run(): Promise<unknown>;
+```
 
 Defined in: [src/toolkit/action.ts:35](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L35)
 

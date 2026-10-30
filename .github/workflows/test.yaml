@@ -49,7 +49,10 @@ jobs:
         id: check-job
         env:
           IS_WORKFLOW_CALL: ${{ github.workflow_ref != job.workflow_ref }}
-        run: echo "is_workflow_call=${IS_WORKFLOW_CALL}" >> $GITHUB_OUTPUT
+          # IS_WORKFLOW_CALL: ${{ (github['workflow_ref'] != '' && job[format('{0}_{1}', 'workflow', 'ref')] != '' ) && github['workflow_ref'] != job[format('{0}_{1}', 'workflow', 'ref')] }}
+        run: |
+          # shellcheck disable=SC2086
+          echo "is_workflow_call=${IS_WORKFLOW_CALL}" >> $GITHUB_OUTPUT
 
   check-changed:
     name: Check Changed Files

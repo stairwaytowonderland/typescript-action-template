@@ -6,7 +6,9 @@
 
 # Function: millisecondsFromInput()
 
-> **millisecondsFromInput**(`input`): `number`
+```ts
+function millisecondsFromInput(input): number;
+```
 
 Defined in: [src/utils.ts:13](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/utils.ts#L13)
 
@@ -14,11 +16,9 @@ Utility function to parse milliseconds from input, used to convert string inputs
 
 ## Parameters
 
-### input
-
-`unknown`
-
-The input value to be parsed as milliseconds.
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `input` | `unknown` | The input value to be parsed as milliseconds. |
 
 ## Returns
 
