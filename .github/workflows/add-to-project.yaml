@@ -14,7 +14,7 @@ on:
         description: 'Dry run mode'
         type: boolean
         required: false
-        default: true
+        default: true # checkov:skip=CKV_GHA_7: Default value for dry-run input is acceptable
 
 permissions:
   contents: read
