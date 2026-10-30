@@ -99,16 +99,24 @@ describe('Action Setup', () => {
 })
 
 describe('Utilities', () => {
+	const mockToken: string = 'mock-token'
+
 	describe('getSafeInputs', () => {
 		test('removes specified keys from the inputs object', () => {
-			const inputs = { ghToken: 'secret', dryRun: true, milliseconds: '1000' }
-			const safeInputs = getSafeInputs(inputs, 'ghToken')
+			const inputs = { mockToken, dryRun: true, milliseconds: '1000' }
+			const safeInputs = getSafeInputs(inputs, 'mockToken')
 			expect(safeInputs).toEqual({ dryRun: true, milliseconds: '1000' })
 		})
 
 		test('returns an empty object if inputs is undefined', () => {
-			const safeInputs = getSafeInputs(undefined, 'ghToken')
+			const safeInputs = getSafeInputs(undefined, 'mockToken')
 			expect(safeInputs).toEqual({})
+		})
+
+		test('returns the original object if no keys are specified', () => {
+			const inputs = { mockToken, dryRun: true, milliseconds: '1000' }
+			const safeInputs = getSafeInputs(inputs)
+			expect(safeInputs).toEqual(inputs)
 		})
 	})
 })

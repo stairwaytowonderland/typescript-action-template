@@ -33,13 +33,9 @@ The GitHub context object.
 
 ##### inputs?
 
+[`Inputs`](../type-aliases/Inputs.md)
+
 Optional action inputs.
-
-###### dryRun
-
-`boolean`
-
-Indicates if the action should run in dry-run mode.
 
 ##### dryRun?
 
@@ -53,6 +49,30 @@ Optional flag indicating if the action should run in dry-run mode.
 
 ## Properties
 
+### context
+
+> **context**: `Context`
+
+The GitHub context object.
+
+#### Implementation of
+
+[`ActionConfig`](../../toolkit/interfaces/ActionConfig.md).[`context`](../../toolkit/interfaces/ActionConfig.md#context)
+
+***
+
+### inputs?
+
+> `optional` **inputs?**: [`Inputs`](../type-aliases/Inputs.md)
+
+The action inputs provided to the GitHub Action.
+
+#### Implementation of
+
+[`ActionConfig`](../../toolkit/interfaces/ActionConfig.md).[`inputs`](../../toolkit/interfaces/ActionConfig.md#inputs)
+
+***
+
 ### dryRun
 
 > **dryRun**: `boolean`
@@ -65,61 +85,25 @@ Indicates if the action should run in dry-run mode.
 
 ## Accessors
 
-### context
+### safeInputs
 
 #### Get Signature
 
-> **get** **context**(): `Context`
+> **get** **safeInputs**(): `ReturnType`\<*typeof* [`getSafeInputs`](../../toolkit/functions/getSafeInputs.md)\>
 
-Retrieves the GitHub context object for the action.
+Returns the action inputs with sensitive keys removed.
 
-##### Returns
-
-`Context`
-
-The GitHub context object.
-
-#### Implementation of
-
-[`ActionConfig`](../../toolkit/interfaces/ActionConfig.md).[`context`](../../toolkit/interfaces/ActionConfig.md#context)
-
-***
-
-### inputs
-
-#### Get Signature
-
-> **get** **inputs**(): \{\[`key`: `string`\]: `unknown`; `dryRun`: `boolean`; \} \| `undefined`
-
-Retrieves the action inputs for the GitHub Action.
+This is useful for safely logging or processing action inputs without exposing sensitive information such as tokens.
 
 ##### Returns
 
-###### Type Literal
+`ReturnType`\<*typeof* [`getSafeInputs`](../../toolkit/functions/getSafeInputs.md)\>
 
-\{\[`key`: `string`\]: `unknown`; `dryRun`: `boolean`; \}
-
-###### Index Signature
-
-\[`key`: `string`\]: `unknown`
-
-The action input key-value pairs.
-
-###### dryRun
-
-> **dryRun**: `boolean`
-
-Indicates if the action should run in dry-run mode.
-
-***
-
-`undefined`
-
-The action inputs provided to the GitHub Action.
+The action inputs with sensitive keys removed.
 
 #### Implementation of
 
-[`ActionConfig`](../../toolkit/interfaces/ActionConfig.md).[`inputs`](../../toolkit/interfaces/ActionConfig.md#inputs)
+[`ActionRun`](../../toolkit/interfaces/ActionRun.md).[`safeInputs`](../../toolkit/interfaces/ActionRun.md#safeinputs)
 
 ***
 

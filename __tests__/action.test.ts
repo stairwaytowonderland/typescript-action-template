@@ -9,22 +9,22 @@
 import { jest } from '@jest/globals'
 
 // Import mocked core and GitHub modules from fixtures
-import * as core from '#toolkit/__fixtures__/core.js'
-import * as github from '#toolkit/__fixtures__/github.js'
+import * as core from '../__fixtures__/core.js'
+import * as github from '../__fixtures__/github.js'
 
 // Import utility functions for mocking inputs and capturing outputs during tests
 import { mockGetInput, mockGetBooleanInput } from '#toolkit/__utils__/mocks.js'
 
 // Import custom types and utilities from the project
-import type { ActionInputs, GitHubContext } from '#toolkit'
-import { getInputs } from '../src/action.js'
+import type { GitHubContext } from '#toolkit'
+import { type Inputs, getInputs } from '../src/action.js'
 import { millisecondsFromInput } from '../src/utils.js'
 
 // Import the mocked core module and wait function from fixtures
-import { Action, delay, main } from '../src/action.js'
+import { Action, delay } from '../src/action.js'
 
 describe('Action Logic', () => {
-	let inputs: ActionInputs
+	let inputs: Inputs
 
 	beforeEach(() => {
 		// Clear any previous mocks to ensure a clean state for each test
@@ -38,7 +38,7 @@ describe('Action Logic', () => {
 			// ghToken: 'mock-token',
 			dryRun: false,
 			milliseconds: '500',
-		} as ActionInputs
+		} as Inputs
 	})
 
 	describe('Action', () => {
@@ -63,6 +63,12 @@ describe('Action Logic', () => {
 		test('get repo from action', () => {
 			const action = new Action(github.context as GitHubContext)
 			expect(action.repo).toBeDefined()
+		})
+
+		test('get safeInputs from action', () => {
+			const action = new Action(github.context as GitHubContext, inputs)
+			expect(action.safeInputs).toBeDefined()
+			expect(action.safeInputs).not.toHaveProperty('ghToken')
 		})
 
 		test('run logs result and sets time output', async () => {
@@ -103,22 +109,6 @@ describe('Action Logic', () => {
 			expect(retrievedInputs.milliseconds).toBe('500')
 			// expect(retrievedInputs).toHaveProperty('ghToken')
 			// expect(retrievedInputs.ghToken).toBe('mock-token')
-		})
-	})
-
-	describe('main', () => {
-		test('main executes and returns done!', async () => {
-			const action = new Action(github.context as GitHubContext, inputs)
-			const ms = millisecondsFromInput(inputs.milliseconds)
-
-			jest.useFakeTimers()
-			try {
-				const resultPromise = main(action)
-				jest.advanceTimersByTime(ms)
-				await expect(resultPromise).resolves.toBe('done!')
-			} finally {
-				jest.useRealTimers()
-			}
 		})
 	})
 

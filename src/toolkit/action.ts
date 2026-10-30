@@ -23,6 +23,11 @@ export type GitHubContext = typeof Context
  */
 export interface ActionRun {
 	/**
+	 * The action inputs with sensitive keys removed.
+	 */
+	safeInputs: ReturnType<typeof getSafeInputs>
+
+	/**
 	 * Executes the main logic of the GitHub Action.
 	 *
 	 * @returns A promise that resolves when the action has completed its run.
@@ -80,6 +85,32 @@ export const getSafeInputs = <K extends keyof ActionInputs>(
 	inputs?: ActionInputs,
 	...keys: K[]
 ): Omit<ActionInputs, K> => {
+	// Fallback to an empty object right away
+	const source = inputs ?? ({} as ActionInputs)
+
+	// Optimization: If no keys are passed, return the shallow copy immediately
+	if (keys.length === 0) {
+		return { ...source } as unknown as Omit<ActionInputs, K>
+	}
+
+	// Filter keys linearly
+	const cleanInputs = Object.keys(source).reduce(
+		(acc, key) => {
+			if (!keys.includes(key as K)) {
+				acc[key] = source[key as keyof ActionInputs]
+			}
+			return acc
+		},
+		{} as Record<string, unknown>
+	)
+
+	return cleanInputs as unknown as Omit<ActionInputs, K>
+}
+/*
+export const getSafeInputs = <K extends keyof ActionInputs>(
+	inputs?: ActionInputs,
+	...keys: K[]
+): Omit<ActionInputs, K> => {
 	// Fallback to an empty object if inputs is undefined
 	const initialObj = inputs ?? {}
 
@@ -95,6 +126,7 @@ export const getSafeInputs = <K extends keyof ActionInputs>(
 
 	return cleanInputs as Omit<ActionInputs, K>
 }
+*/
 
 /*
  * Repository related

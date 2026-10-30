@@ -34124,6 +34124,37 @@ const normalizeOptional = (value) => value || undefined;
  *
  * @packageDocumentation
  */
+/*
+ * Utility functions for handling action inputs and sensitive information.
+ */
+/**
+ * Filters out specified keys from the action inputs object.
+ *
+ * This is useful for removing sensitive information such as tokens from the inputs before logging or further processing.
+ *
+ * @example
+ * const safeInputs = getSafeInputs(inputs, 'ghToken', 'anotherKeyToRemove')
+ *
+ * @param inputs The action inputs object to filter.
+ * @param keys The keys to remove from the inputs object.
+ * @returns A new object with the specified keys removed from the inputs.
+ */
+const getSafeInputs = (inputs, ...keys) => {
+    // Fallback to an empty object right away
+    const source = inputs ?? {};
+    // Optimization: If no keys are passed, return the shallow copy immediately
+    if (keys.length === 0) {
+        return { ...source };
+    }
+    // Filter keys linearly
+    const cleanInputs = Object.keys(source).reduce((acc, key) => {
+        if (!keys.includes(key)) {
+            acc[key] = source[key];
+        }
+        return acc;
+    }, {});
+    return cleanInputs;
+};
 /**
  * Provides methods to parse and normalize repository information from various sources.
  */
@@ -34255,7 +34286,7 @@ const millisecondsFromInput = (input) => parseInt(String(input ?? ''), 10);
  *
  * @packageDocumentation
  */
-// * STEP 1: Retrieve raw inputs from the GitHub Action
+// * STEP 1b: Retrieve raw inputs from the GitHub Action
 /**
  * Retrieves and normalizes GitHub Action inputs based on the provided labels.
  *
@@ -34270,6 +34301,17 @@ const getInputs = () => {
         milliseconds: (getInput('milliseconds') ?? '').trim(),
     };
 };
+// * STEP 1c: Sanitize action inputs to remove sensitive information
+/**
+ * Takes the action inputs and returns a sanitized version with sensitive keys removed.
+ *
+ * Removes sensitive keys such as 'ghToken', 'secretOne', and 'secretTwo' from the inputs.
+ * This helps prevent accidental exposure of sensitive information in logs or outputs.
+ *
+ * @param inputs The action inputs to be sanitized.
+ * @returns The sanitized action inputs with sensitive keys removed.
+ */
+const safeInputs = (inputs) => getSafeInputs(inputs, 'ghToken');
 // * STEP 2: Implement the main action logic using the defined configuration and inputs
 /**
  * Waits for the specified number of milliseconds as defined in the action's inputs.
@@ -34280,7 +34322,7 @@ const getInputs = () => {
 const main = async (action) => {
     /*
     // Octokit instance for GitHub API requests
-    const octokit = await getAuth(action)
+    const octokit = await getAuth(action.inputs?.ghToken as string)
 
     if (!octokit) {
         const authFailedMsg = 'Failed to obtain an authenticated Octokit instance.'
@@ -34317,6 +34359,7 @@ function delay(milliseconds) {
         setTimeout(() => resolve('done!'), milliseconds);
     });
 }
+// * STEP 5: Define the main action class
 // * =======================================================
 // * The main action configuration class doesn't need to be modified,
 // * as it's the base configuration class for setting up the GitHub Action.
@@ -34327,9 +34370,9 @@ function delay(milliseconds) {
  */
 class Action {
     /** The GitHub context object. */
-    _context;
+    context;
     /** The action inputs provided to the GitHub Action. */
-    _inputs;
+    inputs;
     /** Indicates if the action should run in dry-run mode. */
     dryRun;
     /**
@@ -34350,34 +34393,30 @@ class Action {
      * @param dryRun Optional flag indicating if the action should run in dry-run mode.
      */
     constructor(context$1 = context, inputs, dryRun) {
-        this._context = context$1;
-        this._inputs = inputs ?? getInputs();
-        this.dryRun = dryRun ?? this._inputs?.dryRun ?? false;
+        this.context = context$1;
+        this.inputs = inputs ?? getInputs();
+        this.dryRun = dryRun ?? this.inputs?.dryRun ?? false;
         debug(`Initializing Action with dryRun: ${this.dryRun}`);
     }
     /**
-     * Retrieves the GitHub context object for the action.
+     * Returns the action inputs with sensitive keys removed.
+     *
+     * This is useful for safely logging or processing action inputs without exposing sensitive information such as tokens.
      */
-    get context() {
-        return this._context;
-    }
-    /**
-     * Retrieves the action inputs for the GitHub Action.
-     */
-    get inputs() {
-        return this._inputs;
+    get safeInputs() {
+        return safeInputs(this.inputs);
     }
     /**
      * Returns the actor (user) who triggered the GitHub Action.
      */
     get actor() {
-        return this._context.actor;
+        return this.context.actor;
     }
     /**
      * Returns the repository associated with the GitHub Action.
      */
     get repo() {
-        return new ActionRepository(this._context.repo);
+        return new ActionRepository(this.context.repo);
     }
 }
 

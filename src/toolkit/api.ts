@@ -9,7 +9,7 @@
 import * as core from '@actions/core'
 import * as github from '@actions/github'
 
-import type { ActionConfig, GitHubContext } from './action.js'
+import type { GitHubContext } from './action.js'
 
 /*
  * Octokit client
@@ -28,28 +28,11 @@ export type OctokitClient = ReturnType<typeof github.getOctokit>
  * Checks if the provided Octokit client is authenticated for the given repository action.
  *
  * @param octokit The Octokit client to check authentication for.
- * @param action The repository action containing repository and input details.
  * @param failOnError Whether to throw an error if authentication fails. Defaults to false.
  * @returns A promise that resolves to true if authenticated, false otherwise.
  */
-export async function isOctokitAuthenticated(
-	octokit: OctokitClient,
-	action: ActionConfig,
-	failOnError = false
-): Promise<boolean> {
-	const owner = action.repo?.owner
-	const repo = action.repo?.repo
-
-	if (!owner || !repo) {
-		const missingRepoMsg = `Missing owner or repo: owner=${owner}, repo=${repo}`
-		if (failOnError) throw new Error(missingRepoMsg)
-		core.debug(missingRepoMsg)
-		return false
-	}
-
+export async function isOctokitAuthenticated(octokit: OctokitClient, failOnError = false): Promise<boolean> {
 	try {
-		// const { data, status } = await octokit.rest.repos.get({ owner, repo })
-		// const result = status === 200 && data?.full_name !== undefined
 		const { data, status } = await octokit.rest.rateLimit.get()
 		const result = status === 200 && data?.rate?.limit !== undefined
 		if (result) {
@@ -76,17 +59,12 @@ export async function isOctokitAuthenticated(
  *
  * If the environment is set to 'test', the function will skip live GitHub API authentication and return a mock Octokit client.
  *
- * @param action The repository action containing repository and input details.
- * @param failOnError Whether to throw an error if authentication fails. Defaults to false.
  * @param ghToken Optional GitHub token to use for authentication. If not provided, it will be read from the action inputs.
+ * @param failOnError Whether to throw an error if authentication fails. Defaults to false.
  * @returns A promise that resolves to an authenticated Octokit client instance, or undefined if authentication fails.
  */
-export async function getAuth(
-	action: ActionConfig,
-	failOnError = false,
-	ghToken?: string
-): Promise<OctokitClient | undefined> {
-	const token = ghToken?.trim() || (action.inputs?.ghToken as string)?.trim()
+export async function getAuth(ghToken: string, failOnError = false): Promise<OctokitClient | undefined> {
+	const token = ghToken?.trim()
 
 	if (!token) {
 		const noTokenMsg = 'GitHub token is empty or missing.'
@@ -97,17 +75,11 @@ export async function getAuth(
 
 	const octokit: OctokitClient = github.getOctokit(token)
 
-	try {
-		const isAuthenticated = await isOctokitAuthenticated(octokit, action, failOnError)
-		// console.debug('Octokit authentication check completed.')
-		// console.debug(`Octokit authentication result: ${isAuthenticated}`)
-		if (!isAuthenticated) return undefined
-		return octokit
-	} catch (err: unknown) {
-		// console.debug('Octokit authentication check failed.')
-		if (failOnError) throw err
-		return undefined
-	}
+	const isAuthenticated = await isOctokitAuthenticated(octokit)
+	// console.debug('Octokit authentication check completed.')
+	// console.debug(`Octokit authentication result: ${isAuthenticated}`)
+	if (!isAuthenticated) return undefined
+	return octokit
 }
 
 /*

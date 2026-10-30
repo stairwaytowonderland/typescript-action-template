@@ -6,7 +6,7 @@
 
 # Function: isOctokitAuthenticated()
 
-> **isOctokitAuthenticated**(`octokit`, `action`, `failOnError?`): `Promise`\<`boolean`\>
+> **isOctokitAuthenticated**(`octokit`, `failOnError?`): `Promise`\<`boolean`\>
 
 Checks if the provided Octokit client is authenticated for the given repository action.
 
@@ -17,12 +17,6 @@ Checks if the provided Octokit client is authenticated for the given repository 
 `Octokit` & `Api` & `object`
 
 The Octokit client to check authentication for.
-
-### action
-
-[`ActionConfig`](../interfaces/ActionConfig.md)
-
-The repository action containing repository and input details.
 
 ### failOnError?
 

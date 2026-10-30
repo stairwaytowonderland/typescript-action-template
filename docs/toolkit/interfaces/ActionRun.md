@@ -8,6 +8,14 @@
 
 Represents the configuration for a GitHub Action that includes a `run` method.
 
+## Properties
+
+### safeInputs
+
+> **safeInputs**: `ReturnType`\<*typeof* [`getSafeInputs`](../functions/getSafeInputs.md)\>
+
+The action inputs with sensitive keys removed.
+
 ## Methods
 
 ### run()

@@ -14,9 +14,14 @@ Contains the main logic for the GitHub Action
 
 - [Action](classes/Action.md)
 
+## Type Aliases
+
+- [Inputs](type-aliases/Inputs.md)
+
 ## Functions
 
 - [getInputs](functions/getInputs.md)
+- [safeInputs](functions/safeInputs.md)
 - [main](functions/main.md)
 - [delay](functions/delay.md)
 

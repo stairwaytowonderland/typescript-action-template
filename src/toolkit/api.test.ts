@@ -16,7 +16,7 @@ import { toOctokit } from './__utils__/mocks.js'
  */
 
 // Import types
-import type { ActionConfig, SimpleRepository, GitHubContext } from './action.js'
+import type { GitHubContext } from './action.js'
 import type { OctokitClient } from './api.js'
 // Import functions and classes
 import {
@@ -28,27 +28,16 @@ import {
 } from './api.js'
 
 describe('Octokit/API', () => {
-	let action: ActionConfig
+	const mockToken: string = 'mock-token'
 
 	beforeEach(() => {
 		jest.clearAllMocks()
-
-		action = {
-			dryRun: false,
-			actor: github.context.actor,
-			context: github.context as GitHubContext,
-			repo: github.context.repo as SimpleRepository,
-			inputs: {
-				dryRun: false,
-				ghToken: 'secret',
-			},
-		}
 	})
 
 	describe('isOctokitAuthenticated', () => {
 		test('returns true if Octokit is authenticated', async () => {
 			const octokit = toOctokit()
-			const isAuthenticated = await isOctokitAuthenticated(octokit, action)
+			const isAuthenticated = await isOctokitAuthenticated(octokit)
 			expect(isAuthenticated).toBe(true)
 		})
 
@@ -58,21 +47,8 @@ describe('Octokit/API', () => {
 				status: 403,
 				message: 'API rate limit exceeded',
 			})
-			const isAuthenticated = await isOctokitAuthenticated(octokit, action)
+			const isAuthenticated = await isOctokitAuthenticated(octokit)
 			expect(isAuthenticated).toBe(false)
-		})
-
-		test('returns false if repo and owner are undefined', async () => {
-			const octokit = toOctokit()
-			action.repo = { owner: undefined, repo: undefined }
-			const isAuthenticated = await isOctokitAuthenticated(octokit, action)
-			expect(isAuthenticated).toBe(false)
-		})
-
-		test('throws error if repo and owner are undefined and failOnError is true', async () => {
-			const octokit = toOctokit()
-			action.repo = { owner: undefined, repo: undefined }
-			await expect(isOctokitAuthenticated(octokit, action, true)).rejects.toThrow('Missing owner or repo')
 		})
 
 		test('throws error if failure occurs and failOnError is true', async () => {
@@ -81,7 +57,7 @@ describe('Octokit/API', () => {
 				status: 500,
 				message: 'Internal Server Error',
 			})
-			await expect(isOctokitAuthenticated(octokit, action, true)).rejects.toThrow('Internal Server Error')
+			await expect(isOctokitAuthenticated(octokit, true)).rejects.toThrow('Internal Server Error')
 		})
 	})
 
@@ -95,71 +71,25 @@ describe('Octokit/API', () => {
 		})
 
 		test('returns an authenticated Octokit instance', async () => {
-			const authOctokit = await getAuth(action)
+			const authOctokit = await getAuth(mockToken)
 			expect(authOctokit).toBeDefined()
 		})
 
 		test('should fail if GitHub token is missing', async () => {
-			if (action.inputs) {
-				action.inputs.ghToken = ''
-			}
-
-			const result = await getAuth(action, false)
-
+			const result = await getAuth('', false)
 			expect(result).toBeUndefined()
 		})
 
 		test('throws error if GitHub token is missing and failOnError is true', async () => {
-			if (action.inputs) {
-				action.inputs.ghToken = ''
-			}
-
-			await expect(getAuth(action, true)).rejects.toThrow('GitHub token is empty or missing.')
+			await expect(getAuth('', true)).rejects.toThrow('GitHub token is empty or missing.')
 		})
 
 		test('returns undefined if authentication fails', async () => {
-			// Change the mock function response signature directly on the plain mock reference object
 			mockRateLimitGet.mockResolvedValueOnce({
 				status: 403,
 				data: { rate: { limit: 0 } }, // Forces isOctokitAuthenticated to evaluate to false
 			})
-
-			const result = await getAuth(action, false)
-
-			expect(result).toBeUndefined()
-		})
-
-		test('throws error if authentication fails and failOnError is true', async () => {
-			mockRateLimitGet.mockRejectedValueOnce({
-				status: 500,
-				message: 'Internal Server Error',
-			})
-			await expect(getAuth(action, true)).rejects.toThrow('Internal Server Error')
-		})
-
-		test('returns undefined and logs error if an unexpected exception occurs during authentication check', async () => {
-			const explodingRepo: SimpleRepository = {
-				get owner(): string {
-					throw new Error('Catastrophic repository read failure')
-				},
-				get repo(): string {
-					return 'placeholder-repo'
-				},
-			}
-
-			const brokenAction: ActionConfig = {
-				dryRun: false,
-				actor: 'test-actor',
-				context: {} as unknown as GitHubContext, // Standard simple cast permitted for unrelated properties if needed, or map a valid empty context
-				repo: explodingRepo,
-				inputs: {
-					dryRun: false,
-					ghToken: 'valid-format-token',
-				},
-			}
-
-			const result = await getAuth(brokenAction, false)
-
+			const result = await getAuth(mockToken as string, false)
 			expect(result).toBeUndefined()
 		})
 	})

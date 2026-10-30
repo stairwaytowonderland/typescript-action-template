@@ -6,7 +6,7 @@
 
 # Function: getAuth()
 
-> **getAuth**(`action`, `failOnError?`, `ghToken?`): `Promise`\<`Octokit` & `Api` & `object` \| `undefined`\>
+> **getAuth**(`ghToken`, `failOnError?`): `Promise`\<`Octokit` & `Api` & `object` \| `undefined`\>
 
 Retrieves an authenticated Octokit client using the provided GitHub token or the token from the action inputs.
 
@@ -14,23 +14,17 @@ If the environment is set to 'test', the function will skip live GitHub API auth
 
 ## Parameters
 
-### action
+### ghToken
 
-[`ActionConfig`](../interfaces/ActionConfig.md)
+`string`
 
-The repository action containing repository and input details.
+Optional GitHub token to use for authentication. If not provided, it will be read from the action inputs.
 
 ### failOnError?
 
 `boolean` = `false`
 
 Whether to throw an error if authentication fails. Defaults to false.
-
-### ghToken?
-
-`string`
-
-Optional GitHub token to use for authentication. If not provided, it will be read from the action inputs.
 
 ## Returns
 

@@ -13,8 +13,8 @@
 import { jest } from '@jest/globals'
 
 // Import mocked core and GitHub modules from fixtures
-import * as core from '#toolkit/__fixtures__/core.js'
-// import * as github from '#toolkit/__fixtures__/github.js'
+import * as core from '../__fixtures__/core.js'
+// import * as github from '../__fixtures__/github.js'
 
 // Import the action mocks from fixtures
 import { actionMock, actionRunMock } from '../__fixtures__/action.js'
@@ -60,6 +60,7 @@ describe('Main Entry', () => {
 
 	beforeEach(() => {
 		inputs = {
+			'github-token': 'mock-token',
 			'dry-run': 'false',
 			milliseconds: '500',
 		}
