@@ -38,8 +38,8 @@ jobs:
     uses: stairwaytowonderland/.github/.github/workflows/linter.yaml@v1
     with:
       node-version-file: '' # Bypass node setup in the linter workflow
-      superlinter-version: 'v8'
-      checkov-version: 'v12'
+      # superlinter-version: 'v8'
+      # checkov-version: 'v12'
       superlinter-validate-editorconfig: false
       superlinter-filter-regex-exclude: '(docs/.*\..*$|dist/.*|.*\.csv$)'
       additional-vars: |
