@@ -8,6 +8,8 @@
 
 > **getSafeInputs**\<`K`\>(`inputs?`, ...`keys`): `Omit`\<[`ActionInputs`](../type-aliases/ActionInputs.md), `K`\>
 
+Defined in: [src/toolkit/action.ts:84](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L84)
+
 Filters out specified keys from the action inputs object.
 
 This is useful for removing sensitive information such as tokens from the inputs before logging or further processing.

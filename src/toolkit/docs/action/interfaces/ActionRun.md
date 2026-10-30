@@ -6,7 +6,7 @@
 
 # Interface: ActionRun
 
-Defined in: [src/toolkit/action.ts:24](https://github.com/stairwaytowonderland/typescript-action-template/blob/63bd4def94f90d318287a7fef80fd1eabbf24664/src/toolkit/action.ts#L24)
+Defined in: [src/toolkit/action.ts:24](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L24)
 
 Represents the configuration for a GitHub Action that includes a `run` method.
 
@@ -16,7 +16,7 @@ Represents the configuration for a GitHub Action that includes a `run` method.
 
 > **safeInputs**: `ReturnType`\<*typeof* [`getSafeInputs`](../functions/getSafeInputs.md)\>
 
-Defined in: [src/toolkit/action.ts:28](https://github.com/stairwaytowonderland/typescript-action-template/blob/63bd4def94f90d318287a7fef80fd1eabbf24664/src/toolkit/action.ts#L28)
+Defined in: [src/toolkit/action.ts:28](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L28)
 
 The action inputs with sensitive keys removed.
 
@@ -26,7 +26,7 @@ The action inputs with sensitive keys removed.
 
 > **run**(): `Promise`\<`unknown`\>
 
-Defined in: [src/toolkit/action.ts:35](https://github.com/stairwaytowonderland/typescript-action-template/blob/63bd4def94f90d318287a7fef80fd1eabbf24664/src/toolkit/action.ts#L35)
+Defined in: [src/toolkit/action.ts:35](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L35)
 
 Executes the main logic of the GitHub Action.
 

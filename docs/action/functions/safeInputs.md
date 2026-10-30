@@ -8,6 +8,8 @@
 
 > **safeInputs**(`inputs?`): `Omit`\<\{\[`key`: `string`\]: `unknown`; `dryRun`: `boolean`; \}, `"ghToken"`\>
 
+Defined in: [src/action.ts:51](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/action.ts#L51)
+
 Takes the action inputs and returns a sanitized version with sensitive keys removed.
 
 Removes sensitive keys such as 'ghToken', 'secretOne', and 'secretTwo' from the inputs.

@@ -6,7 +6,7 @@
 
 # Interface: SimpleRepository
 
-Defined in: [src/toolkit/action.ts:143](https://github.com/stairwaytowonderland/typescript-action-template/blob/63bd4def94f90d318287a7fef80fd1eabbf24664/src/toolkit/action.ts#L143)
+Defined in: [src/toolkit/action.ts:143](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L143)
 
 Represents basic information about a GitHub repository.
 
@@ -27,7 +27,7 @@ Extends the Partial type to allow optional repository properties.
 
 > `optional` **fullName?**: `string`
 
-Defined in: [src/toolkit/action.ts:145](https://github.com/stairwaytowonderland/typescript-action-template/blob/63bd4def94f90d318287a7fef80fd1eabbf24664/src/toolkit/action.ts#L145)
+Defined in: [src/toolkit/action.ts:145](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L145)
 
 The full repository name in the format "owner/repo".
 

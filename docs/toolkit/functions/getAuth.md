@@ -8,6 +8,8 @@
 
 > **getAuth**(`ghToken`, `failOnError?`): `Promise`\<`Octokit` & `Api` & `object` \| `undefined`\>
 
+Defined in: [src/toolkit/api.ts:66](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/api.ts#L66)
+
 Retrieves an authenticated Octokit client using the provided GitHub token or the token from the action inputs.
 
 If the environment is set to 'test', the function will skip live GitHub API authentication and return a mock Octokit client.

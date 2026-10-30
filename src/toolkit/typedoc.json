@@ -5,6 +5,7 @@
 	"readme": "none",
 	"out": "./docs",
 	"disableSources": false,
+	"gitRevision": "main",
 	"plugin": ["typedoc-plugin-coverage", "typedoc-plugin-markdown"],
 	"entryPointStrategy": "expand",
 	"entryPoints": ["."],

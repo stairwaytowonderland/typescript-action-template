@@ -8,6 +8,8 @@
 
 > **main**(`action`): `Promise`\<`string` \| `void`\>
 
+Defined in: [src/action.ts:60](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/action.ts#L60)
+
 Waits for the specified number of milliseconds as defined in the action's inputs.
 
 ## Parameters

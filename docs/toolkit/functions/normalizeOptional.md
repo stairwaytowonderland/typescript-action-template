@@ -8,6 +8,8 @@
 
 > **normalizeOptional**(`value?`): `string` \| `undefined`
 
+Defined in: [src/toolkit/utils.ts:16](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/utils.ts#L16)
+
 Normalizes an optional string value.
 
 Converts empty strings or undefined values to undefined.

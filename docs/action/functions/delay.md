@@ -8,6 +8,8 @@
 
 > **delay**(`milliseconds`): `Promise`\<`string`\>
 
+Defined in: [src/action.ts:102](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/action.ts#L102)
+
 Waits for a number of milliseconds.
 
 ## Parameters
