@@ -40,6 +40,7 @@ jobs:
       node-version-file: '' # Bypass node setup in the linter workflow
       # superlinter-version: 'v8'
       # checkov-version: '3.4.0'
+
       superlinter-validate-editorconfig: false
       superlinter-filter-regex-exclude: '(docs/.*\..*$|dist/.*|.*\.csv$)'
       additional-vars: |
