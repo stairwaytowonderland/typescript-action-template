@@ -37,7 +37,7 @@ jobs:
       statuses: write
     uses: stairwaytowonderland/.github/.github/workflows/linter.yaml@v1
     with:
-      # node-version-file: '' # Bypass node setup in the linter workflow
+      node-version-file: '' # Bypass node setup in the linter workflow
       superlinter-copy-rules: true
       superlinter-validate-editorconfig: false
       superlinter-filter-regex-exclude: '(docs/.*\..*$|dist/.*|.*\.csv$)'
