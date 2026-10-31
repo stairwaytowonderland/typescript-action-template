@@ -3,7 +3,7 @@
 #
 # For more information, see the super-linter repository:
 #     https://github.com/super-linter/super-linter
-name: ☂️ Lint Codebase
+name: 🧹 Lint Codebase
 
 on:
   pull_request:
@@ -37,13 +37,11 @@ jobs:
       statuses: write
     uses: stairwaytowonderland/.github/.github/workflows/linter.yaml@v1
     with:
-      node-version-file: '' # Bypass node setup in the linter workflow
+      # node-version-file: '' # Bypass node setup in the linter workflow
       # superlinter-version: 'v8'
       # checkov-version: '3.4.0'
-
       superlinter-validate-editorconfig: false
       superlinter-filter-regex-exclude: '(docs/.*\..*$|dist/.*|.*\.csv$)'
       additional-vars: |
         VALIDATE_HTML=false
-        SUPER_LINTER_SUMMARY_IGNORE_PRETTIER_CONFIG=true
     secrets: inherit
