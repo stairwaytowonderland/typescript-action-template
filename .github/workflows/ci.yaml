@@ -64,7 +64,7 @@ jobs:
     if: needs.info.outputs.is-release-workflow == 'true'
     runs-on: ubuntu-latest
     outputs:
-      check-changed: ${{ steps.set-outputs.outputs.CHECK_CHANGED }}
+      check-changed: ${{ steps.set-outputs.outputs.check-changed }}
     steps:
       - name: Set Outputs from Environment
         id: set-outputs
