@@ -13,7 +13,7 @@ function safeInputs(inputs?): Omit<{
 }, "ghToken">;
 ```
 
-Defined in: [src/action.ts:51](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/action.ts#L51)
+Defined in: [src/action.ts:56](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/action.ts#L56)
 
 Takes the action inputs and returns a sanitized version with sensitive keys removed.
 

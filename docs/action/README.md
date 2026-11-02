@@ -20,7 +20,7 @@ Contains the main logic for the GitHub Action
 
 | Type Alias | Description |
 | ------ | ------ |
-| [Inputs](type-aliases/Inputs.md) | - |
+| [Inputs](type-aliases/Inputs.md) | Represents the inputs for the GitHub Action. |
 
 ## Functions
 

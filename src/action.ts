@@ -14,6 +14,11 @@ import { ActionRepository, getSafeInputs } from '#toolkit'
 import { millisecondsFromInput } from './utils.js'
 
 // * STEP 1a: Define the input names for the GitHub Action
+/**
+ * Represents the inputs for the GitHub Action.
+ *
+ * Only includes the relevant input fields required for the action.
+ */
 // prettier-ignore
 export type Inputs = Pick<
 	ActionInputs,
