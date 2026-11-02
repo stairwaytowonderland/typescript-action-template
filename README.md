@@ -406,8 +406,8 @@ own repository:
 
     </details>
 
-1. :hammer: **After updating**, run `npm run clean && npm install && npm run all` to build your action and prepare it
-for commit.
+1. :hammer: **After updating**, run `npm run reset && npm run prep && npm run docs` (or just `npm run all`) to
+build your action and prepare it for commit.
 
 ## :keyboard: Update the Action Code
 
