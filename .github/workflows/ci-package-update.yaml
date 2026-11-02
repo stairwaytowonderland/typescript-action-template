@@ -14,9 +14,9 @@ permissions:
 jobs:
   package-update:
     name: Update packages
-    # concurrency:
-    #   group: ${{ github.repository_id }}-${{ github.ref }}
-    #   cancel-in-progress: false
+    concurrency:
+      group: ${{ github.repository_id }}-${{ github.ref }}
+      cancel-in-progress: false
     permissions:
       actions: write
       contents: write
