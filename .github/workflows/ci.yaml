@@ -88,10 +88,11 @@ jobs:
 
   test:
     name: 🔔 Run Action Tests
-    needs: [info, changed]
+    needs: [info, config, changed]
     if: |
       ${{ (needs.changed.outputs.result == 'true' ||
-      (needs.changed.outputs.result == 'true' &&
+      (needs.config.outputs.check-changed != 'true' &&
+        needs.changed.outputs.result != 'true' &&
         (!failure() && !cancelled()) || success())) &&
       needs.info.outputs.is-release-workflow == 'true' }}
     permissions:
@@ -102,20 +103,22 @@ jobs:
 
   check-dist:
     name: 🏗️ Check Transpiled JavaScript
-    needs: [info, changed]
+    needs: [info, config, changed]
     if: |
       ${{ (needs.changed.outputs.result == 'true' ||
-      (needs.changed.outputs.result == 'true' &&
+      (needs.config.outputs.check-changed != 'true' &&
+        needs.changed.outputs.result != 'true' &&
         (!failure() && !cancelled()) || success())) &&
       needs.info.outputs.is-release-workflow == 'true' }}
     uses: ./.github/workflows/check-dist.yaml
 
   pre-commit:
     name: 🎨 Pre-commit Check
-    needs: [info, changed]
+    needs: [info, config, changed]
     if: |
       ${{ (needs.changed.outputs.result != 'true' ||
-      (needs.changed.outputs.result == 'true' &&
+      (needs.config.outputs.check-changed != 'true' &&
+        needs.changed.outputs.result != 'true' &&
         (!failure() && !cancelled()) || success())) &&
       needs.info.outputs.is-release-workflow == 'true' }}
     permissions:
@@ -126,10 +129,11 @@ jobs:
 
   release:
     name: 🚀 Release a New Version
-    needs: [info, changed, test, check-dist]
+    needs: [info, config, changed, test, check-dist]
     if: |
       ${{ (needs.changed.outputs.result != 'true' ||
-      (needs.changed.outputs.result == 'true' &&
+      (needs.config.outputs.check-changed != 'true' &&
+        needs.changed.outputs.result != 'true' &&
         (!failure() && !cancelled()) || success())) &&
       needs.info.outputs.is-release-workflow == 'true' &&
       ! github.event.repository.is_template }}
