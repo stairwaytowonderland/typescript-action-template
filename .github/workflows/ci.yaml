@@ -39,7 +39,9 @@ concurrency:
 
 # 4. Global Variables & Configuration
 env:
-  CHECK_CHANGED: true
+  # Only run tests and release if the specified 'paths'
+  # in the changed-files job are modified
+  TEST_AND_RELEASE_ONLY_IF_CHANGED: true
 
 defaults:
   run:
@@ -69,9 +71,9 @@ jobs:
       - name: Set Outputs from Environment
         id: set-outputs
         env:
-          CHECK_CHANGED: ${{ env.CHECK_CHANGED }}
+          TEST_AND_RELEASE_ONLY_IF_CHANGED: ${{ env.TEST_AND_RELEASE_ONLY_IF_CHANGED }}
         run: |
-          echo "check-changed=${CHECK_CHANGED}" >> $GITHUB_OUTPUT
+          echo "check-changed=${TEST_AND_RELEASE_ONLY_IF_CHANGED}" >> $GITHUB_OUTPUT
 
   changed:
     name: 📁 Check Changed Files
@@ -80,7 +82,8 @@ jobs:
     uses: stairwaytowonderland/.github/.github/workflows/check-changed.yaml@v1
     with:
       paths: |
-        ${{ needs.config.outputs.check-changed == 'true' && 'action.y*ml
+        ${{ needs.config.outputs.check-changed == 'true' && '.github/**
+        action.y*ml
         **/src/**
         !**/src/**/typedoc*.json
         !**/src/**/badges/*
