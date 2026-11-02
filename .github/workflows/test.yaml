@@ -87,10 +87,14 @@ jobs:
     name: GitHub Actions Test
     needs: [check-workflow, check-changed]
     if: always() && (needs.check-workflow.outputs.is_workflow_call == 'true' || needs.check-changed.outputs.result == 'true')
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       actions: read
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        inputs:
+          - milliseconds: ${{ inputs.milliseconds || 1000 }}
 
     steps:
       - name: Checkout repository
@@ -101,7 +105,7 @@ jobs:
         id: test-action
         uses: ./
         with:
-          milliseconds: ${{ inputs.milliseconds || 1000 }}
+          milliseconds: ${{ matrix.inputs.milliseconds }}
 
       - name: Print Output
         id: output
