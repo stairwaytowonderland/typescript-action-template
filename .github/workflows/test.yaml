@@ -9,24 +9,12 @@ on:
       - '**/src/**'
       - 'package*.json'
       - 'action.y*ml'
-  # push:
-  #   branches:
-  #     - main
-  #   paths:
-  #     - '.github/**'
-  #     - '**/src/**'
-  #     - 'package*.json'
-  #     - 'action.y*ml'
   workflow_call:
     inputs:
       milliseconds:
         description: 'Milliseconds to wait'
         type: number
   workflow_dispatch:
-    inputs:
-      milliseconds:
-        description: 'Milliseconds to wait'
-        type: number
 
 permissions:
   contents: read
@@ -117,7 +105,7 @@ jobs:
     strategy:
       matrix:
         inputs:
-          - milliseconds: ${{ inputs.milliseconds || 1000 }}
+          - milliseconds: 1000
 
     steps:
       - name: Checkout repository
@@ -128,6 +116,7 @@ jobs:
         id: test-action
         uses: ./
         with:
+          dry-run: true
           milliseconds: ${{ matrix.inputs.milliseconds }}
 
       - name: Print Output
