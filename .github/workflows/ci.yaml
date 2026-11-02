@@ -86,36 +86,25 @@ jobs:
         !**/src/**/badges/*
         !**/src/**/docs/**/*
 
-  debug:
-    name: 🐛 Debug
-    needs: [info, config, changed]
-    if: needs.info.outputs.is-release-workflow == 'true'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Print Environment Variables
-        run: env
-      - name: Print Action Test Conditionals
-        env:
-          IS_RELEASE_WORKFLOW: ${{ needs.info.outputs.is-release-workflow }}
-          CHECK_CHANGED: ${{ needs.config.outputs.check-changed }}
-          CHANGED_RESULT: ${{ needs.changed.outputs.result }}
-          JOB_STATUS: ${{ job.status }}
-        run: |
-          echo "is-release-workflow: $IS_RELEASE_WORKFLOW"
-          echo "check-changed: $CHECK_CHANGED"
-          echo "changed result: $CHANGED_RESULT"
-          echo "status: $JOB_STATUS"
-          echo "expression result: $(( $IS_RELEASE_WORKFLOW && $CHECK_CHANGED && $CHANGED_RESULT ))"
-
-  test:
-    name: 🔔 Run Action Tests
+  release-continue:
+    name: ⏭️ Check Release Progress
     needs: [info, config, changed]
     if: |
       ${{ (needs.changed.outputs.result == 'true' ||
-      (needs.config.outputs.check-changed != 'true' &&
-        needs.changed.outputs.result != 'true' &&
-        (!failure() && !cancelled()) || success())) &&
+        (needs.config.outputs.check-changed != 'true' &&
+          always())) &&
       needs.info.outputs.is-release-workflow == 'true' }}
+    runs-on: ubuntu-latest
+    outputs:
+      result: ${{ steps.set-result.outputs.result }}
+    steps:
+      - id: set-result
+        run: echo "result=true" >> $GITHUB_OUTPUT
+
+  test:
+    name: 🔔 Run Action Tests
+    needs: [release-continue]
+    if: needs.release-continue.outputs.result == 'true'
     permissions:
       contents: read
       actions: read
@@ -124,24 +113,14 @@ jobs:
 
   check-dist:
     name: 🏗️ Check Transpiled JavaScript
-    needs: [info, config, changed]
-    if: |
-      ${{ (needs.changed.outputs.result == 'true' ||
-      (needs.config.outputs.check-changed != 'true' &&
-        needs.changed.outputs.result != 'true' &&
-        (!failure() && !cancelled()) || success())) &&
-      needs.info.outputs.is-release-workflow == 'true' }}
+    needs: [release-continue]
+    if: needs.release-continue.outputs.result == 'true'
     uses: ./.github/workflows/check-dist.yaml
 
   pre-commit:
     name: 🎨 Pre-commit Check
-    needs: [info, config, changed]
-    if: |
-      ${{ (needs.changed.outputs.result != 'true' ||
-      (needs.config.outputs.check-changed != 'true' &&
-        needs.changed.outputs.result != 'true' &&
-        (!failure() && !cancelled()) || success())) &&
-      needs.info.outputs.is-release-workflow == 'true' }}
+    needs: [release-continue]
+    if: needs.release-continue.outputs.result == 'true'
     permissions:
       contents: read
       pull-requests: read
@@ -150,14 +129,8 @@ jobs:
 
   release:
     name: 🚀 Release a New Version
-    needs: [info, config, changed, test, check-dist]
-    if: |
-      ${{ (needs.changed.outputs.result != 'true' ||
-      (needs.config.outputs.check-changed != 'true' &&
-        needs.changed.outputs.result != 'true' &&
-        (!failure() && !cancelled()) || success())) &&
-      needs.info.outputs.is-release-workflow == 'true' &&
-      ! github.event.repository.is_template }}
+    needs: [test, check-dist]
+    if: ${{ ! github.event.repository.is_template }}
     permissions:
       actions: write
       contents: write
@@ -171,7 +144,7 @@ jobs:
   publish:
     name: 📦 Publish Release
     needs: [info]
-    if: needs.info.outputs.is-publish-workflow == 'true' && ! github.event.repository.is_template
+    if: ${{ needs.info.outputs.is-publish-workflow == 'true' && ! github.event.repository.is_template }}
     permissions:
       contents: write
     uses: stairwaytowonderland/.github/.github/workflows/publish.yaml@v1
