@@ -155,6 +155,9 @@
 	"optionalDependencies": {
 		"@rollup/rollup-linux-x64-gnu": "*"
 	},
+	"resolutions": {
+		"ip-address": "10.31.0"
+	},
 	"overrides": {
 		"undici": "^6.29.1",
 		"semantic-release": {

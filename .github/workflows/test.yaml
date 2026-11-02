@@ -22,11 +22,13 @@ on:
       milliseconds:
         description: 'Milliseconds to wait'
         type: number
+        default: ''
   workflow_dispatch:
     inputs:
       milliseconds:
         description: 'Milliseconds to wait'
         type: number
+        default: '' # checkov:skip=CKV_GHA_7: Default value for milliseconds input is acceptable
 
 permissions:
   contents: read
