@@ -35,7 +35,7 @@ permissions:
 
 concurrency:
   group: ${{ github.repository_id }}-${{ github.ref }}
-  cancel-in-progress: ${{ github.event_name == 'push' }}
+  cancel-in-progress: true
 
 # 4. Global Variables & Configuration
 # env:
