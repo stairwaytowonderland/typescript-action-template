@@ -39,7 +39,7 @@ concurrency:
 
 # 4. Global Variables & Configuration
 env:
-  CHECK_CHANGED: true
+  CHECK_CHANGED: false
 
 defaults:
   run:
@@ -87,13 +87,13 @@ jobs:
         !**/src/**/docs/**/*
 
   release-continue:
-    name: ⏭️ Check Release Progress
+    name: ⏭️ Determine Release Continuation
     needs: [info, config, changed]
     if: |
-      ${{ (needs.changed.outputs.result == 'true' ||
+      (needs.changed.outputs.result == 'true' ||
         (needs.config.outputs.check-changed != 'true' &&
           always())) &&
-      needs.info.outputs.is-release-workflow == 'true' }}
+      needs.info.outputs.is-release-workflow == 'true'
     runs-on: ubuntu-latest
     outputs:
       result: ${{ steps.set-result.outputs.result }}
