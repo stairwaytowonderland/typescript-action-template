@@ -73,7 +73,7 @@ jobs:
         env:
           TEST_AND_RELEASE_ONLY_IF_CHANGED: ${{ env.TEST_AND_RELEASE_ONLY_IF_CHANGED }}
         run: |
-          echo "check-changed=${TEST_AND_RELEASE_ONLY_IF_CHANGED}" >> $GITHUB_OUTPUT
+          echo "check-changed=${TEST_AND_RELEASE_ONLY_IF_CHANGED}" >> "$GITHUB_OUTPUT"
 
   changed:
     name: 📁 Check Changed Files
@@ -101,7 +101,7 @@ jobs:
       result: ${{ steps.set-result.outputs.result }}
     steps:
       - id: set-result
-        run: echo "result=true" >> $GITHUB_OUTPUT
+        run: echo "result=true" >> "$GITHUB_OUTPUT"
 
   test:
     name: 🔔 Run Action Tests
