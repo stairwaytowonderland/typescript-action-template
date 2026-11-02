@@ -39,7 +39,7 @@ concurrency:
 
 # 4. Global Variables & Configuration
 env:
-  CHECK_CHANGED: false
+  CHECK_CHANGED: true
 
 defaults:
   run:
