@@ -86,6 +86,27 @@ jobs:
         !**/src/**/badges/*
         !**/src/**/docs/**/*
 
+  debug:
+    name: 🐛 Debug
+    needs: [info, config, changed]
+    if: needs.info.outputs.is-release-workflow == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Environment Variables
+        run: env
+      - name: Print Action Test Conditionals
+        env:
+          IS_RELEASE_WORKFLOW: ${{ needs.info.outputs.is-release-workflow }}
+          CHECK_CHANGED: ${{ needs.config.outputs.check-changed }}
+          CHANGED_RESULT: ${{ needs.changed.outputs.result }}
+          JOB_STATUS: ${{ job.status }}
+        run: |
+          echo "is-release-workflow: $IS_RELEASE_WORKFLOW"
+          echo "check-changed: $CHECK_CHANGED"
+          echo "changed result: $CHANGED_RESULT"
+          echo "status: $JOB_STATUS"
+          echo "expression result: $(( $IS_RELEASE_WORKFLOW && $CHECK_CHANGED && $CHANGED_RESULT ))"
+
   test:
     name: 🔔 Run Action Tests
     needs: [info, config, changed]
