@@ -49,6 +49,9 @@ defaults:
 jobs:
   info:
     name: 🔎 Gather Info
+    # concurrency:
+    #   group: ${{ github.repository_id }}-${{ github.ref }}
+    #   cancel-in-progress: false
     permissions:
       contents: read
     uses: stairwaytowonderland/.github/.github/workflows/ci-meta.yaml@v1
