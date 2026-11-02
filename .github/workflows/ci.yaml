@@ -80,7 +80,6 @@ jobs:
     uses: stairwaytowonderland/.github/.github/workflows/check-changed.yaml@v1
     with:
       paths: |
-        .github/**
         action.y*ml
         **/src/**
         !**/src/**/typedoc*.json
