@@ -101,22 +101,10 @@ jobs:
       - id: set-result
         run: echo "result=true" >> $GITHUB_OUTPUT
 
-  debug:
-    name: 🐛 Debug Information
-    needs: [release-continue]
-    if: always()
-    runs-on: ubuntu-latest
-    steps:
-      - name: Show Release Continuation Result
-        env:
-          RELEASE_CONTINUATION_RESULT: ${{ needs.release-continue.outputs.result }}
-        run: |
-          echo "Release continuation result: $RELEASE_CONTINUATION_RESULT"
-
   test:
     name: 🔔 Run Action Tests
     needs: [release-continue]
-    if: needs.release-continue.outputs.result == 'true'
+    if: ${{ fromJSON(needs['release-continue'].outputs.result) }}
     permissions:
       contents: read
       actions: read
@@ -126,13 +114,13 @@ jobs:
   check-dist:
     name: 🏗️ Check Transpiled JavaScript
     needs: [release-continue]
-    if: needs.release-continue.outputs.result == 'true'
+    if: ${{ fromJSON(needs['release-continue'].outputs.result) }}
     uses: ./.github/workflows/check-dist.yaml
 
   pre-commit:
     name: 🎨 Pre-commit Check
     needs: [release-continue]
-    if: needs.release-continue.outputs.result == 'true'
+    if: ${{ fromJSON(needs['release-continue'].outputs.result) }}
     permissions:
       contents: read
       pull-requests: read
