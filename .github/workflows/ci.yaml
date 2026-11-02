@@ -78,7 +78,6 @@ jobs:
     needs: [info, config]
     if: needs.info.outputs.is-release-workflow == 'true'
     uses: stairwaytowonderland/.github/.github/workflows/check-changed.yaml@v1
-
     with:
       paths: |
         ${{ needs.config.outputs.check-changed == 'true' && 'action.y*ml
