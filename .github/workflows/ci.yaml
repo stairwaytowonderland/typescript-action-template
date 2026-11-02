@@ -33,6 +33,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: ${{ github.repository_id }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'push' }}
+
 # 4. Global Variables & Configuration
 # env:
 #   DRY_RUN: ${{ format('{0}', inputs.dry-run == 'true') }}
@@ -45,9 +49,6 @@ defaults:
 jobs:
   info:
     name: 🔎 Gather Info
-    concurrency:
-      group: ${{ github.repository_id }}-${{ github.ref }}
-      cancel-in-progress: false
     permissions:
       contents: read
     uses: stairwaytowonderland/.github/.github/workflows/ci-meta.yaml@v1
