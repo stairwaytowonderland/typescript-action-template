@@ -26,10 +26,6 @@ on:
   #     - 'package-lock.json'
   workflow_dispatch:
   workflow_call:
-    outputs:
-      completed:
-        description: 'Indicates if the workflow completed'
-        value: true
 
 permissions:
   contents: read
