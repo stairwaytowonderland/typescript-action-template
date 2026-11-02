@@ -13,10 +13,10 @@ on:
   #   branches:
   #     - main
   #   paths:
-  #     # - '.github/**'
+  #     - '.github/**'
   #     - '**/src/**'
-  #     - 'package*json'
-  #     - 'action.yaml'
+  #     - 'package*.json'
+  #     - 'action.y*ml'
   workflow_call:
     inputs:
       milliseconds:
@@ -82,6 +82,29 @@ jobs:
     with:
       operating-systems: '["ubuntu-latest"]'
       enable-audit: false
+
+  unit-tests:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [24, 26]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: ${{ matrix.node-version }}
+          # cache: 'npm'
+          package-manager-cache: false
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run unit tests
+        run: npm test
 
   test-action:
     name: GitHub Actions Test
