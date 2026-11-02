@@ -76,23 +76,22 @@ jobs:
   changed:
     name: 📁 Check Changed Files
     needs: [info, config]
-    if: needs.info.outputs.is-release-workflow == 'true' && needs.config.outputs.check-changed == 'true'
+    if: needs.info.outputs.is-release-workflow == 'true'
     uses: stairwaytowonderland/.github/.github/workflows/check-changed.yaml@v1
     with:
       paths: |
-        action.y*ml
+        ${{ needs.config.outputs.check-changed == 'true' && 'action.y*ml
         **/src/**
         !**/src/**/typedoc*.json
         !**/src/**/badges/*
-        !**/src/**/docs/**/*
+        !**/src/**/docs/**/*' || '' }}
 
   release-continue:
     name: ⏭️ Determine Continuation
     needs: [info, config, changed]
     if: |
-      (needs.changed.outputs.result == 'true' ||
-        (needs.config.outputs.check-changed != 'true' &&
-          always())) &&
+      (needs.config.outputs.check-changed != 'true' ||
+        needs.changed.outputs.result == 'true') &&
       needs.info.outputs.is-release-workflow == 'true'
     runs-on: ubuntu-latest
     outputs:
