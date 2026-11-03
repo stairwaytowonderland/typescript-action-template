@@ -1,8 +1,8 @@
 # :shopping_cart: Create a GitHub Action Using TypeScript
 
-![CI](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/ci.yaml)
-![Linter](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/linter.yaml)
-![CodeQL](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/codeql-analysis.yml)
+[![CI](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/ci.yaml/badge.svg)](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/ci.yaml)
+[![Linter](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/linter.yaml/badge.svg)](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/linter.yaml)
+[![CodeQL](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/codeql-analysis.yml)
 [![Coverage](./badges/coverage.svg)](./badges/coverage.svg)
 [![Documented](./badges/documentation.svg)](./docs)
 
