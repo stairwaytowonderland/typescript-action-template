@@ -41,10 +41,8 @@ If you are new, there's also a simpler introduction in the
 │   └── github.ts
 ├── __tests__/
 │   ├── action.test.ts
-│   ├── common.test.ts
-│   └── main.test.ts
-├── __utils__/
-│   └── mocks.ts
+│   ├── main.test.ts
+│   └── utils.test.ts
 ├── .github/
 │   ├── codeql/
 │   ├── workflows/
@@ -53,23 +51,31 @@ If you are new, there's also a simpler introduction in the
 │   └── index.md
 ├── .licenses/
 │   └── npm/
+├── .typedoc copy/
 ├── badges/
-│   └── coverage.svg
+│   ├── coverage.svg
+│   └── documentation.svg
 ├── dist/
 │   ├── index.js
 │   ├── index.js.map
 │   └── licenses.txt
+├── docs/
+│   ├── action/
+│   ├── index/
+│   ├── main/
+│   ├── toolkit/
+│   ├── utils/
+│   └── README.md
 ├── script/
 │   ├── release*
 │   ├── reset.example*
-│   └── superlinter.example*
+│   ├── superlinter.example*
+│   └── test.example*
 ├── src/
-│   ├── _common.ts
+│   ├── toolkit/
 │   ├── action.ts
-│   ├── config.ts
 │   ├── index.ts
 │   ├── main.ts
-│   ├── types.ts
 │   └── utils.ts
 ├── .checkov.yml
 ├── .editorconfig
@@ -100,7 +106,9 @@ If you are new, there's also a simpler introduction in the
 ├── TODO.example.csv
 ├── tsconfig.eslint.json
 ├── tsconfig.json
-└── tsconfig.test.json
+├── tsconfig.test.json
+├── typedoc.action.json
+└── typedoc.json
 ```
 
 </details>

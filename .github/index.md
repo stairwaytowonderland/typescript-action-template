@@ -21,7 +21,7 @@
 │   ├── post-create.yaml
 │   ├── pre-commit.yaml
 │   ├── repository-created.yaml
-│   ├── stargazers.yml
+│   ├── stargazers.yaml
 │   └── test.yaml
 ├── CODEOWNERS
 ├── dependabot.yml
