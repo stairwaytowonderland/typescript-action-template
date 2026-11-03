@@ -1,9 +1,9 @@
 # :shopping_cart: Create a GitHub Action Using TypeScript
 
-![CI](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/ci.yaml/badge.svg)
-![Linter](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/linter.yaml/badge.svg)
-![CodeQL](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/codeql-analysis.yml/badge.svg)
-![Coverage](./badges/coverage.svg)
+![CI](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/ci.yaml)
+![Linter](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/linter.yaml)
+![CodeQL](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/codeql-analysis.yml)
+[![Coverage](./badges/coverage.svg)](./badges/coverage.svg)
 [![Documented](./badges/documentation.svg)](./docs)
 
 [![GitHub latest release](https://img.shields.io/github/v/release/stairwaytowonderland/typescript-action-template?include_prereleases&logo=rocket)](https://github.com/stairwaytowonderland/typescript-action-template/releases)

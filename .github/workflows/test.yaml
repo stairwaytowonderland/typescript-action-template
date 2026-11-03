@@ -93,6 +93,9 @@ jobs:
       - name: Run unit tests
         run: npm test
 
+      - name: Format, Lint, and Type Checks
+        run: npm run check
+
   test-action:
     name: GitHub Actions Test
     needs: [check-workflow, check-changed]
