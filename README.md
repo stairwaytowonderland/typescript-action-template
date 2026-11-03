@@ -331,16 +331,16 @@ need to perform some initial setup steps before you can develop your action.
 1. :broom: Format and lint
 
     ```bash
-    # Use `npm run format:check` to check only
-    $ npm run format:write
+    # Use `npm run check:format` to check only
+    $ npm run fix:format
 
-    > typescript-action@0.0.0 format:write
-    > npx prettier --write .
+    > typescript-action-template@0.0.0 fix:format
+    > prettier --write .
 
     $ npm run lint
 
-    > typescript-action@0.0.0 lint
-    > npx eslint .
+    > typescript-action-template@0.0.0 lint
+    > eslint .
     ...
     ```
 
