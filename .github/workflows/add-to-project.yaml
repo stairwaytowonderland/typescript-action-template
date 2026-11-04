@@ -8,13 +8,15 @@ on:
   pull_request_target:
     branches:
       - main
+
+  # checkov:skip=CKV_GHA_7: Inputs are required for manual targeting
   workflow_dispatch:
     inputs:
       dry-run:
         description: 'Dry run mode'
         type: boolean
         required: false
-        default: true # checkov:skip=CKV_GHA_7: Default value for dry-run input is acceptable
+        default: true
 
 permissions:
   contents: read
