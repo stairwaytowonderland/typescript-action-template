@@ -80,6 +80,7 @@ export default defineConfig({
 		 */
 		// preserveModulesRoot: 'src',
 	},
+	external: ['node:sqlite'], // Mark 'node:sqlite' as external to prevent bundling it (coming from undici)
 	onwarn(warning, warn) {
 		switch (warning.code) {
 			case 'CIRCULAR_DEPENDENCY':
