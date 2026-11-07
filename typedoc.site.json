@@ -26,7 +26,7 @@
 	"cleanJsdocTheme": {
 		"siteName": "Typescript Action Reference",
 		"siteUrl": "https://stairwaytowonderland.github.io/typescript-action-template",
-		"basePath": "/",
+		"basePath": "/typescript-action-template",
 		"menu": [
 			{ "id": "home", "title": "Home" },
 			{
