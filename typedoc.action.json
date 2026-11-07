@@ -2,7 +2,7 @@
 	"extends": "./typedoc.json",
 	"readme": "none",
 	"plugin": ["typedoc-plugin-coverage", "typedoc-plugin-markdown"],
-	"entryPoints": ["src/index.ts", "src/main.ts", "src/!(index|main).ts", "src/toolkit/index.ts"],
+	"entryPoints": ["src/main.ts", "src/!(index|main).ts", "src/toolkit/index.ts"],
 	"entryPointStrategy": "resolve",
 	"sort": ["source-order"],
 	"sortEntryPoints": false,

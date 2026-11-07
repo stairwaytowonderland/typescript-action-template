@@ -3,19 +3,27 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { dirname } from 'node:path'
 import { pathToFileURL } from 'node:url'
 
-const basePath = 'src/toolkit/docs'
+export function rewriteDocsLinks(content) {
+	const moduleRoute = (name, hash = '') => `module/${name}/${hash}`
 
-export function rewriteToolkitDocsLinks(content) {
 	return content
-		.replace(/\[([A-Za-z0-9_-]+)\]\(\/\/readme\)/g, (_match, name) => `[${name}](/module/${name})`)
+		.replace(/\[([A-Za-z0-9_-]+)\]\(\/\/readme\)/g, (_match, name) => `[${name}](${moduleRoute(name)})`)
 		.replace(
 			/\[([A-Za-z0-9_-]+)\]\(\/(?:docs\/)?([A-Za-z0-9_-]+)(?:\/readme)?\)/g,
-			(_match, label, name) => `[${label}](/module/${name})`
+			(_match, label, name) => `[${label}](${moduleRoute(name)})`
 		)
-		.replace(/\]\((?:\.\/)?([A-Za-z0-9_-]+)\.md(#[^)]+)?\)/g, (_match, name) => `](/module/${name})`)
+		.replace(
+			/\]\((?:\.\/)?([A-Za-z0-9_-]+)\/README\.md(#[^)]+)?\)/g,
+			(_match, name, hash = '') => `](${moduleRoute(name, hash)})`
+		)
+		.replace(
+			/\]\((?:\.\/)?([A-Za-z0-9_-]+)\.md(#[^)]+)?\)/g,
+			(_match, name, hash = '') => `](${moduleRoute(name, hash)})`
+		)
 }
 
-export async function generateToolkitDocsIndex(
+export async function generateDocsIndex(
+	basePath = 'docs',
 	sourcePath = `${basePath}/README.md`,
 	outputPath = `${basePath}/.index.md`
 ) {
@@ -24,7 +32,7 @@ export async function generateToolkitDocsIndex(
 	}
 
 	const source = await readFile(sourcePath, 'utf8')
-	const output = rewriteToolkitDocsLinks(source)
+	const output = rewriteDocsLinks(source)
 
 	await mkdir(dirname(outputPath), { recursive: true })
 	await writeFile(outputPath, output)
@@ -33,7 +41,7 @@ export async function generateToolkitDocsIndex(
 }
 
 const commands = {
-	'build-docs-fix-links': generateToolkitDocsIndex,
+	'build-docs-fix-links': generateDocsIndex,
 }
 
 async function main() {

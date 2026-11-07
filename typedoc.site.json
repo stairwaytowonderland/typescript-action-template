@@ -1,16 +1,48 @@
 {
 	"$schema": "https://typedoc.org/schema.json",
-	"entryPoints": ["src/index.ts", "src/main.ts", "src/!(index|main).ts", "src/toolkit/index.ts"],
+	"name": "API Reference",
+	"logLevel": "Error",
+	"entryPoints": ["src/main.ts", "src/!(index|main).ts", "src/toolkit/index.ts"],
+	"entryPointStrategy": "resolve",
 	"sort": ["source-order"],
+	"sortEntryPoints": false,
 	"tsconfig": "tsconfig.json",
-	"readme": "none",
+	"readme": "docs/.index.md",
 
 	"plugin": ["@clean-jsdoc-theme/typedoc"],
-	"exclude": ["**/node_modules/**", "**/dist/**", "**/docs/**"],
 	"outputs": [{ "name": "clean-jsdoc-theme", "path": "docs-site" }],
+	"exclude": [
+		"**/node_modules/**",
+		"**/dist/**",
+		"**/__tests__/**",
+		"**/__fixtures__/**",
+		"**/__utils__/**",
+		"**/docs/**",
+		"**/docs-site/**",
+		"**/*.test.ts",
+		"index.ts"
+	],
 
 	"cleanJsdocTheme": {
-		"siteName": "My Library",
-		"docs": "src"
+		"siteName": "Typescript Action Reference",
+		"menu": [
+			{ "id": "home", "title": "Home" },
+			{
+				"title": "GitHub",
+				"link": "https://github.com/stairwaytowonderland/typescript-action-template",
+				"icon": "simpleicons:github"
+			},
+			{
+				"title": "Author Profile",
+				"link": "https://github.com/andrewhaller",
+				"icon": "simpleicons:github"
+			},
+			{
+				"title": "Clean JSDoc Theme",
+				"link": "https://ankdev.me/clean-jsdoc-theme",
+				"icon": "lucide:book-open-text"
+			}
+		],
+		"sectionOrder": ["Globals", "Namespaces", "Classes", "Modules", "GitHub Script Modules", "Utilities", "Typedefs"]
 	}
 }
