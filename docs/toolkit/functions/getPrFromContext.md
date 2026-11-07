@@ -7,7 +7,7 @@
 # Function: getPrFromContext()
 
 ```ts
-function getPrFromContext(context?):
+function getPrFromContext(context?): 
   | {
 [key: string]: any;
   number: number;

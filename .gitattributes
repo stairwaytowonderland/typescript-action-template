@@ -3,3 +3,4 @@
 dist/** -diff linguist-generated=true
 
 **/docs/** linguist-generated
+**/docs-site/** linguist-generated

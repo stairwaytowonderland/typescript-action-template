@@ -7,7 +7,7 @@
 # Function: getIssueFromContext()
 
 ```ts
-function getIssueFromContext(context?):
+function getIssueFromContext(context?): 
   | {
 [key: string]: any;
   number: number;

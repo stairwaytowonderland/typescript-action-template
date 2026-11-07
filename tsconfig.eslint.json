@@ -3,7 +3,14 @@
 		"noEmit": true,
 		"allowJs": true
 	},
-	"include": ["eslint.config.js", "fix-regex.cjs", "jest.config.js", "rollup.config.ts", ".prettierrc.mjs"],
-	"exclude": ["coverage", "dist", "node_modules"],
+	"include": [
+		"eslint.config.js",
+		"fix-regex.cjs",
+		"jest.config.js",
+		"pkg-utils.mjs",
+		"rollup.config.ts",
+		".prettierrc.mjs"
+	],
+	"exclude": ["dist", "node_modules"],
 	"extends": "./tsconfig.json"
 }

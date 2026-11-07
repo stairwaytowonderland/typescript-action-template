@@ -82,7 +82,7 @@ A promise that resolves to an authenticated Octokit client instance, or undefine
 ### getIssueFromContext()
 
 ```ts
-function getIssueFromContext(context?):
+function getIssueFromContext(context?): 
   | {
 [key: string]: any;
   number: number;
@@ -119,7 +119,7 @@ The issue object from the GitHub context payload, or undefined if not present.
 ### getPrFromContext()
 
 ```ts
-function getPrFromContext(context?):
+function getPrFromContext(context?): 
   | {
 [key: string]: any;
   number: number;

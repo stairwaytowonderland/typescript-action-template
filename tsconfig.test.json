@@ -9,5 +9,5 @@
 		"noUnusedParameters": false
 	},
 	"include": ["src", "__fixtures__", "__tests__", "__utils__"],
-	"exclude": ["coverage", "dist", "node_modules", "docs", "src/toolkit/docs"]
+	"exclude": ["dist", "node_modules", "src/toolkit/docs", "src/toolkit/docs-site"]
 }

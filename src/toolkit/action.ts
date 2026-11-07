@@ -137,8 +137,9 @@ export const getSafeInputs = <K extends keyof ActionInputs>(
  *
  * Extends the Partial type to allow optional repository properties.
  *
- * @see https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype
- * @see https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-1.html#mapped-types
+ * **References**
+ * - https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype
+ * - https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-1.html#mapped-types
  */
 export interface SimpleRepository extends Partial<GitHubContext['repo']> {
 	/** The full repository name in the format "owner/repo". */

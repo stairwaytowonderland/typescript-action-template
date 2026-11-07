@@ -123,3 +123,6 @@ out/
 !/script/release
 !/script/*.sh
 !/script/*.example
+
+**/docs-site/
+.index.md

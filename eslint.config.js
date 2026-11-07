@@ -16,7 +16,16 @@ export default [
 	// 1. Global Ignores
 	{
 		// '**/.rollup.cache/**',
-		ignores: ['coverage/**', 'dist/**', 'lib/**', 'node_modules/**', 'docs/**', 'src/toolkit/docs/**'],
+		ignores: [
+			'coverage/**',
+			'dist/**',
+			'lib/**',
+			'node_modules/**',
+			'docs/**',
+			'docs-site/**',
+			'src/toolkit/docs/**',
+			'src/toolkit/docs-site/**',
+		],
 	},
 
 	// 2. Base Presets (Native Flat Config definitions)

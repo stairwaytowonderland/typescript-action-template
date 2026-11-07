@@ -23,8 +23,8 @@ Implements the RepoAction interface and provides methods to run the action.
 
 ```ts
 new Action(
-   context?,
-   inputs?,
+   context?, 
+   inputs?, 
    dryRun?
 ): Action;
 ```

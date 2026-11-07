@@ -11,7 +11,7 @@ export default {
 		'!src/toolkit/__utils__/**/*',
 	],
 	coverageDirectory: './coverage',
-	coveragePathIgnorePatterns: ['/docs/', '/src/toolkit/docs/'],
+	coveragePathIgnorePatterns: ['/docs/', '/docs-site/', '/src/toolkit/docs/', '/src/toolkit/docs-site/'],
 	coverageReporters: ['json-summary', 'text', 'lcov'],
 	// Uncomment the below lines if you would like to enforce a coverage threshold
 	// for your action. This will fail the build if the coverage is below the

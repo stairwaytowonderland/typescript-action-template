@@ -1,0 +1,16 @@
+{
+	"$schema": "https://typedoc.org/schema.json",
+	"entryPoints": ["src/index.ts", "src/main.ts", "src/!(index|main).ts", "src/toolkit/index.ts"],
+	"sort": ["source-order"],
+	"tsconfig": "tsconfig.json",
+	"readme": "none",
+
+	"plugin": ["@clean-jsdoc-theme/typedoc"],
+	"exclude": ["**/node_modules/**", "**/dist/**", "**/docs/**"],
+	"outputs": [{ "name": "clean-jsdoc-theme", "path": "docs-site" }],
+
+	"cleanJsdocTheme": {
+		"siteName": "My Library",
+		"docs": "src"
+	}
+}
