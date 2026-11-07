@@ -34,13 +34,13 @@ jobs:
         with:
           node-version: '24'
           cache: 'npm'
-          cache-dependency-path: run-github-script/package-lock.json
+          cache-dependency-path: package-lock.json
 
       - name: Install Dependencies
-        run: npm --prefix run-github-script ci
+        run: npm ci
 
       - name: Generate Typedoc Site
-        run: npm --prefix run-github-script run build:docs
+        run: npm run build:docs
 
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v6
