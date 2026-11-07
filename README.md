@@ -3,6 +3,7 @@
 [![CI](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/ci.yaml/badge.svg)](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/ci.yaml)
 [![Linter](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/linter.yaml/badge.svg)](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/linter.yaml)
 [![CodeQL](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/codeql-analysis.yml)
+[![Deploy Typedoc to GitHub Pages](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/docs.yaml/badge.svg)](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/docs.yaml)
 [![Coverage](./badges/coverage.svg)](./badges/coverage.svg)
 [![Documented](./badges/documentation.svg)](./docs)
 

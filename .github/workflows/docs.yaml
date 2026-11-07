@@ -1,4 +1,4 @@
-name: Deploy Typedoc to GitHub Pages
+name: 📖 Deploy Docs
 
 on:
   push:
@@ -20,6 +20,7 @@ concurrency:
 
 jobs:
   deploy:
+    name: 🌐 Deploy GitHub Pages Site
     permissions:
       contents: read
       pages: write
