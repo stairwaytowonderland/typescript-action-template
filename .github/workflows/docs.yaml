@@ -8,6 +8,7 @@ on:
       - '.github/workflows/docs.yaml'
       - 'typedoc.site.json'
       - 'src/**/*.ts'
+  workflow_dispatch:
 
 # Set minimum required permissions for the workflow
 permissions:
