@@ -2,6 +2,8 @@
  * Utility functions for the GitHub Action.
  *
  * @packageDocumentation
+ * @module utils
+ * @category Action
  */
 
 /**

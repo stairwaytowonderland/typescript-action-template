@@ -10,7 +10,7 @@
 function delay(milliseconds): Promise<string>;
 ```
 
-Defined in: [src/action.ts:107](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/action.ts#L107)
+Defined in: [src/action.ts:109](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/action.ts#L109)
 
 Waits for a number of milliseconds.
 

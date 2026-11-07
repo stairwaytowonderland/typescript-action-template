@@ -125,4 +125,5 @@ out/
 !/script/*.example
 
 **/docs-site/
+**/*.local.*
 .index.md

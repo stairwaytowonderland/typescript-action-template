@@ -4,11 +4,22 @@
 
 # typescript-action-template
 
-## Modules
+## Toolkit
 
 | Module | Description |
 | ------ | ------ |
-| [main](main/README.md) | Main entry for the GitHub Action. |
-| [action](action/README.md) | Action logic |
-| [utils](utils/README.md) | Utility functions for the GitHub Action. |
 | [#toolkit](toolkit/README.md) | Exports all the modules from the toolkit. |
+
+## Action
+
+| Module | Description |
+| ------ | ------ |
+| [action](action/README.md) | Action logic |
+| [main](main/README.md) | Main entry for the GitHub Action. |
+| [utils](utils/README.md) | Utility functions for the GitHub Action. |
+
+## Barrel
+
+| Module | Description |
+| ------ | ------ |
+| [index-file](index-file/README.md) | Barrel file for the GitHub Action. |

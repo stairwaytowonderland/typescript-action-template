@@ -4,6 +4,8 @@
  * This file simply imports and runs the main logic of the action.
  *
  * @packageDocumentation
+ * @module index-file
+ * @category Barrel
  */
 
 import run from './main.js'

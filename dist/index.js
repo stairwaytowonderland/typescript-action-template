@@ -73344,6 +73344,8 @@ class ActionRepository {
  * Utility functions for the GitHub Action.
  *
  * @packageDocumentation
+ * @module utils
+ * @category Action
  */
 /**
  * Utility function to parse milliseconds from input, used to convert string inputs to numeric values.
@@ -73359,6 +73361,8 @@ const millisecondsFromInput = (input) => parseInt(String(input ?? ''), 10);
  * Contains the main logic for the GitHub Action
  *
  * @packageDocumentation
+ * @module action
+ * @category Action
  */
 // * STEP 1b: Retrieve raw inputs from the GitHub Action
 /**
@@ -73501,6 +73505,8 @@ class Action {
  * which gathers inputs and invokes the run function.
  *
  * @packageDocumentation
+ * @module main
+ * @category Action
  */
 /**
  * Runs the main logic for the GitHub Action.
@@ -73534,6 +73540,8 @@ const run = async () => {
  * This file simply imports and runs the main logic of the action.
  *
  * @packageDocumentation
+ * @module index-file
+ * @category Barrel
  */
 /* istanbul ignore next */
 run();
