@@ -6,7 +6,7 @@
 
 Welcome to the Toolkit docs.
 
-> Use this guide to explore the API.
+> Use this guide to explore the Toolkit API.
 
 ## Modules
 
