@@ -10,7 +10,7 @@
 function getInputs(): Inputs;
 ```
 
-Defined in: [src/action.ts:40](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/action.ts#L40)
+Defined in: [src/action.ts:39](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/action.ts#L39)
 
 Retrieves and normalizes GitHub Action inputs based on the provided labels.
 

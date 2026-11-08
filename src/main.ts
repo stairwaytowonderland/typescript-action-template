@@ -5,8 +5,7 @@
  * which gathers inputs and invokes the run function.
  *
  * @packageDocumentation
- * @module main
- * @category Action
+ * @category Main Logic
  */
 
 import * as core from '@actions/core'

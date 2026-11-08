@@ -10,7 +10,7 @@
 function millisecondsFromInput(input): number;
 ```
 
-Defined in: [src/utils.ts:15](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/utils.ts#L15)
+Defined in: [src/utils.ts:14](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/utils.ts#L14)
 
 Utility function to parse milliseconds from input, used to convert string inputs to numeric values.
 

@@ -7,9 +7,9 @@
 		"eslint.config.js",
 		"fix-regex.cjs",
 		"jest.config.js",
-		"pkg-utils.mjs",
 		"rollup.config.ts",
-		".prettierrc.mjs"
+		".prettierrc.mjs",
+		"script/pkg-utils.mjs"
 	],
 	"exclude": ["dist", "node_modules"],
 	"extends": "./tsconfig.json"

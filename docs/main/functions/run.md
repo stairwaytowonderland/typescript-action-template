@@ -10,7 +10,7 @@
 function run(): Promise<void>;
 ```
 
-Defined in: [src/main.ts:23](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/main.ts#L23)
+Defined in: [src/main.ts:22](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/main.ts#L22)
 
 Runs the main logic for the GitHub Action.
 

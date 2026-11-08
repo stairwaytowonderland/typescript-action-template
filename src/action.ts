@@ -4,8 +4,7 @@
  * Contains the main logic for the GitHub Action
  *
  * @packageDocumentation
- * @module action
- * @category Action
+ * @category Main Logic
  */
 
 import * as core from '@actions/core'

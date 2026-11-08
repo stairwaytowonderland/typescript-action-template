@@ -6,7 +6,7 @@
 	"entryPointStrategy": "resolve",
 	"sort": ["source-order"],
 	"sortEntryPoints": false,
-	"categoryOrder": ["Toolkit", "Action", "Barrel"],
+	"categoryOrder": ["Barrel", "Main Logic"],
 	"coverageLabel": "⌨️ Documented",
 	"coverageColor": "#5330c8",
 	"coverageOutputPath": "./badges/documentation.svg",

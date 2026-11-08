@@ -10,7 +10,7 @@
 type Inputs = Pick<ActionInputs, "dryRun" | "milliseconds">;
 ```
 
-Defined in: [src/action.ts:25](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/action.ts#L25)
+Defined in: [src/action.ts:24](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/action.ts#L24)
 
 Represents the inputs for the GitHub Action.
 

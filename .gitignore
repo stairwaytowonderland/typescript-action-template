@@ -123,6 +123,7 @@ out/
 !/script/release
 !/script/*.sh
 !/script/*.example
+!/script/*.mjs
 
 **/docs-site/
 **/*.local.*

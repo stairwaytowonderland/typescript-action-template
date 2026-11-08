@@ -10,7 +10,7 @@
 function main(action): Promise<string | void>;
 ```
 
-Defined in: [src/action.ts:67](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/action.ts#L67)
+Defined in: [src/action.ts:66](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/action.ts#L66)
 
 Waits for the specified number of milliseconds as defined in the action's inputs.
 

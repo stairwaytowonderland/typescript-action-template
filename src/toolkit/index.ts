@@ -3,7 +3,7 @@
  *
  * @packageDocumentation
  * @module #toolkit
- * @category Toolkit
+ * @category Barrel
  */
 
 export * from './action.js'
