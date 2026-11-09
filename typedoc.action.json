@@ -1,6 +1,7 @@
 {
 	"extends": "./typedoc.json",
-	"readme": "none",
+	"readme": "src/README.md",
+	"mergeReadme": true,
 	"plugin": ["typedoc-plugin-coverage", "typedoc-plugin-markdown"],
 	"entryPoints": ["src/index.ts", "src/main.ts", "src/!(index|main).ts", "src/toolkit/index.ts"],
 	"entryPointStrategy": "resolve",

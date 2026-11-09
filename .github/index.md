@@ -15,6 +15,7 @@
 │   ├── ci.yaml
 │   ├── codeql-analysis.yml
 │   ├── conventional-commit.yaml
+│   ├── docs.yaml
 │   ├── import-csv-issues.yaml
 │   ├── licensed.yaml
 │   ├── linter.yaml

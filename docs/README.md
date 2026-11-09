@@ -2,7 +2,11 @@
 
 ***
 
-# typescript-action-template
+# API Documentation
+
+Welcome to the API docs.
+
+> Use this guide to explore the API.
 
 ## Barrel
 
@@ -17,4 +21,9 @@
 | ------ | ------ |
 | [action](action/README.md) | Action logic |
 | [main](main/README.md) | Main entry for the GitHub Action. |
+
+## Other
+
+| Module | Description |
+| ------ | ------ |
 | [utils](utils/README.md) | Utility functions for the GitHub Action. |

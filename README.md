@@ -3,7 +3,7 @@
 [![CI](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/ci.yaml/badge.svg)](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/ci.yaml)
 [![Linter](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/linter.yaml/badge.svg)](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/linter.yaml)
 [![CodeQL](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/codeql-analysis.yml)
-[![Deploy Typedoc to GitHub Pages](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/docs.yaml/badge.svg)](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/docs.yaml)
+[![Deploy Docs ](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/docs.yaml/badge.svg)](https://github.com/stairwaytowonderland/typescript-action-template/actions/workflows/docs.yaml)
 [![Coverage](./badges/coverage.svg)](./badges/coverage.svg)
 [![Documented](./badges/documentation.svg)](./docs)
 [![GitHub latest release](https://img.shields.io/github/v/release/stairwaytowonderland/typescript-action-template?include_prereleases&logo=rocket)](https://github.com/stairwaytowonderland/typescript-action-template/releases)
@@ -61,17 +61,23 @@ If you are new, there's also a simpler introduction in the
 │   └── licenses.txt
 ├── docs/
 │   ├── action/
-│   ├── index/
+│   ├── index-file/
 │   ├── main/
 │   ├── toolkit/
 │   ├── utils/
 │   └── README.md
 ├── script/
+│   ├── build*
+│   ├── pkg-utils.mjs
 │   ├── release*
 │   ├── reset.example*
 │   ├── superlinter.example*
 │   └── test.example*
 ├── src/
+│   ├── _assets/
+│   ├── _islands/
+│   ├── module/
+│   ├── source/
 │   ├── toolkit/
 │   ├── action.ts
 │   ├── index.ts
@@ -108,7 +114,8 @@ If you are new, there's also a simpler introduction in the
 ├── tsconfig.json
 ├── tsconfig.test.json
 ├── typedoc.action.json
-└── typedoc.json
+├── typedoc.json
+└── typedoc.site.json
 ```
 
 </details>
@@ -265,9 +272,7 @@ hash.
 ```yaml
 name: CI
 
-on:
-  push:
-  pull_request:
+on: [push, workflow_dispatch]
 
 permissions:
   contents: read

@@ -73344,7 +73344,7 @@ class ActionRepository {
  * Utility functions for the GitHub Action.
  *
  * @packageDocumentation
- * @category Main Logic
+ * @module utils
  */
 /**
  * Utility function to parse milliseconds from input, used to convert string inputs to numeric values.
@@ -73540,8 +73540,8 @@ const run = async () => {
  * @module index-file
  * @category Barrel
  */
+// Re-export the run function for external usage
+// export { run }
 /* istanbul ignore next */
 run();
-
-export { run };
 //# sourceMappingURL=index.js.map
