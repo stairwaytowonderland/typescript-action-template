@@ -14,6 +14,7 @@ on:
       milliseconds:
         description: 'Milliseconds to wait'
         type: number
+        default: 1000
   workflow_dispatch:
 
 permissions:
@@ -39,7 +40,7 @@ jobs:
     needs: check-workflow
     if: |
       needs.check-workflow.outputs.is_workflow_call != 'true' &&
-        (github.event_name == 'pull_request' ||
+        (github.event_name == 'workflow_dispatch' || github.event_name == 'pull_request' ||
         (github.event_name == 'push' && ! startsWith(github.ref, 'refs/tags/')))
     uses: stairwaytowonderland/.github/.github/workflows/check-changed.yaml@v1
     permissions:
@@ -81,7 +82,7 @@ jobs:
     strategy:
       matrix:
         inputs:
-          - milliseconds: 1000
+          - milliseconds: ${{ github.event_name == 'workflow_dispatch' && 1000 || inputs.milliseconds }}
 
     steps:
       - name: Checkout repository
