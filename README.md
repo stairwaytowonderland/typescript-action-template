@@ -97,7 +97,7 @@ If you are new, there's also a simpler introduction in the
 ├── .prettier.json
 ├── .prettierignore
 ├── .prettierrc.mjs
-├── .releaserc
+├── .releaserc.json
 ├── .yaml-lint.yml
 ├── action.yaml
 ├── actionlint.yml
