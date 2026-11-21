@@ -84,9 +84,9 @@ jobs:
     with:
       paths: |
         ${{ needs.config.outputs.check-changed == 'true' && '
-        /.github/
-        /action.y*ml
-        src/
+        .github/**
+        action.y*ml
+        **/src/**
         !**/src/**/typedoc*.json
         !**/src/**/badges/*
         !**/src/**/docs/**/*' || '' }}
