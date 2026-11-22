@@ -77,6 +77,7 @@
 		"package-lock:fix": "node -e \"const fs = require('fs'); const f = 'package-lock.json'; const c = fs.readFileSync(f, 'utf8').trimEnd(); fs.writeFileSync(f, c + '\\n');\"",
 		"install:clean": "npm run clean && rm -f package-lock.json && npm run package-lock:install && npm install",
 		"install:minimatch": "npm install --ignore-scripts --no-save minimatch@$(node -pe \"require('./package.json').devDependencies['minimatch'] || require('./package.json').overrides['minimatch']\")",
+		"clean-install": "rm -rf node_modules && npm ci",
 		"prep": "npm run fix && npm run check:type && npm test && npm run package",
 		"all": "npm run install:clean && npm run fix && npm test && npm run coverage && npm run bundle",
 		"postall": "printf '\\033[1;32m%s\\033[0m\n' 'All tasks completed successfully.'",

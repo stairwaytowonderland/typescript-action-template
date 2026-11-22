@@ -58,6 +58,13 @@ jobs:
           # This must match the `outputs.path` directory in your typedoc.site.json
           path: './docs-site'
 
+      # Avoid new-repo artifact propagation race...
+      # Newly generated template repositories have brief propagation lag before
+      # actions/deploy-pages can query uploaded artifact metadata.
+      - name: Wait for artifact indexing on initial commit
+        if: github.event.head_commit.message == 'Initial commit'
+        run: sleep 10
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
