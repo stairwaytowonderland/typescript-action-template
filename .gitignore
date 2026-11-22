@@ -125,6 +125,8 @@ out/
 !/script/*.example
 !/script/*.mjs
 
-**/docs-site/
 **/*.local.*
+
+!/typedoc.local.json
+**/docs-site/
 .index.md
