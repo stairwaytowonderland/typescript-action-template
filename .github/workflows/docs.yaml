@@ -23,6 +23,9 @@ concurrency:
 jobs:
   deploy:
     name: 🌐 Deploy GitHub Pages Site
+    # Skip deployment for initial commit
+    if: github.event.head_commit.message != 'Initial commit'
+
     permissions:
       contents: read
       pages: write
@@ -61,8 +64,8 @@ jobs:
       # Avoid new-repo artifact propagation race...
       # Newly generated template repositories have brief propagation lag before
       # actions/deploy-pages can query uploaded artifact metadata.
-      - name: Wait for artifact indexing on initial commit
-        if: github.event.head_commit.message == 'Initial commit'
+      - name: Wait for artifact indexing
+        # if: github.event.head_commit.message == 'Initial commit'
         run: sleep 10
 
       - name: Deploy to GitHub Pages
