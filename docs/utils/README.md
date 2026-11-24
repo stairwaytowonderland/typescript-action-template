@@ -13,3 +13,4 @@ Utility functions for the GitHub Action.
 | Function | Description |
 | ------ | ------ |
 | [millisecondsFromInput](functions/millisecondsFromInput.md) | Utility function to parse milliseconds from input, used to convert string inputs to numeric values. |
+| [sleep](functions/sleep.md) | Sleeps for the specified number of milliseconds. |

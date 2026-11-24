@@ -12,7 +12,7 @@ Welcome to the API docs.
 
 | Module | Description |
 | ------ | ------ |
-| [index-file](index-file/README.md) | Barrel file for the GitHub Action. |
+| [0-index](0-index/README.md) | Barrel file for the GitHub Action. |
 | [#toolkit](toolkit/README.md) | Exports all the modules from the toolkit. |
 
 ## Main Logic

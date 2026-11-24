@@ -69187,7 +69187,9 @@ function expand(template, context) {
         }
         expression.split(/,/g).forEach(function(variable) {
           var tmp = /([^:\*]*)(?::(\d+)|(\*))?/.exec(variable);
-          values.push(getValues(context, operator, tmp[1], tmp[2] || tmp[3]));
+          values.push(
+            ...getValues(context, operator, tmp[1], tmp[2] || tmp[3])
+          );
         });
         if (operator && operator !== "+") {
           var separator = ",";
@@ -73353,6 +73355,23 @@ class ActionRepository {
  * @returns The parsed number of milliseconds.
  */
 const millisecondsFromInput = (input) => parseInt(String(input ?? ''), 10);
+/**
+ * Sleeps for the specified number of milliseconds.
+ *
+ * @param ms The number of milliseconds to sleep.
+ * @param msg Optional message to resolve with after the sleep duration.
+ * @returns A promise that resolves after the specified time.
+ * @throws Will reject the promise if the provided milliseconds value is not a number.
+ */
+const sleep = (ms, msg) => {
+    return new Promise((resolve, reject) => {
+        if (isNaN(ms)) {
+            reject(new Error('milliseconds is not a number'));
+            return;
+        }
+        setTimeout(() => resolve(msg?.trim() || undefined), ms);
+    });
+};
 
 /**
  * Action logic
@@ -73428,12 +73447,8 @@ const main = async (action) => {
  * @param milliseconds The number of milliseconds to wait.
  * @returns Resolves with 'done!' after the wait is over.
  */
-function delay(milliseconds) {
-    if (isNaN(milliseconds))
-        return Promise.reject(new Error('milliseconds is not a number'));
-    return new Promise((resolve) => {
-        setTimeout(() => resolve('done!'), milliseconds);
-    });
+async function delay(milliseconds) {
+    return (await sleep(milliseconds, 'done!').then((msg) => msg));
 }
 // * STEP 5: Define the main action class
 // * =======================================================
@@ -73536,8 +73551,12 @@ const run = async () => {
  *
  * This file simply imports and runs the main logic of the action.
  *
+ * @remarks
+ * - The leading zero *("0-")* in the module name is for ordering purposes in the documentation.
+ * - It also serves so as not to conflict with the default 'index' file behavior in the documentation.
+ *
  * @packageDocumentation
- * @module index-file
+ * @module 0-index
  * @category Barrel
  */
 // Re-export the run function for external usage

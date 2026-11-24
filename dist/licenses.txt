@@ -432,7 +432,7 @@ License Text:
 ---
 
 Name: @octokit/endpoint
-Version: 11.0.5
+Version: 11.0.6
 License: MIT
 Private: false
 Description: Turns REST API endpoints into generic request options

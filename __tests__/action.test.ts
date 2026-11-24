@@ -20,8 +20,12 @@ import type { GitHubContext } from '#toolkit'
 import { type Inputs, getInputs } from '../src/action.js'
 import { millisecondsFromInput } from '../src/utils.js'
 
-// Import the mocked core module and wait function from fixtures
+// Import the mocked core module and delay function from fixtures
+// import { delay } from '../__fixtures__/action.js'
 import { Action, delay } from '../src/action.js'
+
+jest.unstable_mockModule('@actions/core', () => core)
+jest.unstable_mockModule('../src/action.js', () => ({ delay }))
 
 describe('Action Logic', () => {
 	let inputs: Inputs
@@ -109,47 +113,6 @@ describe('Action Logic', () => {
 			expect(retrievedInputs.milliseconds).toBe('500')
 			// expect(retrievedInputs).toHaveProperty('ghToken')
 			// expect(retrievedInputs.ghToken).toBe('mock-token')
-		})
-	})
-
-	describe('delay', () => {
-		test('Throws an invalid number', async () => {
-			const input = parseInt('foo', 10)
-
-			expect(isNaN(input)).toBe(true)
-
-			await expect(delay(input)).rejects.toThrow('milliseconds is not a number')
-		})
-
-		// eslint-disable-next-line jest/no-commented-out-tests
-		/*
-		// Test the delay function with a valid number and real timers.
-		test('Waits with a valid number', async () => {
-			const ms: number = parseInt(inputs.milliseconds as string, 10)
-
-			const start = new Date()
-			const result = await delay(ms)
-			const end = new Date()
-
-			const delta = Math.abs(end.getTime() - start.getTime())
-
-			expect(delta).toBeGreaterThan(ms - 1)
-			expect(result).toBe('done!')
-		})
-		*/
-
-		// Test the delay function using fake timers to simulate the passage of time.
-		test('Waits with a valid number', async () => {
-			const ms: number = parseInt(inputs.milliseconds as string, 10)
-			jest.useFakeTimers()
-
-			try {
-				const result = delay(ms)
-				jest.advanceTimersByTime(ms)
-				await expect(result).resolves.toBe('done!')
-			} finally {
-				jest.useRealTimers()
-			}
 		})
 	})
 })

@@ -49,4 +49,9 @@ export const actionRunMock = actionRunMockNamed
  *
  * Currently commented out, as the mocked implementation is not needed for the tests.
  */
-export const main = jest.fn<typeof import('../src/action.js').main>()
+// export const main = jest.fn<typeof import('../src/action.js').main>()
+
+/**
+ * Mock for the delay function, used to simulate delays during tests.
+ */
+export const delay = jest.fn<typeof import('../src/action.js').delay>()

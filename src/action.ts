@@ -12,7 +12,7 @@ import { context as githubContext } from '@actions/github'
 import type { ActionRun, ActionConfig, ActionInputs, GitHubContext, SimpleRepository } from '#toolkit'
 import { ActionRepository, getSafeInputs } from '#toolkit'
 // import { getAuth } from '#toolkit'
-import { millisecondsFromInput } from './utils.js'
+import { millisecondsFromInput, sleep } from './utils.js'
 
 // * STEP 1a: Define the input names for the GitHub Action
 /**
@@ -105,12 +105,8 @@ export const main = async (action: Action): Promise<string | void> => {
  * @param milliseconds The number of milliseconds to wait.
  * @returns Resolves with 'done!' after the wait is over.
  */
-export function delay(milliseconds: number): Promise<string> {
-	if (isNaN(milliseconds)) return Promise.reject(new Error('milliseconds is not a number'))
-
-	return new Promise((resolve) => {
-		setTimeout(() => resolve('done!'), milliseconds)
-	})
+export async function delay(milliseconds: number): Promise<string> {
+	return (await sleep(milliseconds, 'done!').then((msg) => msg)) as string
 }
 
 // * STEP 4: Define an optional flat configuration interface for persisting action information
