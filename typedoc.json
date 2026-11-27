@@ -9,6 +9,7 @@
 	"parametersFormat": "table",
 	"typeDeclarationFormat": "table",
 	"indexFormat": "table",
+	"categorizeByGroup": true,
 	"useCodeBlocks": true,
 	"expandObjects": true,
 	"entryPoints": ["src"],

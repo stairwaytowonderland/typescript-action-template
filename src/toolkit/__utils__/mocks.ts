@@ -44,8 +44,8 @@ export function toOctokit(): OctokitClient {
  * @param mocks - A record of input keys and their corresponding mock values.
  * @returns void, as this function only sets up the mock implementation.
  */
-export function mockGetInput(mocks: Record<string, string>): void {
-	;(core.getInput as jest.Mock).mockImplementation((key: unknown) => mocks[key as string] ?? '')
+export function mockGetInput(mocks: Record<string, string | undefined>): void {
+	;(core.getInput as jest.Mock).mockImplementation((key: unknown) => mocks[key as string])
 }
 
 /**

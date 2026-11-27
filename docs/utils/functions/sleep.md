@@ -10,7 +10,7 @@
 function sleep(ms, msg?): Promise<string | void | undefined>;
 ```
 
-Defined in: [src/utils.ts:24](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/utils.ts#L24)
+Defined in: [src/utils.ts:25](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/utils.ts#L25)
 
 Sleeps for the specified number of milliseconds.
 

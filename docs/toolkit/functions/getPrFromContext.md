@@ -17,7 +17,7 @@ function getPrFromContext(context?):
   | undefined;
 ```
 
-Defined in: [src/toolkit/api.ts:103](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/api.ts#L103)
+Defined in: [src/toolkit/api.ts:101](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/api.ts#L101)
 
 Get the pull request object from the GitHub context payload.
 

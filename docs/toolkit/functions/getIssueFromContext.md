@@ -17,7 +17,7 @@ function getIssueFromContext(context?):
   | undefined;
 ```
 
-Defined in: [src/toolkit/api.ts:95](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/api.ts#L95)
+Defined in: [src/toolkit/api.ts:93](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/api.ts#L93)
 
 Get the issue object from the GitHub context payload.
 

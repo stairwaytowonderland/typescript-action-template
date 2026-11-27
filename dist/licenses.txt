@@ -603,7 +603,7 @@ THE SOFTWARE.
 ---
 
 Name: @octokit/graphql
-Version: 9.0.5
+Version: 9.0.6
 License: MIT
 Private: false
 Description: GitHub GraphQL API client for browsers and Node

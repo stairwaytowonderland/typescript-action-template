@@ -73209,7 +73209,7 @@ const normalizeOptional = (value) => value || undefined;
  * This is useful for removing sensitive information such as tokens from the inputs before logging or further processing.
  *
  * @example
- * const safeInputs = getSafeInputs(inputs, 'ghToken', 'anotherKeyToRemove')
+ * const safeInputs = getSafeInputs(inputs, 'token', 'anotherKeyToRemove')
  *
  * @param inputs The action inputs object to filter.
  * @param keys The keys to remove from the inputs object.
@@ -73346,7 +73346,8 @@ class ActionRepository {
  * Utility functions for the GitHub Action.
  *
  * @packageDocumentation
- * @module utils
+ * @module
+ * @category Utilities
  */
 /**
  * Utility function to parse milliseconds from input, used to convert string inputs to numeric values.
@@ -73381,32 +73382,32 @@ const sleep = (ms, msg) => {
  * @packageDocumentation
  * @category Main Logic
  */
-// * STEP 1b: Retrieve raw inputs from the GitHub Action
+// * STEP 1a: Retrieve raw inputs from the GitHub Action
 /**
- * Retrieves and normalizes GitHub Action inputs based on the provided labels.
+ * Represents the sanitized action inputs.
  *
  * Converts the input labels from kebab-case to camelCase and returns an object containing the corresponding input values.
- *
- * @returns An object containing the normalized action inputs keyed by camelCase names.
  */
-const getInputs = () => {
-    return {
-        // ghToken: (core.getInput('github-token') ?? '').trim(),
-        dryRun: getBooleanInput('dry-run'),
-        milliseconds: (getInput('milliseconds') ?? '').trim(),
-    };
-};
-// * STEP 1c: Sanitize action inputs to remove sensitive information
-/**
- * Takes the action inputs and returns a sanitized version with sensitive keys removed.
- *
- * Removes sensitive keys such as 'ghToken', 'secretOne', and 'secretTwo' from the inputs.
- * This helps prevent accidental exposure of sensitive information in logs or outputs.
- *
- * @param inputs The action inputs to be sanitized.
- * @returns The sanitized action inputs with sensitive keys removed.
- */
-const safeInputs = (inputs) => getSafeInputs(inputs, 'ghToken');
+class Inputs {
+    /** Indicates if the action should run in dry-run mode. */
+    dryRun;
+    /** The number of milliseconds to wait as a string input. */
+    milliseconds;
+    /**
+     * Constructs an instance of the Inputs class with sanitized action inputs.
+     *
+     * @param inputs The raw action inputs to be sanitized and stored.
+     */
+    constructor(inputs) {
+        // token: inputs?.token as string ?? (core.getInput('github-token') ?? '').trim(),
+        this.dryRun = inputs?.dryRun ?? getBooleanInput('dry-run');
+        this.milliseconds = inputs?.milliseconds ?? (getInput('milliseconds') ?? '').trim();
+    }
+    // * STEP 1b: Sanitize action inputs to remove sensitive information
+    getSafeInputs() {
+        return getSafeInputs(this, 'token');
+    }
+}
 // * STEP 2: Implement the main action logic using the defined configuration and inputs
 /**
  * Waits for the specified number of milliseconds as defined in the action's inputs.
@@ -73417,7 +73418,7 @@ const safeInputs = (inputs) => getSafeInputs(inputs, 'ghToken');
 const main = async (action) => {
     /*
     // Octokit instance for GitHub API requests
-    const octokit = await getAuth(action.inputs?.ghToken as string)
+    const octokit = await getAuth(action.inputs?.token as string)
 
     if (!octokit) {
         const authFailedMsg = 'Failed to obtain an authenticated Octokit instance.'
@@ -73485,7 +73486,7 @@ class Action {
      */
     constructor(context$1 = context, inputs, dryRun) {
         this.context = context$1;
-        this.inputs = inputs ?? getInputs();
+        this.inputs = inputs;
         this.dryRun = dryRun ?? this.inputs?.dryRun ?? false;
         debug(`Initializing Action with dryRun: ${this.dryRun}`);
     }
@@ -73495,7 +73496,7 @@ class Action {
      * This is useful for safely logging or processing action inputs without exposing sensitive information such as tokens.
      */
     get safeInputs() {
-        return safeInputs(this.inputs);
+        return this.inputs.getSafeInputs();
     }
     /**
      * Returns the actor (user) who triggered the GitHub Action.
@@ -73521,6 +73522,14 @@ class Action {
  * @category Main Logic
  */
 /**
+ * Retrieves and returns the sanitized action inputs as an instance of the Inputs class.
+ *
+ * @returns An object containing the normalized action inputs keyed by camelCase names.
+ */
+function getInputs() {
+    return new Inputs();
+}
+/**
  * Runs the main logic for the GitHub Action.
  *
  * Gathers inputs and invokes the run function.
@@ -73530,7 +73539,8 @@ class Action {
 const run = async () => {
     try {
         console.debug('Starting your GitHub action...');
-        const action = new Action(context);
+        const inputs = getInputs();
+        const action = new Action(context, inputs);
         await action.run();
         console.debug('Your GitHub action completed successfully!');
         process.exit(0);

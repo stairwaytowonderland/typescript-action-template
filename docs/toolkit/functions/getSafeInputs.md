@@ -39,5 +39,5 @@ A new object with the specified keys removed from the inputs.
 ## Example
 
 ```ts
-const safeInputs = getSafeInputs(inputs, 'ghToken', 'anotherKeyToRemove')
+const safeInputs = getSafeInputs(inputs, 'token', 'anotherKeyToRemove')
 ```

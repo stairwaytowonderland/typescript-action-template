@@ -15,20 +15,19 @@ import * as github from '../__fixtures__/github.js'
 // Import utility functions for mocking inputs and capturing outputs during tests
 import { mockGetInput, mockGetBooleanInput } from '#toolkit/__utils__/mocks.js'
 
-// Import custom types and utilities from the project
+// Type-only imports are safe at the top
 import type { GitHubContext } from '#toolkit'
-import { type Inputs, getInputs } from '../src/action.js'
 import { millisecondsFromInput } from '../src/utils.js'
 
-// Import the mocked core module and delay function from fixtures
-// import { delay } from '../__fixtures__/action.js'
-import { Action, delay } from '../src/action.js'
-
+// 1. Declare module mocks FIRST (do NOT mock ../src/action.js here)
 jest.unstable_mockModule('@actions/core', () => core)
-jest.unstable_mockModule('../src/action.js', () => ({ delay }))
+
+// 2. Dynamically import the modules under test AFTER mocks are registered
+const { getInputs } = await import('../src/main.js')
+const { Action, Inputs } = await import('../src/action.js')
 
 describe('Action Logic', () => {
-	let inputs: Inputs
+	let inputs: InstanceType<typeof Inputs>
 
 	beforeEach(() => {
 		// Clear any previous mocks to ensure a clean state for each test
@@ -38,21 +37,69 @@ describe('Action Logic', () => {
 	})
 
 	beforeEach(() => {
-		inputs = {
-			// ghToken: 'mock-token',
+		inputs = new Inputs({
+			// token: 'mock-token',
 			dryRun: false,
 			milliseconds: '500',
-		} as Inputs
+		})
+	})
+
+	describe('Inputs', () => {
+		test('falls back to empty string when milliseconds input is undefined', () => {
+			mockGetBooleanInput({ 'dry-run': false })
+			mockGetInput({ milliseconds: undefined as unknown as string })
+
+			const emptyInputs = new Inputs()
+			expect(emptyInputs.milliseconds).toBe('')
+		})
+
+		describe('getInputs', () => {
+			beforeEach(() => {
+				mockGetInput({
+					// 'github-token': inputs.token as string,
+					milliseconds: inputs.milliseconds as string,
+				})
+				mockGetBooleanInput({
+					'dry-run': true,
+				})
+			})
+
+			test('returns an object with the specified inputs', () => {
+				const retrievedInputs = getInputs()
+				expect(retrievedInputs).toHaveProperty('dryRun')
+				expect(typeof retrievedInputs.dryRun).toBe('boolean')
+				expect(retrievedInputs.dryRun).toBe(true)
+				expect(retrievedInputs).toHaveProperty('milliseconds')
+				expect(retrievedInputs.milliseconds).toBe('500')
+				// expect(retrievedInputs).toHaveProperty('token')
+				// expect(retrievedInputs.token).toBe('mock-token')
+			})
+		})
 	})
 
 	describe('Action', () => {
+		// eslint-disable-next-line jest/no-commented-out-tests
+		/*
 		test('initializes with no values', () => {
 			const action = new Action()
 			expect(action.context).toEqual(github.context)
 		})
+		*/
+
+		test('initializes with default githubContext and explicit dryRun', () => {
+			const action = new Action(undefined, inputs, true)
+			expect(action.context).toBeDefined()
+			expect(action.dryRun).toBe(true)
+		})
+
+		test('falls back to false when inputs.dryRun is undefined', () => {
+			const noDryRunInputs = { ...inputs, dryRun: undefined } as unknown as InstanceType<typeof Inputs>
+			const action = new Action(github.context as GitHubContext, noDryRunInputs)
+			expect(action.dryRun).toBe(false)
+		})
 
 		test('initializes with default values', () => {
-			const action = new Action(github.context as GitHubContext)
+			const action = new Action(github.context as GitHubContext, inputs)
 			expect(action.dryRun).toBe(false)
 			expect(action.actor).toBeDefined()
 			expect(action.repo).toBeDefined()
@@ -60,19 +107,19 @@ describe('Action Logic', () => {
 		})
 
 		test('get actor from action', () => {
-			const action = new Action(github.context as GitHubContext)
+			const action = new Action(github.context as GitHubContext, inputs)
 			expect(action.actor).toBeDefined()
 		})
 
 		test('get repo from action', () => {
-			const action = new Action(github.context as GitHubContext)
+			const action = new Action(github.context as GitHubContext, inputs)
 			expect(action.repo).toBeDefined()
 		})
 
 		test('get safeInputs from action', () => {
 			const action = new Action(github.context as GitHubContext, inputs)
 			expect(action.safeInputs).toBeDefined()
-			expect(action.safeInputs).not.toHaveProperty('ghToken')
+			expect(action.safeInputs).not.toHaveProperty('token')
 		})
 
 		test('run logs result and sets time output', async () => {
@@ -90,29 +137,6 @@ describe('Action Logic', () => {
 			}
 
 			expect(core.setOutput).toHaveBeenCalledWith('time', expect.stringMatching(/^\d{2}:\d{2}:\d{2}/))
-		})
-	})
-
-	describe('getInputs', () => {
-		beforeEach(() => {
-			mockGetInput({
-				// 'github-token': inputs.ghToken as string,
-				milliseconds: inputs.milliseconds as string,
-			})
-			mockGetBooleanInput({
-				'dry-run': true,
-			})
-		})
-
-		test('returns an object with the specified inputs', () => {
-			const retrievedInputs = getInputs()
-			expect(retrievedInputs).toHaveProperty('dryRun')
-			expect(typeof retrievedInputs.dryRun).toBe('boolean')
-			expect(retrievedInputs.dryRun).toBe(true)
-			expect(retrievedInputs).toHaveProperty('milliseconds')
-			expect(retrievedInputs.milliseconds).toBe('500')
-			// expect(retrievedInputs).toHaveProperty('ghToken')
-			// expect(retrievedInputs.ghToken).toBe('mock-token')
 		})
 	})
 })

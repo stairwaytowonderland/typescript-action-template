@@ -15,6 +15,7 @@ which gathers inputs and invokes the run function.
 
 | Function | Description |
 | ------ | ------ |
+| [getInputs](functions/getInputs.md) | Retrieves and returns the sanitized action inputs as an instance of the Inputs class. |
 | [run](functions/run.md) | Runs the main logic for the GitHub Action. |
 
 ## References

@@ -9,7 +9,7 @@ export TOKEN="${GITHUB_TOKEN-}"
 
 github_token() {
 	set +e
-	output=$(sh ../local-github-testing/generate-app-token/main.sh true)
+	output=$(sh ../local-github-script/generate-app-token/main.sh true)
 	status=$?
 	set -e
 	if [ $status -ne 0 ]; then

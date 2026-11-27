@@ -22,6 +22,14 @@ export type GitHubContext = typeof Context
  * Represents the configuration for a GitHub Action that includes a `run` method.
  */
 export interface ActionRun {
+	/** The action inputs provided to the GitHub Action. */
+	inputs?: {
+		/** The action input key-value pairs. */
+		[key: string]: unknown
+		/** Indicates if the action should run in dry-run mode. */
+		dryRun: boolean
+	}
+
 	/**
 	 * The action inputs with sensitive keys removed.
 	 */
@@ -50,20 +58,12 @@ export interface ActionConfig {
 
 	/** The repository associated with the GitHub Action. */
 	repo: SimpleRepository
-
-	/** The action inputs provided to the GitHub Action. */
-	inputs?: {
-		/** The action input key-value pairs. */
-		[key: string]: unknown
-		/** Indicates if the action should run in dry-run mode. */
-		dryRun: boolean
-	}
 }
 
 /**
  * Represents the non-nullable action inputs for the GitHub Action.
  */
-export type ActionInputs = NonNullable<ActionConfig['inputs']>
+export type ActionInputs = NonNullable<ActionRun['inputs']>
 
 /*
  * Utility functions for handling action inputs and sensitive information.
@@ -75,7 +75,7 @@ export type ActionInputs = NonNullable<ActionConfig['inputs']>
  * This is useful for removing sensitive information such as tokens from the inputs before logging or further processing.
  *
  * @example
- * const safeInputs = getSafeInputs(inputs, 'ghToken', 'anotherKeyToRemove')
+ * const safeInputs = getSafeInputs(inputs, 'token', 'anotherKeyToRemove')
  *
  * @param inputs The action inputs object to filter.
  * @param keys The keys to remove from the inputs object.

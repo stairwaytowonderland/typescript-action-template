@@ -19,17 +19,25 @@
 			"args": ["time:all"]
 		},
 		{
-			"label": "Run Checks (npm)",
+			"label": "CI Checks (npm)",
 			"type": "npm",
-			"script": "cicd:build"
+			"script": "cicd:build",
+			"problemMatcher": []
 		},
 		{
-			"label": "Run Tests (npm)",
+			"label": "Unit Tests (npm)",
 			"type": "npm",
-			"script": "test"
+			"script": "test",
+			"problemMatcher": []
 		},
 		{
-			"label": "Run CICD Validations",
+			"label": "Test Local (npm)",
+			"type": "npm",
+			"script": "start",
+			"problemMatcher": []
+		},
+		{
+			"label": "CI Checks and Unit Tests (npm)",
 			"group": {
 				"kind": "test",
 				"isDefault": true
@@ -42,7 +50,47 @@
 			},
 			"problemMatcher": [],
 			"dependsOrder": "sequence",
-			"dependsOn": ["Run Checks (npm)", "Run Tests (npm)"]
+			"dependsOn": ["CI Checks (npm)", "Unit Tests (npm)"]
+		},
+		{
+			"label": "Fix Prettier Formatting (npm)",
+			"type": "npm",
+			"script": "fix:format",
+			"problemMatcher": []
+		},
+		{
+			"label": "Fix ESLint Issues (npm)",
+			"type": "npm",
+			"script": "fix:lint",
+			"problemMatcher": []
+		},
+		{
+			"label": "Fix All (npm)",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "shared"
+			},
+			"problemMatcher": [],
+			"dependsOrder": "sequence",
+			"dependsOn": ["Fix Prettier Formatting (npm)", "Fix ESLint Issues (npm)"]
+		},
+		{
+			"label": "Generate Documentation (npm)",
+			"type": "npm",
+			"script": "docs",
+			"problemMatcher": []
+		},
+		{
+			"label": "All - 'Kitchen Sink' (npm)",
+			"type": "npm",
+			"script": "all",
+			"problemMatcher": []
 		}
 	]
 }

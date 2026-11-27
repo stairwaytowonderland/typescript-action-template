@@ -8,21 +8,23 @@ Welcome to the API docs.
 
 > Use this guide to explore the API.
 
-## Barrel
+## Modules
+
+### Barrel
 
 | Module | Description |
 | ------ | ------ |
 | [0-index](0-index/README.md) | Barrel file for the GitHub Action. |
 | [#toolkit](toolkit/README.md) | Exports all the modules from the toolkit. |
 
-## Main Logic
+### Main Logic
 
 | Module | Description |
 | ------ | ------ |
 | [action](action/README.md) | Action logic |
 | [main](main/README.md) | Main entry for the GitHub Action. |
 
-## Other
+### Utilities
 
 | Module | Description |
 | ------ | ------ |

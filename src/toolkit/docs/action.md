@@ -161,7 +161,7 @@ Updates the repository owner and name based on the provided GitHub Actions conte
 
 ### ActionConfig
 
-Defined in: [src/toolkit/action.ts:41](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L41)
+Defined in: [src/toolkit/action.ts:49](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L49)
 
 Represents the base configuration for a GitHub Actions run.
 
@@ -169,12 +169,10 @@ Represents the base configuration for a GitHub Actions run.
 
 | Property | Type | Description | Defined in |
 | ------ | ------ | ------ | ------ |
-| <a id="actor"></a> `actor` | `string` | The actor (user) who triggered the GitHub Action. | [src/toolkit/action.ts:49](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L49) |
-| <a id="context"></a> `context` | `Context` | The GitHub context object. | [src/toolkit/action.ts:46](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L46) |
-| <a id="dryrun"></a> `dryRun` | `boolean` | Indicates if the action should run in dry-run mode. | [src/toolkit/action.ts:43](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L43) |
-| <a id="repo-1"></a> `repo` | [`SimpleRepository`](#simplerepository) | The repository associated with the GitHub Action. | [src/toolkit/action.ts:52](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L52) |
-| <a id="inputs"></a> `inputs?` | \{ \[`key`: `string`\]: `unknown`; `dryRun`: `boolean`; \} | The action inputs provided to the GitHub Action. | [src/toolkit/action.ts:55](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L55) |
-| `inputs.dryRun` | `boolean` | Indicates if the action should run in dry-run mode. | [src/toolkit/action.ts:59](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L59) |
+| <a id="actor"></a> `actor` | `string` | The actor (user) who triggered the GitHub Action. | [src/toolkit/action.ts:57](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L57) |
+| <a id="context"></a> `context` | `Context` | The GitHub context object. | [src/toolkit/action.ts:54](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L54) |
+| <a id="dryrun"></a> `dryRun` | `boolean` | Indicates if the action should run in dry-run mode. | [src/toolkit/action.ts:51](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L51) |
+| <a id="repo-1"></a> `repo` | [`SimpleRepository`](#simplerepository) | The repository associated with the GitHub Action. | [src/toolkit/action.ts:60](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L60) |
 
 ***
 
@@ -188,7 +186,9 @@ Represents the configuration for a GitHub Action that includes a `run` method.
 
 | Property | Type | Description | Defined in |
 | ------ | ------ | ------ | ------ |
-| <a id="safeinputs"></a> `safeInputs` | `ReturnType`\<*typeof* [`getSafeInputs`](#getsafeinputs)\> | The action inputs with sensitive keys removed. | [src/toolkit/action.ts:28](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L28) |
+| <a id="safeinputs"></a> `safeInputs` | `ReturnType`\<*typeof* [`getSafeInputs`](#getsafeinputs)\> | The action inputs with sensitive keys removed. | [src/toolkit/action.ts:36](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L36) |
+| <a id="inputs"></a> `inputs?` | \{ \[`key`: `string`\]: `unknown`; `dryRun`: `boolean`; \} | The action inputs provided to the GitHub Action. | [src/toolkit/action.ts:26](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L26) |
+| `inputs.dryRun` | `boolean` | Indicates if the action should run in dry-run mode. | [src/toolkit/action.ts:30](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L30) |
 
 #### Methods
 
@@ -198,7 +198,7 @@ Represents the configuration for a GitHub Action that includes a `run` method.
 run(): Promise<unknown>;
 ```
 
-Defined in: [src/toolkit/action.ts:35](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L35)
+Defined in: [src/toolkit/action.ts:43](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L43)
 
 Executes the main logic of the GitHub Action.
 
@@ -239,7 +239,7 @@ Extends the Partial type to allow optional repository properties.
 ### ActionInputs
 
 ```ts
-type ActionInputs = NonNullable<ActionConfig["inputs"]>;
+type ActionInputs = NonNullable<ActionRun["inputs"]>;
 ```
 
 Defined in: [src/toolkit/action.ts:66](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L66)
@@ -295,5 +295,5 @@ A new object with the specified keys removed from the inputs.
 #### Example
 
 ```ts
-const safeInputs = getSafeInputs(inputs, 'ghToken', 'anotherKeyToRemove')
+const safeInputs = getSafeInputs(inputs, 'token', 'anotherKeyToRemove')
 ```

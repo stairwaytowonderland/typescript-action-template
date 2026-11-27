@@ -14,47 +14,36 @@ import { ActionRepository, getSafeInputs } from '#toolkit'
 // import { getAuth } from '#toolkit'
 import { millisecondsFromInput, sleep } from './utils.js'
 
-// * STEP 1a: Define the input names for the GitHub Action
+// * STEP 1a: Retrieve raw inputs from the GitHub Action
 /**
- * Represents the inputs for the GitHub Action.
- *
- * Only includes the relevant input fields required for the action.
- */
-// prettier-ignore
-export type Inputs = Pick<
-	ActionInputs,
-	// | 'ghToken'
-	| 'dryRun'
-	| 'milliseconds'
->
-
-// * STEP 1b: Retrieve raw inputs from the GitHub Action
-/**
- * Retrieves and normalizes GitHub Action inputs based on the provided labels.
+ * Represents the sanitized action inputs.
  *
  * Converts the input labels from kebab-case to camelCase and returns an object containing the corresponding input values.
- *
- * @returns An object containing the normalized action inputs keyed by camelCase names.
  */
-export const getInputs = (): Inputs => {
-	return {
-		// ghToken: (core.getInput('github-token') ?? '').trim(),
-		dryRun: core.getBooleanInput('dry-run'),
-		milliseconds: (core.getInput('milliseconds') ?? '').trim(),
+export class Inputs implements ActionInputs {
+	/** The action input key-value pairs. */
+	[key: string]: unknown
+	/** Indicates if the action should run in dry-run mode. */
+	dryRun: boolean
+	/** The number of milliseconds to wait as a string input. */
+	milliseconds: string
+
+	/**
+	 * Constructs an instance of the Inputs class with sanitized action inputs.
+	 *
+	 * @param inputs The raw action inputs to be sanitized and stored.
+	 */
+	constructor(inputs?: ActionInputs) {
+		// token: inputs?.token as string ?? (core.getInput('github-token') ?? '').trim(),
+		this.dryRun = inputs?.dryRun ?? core.getBooleanInput('dry-run')
+		this.milliseconds = (inputs?.milliseconds as string) ?? (core.getInput('milliseconds') ?? '').trim()
+	}
+
+	// * STEP 1b: Sanitize action inputs to remove sensitive information
+	getSafeInputs(): ReturnType<typeof getSafeInputs> {
+		return getSafeInputs(this, 'token')
 	}
 }
-
-// * STEP 1c: Sanitize action inputs to remove sensitive information
-/**
- * Takes the action inputs and returns a sanitized version with sensitive keys removed.
- *
- * Removes sensitive keys such as 'ghToken', 'secretOne', and 'secretTwo' from the inputs.
- * This helps prevent accidental exposure of sensitive information in logs or outputs.
- *
- * @param inputs The action inputs to be sanitized.
- * @returns The sanitized action inputs with sensitive keys removed.
- */
-export const safeInputs = (inputs?: Inputs) => getSafeInputs(inputs, 'ghToken')
 
 // * STEP 2: Implement the main action logic using the defined configuration and inputs
 /**
@@ -66,7 +55,7 @@ export const safeInputs = (inputs?: Inputs) => getSafeInputs(inputs, 'ghToken')
 export const main = async (action: Action): Promise<string | void> => {
 	/*
 	// Octokit instance for GitHub API requests
-	const octokit = await getAuth(action.inputs?.ghToken as string)
+	const octokit = await getAuth(action.inputs?.token as string)
 
 	if (!octokit) {
 		const authFailedMsg = 'Failed to obtain an authenticated Octokit instance.'
@@ -115,7 +104,7 @@ export async function delay(milliseconds: number): Promise<string> {
  *
  * Customize this interface to include any additional configuration options required for your action.
  */
-interface ActionInfo extends ReturnType<typeof safeInputs> {
+interface ActionInfo extends ReturnType<Inputs['getSafeInputs']> {
 	/** The number of milliseconds to wait during the action execution. */
 	milliseconds: number
 }
@@ -133,7 +122,7 @@ export class Action implements ActionConfig, ActionRun {
 	/** The GitHub context object. */
 	context: GitHubContext
 	/** The action inputs provided to the GitHub Action. */
-	inputs?: Inputs
+	inputs: Inputs
 	/** Indicates if the action should run in dry-run mode. */
 	dryRun: boolean
 
@@ -155,9 +144,9 @@ export class Action implements ActionConfig, ActionRun {
 	 * @param inputs Optional action inputs.
 	 * @param dryRun Optional flag indicating if the action should run in dry-run mode.
 	 */
-	constructor(context: GitHubContext = githubContext, inputs?: Inputs, dryRun?: boolean) {
+	constructor(context: GitHubContext = githubContext, inputs: Inputs, dryRun?: boolean) {
 		this.context = context
-		this.inputs = inputs ?? getInputs()
+		this.inputs = inputs
 		this.dryRun = dryRun ?? this.inputs?.dryRun ?? false
 		core.debug(`Initializing Action with dryRun: ${this.dryRun}`)
 	}
@@ -167,8 +156,8 @@ export class Action implements ActionConfig, ActionRun {
 	 *
 	 * This is useful for safely logging or processing action inputs without exposing sensitive information such as tokens.
 	 */
-	get safeInputs(): ReturnType<typeof getSafeInputs> {
-		return safeInputs(this.inputs)
+	get safeInputs(): ReturnType<Inputs['getSafeInputs']> {
+		return this.inputs.getSafeInputs()
 	}
 
 	/**

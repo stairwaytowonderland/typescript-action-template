@@ -22,13 +22,13 @@ import { normalizeOptional, kebabToCamel } from './utils.js'
 describe('Utilities', () => {
 	describe('getSafeInputs', () => {
 		test('removes specified keys from the inputs object', () => {
-			const inputs = { ghToken: 'secret', dryRun: true, milliseconds: '1000' }
-			const safeInputs = getSafeInputs(inputs, 'ghToken')
+			const inputs = { token: 'secret', dryRun: true, milliseconds: '1000' }
+			const safeInputs = getSafeInputs(inputs, 'token')
 			expect(safeInputs).toEqual({ dryRun: true, milliseconds: '1000' })
 		})
 
 		test('returns an empty object if inputs is undefined', () => {
-			const safeInputs = getSafeInputs(undefined, 'ghToken')
+			const safeInputs = getSafeInputs(undefined, 'token')
 			expect(safeInputs).toEqual({})
 		})
 	})

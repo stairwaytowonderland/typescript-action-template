@@ -6,7 +6,7 @@
 
 # Interface: SearchItem
 
-Defined in: [src/toolkit/api.ts:113](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/api.ts#L113)
+Defined in: [src/toolkit/api.ts:111](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/api.ts#L111)
 
 Represents a single search result item from the GitHub API.
 
@@ -18,7 +18,7 @@ Represents a single search result item from the GitHub API.
 node_id: string;
 ```
 
-Defined in: [src/toolkit/api.ts:115](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/api.ts#L115)
+Defined in: [src/toolkit/api.ts:113](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/api.ts#L113)
 
 The unique node ID of the search result item.
 
@@ -30,7 +30,7 @@ The unique node ID of the search result item.
 number: number;
 ```
 
-Defined in: [src/toolkit/api.ts:117](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/api.ts#L117)
+Defined in: [src/toolkit/api.ts:115](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/api.ts#L115)
 
 The issue or pull request number.
 
@@ -44,7 +44,7 @@ labels: {
 }[];
 ```
 
-Defined in: [src/toolkit/api.ts:119](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/api.ts#L119)
+Defined in: [src/toolkit/api.ts:117](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/api.ts#L117)
 
 The labels associated with the issue or pull request.
 
@@ -64,7 +64,7 @@ The name of the label.
 title: string;
 ```
 
-Defined in: [src/toolkit/api.ts:124](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/api.ts#L124)
+Defined in: [src/toolkit/api.ts:122](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/api.ts#L122)
 
 The title of the issue or pull request.
 
@@ -76,7 +76,7 @@ The title of the issue or pull request.
 html_url: string;
 ```
 
-Defined in: [src/toolkit/api.ts:126](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/api.ts#L126)
+Defined in: [src/toolkit/api.ts:124](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/api.ts#L124)
 
 The URL of the issue or pull request on GitHub.
 
@@ -88,7 +88,7 @@ The URL of the issue or pull request on GitHub.
 repository_url: string;
 ```
 
-Defined in: [src/toolkit/api.ts:128](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/api.ts#L128)
+Defined in: [src/toolkit/api.ts:126](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/api.ts#L126)
 
 The URL of the repository containing the issue or pull request.
 
@@ -100,6 +100,6 @@ The URL of the repository containing the issue or pull request.
 created_at: Date;
 ```
 
-Defined in: [src/toolkit/api.ts:130](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/api.ts#L130)
+Defined in: [src/toolkit/api.ts:128](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/api.ts#L128)
 
 The date and time when the issue or pull request was created.

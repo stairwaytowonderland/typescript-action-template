@@ -12,13 +12,44 @@ Represents the configuration for a GitHub Action that includes a `run` method.
 
 ## Properties
 
+### inputs?
+
+```ts
+inputs?: {
+[key: string]: unknown;
+  dryRun: boolean;
+};
+```
+
+Defined in: [src/toolkit/action.ts:26](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L26)
+
+The action inputs provided to the GitHub Action.
+
+#### Index Signature
+
+```ts
+[key: string]: unknown
+```
+
+The action input key-value pairs.
+
+#### dryRun
+
+```ts
+dryRun: boolean;
+```
+
+Indicates if the action should run in dry-run mode.
+
+***
+
 ### safeInputs
 
 ```ts
 safeInputs: ReturnType<typeof getSafeInputs>;
 ```
 
-Defined in: [src/toolkit/action.ts:28](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L28)
+Defined in: [src/toolkit/action.ts:36](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L36)
 
 The action inputs with sensitive keys removed.
 
@@ -30,7 +61,7 @@ The action inputs with sensitive keys removed.
 run(): Promise<unknown>;
 ```
 
-Defined in: [src/toolkit/action.ts:35](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L35)
+Defined in: [src/toolkit/action.ts:43](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L43)
 
 Executes the main logic of the GitHub Action.
 

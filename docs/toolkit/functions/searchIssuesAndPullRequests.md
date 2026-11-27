@@ -10,7 +10,7 @@
 function searchIssuesAndPullRequests(query, octokit): Promise<SearchItem[]>;
 ```
 
-Defined in: [src/toolkit/api.ts:143](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/api.ts#L143)
+Defined in: [src/toolkit/api.ts:141](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/api.ts#L141)
 
 Searches for issues and pull requests based on the provided query using the GitHub REST API.
 Returns a list of search result items matching the query.

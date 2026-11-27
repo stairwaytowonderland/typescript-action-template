@@ -10,7 +10,16 @@
 
 import * as core from '@actions/core'
 import * as github from '@actions/github'
-import { Action } from './action.js'
+import { Action, Inputs } from './action.js'
+
+/**
+ * Retrieves and returns the sanitized action inputs as an instance of the Inputs class.
+ *
+ * @returns An object containing the normalized action inputs keyed by camelCase names.
+ */
+export function getInputs() {
+	return new Inputs()
+}
 
 /**
  * Runs the main logic for the GitHub Action.
@@ -22,7 +31,8 @@ import { Action } from './action.js'
 export const run = async (): Promise<void> => {
 	try {
 		console.debug('Starting your GitHub action...')
-		const action = new Action(github.context)
+		const inputs = getInputs()
+		const action = new Action(github.context, inputs)
 		await action.run()
 
 		console.debug('Your GitHub action completed successfully!')

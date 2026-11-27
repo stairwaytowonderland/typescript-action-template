@@ -7,7 +7,7 @@
 # Function: getAuth()
 
 ```ts
-function getAuth(ghToken, failOnError?): Promise<
+function getAuth(token, failOnError?): Promise<
   | Octokit & Api & {
   paginate: PaginateInterface;
 }
@@ -24,7 +24,7 @@ If the environment is set to 'test', the function will skip live GitHub API auth
 
 | Parameter | Type | Default value | Description |
 | ------ | ------ | ------ | ------ |
-| `ghToken` | `string` | `undefined` | Optional GitHub token to use for authentication. If not provided, it will be read from the action inputs. |
+| `token` | `string` | `undefined` | Optional GitHub token to use for authentication. If not provided, it will be read from the action inputs. |
 | `failOnError?` | `boolean` | `false` | Whether to throw an error if authentication fails. Defaults to false. |
 
 ## Returns

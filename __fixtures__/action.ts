@@ -20,6 +20,9 @@ export const actionRunMockDefault = () => ({
 			return actionMock()
 		}
 	},
+	Inputs: class {
+		constructor() {}
+	},
 })
 
 /**
@@ -34,6 +37,9 @@ export const actionRunMockNamed = () => ({
 		async run(): Promise<void> {
 			return actionMock()
 		}
+	},
+	Inputs: class {
+		constructor() {}
 	},
 })
 

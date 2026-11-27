@@ -7,7 +7,7 @@
 # Type Alias: ActionInputs
 
 ```ts
-type ActionInputs = NonNullable<ActionConfig["inputs"]>;
+type ActionInputs = NonNullable<ActionRun["inputs"]>;
 ```
 
 Defined in: [src/toolkit/action.ts:66](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/toolkit/action.ts#L66)
