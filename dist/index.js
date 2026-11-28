@@ -73389,6 +73389,14 @@ const sleep = (ms, msg) => {
  * Converts the input labels from kebab-case to camelCase and returns an object containing the corresponding input values.
  */
 class Inputs {
+    /**
+     * Retrieves the sanitized action inputs as an instance of the Inputs class.
+     *
+     * @returns An instance of the Inputs class containing the sanitized action inputs.
+     */
+    static getInputs() {
+        return new Inputs();
+    }
     /** Indicates if the action should run in dry-run mode. */
     dryRun;
     /** The number of milliseconds to wait as a string input. */
@@ -73484,8 +73492,8 @@ class Action {
      * @param inputs Optional action inputs.
      * @param dryRun Optional flag indicating if the action should run in dry-run mode.
      */
-    constructor(context$1 = context, inputs, dryRun) {
-        this.context = context$1;
+    constructor(context, inputs, dryRun) {
+        this.context = context;
         this.inputs = inputs;
         this.dryRun = dryRun ?? this.inputs?.dryRun ?? false;
         debug(`Initializing Action with dryRun: ${this.dryRun}`);
@@ -73522,14 +73530,6 @@ class Action {
  * @category Main Logic
  */
 /**
- * Retrieves and returns the sanitized action inputs as an instance of the Inputs class.
- *
- * @returns An object containing the normalized action inputs keyed by camelCase names.
- */
-function getInputs() {
-    return new Inputs();
-}
-/**
  * Runs the main logic for the GitHub Action.
  *
  * Gathers inputs and invokes the run function.
@@ -73538,11 +73538,11 @@ function getInputs() {
  */
 const run = async () => {
     try {
-        console.debug('Starting your GitHub action...');
-        const inputs = getInputs();
+        debug('Starting your GitHub action...');
+        const inputs = Inputs.getInputs();
         const action = new Action(context, inputs);
         await action.run();
-        console.debug('Your GitHub action completed successfully!');
+        debug('Your GitHub action completed successfully!');
         process.exit(0);
     }
     catch (error) {

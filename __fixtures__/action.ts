@@ -38,8 +38,11 @@ export const actionRunMockNamed = () => ({
 			return actionMock()
 		}
 	},
-	Inputs: class {
+	Inputs: class Inputs {
 		constructor() {}
+		static getInputs() {
+			return new Inputs()
+		}
 	},
 })
 

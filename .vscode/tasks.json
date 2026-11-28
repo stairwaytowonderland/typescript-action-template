@@ -2,7 +2,7 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"label": "Run Build Script",
+			"label": "Run 'Kitchen Sink' Build Script (shell)",
 			"group": {
 				"kind": "build",
 				"isDefault": true
@@ -81,16 +81,44 @@
 			"dependsOn": ["Fix Prettier Formatting (npm)", "Fix ESLint Issues (npm)"]
 		},
 		{
+			"label": "Generate Coverage (npm)",
+			"type": "npm",
+			"script": "coverage",
+			"problemMatcher": []
+		},
+		{
+			"label": "Bundle (npm)",
+			"type": "npm",
+			"script": "bundle",
+			"problemMatcher": []
+		},
+		{
 			"label": "Generate Documentation (npm)",
 			"type": "npm",
 			"script": "docs",
 			"problemMatcher": []
 		},
 		{
-			"label": "All - 'Kitchen Sink' (npm)",
-			"type": "npm",
-			"script": "all",
-			"problemMatcher": []
+			"label": "Package (npm)",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "shared"
+			},
+			"problemMatcher": [],
+			"dependsOrder": "sequence",
+			"dependsOn": [
+				"Fix All (npm)",
+				"Unit Tests (npm)",
+				"Generate Coverage (npm)",
+				"Bundle (npm)",
+				"Generate Documentation (npm)"
+			]
 		}
 	]
 }

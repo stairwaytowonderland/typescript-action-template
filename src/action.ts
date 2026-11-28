@@ -8,7 +8,6 @@
  */
 
 import * as core from '@actions/core'
-import { context as githubContext } from '@actions/github'
 import type { ActionRun, ActionConfig, ActionInputs, GitHubContext, SimpleRepository } from '#toolkit'
 import { ActionRepository, getSafeInputs } from '#toolkit'
 // import { getAuth } from '#toolkit'
@@ -21,6 +20,15 @@ import { millisecondsFromInput, sleep } from './utils.js'
  * Converts the input labels from kebab-case to camelCase and returns an object containing the corresponding input values.
  */
 export class Inputs implements ActionInputs {
+	/**
+	 * Retrieves the sanitized action inputs as an instance of the Inputs class.
+	 *
+	 * @returns An instance of the Inputs class containing the sanitized action inputs.
+	 */
+	static getInputs(): Inputs {
+		return new Inputs()
+	}
+
 	/** The action input key-value pairs. */
 	[key: string]: unknown
 	/** Indicates if the action should run in dry-run mode. */
@@ -144,7 +152,7 @@ export class Action implements ActionConfig, ActionRun {
 	 * @param inputs Optional action inputs.
 	 * @param dryRun Optional flag indicating if the action should run in dry-run mode.
 	 */
-	constructor(context: GitHubContext = githubContext, inputs: Inputs, dryRun?: boolean) {
+	constructor(context: GitHubContext, inputs: Inputs, dryRun?: boolean) {
 		this.context = context
 		this.inputs = inputs
 		this.dryRun = dryRun ?? this.inputs?.dryRun ?? false

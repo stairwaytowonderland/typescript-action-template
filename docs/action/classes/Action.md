@@ -6,7 +6,7 @@
 
 # Class: Action
 
-Defined in: [src/action.ts:121](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/action.ts#L121)
+Defined in: [src/action.ts:129](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/action.ts#L129)
 
 Main action class for the GitHub Action.
 
@@ -23,23 +23,23 @@ Implements the RepoAction interface and provides methods to run the action.
 
 ```ts
 new Action(
-   context?, 
+   context, 
    inputs, 
    dryRun?
 ): Action;
 ```
 
-Defined in: [src/action.ts:147](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/action.ts#L147)
+Defined in: [src/action.ts:155](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/action.ts#L155)
 
 Creates a new instance of the Action class.
 
 #### Parameters
 
-| Parameter | Type | Default value | Description |
-| ------ | ------ | ------ | ------ |
-| `context?` | `Context` | `githubContext` | The GitHub context object. |
-| `inputs` | [`Inputs`](Inputs.md) | `undefined` | Optional action inputs. |
-| `dryRun?` | `boolean` | `undefined` | Optional flag indicating if the action should run in dry-run mode. |
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `context` | `Context` | The GitHub context object. |
+| `inputs` | [`Inputs`](Inputs.md) | Optional action inputs. |
+| `dryRun?` | `boolean` | Optional flag indicating if the action should run in dry-run mode. |
 
 #### Returns
 
@@ -53,7 +53,7 @@ Creates a new instance of the Action class.
 context: Context;
 ```
 
-Defined in: [src/action.ts:123](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/action.ts#L123)
+Defined in: [src/action.ts:131](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/action.ts#L131)
 
 The GitHub context object.
 
@@ -69,7 +69,7 @@ The GitHub context object.
 inputs: Inputs;
 ```
 
-Defined in: [src/action.ts:125](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/action.ts#L125)
+Defined in: [src/action.ts:133](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/action.ts#L133)
 
 The action inputs provided to the GitHub Action.
 
@@ -85,7 +85,7 @@ The action inputs provided to the GitHub Action.
 dryRun: boolean;
 ```
 
-Defined in: [src/action.ts:127](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/action.ts#L127)
+Defined in: [src/action.ts:135](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/action.ts#L135)
 
 Indicates if the action should run in dry-run mode.
 
@@ -103,7 +103,7 @@ Indicates if the action should run in dry-run mode.
 get safeInputs(): ReturnType<Inputs["getSafeInputs"]>;
 ```
 
-Defined in: [src/action.ts:159](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/action.ts#L159)
+Defined in: [src/action.ts:167](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/action.ts#L167)
 
 Returns the action inputs with sensitive keys removed.
 
@@ -129,7 +129,7 @@ The action inputs with sensitive keys removed.
 get actor(): string;
 ```
 
-Defined in: [src/action.ts:166](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/action.ts#L166)
+Defined in: [src/action.ts:174](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/action.ts#L174)
 
 Returns the actor (user) who triggered the GitHub Action.
 
@@ -153,7 +153,7 @@ The actor (user) who triggered the GitHub Action.
 get repo(): SimpleRepository;
 ```
 
-Defined in: [src/action.ts:173](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/action.ts#L173)
+Defined in: [src/action.ts:181](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/action.ts#L181)
 
 Returns the repository associated with the GitHub Action.
 
@@ -175,7 +175,7 @@ The repository associated with the GitHub Action.
 run(): Promise<unknown>;
 ```
 
-Defined in: [src/action.ts:136](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/action.ts#L136)
+Defined in: [src/action.ts:144](https://github.com/stairwaytowonderland/typescript-action-template/blob/main/src/action.ts#L144)
 
 Executes the main logic of the GitHub Action.
 

@@ -23,7 +23,6 @@ import { millisecondsFromInput } from '../src/utils.js'
 jest.unstable_mockModule('@actions/core', () => core)
 
 // 2. Dynamically import the modules under test AFTER mocks are registered
-const { getInputs } = await import('../src/main.js')
 const { Action, Inputs } = await import('../src/action.js')
 
 describe('Action Logic', () => {
@@ -65,7 +64,7 @@ describe('Action Logic', () => {
 			})
 
 			test('returns an object with the specified inputs', () => {
-				const retrievedInputs = getInputs()
+				const retrievedInputs = Inputs.getInputs()
 				expect(retrievedInputs).toHaveProperty('dryRun')
 				expect(typeof retrievedInputs.dryRun).toBe('boolean')
 				expect(retrievedInputs.dryRun).toBe(true)
@@ -78,32 +77,18 @@ describe('Action Logic', () => {
 	})
 
 	describe('Action', () => {
-		// eslint-disable-next-line jest/no-commented-out-tests
-		/*
-		test('initializes with no values', () => {
-			const action = new Action()
-			expect(action.context).toEqual(github.context)
-		})
-		*/
-
-		test('initializes with default githubContext and explicit dryRun', () => {
-			const action = new Action(undefined, inputs, true)
-			expect(action.context).toBeDefined()
-			expect(action.dryRun).toBe(true)
-		})
-
-		test('falls back to false when inputs.dryRun is undefined', () => {
-			const noDryRunInputs = { ...inputs, dryRun: undefined } as unknown as InstanceType<typeof Inputs>
-			const action = new Action(github.context as GitHubContext, noDryRunInputs)
-			expect(action.dryRun).toBe(false)
-		})
-
 		test('initializes with default values', () => {
 			const action = new Action(github.context as GitHubContext, inputs)
 			expect(action.dryRun).toBe(false)
 			expect(action.actor).toBeDefined()
 			expect(action.repo).toBeDefined()
 			expect(action.inputs).toBeDefined()
+		})
+
+		test('falls back to false when inputs.dryRun is undefined', () => {
+			const noDryRunInputs = { ...inputs, dryRun: undefined } as unknown as InstanceType<typeof Inputs>
+			const action = new Action(github.context as GitHubContext, noDryRunInputs)
+			expect(action.dryRun).toBe(false)
 		})
 
 		test('get actor from action', () => {
